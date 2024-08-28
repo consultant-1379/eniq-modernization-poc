@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DocName - Event format description, DocNo - LMI-09:1899, Rev A, Contact - LMI - David Loftus -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!-- basic types: general -->
+	<xsd:simpleType name="revisionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:pattern value="[A-Z]+[0-9]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ffvType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_-]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="jobPersistenceType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE"/>
+			<xsd:enumeration value="RESTART"/>
+			<xsd:enumeration value="UPGRADE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OutputFormatType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="3GPP_XML"/>
+			<xsd:enumeration value="Ericsson_Binary"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="eventDeliveryProtocolType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SFTP"/>
+			<xsd:enumeration value="FTP"/>
+			<xsd:enumeration value="STREAM"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="eventDeliveryMethodType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PUSH"/>
+			<xsd:enumeration value="PULL"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="reportingPeriodType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="5"/>
+			<xsd:enumeration value="15"/>
+			<xsd:enumeration value="30"/>
+			<xsd:enumeration value="1h"/>
+			<xsd:enumeration value="12h"/>
+			<xsd:enumeration value="24h"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="compressionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE"/>
+			<xsd:enumeration value="GZIP"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="revisionHistoryType">
+		<xsd:sequence>
+			<xsd:element name="revisionhistoryelem" type="revisionHistoryElementType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="revisionHistoryElementType">
+		<xsd:sequence>
+			<xsd:element name="revision" type="revisionType"/>
+			<xsd:element name="comment" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eventCapabilitiesType">
+		<xsd:sequence>
+			<xsd:element name="OutputFormat" type="OutputFormatType" minOccurs="0"/>
+			<xsd:element name="Protocol" type="eventDeliveryProtocolType" minOccurs="0"/>
+			<xsd:element name="Method" type="eventDeliveryMethodType" minOccurs="0"/>
+			<xsd:element name="Directory" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ReportingPeriod" type="reportingPeriodType" minOccurs="0"/>
+			<xsd:element name="AlignedReportingPeriod" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="Retention" type="xsd:nonNegativeInteger" minOccurs="0"/>
+			<xsd:element name="Compression" type="compressionType"/>
+			<xsd:element name="StreamPort" type="xsd:nonNegativeInteger" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="capabilitiesType">
+		<xsd:sequence>
+			<xsd:element name="JobPersistence" type="jobPersistenceType"/>
+			<xsd:element name="EventCapabilities" type="eventCapabilitiesType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- basic types: events -->
+	<xsd:complexType name="decodeDisplayType">
+		<xsd:sequence>
+			<xsd:element name="display" type="yesNoType"/>
+			<xsd:element name="decode" type="yesNoType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="eventNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="eventIdType">
+		<xsd:restriction base="xsd:nonNegativeInteger">
+			<xsd:maxInclusive value="65535"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="protocolType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="RRC"/>
+			<xsd:enumeration value="NBAP"/>
+			<xsd:enumeration value="RANAP"/>
+			<xsd:enumeration value="RNSAP"/>
+			<xsd:enumeration value="INTERNAL"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="yesNoType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Yes"/>
+			<xsd:enumeration value="No"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="activationType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Ue"/>
+			<xsd:enumeration value="All"/>
+			<xsd:enumeration value="-"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="paramRefType">
+		<xsd:simpleContent>
+			<xsd:extension base="paramRefSimpleType">
+				<xsd:attribute name="usevalid"/>
+				<xsd:attribute name="bytealign" type="xsd:boolean" default="false"/>
+				<xsd:attribute name="variablelength" type="xsd:string" use="optional" default="false"/>
+				<xsd:attribute name="type" type="nameType"/>
+				<xsd:attribute name="optional" type="xsd:boolean" default="false"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="structRefType">
+		<xsd:simpleContent>
+			<xsd:extension base="structRefSimpleType">
+				<xsd:attribute name="seqmaxlen"/>
+				<xsd:attribute name="type"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="structRefSimpleType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+			<xsd:pattern value=""/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="paramRefSimpleType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="fieldSimpleType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="fieldType">
+		<xsd:simpleContent>
+			<xsd:extension base="fieldSimpleType">
+				<xsd:attribute name="mapto" type="paramRefSimpleType" use="optional"/>
+				<xsd:attribute name="bits" use="optional">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:positiveInteger">
+							<xsd:maxInclusive value="32"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="elementType">
+		<xsd:sequence maxOccurs="unbounded">
+			<xsd:element name="struct" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="structRefType"/>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="param" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="paramRefType"/>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="bytealign" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="shortalign" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="wordalign" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="elementTypeRecord">
+		<xsd:sequence maxOccurs="unbounded">
+			<xsd:element name="struct" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="structRefType"/>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="param" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="paramRefType"/>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="bytealign" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="shortalign" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="wordalign" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="content" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="intFormatType">
+		<xsd:sequence>
+			<xsd:element name="field" type="fieldType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- basic types: predefinedeventgroup -->
+	<xsd:simpleType name="predefinedeventNameType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Z0-9_]+" />
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+	<!-- basic types: structure -->
+	<xsd:simpleType name="structTypeNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="structNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- basic types: parameter -->
+	<xsd:simpleType name="paramNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="nameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="paramTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="UINT"/>
+			<xsd:enumeration value="ENUM"/>
+			<xsd:enumeration value="BYTEARRAY"/>
+			<xsd:enumeration value="BCD"/>
+			<xsd:enumeration value="IBCD"/>
+			<xsd:enumeration value="TBCD"/>
+			<xsd:enumeration value="DNSNAME"/>
+			<xsd:enumeration value="IPADDRESS"/>
+			<xsd:enumeration value="IPADDRESSV6"/>
+			<xsd:enumeration value="STRING"/>
+			<xsd:enumeration value="BINARY"/>
+			<xsd:enumeration value="FROREF"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="enumerationType">
+		<xsd:sequence>
+			<xsd:element name="enum" type="enumerationElemType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="enumerationElemType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="value" type="xsd:nonNegativeInteger"/>
+				<xsd:attribute name="internal" type="internalEnumNameType"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="internalEnumNameType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Z0-9_]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- level 2: eventType, parameterType -->
+	<xsd:complexType name="eventType">
+		<xsd:sequence>
+			<xsd:element name="name" type="eventNameType"/>
+			<xsd:element name="id" type="eventIdType"/>
+			<xsd:element name="protocol" type="protocolType" minOccurs="0"/>
+			<xsd:element name="triggerdescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="triggerevent" type="yesNoType" minOccurs="0"/>
+			<xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="osscomment" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="applications" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ctr" type="activationType"/>
+						<xsd:element name="uetr" type="activationType"/>
+						<xsd:element name="gpeh" type="activationType"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="elements" type="elementType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="parameterType">
+		<xsd:sequence>
+			<xsd:element name="name" type="nameType"/>
+			<xsd:element name="type" type="paramTypeType"/>
+			<xsd:element name="description" type="xsd:string"/>
+			<xsd:element name="detaileddescription" minOccurs="0"/>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="numberofbytes">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:string"/>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="numberofbits">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:string"/>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="lengthbits" minOccurs="0"/>
+			<xsd:element name="validlength" minOccurs="0"/>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="wordalign"/>
+				<xsd:element name="shortalign"/>
+				<xsd:element name="bytealign"/>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="usevalid" type="yesNoType"/>
+				<xsd:element name="invalidvalue" type="xsd:integer"/>
+				<xsd:element name="optional" type="yesNoType"/>
+				<xsd:element name="usevalidbit" type="yesNoType"/>
+			</xsd:choice>
+			<xsd:element name="range" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="low" type="xsd:nonNegativeInteger"/>
+						<xsd:element name="high" type="xsd:nonNegativeInteger"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="resolution" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="unit" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="enumeration" type="enumerationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="structureType">
+		<xsd:sequence>
+			<xsd:element name="name" type="structTypeNameType"/>
+			<xsd:element name="elements" type="elementType"/>
+		</xsd:sequence>
+		<xsd:attribute name="sequence" type="xsd:boolean"/>
+		<xsd:attribute name="numberofbits" type="xsd:positiveInteger"/>
+	</xsd:complexType>
+	<!-- level 1: general, eventListType, parameterListType -->
+	<xsd:complexType name="generalType">
+		<xsd:sequence>
+			<xsd:element name="docno" type="xsd:string"/>
+			<xsd:element name="revision" type="revisionType"/>
+			<xsd:element name="date" type="xsd:date"/>
+			<xsd:element name="author" type="xsd:string"/>
+			<xsd:element name="increment" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ffv" type="ffvType"/>
+			<xsd:element name="fiv" type="ffvType" minOccurs="0"/>
+			<xsd:element name="revisionhistory" type="revisionHistoryType" minOccurs="0"/>
+			<xsd:element name="protocols" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="protocol" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="name"/>
+									<xsd:element name="specification"/>
+									<xsd:element name="version"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Capabilities" type="capabilitiesType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eventListType">
+		<xsd:sequence>
+			<xsd:element name="event" type="eventType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="predefinedeventListType">
+        <xsd:sequence>
+            <xsd:element name="name" type="predefinedeventNameType"  />
+            <xsd:element name="events">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="eventNameType" minOccurs="0" maxOccurs="unbounded" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+	<xsd:complexType name="predefinedeventgroupListType">
+		<xsd:sequence>
+			<xsd:element name="predefinedeventgroup" type="predefinedeventListType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="parameterListType">
+		<xsd:sequence>
+			<xsd:element name="parametertype" type="parameterType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="structureListType">
+		<xsd:sequence>
+			<xsd:element name="structuretype" type="structureType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- root level -->
+	<xsd:complexType name="rootType">
+		<xsd:sequence>
+			<xsd:element name="general" type="generalType"/>
+			<xsd:element name="parametertypes" type="parameterListType"/>
+			<xsd:element name="structuretypes" type="structureListType"/>
+			<xsd:element name="events" type="eventListType"/>
+			<xsd:element name="predefinedeventgroups" type="predefinedeventgroupListType" minOccurs="0"/>
+			<xsd:element name="records" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="record" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="name"/>
+									<xsd:element name="type"/>
+									<xsd:element name="elements" type="elementTypeRecord"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- document root -->
+	<xsd:element name="eventspecification">
+		<!-- constraints -->
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="rootType"/>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

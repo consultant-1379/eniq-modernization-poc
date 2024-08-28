@@ -1,0 +1,1571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:03:16 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>title</momTitle>
+        <momSubTitle>sub title</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>date</docDate>
+        </momIdentity>
+        <createdBy>
+            <signature>xcssukd</signature>
+        </createdBy>
+    </momMetaData>
+    <mim author="EAB/FBA/TN Johan Landtmansson" contact="EAB/FBA/TN Johan Landtmansson" correction="1" date="2014-01-15" docNo="12/155 19-AXB 250 17" name="SgsnMmeSwM" namespace="urn:com:ericsson:ecim:SgsnMmeSwM" namespacePrefix="sgsnmmeswm" organization="EAB/FBA/T - NDO SGSN-MME" release="8" revision="A1" version="1">
+        <description>ECIM Software management model.
+Introduced in SGSN-MME 14B</description>
+        <domainExtension domain="ECIM">
+            <extension name="ecimMomName" value="ECIM_SwM"/>
+            <extension name="ecimMomVersion" value="2"/>
+            <extension name="ecimMomRelease" value="1"/>
+        </domainExtension>
+        <implements name="ECIM_SwM" release="1" version="2"/>
+        <struct name="ProductData">
+            <description>UpgradePackage Product.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="productName">
+                <description>The name of the product.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pnam"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productNumber">
+                <description>The product number of the product.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pnum"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productRevision">
+                <description>The revision state of the product.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="prev"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productionDate">
+                <description>The production date of Upgrade Package.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pdat"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="description">
+                <description>Free text description of the product. &#13;
+&#13;
+The NMS may display this information, but it is not supposed to build any logic on this one.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="des"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="type">
+                <description>Free text product type. &#13;
+&#13;
+The NMS may display this information, but it is not supposed to build any logic on this one.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="type"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <struct name="AsyncActionProgressWithSteps">
+            <description>The progress of an ongoing action.&#13;
+&#13;
+Some actions can have 1+ breakpoints. Breakpoints allow an action be be divide into defined steps. A breakpoint is an intentional stop of an (executing) action. &#13;
+Example the Activate action in the ECIM SwM MOM. The activate action puts an upgrade package into operation. A breakpoint represents a part of the upgrade after which the functionality of  the ME can be manually observed. I.e. the breakpoint(s) give the operator an option to manually verify that the (upgrade) step has been executed correctly. &#13;
+&#13;
+The ProgressReport MOC models a standard action. This MOC struct has same attributes as the ProgressReport MOC, plus two extra attributes step and stepProgressPercentage. &#13;
+step: This attribute stores the current execution action Step (number)&#13;
+stepProgressPercentage: This attribue stores the Progress Percentage of current executing action step.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="actionName">
+                <description>Name of the invoked action.&#13;
+&#13;
+(e.g., prepare(), verify(), activate() on UpgradePackage MO).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="an"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="additionalInfo">
+                <description>Used for logging significant messages during execution of an action.&#13;
+&#13;
+ I.e., it contains information about the "history" of the execution. This field contains the log entries as an array. It may be empty.&#13;
+This information is for display only; it is not recommended to build any logic on the content of this field.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="adi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <sequence>
+                    <string/>
+                    <minLength>0</minLength>
+                </sequence>
+            </structMember>
+            <structMember name="progressInfo">
+                <description>Description of the "actual state" of the execution, which might be useful/needed by NMS.&#13;
+This information is for display only; it is not recommended to build any logic on the content of this field.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="progressPercentage">
+                <description>This represents the overall progress for  completion of the action. &#13;
+Range is between 0 and 100. The implementation shall intend to calculate the percentage time-wise. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint8/>
+            </structMember>
+            <structMember name="result">
+                <description>Result of completed action.&#13;
+&#13;
+This field has a value NOT_AVAILABLE if the action is not finished.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="res"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionResultType">
+                    <mimName>SgsnMmeSwM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="resultInfo">
+                <description>Textual description of the outcome/result of the action containing useful info for the NMS.&#13;
+&#13;
+E.g., it can contain an error message if the action failed.&#13;
+This information is for display only; it is not recommended to build any logic on the content of this field.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="resi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="state">
+                <description>Current state of the action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionStateType">
+                    <mimName>SgsnMmeSwM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="actionId">
+                <description>Id of the action.&#13;
+&#13;
+Each action has an action id, which is used for querying the progress of an action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="ai"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint16/>
+            </structMember>
+            <structMember name="timeActionStarted">
+                <description>The date and time when the current action was started.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tas"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeActionCompleted">
+                <description>The date and time when the action was completed either successfully or unsuccessfully.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tac"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeOfLastStatusUpdate">
+                <description>The date and time when this MO Struct was last updated.&#13;
+&#13;
+I.e., the last date and time when any attribute changed.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tlsu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="step">
+                <description>Current execution action step number.&#13;
+ &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="step"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <int16/>
+            </structMember>
+            <structMember name="stepProgressPercentage">
+                <description>This represents the progress percentage of currently executing step. &#13;
+&#13;
+It goes from 0 to 100 percentage for each and every step.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="spp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <int8/>
+            </structMember>
+        </struct>
+        <struct name="AsyncActionProgress">
+            <description>This records the progress of an asyncronous action.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="actionName">
+                <description>The name of the invoked asynchronous action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="an"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="additionalInfo">
+                <description>Used for logging significant messages during execution of an action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="adi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <sequence>
+                    <string/>
+                    <minLength>0</minLength>
+                </sequence>
+            </structMember>
+            <structMember name="progressInfo">
+                <description>Textual information describing the actual state of the execution of the action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="progressPercentage">
+                <description>Progress of the action. &#13;
+The range is between 0 and 100.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint8/>
+            </structMember>
+            <structMember name="result">
+                <description>Result state of completed action.&#13;
+This field has the value NOT_AVAILABLE if the action is not finished.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="res"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionResultType">
+                    <mimName>SgsnMmeSwM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="resultInfo">
+                <description>Textual description of the outcome/result of the action containing useful info for the NMS.&#13;
+It can contain an error message if the action failed.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="resi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="state">
+                <description>Current state of the action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionStateType">
+                    <mimName>SgsnMmeSwM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="actionId">
+                <description>Uniquely identifies the invocation of an action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="ai"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint16/>
+            </structMember>
+            <structMember name="timeActionStarted">
+                <description>The date and time when the current action was started.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tas"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeActionCompleted">
+                <description>The date and time when the action was completed (successfully or unsuccessfully).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tac"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeOfLastStatusUpdate">
+                <description>The date and time when the struct member state was last updated.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tlsu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+        </struct>
+        <struct name="ActivationStep">
+            <description>Activation step details.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="serialNumber">
+                <description>Activation step number, position of the activation step in the activation procedure.&#13;
+&#13;
+Starting at 1.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="sn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <int16/>
+            </structMember>
+            <structMember name="name">
+                <description>Activation step name.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="name"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="description">
+                <description>Textual description of the activation step.&#13;
+It could describe the role/meaning/interpretation of the activation step, any info which is useful for the operator.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="des"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <struct name="EcimPassword">
+            <description>This struct stores the password.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="cleartext">
+                <description>Indicates if the password is entered in cleartext or not. </description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="ct"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="EcimEmpty">
+                    <mimName>SgsnMmeSwM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="password">
+                <description>Holds the password or passphrase text.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pwd"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <enum name="ActionResultType">
+            <description>Lists the different results of an action.&#13;
+</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="SUCCESS">
+                <description>The asynchronous action has ended with success.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="FAILURE">
+                <description>The asynchronous action has ended with failure.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="NOT_AVAILABLE">
+                <description>No result is available yet.</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="SwMTimeoutFallbackCapability">
+            <description>Fallback support.</description>
+            <enumMember name="SUPPORTED">
+                <description>Indicates that the fallback capability is supported.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="NOT_SUPPORTED">
+                <description>Indicates that the fallback capability is not supported.</description>
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="ActionStateType">
+            <description>Lists Action states.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="CANCELLING">
+                <description>Cancellation is in progress.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="RUNNING">
+                <description>The execution of the action is currently executing.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="FINISHED">
+                <description>The action is finished.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="CANCELLED">
+                <description>The action has been cancelled and the cancellation is done.</description>
+                <value>4</value>
+            </enumMember>
+        </enum>
+        <enum name="UpgradePackageState">
+            <description>Lists possible states of the Upgrade Package.</description>
+            <enumMember name="INITIALIZED">
+                <description>The Upgrade Package is initialized. &#13;
+&#13;
+The administrative data and activations steps of the UP can be read.&#13;
+In this state, only the prepare() action may be called.&#13;
+ &#13;
+</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="PREPARE_IN_PROGRESS">
+                <description>Prepare action in progress.&#13;
+&#13;
+In this state, only the cancel() action may be called. If the prepare() action completes successfully, the UP moves to PREPARE_COMPLETED state. If the prepare() action fails (or cancel() is called), the UP moves back to INITIALIZED state.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="PREPARE_COMPLETED">
+                <description>Prepare action has successfully finished.&#13;
+&#13;
+In this state, only the verify() or the activate() action may be called.&#13;
+If the activate() action is called, the UP moves to ACTIVATION_IN_PROGRESS state.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="ACTIVATION_IN_PROGRESS">
+                <description>Activation is in progress.&#13;
+&#13;
+In this state, only the cancel() action may be called.&#13;
+If the cancel() action is called, the UP moves to DEACTIVATION_IN_PROGRESS state.&#13;
+If the activation step completes successfully, the UP moves to ACTIVATION_STEP_COMPLETED state.</description>
+                <value>4</value>
+            </enumMember>
+            <enumMember name="ACTIVATION_STEP_COMPLETED">
+                <description>The previous activitation step completed successfully.There are still more activation step(s) left.&#13;
+&#13;
+In this state, only the activate() or the cancel() action may be called.&#13;
+If the cancel() action is called, the UP moves to DEACTIVATION_IN_PROGRESS state.&#13;
+If the activate() action is called, the ME starts the activation of the next activation step and the UP moves to ACTIVATION_IN_PROGRESS state.&#13;
+If the fallback timer expires in this state, the UP moves to DEACTIVATION_IN_PROGRESS state.</description>
+                <value>5</value>
+            </enumMember>
+            <enumMember name="WAITING_FOR_COMMIT">
+                <description>The last activation step completed successfully. &#13;
+&#13;
+The operator has to confirm the upgrade.&#13;
+In this state, only the confirm() or the cancel() action may be called.&#13;
+If the cancel() action is called, the UP moves to DEACTIVATION_IN_PROGRESS state.&#13;
+If the confirm() action is called, the UP moves to COMMIT_COMPLETED state.&#13;
+</description>
+                <value>6</value>
+            </enumMember>
+            <enumMember name="COMMIT_COMPLETED">
+                <description>The upgrade is confirmed.&#13;
+The whole upgrade procedure has completed.</description>
+                <value>7</value>
+            </enumMember>
+            <enumMember name="DEACTIVATION_IN_PROGRESS">
+                <description>The deactivation of the UP is in progress.&#13;
+&#13;
+This may be a result of a cancel() action having been called or the fallback timer may have expired. In this state, no action can be called. In the end of fallback operation, the UP moves back to PREPARE_COMPLETED state.</description>
+                <value>8</value>
+            </enumMember>
+        </enum>
+        <derivedDataType name="EcimEmpty">
+            <description>This type represents a leaf that has no value, it conveys information by its presence or absence.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <boolean/>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="DateTime">
+            <description>DateTime in format YYYY-MM-DDThh:mm:ss.SSSZ .</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>19</min>
+                        <max>31</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>19</min>
+                            <max>31</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="EcimPasswordString">
+            <description>This type enables secure handling of passwords.</description>
+            <baseType>
+                <string/>
+            </baseType>
+        </derivedDataType>
+        <class name="SwM">
+            <description>The root structural element of SW management activities.&#13;
+ &#13;
+&#13;
+&#13;
+</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <action name="cancel">
+                <description>Cancel can be invoked during any long lasting operation.&#13;
+Stops the operation and restores the consistent state present before the long lasting operation was started.&#13;
+&#13;
+The action returns immediately after invocation. The consequences of the action can be tracked via the progressReport attribute. The action returns false if the action is refused by the ME, returns true otherwise.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <action name="removeUpgradePackage">
+                <description>Removes an UpgradePackage.&#13;
+&#13;
+This action removes the UpgradePackage MO specified as action parameter as well as all files temporarily stored in the ME and associated with the UP.&#13;
+&#13;
+The action returns immediately after invocation. The progress of the action can be tracked via the progressReport attribute.&#13;
+This action can be invoked when there is no other action in progress on this MO. The action returns false if the action could not start for any reason (e.g., another parallel action is in progress), otherwise returns true.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+                <parameter name="upgradePackage">
+                    <description>An UpgradePackage MO to be removed.</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="up"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <moRef name="UpgradePackage">
+                            <mimName>SgsnMmeSwM</mimName>
+                        </moRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="createUpgradePackage">
+                <description>Creates a new UpgradePackage MO representing an UP specified by a URI.&#13;
+&#13;
+This action includes all activities to initialize the UP MO. After the UP MO is created, all descriptive information will be available: e.g. administrativeData, number/names of activation step(s) data. &#13;
+&#13;
+This action can be invoked when there is no other action in progress on this MO.&#13;
+&#13;
+The action returns immediately after invocation. The progress of the action can be tracked via the progressReport attribute.&#13;
+&#13;
+The action returns 0 if the action could not start for any reason (e.g., another parallel action is in progress), otherwise returns the id of the action. The action id is different and unique for every invocation of the action.&#13;
+&#13;
+The action also returns 0 if the ME cannot handle the URI (e.g., does not support the protocol specified in the URI).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <uint16/>
+                </returnType>
+                <parameter name="uri">
+                    <description>Contains a URI pointing to a directory containing the UP content.&#13;
+&#13;
+The generic URI syntax is defined by RFC 2396&#13;
+&#13;
+The URI must not contain any password. (The password shall be provided in the second parameter of this action.)&#13;
+The URI may be local absolute (e.g., file:///data/dir/subdir), or remote (e.g., sftp://hostname/dir/subdir).&#13;
+</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="uri"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="password">
+                    <description>A password to the server which provides UP.&#13;
+&#13;
+If  authentication is not password based, this parameter will be ignored. </description>
+                    <domainExtension domain="ECIM">
+                        <extension name="isNillable" value="true"/>
+                    </domainExtension>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="pass"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <isNillable/>
+                    <in/>
+                    <dataType>
+                        <derivedDataTypeRef name="EcimPasswordString">
+                            <mimName>SgsnMmeSwM</mimName>
+                        </derivedDataTypeRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="removeSoftwareVersion">
+                <description>Removes a SW version as completely as possible without disturbing node functionality. &#13;
+Files shared with other SW versions are not deleted.&#13;
+The active SW version cannot be removed.&#13;
+This action can only be invoked when there is no other action in progress on this MO. &#13;
+The action returns false if any of these conditions are violated. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+                <parameter name="swVersion">
+                    <description>The value component of the RDN of the SwVersion MO in ECIM_SWIM  to remove.</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="swv"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <moRef name="SwVersion">
+                            <mimName>SgsnMmeSwIM</mimName>
+                        </moRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="prepareUpgradePackage">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <void/>
+                </returnType>
+                <parameter name="uri">
+                    <description>.</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="uri"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="password">
+                    <description>.</description>
+                    <domainExtension domain="ECIM">
+                        <extension name="isNillable" value="true"/>
+                    </domainExtension>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="pass"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <isNillable/>
+                    <in/>
+                    <dataType>
+                        <derivedDataTypeRef name="EcimPasswordString">
+                            <mimName>SgsnMmeSwM</mimName>
+                        </derivedDataTypeRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="upgradeStatus">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="true"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <moRef name="UpgradeStatus">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </moRef>
+                </returnType>
+                <preliminary/>
+            </action>
+            <attribute name="swMId">
+                <description>The value component of the RDN.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="si"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="reportProgress">
+                <description>Represents the progress report (including result) of the ongoing action.&#13;
+&#13;
+This MO supports only one action to be executed at a time.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <structRef name="AsyncActionProgress">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="fallbackTimer">
+                <description>Maximum interval in seconds within which the next action must be invoked to avoid fallback.&#13;
+&#13;
+The maximum number of seconds allowed to elapse between the finish of an activation step and the start of the next action - a new activate() action - or confirm() action.&#13;
+&#13;
+This attribute holds the value to which the attribute timeRemainingBeforeFallback is set after the action activate() is successfully completeted.&#13;
+-1 symbolizes "infinity". In this case, the starting value of timeRemainingBeforeFallback shall also be set to -1 when the timer stars even though no counting down ever starts (it remains always -1).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ft"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <int16>
+                        <defaultValue>1200</defaultValue>
+                    </int16>
+                </dataType>
+            </attribute>
+            <attribute name="timeRemainingBeforeFallback">
+                <description>Remaining number of seconds before performing fallback. &#13;
+&#13;
+The value -1 indicates infinite number of seconds.&#13;
+Fallback means that the system returns to the state PREPARE_COMPLETED.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="trbf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <int16>
+                        <defaultValue>-1</defaultValue>
+                    </int16>
+                </dataType>
+            </attribute>
+            <attribute name="localFileStorePath">
+                <description>URI of the directory where the UPs are stored on the ME.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lfsp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="userLabel">
+                <description>Used for free-text description. </description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ul"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="timeoutFallbackCapability">
+                <description>Indicates whether fallback capability is supported or not. &#13;
+&#13;
+If fallback capability is not supported, then setting SwM fallbackTimer has no effect and automatic fallback never happens.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tfc"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="SwMTimeoutFallbackCapability">
+                        <defaultValue>SUPPORTED</defaultValue>
+                        <mimName>SgsnMmeSwM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="UpgradePackage">
+            <description>Controls the process of changing the software configuration of an ME.&#13;
+&#13;
+An instance of UpgradePackage (UP) represents a specific change of software configuration from the existing one to the new one identified by the attribute administrativeData. The execution of the change process described by UP class is the normal way to change the content of the SW inventory.&#13;
+&#13;
+An UP may be seen as a "modification agent": it can add new, remove, or modify functionality.&#13;
+&#13;
+The sequence in which a Software upgrade executes is:&#13;
+1. Prepare&#13;
+2. Verify (optional)&#13;
+3. Activate&#13;
+4. Confirm&#13;
+&#13;
+When the upgrade package MO is created the upgrade control file is downloaded to specify the administrative data and the activation steps for this upgrade.&#13;
+The sequence in which a Software upgrade executes is:&#13;
+&#13;
+1. Prepare&#13;
+2. Verify (optional)&#13;
+3. Activate &#13;
+4. Confirm</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="activate">
+                <description>Current upgrade package is taken into operation fully or partially. &#13;
+&#13;
+Partial activation occurs if the UCF defines activation steps and the attribute ignoreBreakPoints is false. &#13;
+The ME upgrade engine notifies the operator that the activation step is completed. The next activation step starts when the operator invokes an activate action. &#13;
+Each UP has to have at least 1 activation step.&#13;
+&#13;
+When the attribute ignoreBreakPoints=true, all activation steps are executed in sequence, when an activation step is complete the ME executes the next activation step i.e. there is no operator invocation when an activation step is complete. &#13;
+&#13;
+The time for observation of the correct operation of the ME after each completed step is always monitored by a supervision timer.&#13;
+The invocation of activate() may be monitored by a supervision timer.&#13;
+If the supervision timer expires before invocation of activate() or confirm(), then the activation fails and the ME falls back to the state PREPARE_COMPLETED.&#13;
+&#13;
+The action returns immediately after invocation. The progress of the action can be tracked via the progressReport attribute. The action returns false if the action could not start for any reason (e.g., another parallel action is in progress), otherwise returns true.&#13;
+&#13;
+This action can be invoked when the state is PREPARE_COMPLETED or ACTIVATION_STEP_COMPLETED. If the action is invoked in a state where the action has no meaning, ME is expected to return an error message.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <action name="cancel">
+                <description>Cancel can be invoked during any long lasting operation.&#13;
+Stops the operation and restores the (consistent) state present before the long lasting operation was started.  &#13;
+ Furthermore, cancel() can also be invoked when the UP is in WAITING_FOR_COMMIT or ACTIVATION_STEP_COMPLETED state (without having a long lasting operation in progress). Calling cancel(), in this state, orders the ME to restore the state present before the activation procedure was started (PREPARE_COMPLETED).&#13;
+&#13;
+The action returns immediately after invocation. The consequences of the action can be tracked via the progressReport attribute. The action returns false if the action is refused by the ME, returns true otherwise.&#13;
+&#13;
+This action can be invoked when the UP state is PREPARE_IN_PROGRESS, VERIFICATION_IN_PROGRESS, ACTIVATION_IN_PROGRESS, ACTIVATION_STEP_COMPLETED, or WAITING_FOR_COMMIT. If the action is invoked in a state where the action has no meaning, the ME is expected to return false.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <action name="verify">
+                <description>Verifies the ability to activate current upgrade package.&#13;
+&#13;
+The action returns immediately after invocation. The progress of the action can be tracked via the progressReport attribute. The action returns false if the action could not start for any reason (e.g., another parallel action is in progress), otherwise returns true.&#13;
+&#13;
+This action can be invoked when the state is PREPARE_COMPLETED. If the action is invoked in a state where the action has no meaning, ME is expected to return an error message.&#13;
+Calling this action is optional in the whole upgrade procedure. The action can be called more than once if wished.&#13;
+&#13;
+&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <action name="prepare">
+                <description>Prepares the Managed Element for the activation of current upgrade package. &#13;
+&#13;
+Executing prepare() does not have any negative impact on the in service performance of Managed Element.&#13;
+&#13;
+The action returns immediately after invocation. The progress of the action can be tracked via the progressReport attribute. The action returns false if the action could not start for any reason (e.g., another parallel action is in progress), otherwise returns true.&#13;
+&#13;
+&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <action name="confirm">
+                <description>Stops the activation supervision timer (fallback timer) and confirms the upgrade.&#13;
+&#13;
+The action returns when the action has completed (synchronous).&#13;
+This action can be invoked when the state is WAITING_FOR_COMMIT. The action returns true on success, false on failure.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <attribute name="upgradePackageId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="up"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="state">
+                <description>Current state of Upgrade Package.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="UpgradePackageState">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="reportProgress">
+                <description>Represents the progress report (including result) of the ongoing action.&#13;
+&#13;
+This MO supports only one action to be executed at a time.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <structRef name="AsyncActionProgressWithSteps">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="ignoreBreakPoints">
+                <description>Influences the behaviour of the activate() action.&#13;
+&#13;
+false =&gt; There is a breakpoint between each activation step. Activation process stops at each breakpoint. &#13;
+true =&gt; Execution shall ignore breakpoints between activation steps and instead execute the end to end activation process invoking all activation steps in sequence (assuming no errors occur).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ibp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="userLabel">
+                <description>Used for free-text description. </description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ul"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="administrativeData">
+                <description>The product identification of the software version(s) activated upon the completion of an upgrade.&#13;
+&#13;
+If the resulting software version after activation is unknown or uncertain, the administrativeData could be empty.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ad"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <structRef name="ProductData">
+                            <mimName>SgsnMmeSwM</mimName>
+                        </structRef>
+                        <minLength>1</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="activationStep">
+                <description>List of activation steps the activation procedure consists of.&#13;
+&#13;
+ It is possible to stop after each step, perform supervision and continue with the procedure.&#13;
+The upgrade procedure consists of at least one activation step.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <structRef name="ActivationStep">
+                            <mimName>SgsnMmeSwM</mimName>
+                        </structRef>
+                        <minLength>1</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="created">
+                <description>Date and time  this Upgrade Package instance was created.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cre"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="isLocallyStored">
+                <description>Deprecated, Shows if upgrade package is stored on the node. &#13;
+This attribute is used by deprecated Use Case Create a new (local) Upgrade Package.&#13;
+&#13;
+If true the upgrade package is stored in the local file system of the managed element.&#13;
+If false the upgrade package is stored in a remote file system (remote file server).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ils"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+                <deprecated/>
+                <statusInformation>This attribute is used by deprecated Use Case Create a new (local) Upgrade Package.</statusInformation>
+            </attribute>
+            <attribute name="uri">
+                <description>A URI pointing to the directory where the UP can be found.&#13;
+&#13;
+The URI may be local (e.g., file://data/dir/subdir) or a remote (e.g., ftp://hostname/dir/subdir).</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="uri"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="creatorActionId">
+                <description>The Id (actionId) of the action that have created this UpgradePackage managed object.&#13;
+&#13;
+The default 0 value denotes that the managed element does not record this information.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cai"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <uint16>
+                        <defaultValue>0</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="password">
+                <description>Password to the server which provides the UpgradePackage. &#13;
+&#13;
+</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pass"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <structRef name="EcimPassword">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="toScName">
+                <description>N/A</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="true"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tsn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+                <preliminary/>
+            </attribute>
+            <attribute name="fromScName">
+                <description>N/A</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="true"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fsn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+                <preliminary/>
+            </attribute>
+        </class>
+        <class name="UpgradeStatus">
+            <description>.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="true"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <preliminary/>
+            <attribute name="upgradePackageId">
+                <description>N/A</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="up"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="actionName">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="an"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="progressInfo">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="state">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="UpgradePackageState">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="progressPercentage">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <uint8/>
+                </dataType>
+            </attribute>
+            <attribute name="result">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="res"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="ActionResultType">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="resultInfo">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="resi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <relationship name="SwM_to_UpgradePackage">
+            <containment>
+                <parent>
+                    <hasClass name="SwM">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="UpgradePackage">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="SwM_to_UpgradeStatus">
+            <containment>
+                <parent>
+                    <hasClass name="SwM">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="UpgradeStatus">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </mim>
+    <interMim>
+        <relationship name="SystemFunctions_to_SwM">
+            <containment>
+                <parent>
+                    <hasClass name="SystemFunctions">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="SwM">
+                        <mimName>SgsnMmeSwM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </interMim>
+</models>

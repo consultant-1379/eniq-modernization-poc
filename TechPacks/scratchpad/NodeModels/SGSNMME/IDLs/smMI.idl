@@ -1,0 +1,1240 @@
+// ==================================================================
+// 
+// NAME
+//   Interface Specification
+//   Security Management MI in WPP
+//
+// MODULE
+//   smMI
+//
+// FILE	
+//   smMI.idl
+//
+// DOCUMENT NO.
+//   81/15519-CNX 901 111 Uen 
+// 
+// REVISION
+//   E
+//
+// COPYRIGHT
+//   COPYRIGHT Ericsson Eurolab Deutschland GmbH, Germany 1999.
+//   All rights reserved.
+//
+//   The Copyright to the computer program(s) herein is the property of
+//   Ericsson Eurolab Deutschland GmbH, Germany.
+//   The program(s) may be used and/or copied only with the written
+//   permission from Ericsson Eurolab Deutschland GmbH or in accordance with
+//   the terms and conditions stipulated in the agreement/contract under
+//   which the program(s) have been supplied.
+// 
+// DESCRIPTION 
+//   This API provides the access to the security management functions of
+//   WPP towards the IIOP interface.
+//   Most functions in this Module use Mnesia transactions to store  
+//   and retrieve the attributes and may be blocking.
+//
+//   Three interfaces are provided:
+//   1) UserAdministration:
+//	This interface can be used by the management clients to perform 
+//      user administration.  The SO registered under the following name in 
+//	the Naming Service: ["gprs", "oam", "smMI", "UserAdmin"]
+//   2) RoleAdministration:
+//	This interface can be used by the management clients to perform 
+//      role administration.  The SO registered under the following name in 
+//	the Naming Service: ["gprs", "oam", "smMI", "RoleAdmin"]
+//   3) GroupAdministration:
+//	This interface can be used by the management clients to perform 
+//      group administration.  The SO registered under the following name in 
+//	the Naming Service: ["gprs", "oam", "smMI", "GroupAdmin"]
+//
+//
+// AUTHOR
+//   Paul Hamers (eedpah@eed.ericsson.se)
+//   Responsibility now in ERV Vanersborg, contact ervkatb@erv
+//
+// REVISION HISTORY
+//   A     2000-03-27  eedmaba   Approved version for WPP 2.0
+//   B     2000-11-28  ervkatb   Approved version for WPP
+//   C     2001-12-05  ervkatb   New functions in interface.
+//   D     2002-11-26  ervkatb   New function in interface.  
+//   E     2005-06-01  ervbolm   New functions in user and role interfaces,
+//                               new group interface.  
+// ==================================================================
+
+
+#ifndef sm_MI_Idl
+#define sm_MI_Idl
+
+// Include general OMS types and definitions.
+#include "omsDefs.idl"
+// Include oam support functions.
+#include "oamSupport.idl"
+
+
+// ==================================================================
+
+module smMI {
+
+	 struct UserData {
+		string userId;
+    		string roleId;
+    		omsDefs::Time prevLoginTime;
+    		string prevLoginHost;
+    		oamSupport::TimeStamp timestamp;
+    		boolean loggedIn;
+  		};
+
+	 struct UserData2 {
+		string userId;
+    		string roleId;
+    		oamSupport::StringList groups;
+    		omsDefs::Time prevLoginTime;
+    		string prevLoginHost;
+    		oamSupport::TimeStamp timestamp;
+    		boolean loggedIn;
+  		};
+
+	 typedef sequence <UserData> UserDataList;
+ 	 typedef sequence <UserData2> UserDataList2;
+
+	 struct LockData {
+		string lockInitiator;
+		boolean nodeLocked;
+	        string lockReason;
+	        };
+
+  interface UserAdministration {
+  //*****************************************************************
+  // This interface can be used by the management clients to perform
+  // to perform user administration.
+  //*****************************************************************
+ 
+        // The version of this interface, only to be changed when
+        // the signatures or semantics of this interface change
+        const long IF_VERSION = 1;
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+        omsDefs::Result login(inout oamSupport::AdmData data, 
+                              in string password, 
+			      in string loginHost,
+			      out UserData uData)
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and returns an 
+	//	authenticationKey (data) when the userId and the password 
+	//	combination is valid. The authenticationKey should be used 
+	//	for all communication between PXM and NE.
+	// Parameters							
+	//	data	   : structure containing:
+	//			callerSwVersion - version of the interface SW.
+	//			callerUserId - 	id of the user requesting the 
+        //						service.
+	//			authenticationKey - key for identifying a 
+	//				successfully authentified user.
+	//	password   : password for this user.
+        //      loginHost  : host from which the user logs in.
+	//	uData	   : struct defined in this file containing info
+	//		      on the user who attempts to login.
+	// Return value			
+	//   	According to definitions from omsDefs.idl.
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_no_role_mapping_for_user" |[User] |   ""        |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_db_failure"   |[]                |   ""	      |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]                |   ""	      |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_unix_userid_or_password"|[User] |   ""  |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_authenticationKey_creation_error"|[User]|   ""  |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_already_logged_in"|[User]     |   ""	      |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_too_many_login_attempts"|[User]   |   ""	      |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_input"|[User]         |   ""	      |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_password"|[User]      |   ""	      |
+        //  +-------+--------------------+------------------+-----------------+
+	//
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	//	userId and password are valid.
+	// Postconditions			
+	// 	User gets an authenticationKey for further operations.
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+	omsDefs::Result logout(in oamSupport::AdmData data)
+			raises(omsDefs::OperationFailed);
+   	// Purpose
+	//	Does necessary checks on the parameter "data" and logs the user
+	//	out that has the specified authenticationKey.
+	//	An error is returned if the core function returns an error.
+	// Parameters
+	//	data	: structure containing:
+	//			callerSwVersion - version of the interface SW.
+	//			callerUserId - 	id of the user requesting the 
+	//					service.
+	//			authenticationKey - key for identifying a 
+	//				successfully authentified user.
+	// Return value
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[] 		    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions
+	//	authenticationkey in AdmData is valid
+	// Postconditions 
+	//	user is logged out
+	//	authenticationKey is made invalid
+	//
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.
+        omsDefs::Result getTimeForActiveAction(in oamSupport::AdmData data, 
+					       out omsDefs::Time time)
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Gets the time for latest performed active action. 
+	//      Usually a "set" of configuration data. 
+	// Parameters							
+	//	time	   : structure as specified in omsDefs.idl
+	// Return value			
+	//   	According to definitions from omsDefs.idl.
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	//
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | "oms_db_error"     | []               | Reason	      |
+	//  +---------------------------------------------------------
+        //  +--------------------+------------------+-----------------+
+	//  | "oms_db_error"     | []               | Reason	      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// Postconditions
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+        omsDefs::Result getNodeLockState(in oamSupport::AdmData data, 
+			      out LockData lockData)
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and return the
+	//      LockData.
+	// Parameters							
+	//	data	   : structure as specified above, concerning authority
+	//      lockData   : structure as specified above, describing the 
+	//                   current lock status of the node.
+	// Return value			
+	//   	According to definitions from omsDefs.idl.
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	//
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// Postconditions			
+
+	//******************************************************************
+        // #SM_ASD: oms_sm_user_admin_active: contains privileged operations for user administration part of security management.  These allow user to change someone else's password, add & delete new users, log users out
+        omsDefs::Result forcedUnlock(in oamSupport::AdmData data)
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and resets the
+	//      node lock. The node could be locked due to checkpointing or 
+	//      some other reason.
+	// Parameters							
+	//	data	   : structure as specified above, concerning authority
+	// Return value			
+	//   	According to definitions from omsDefs.idl.
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	//
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions			
+	//     The node is locked for some reason.	
+	// Postconditions
+	//     The node is unlocked.
+
+	//******************************************************************
+        // #SM_ASD: oms_sm_user_admin_active: contains privileged operations for user administration part of security management.  These allow user to change someone else's password, add & delete new users, log users out
+	omsDefs::Result addUser(in oamSupport::AdmData data,
+				in string userId, 
+				out oamSupport::TimeStamp timeStamp)
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and 	
+	//	adds the specified user with its default password.
+	// Parameters
+	//   data     :  structure defined in oamSupport.idl
+	//   userId   :  identifies the new user
+	//   password :  (default) password for this user
+	// Return value
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_only_lower_case_letters"|[]   |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_password_too_short"|[]	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"|[]		    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions
+	// 	authenticationKey (in AdmData) is valid
+        //      user does not exist
+	//	newPassword is correctly constructed
+	// Postconditions
+	//	user is added to the Unix system
+	//	user's password is set in Unix
+	//	an userId-Role mapping entry is created
+	//
+	//******************************************************************
+        // #SM_ASD: oms_sm_user_admin_active: contains privileged operations for user administration part of security management.  These allow user to change someone else's password, add & delete new users, log users out
+	omsDefs::Result deleteUser(in oamSupport::AdmData data,
+		                   in string userId )
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and 	
+	//	deletes the user from the database.
+	// Parameters
+	//	data   :  structure defined in oamSupport.idl
+	//	userId : identifies the user that shall be deleted
+	// Return value
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_permanent_userId"| []         |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_ldap_user_deletion_error"|[]  |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_db_failure"   |[] 		    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_input"|[] 	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_userId"|[] 	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions
+	// 	authenticationKey (in AdmData) is valid
+        //      user must exist
+	// Postconditions
+	//	All existing authenticationKeys belonging to userId are made
+	//		invalid.
+	//	UserId-Role mapping entry is deleted.
+	//	UserId is deleted from Unix.
+	//
+        //******************************************************************
+        // #SM_ASD: oms_sm_user_admin_active: contains privileged operations for user administration part of security management.  These allow user to change someone else's password, add & delete new users, log users out
+	omsDefs::Result forceLogout(in oamSupport::AdmData data,
+		                   in string userId )
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and 	
+	//	logs out the user from the node. 
+	// Parameters
+	//	data   :  structure defined in oamSupport.idl
+	//	userId : identifies the user that shall be logged out
+	// Return value
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_not_logged_in"|[]    	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"   |[] 		    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+
+	// Preconditions
+	// 	authenticationKey (in AdmData) is valid
+        //      user must exist
+	// Postconditions
+	//	All existing authenticationKeys belonging to userId are made
+	//		invalid.
+	//	UserId-Role mapping entry is deleted.
+	//	UserId is deleted from Unix.
+	//
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+	omsDefs::Result getAllUserIds(in oamSupport::AdmData data, 
+                                      out oamSupport::StringList userIds)
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and returns a 
+	//	list of known users.
+        //      
+	// Parameters
+	//	data    : structure defined in oamSupport.idl
+	//	userIds   : list of 'known' userIds
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"   |[]    	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationKey (in AdmData) is valid
+	// Postconditions			
+	// 	state unchanged
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+	omsDefs::Result getUserData(in oamSupport::AdmData data,
+				    in string userId,
+                                    out UserData uData )
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+        //      Does necessary checks on the parameter "data" and returns
+	//	the data belonging to the user specified in userId.
+	// Parameters
+	//	data    : structure defined in oamSupport.idl
+	//	userId	: identifies the user to retrieve data for
+	//	uData   : structure defined above.
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]    	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_userId" |[]           |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationKey (in AdmData) is valid
+	//	userId exists
+	// Postconditions			
+	// 	state unchanged	
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+	omsDefs::Result getAllUsersData(in oamSupport::AdmData data,
+	                                out UserDataList userData )
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+        //      Does necessary checks on the parameter "data" and returns
+	//	the data belonging to the users.
+	// Parameters
+	//	data    : structure defined in oamSupport.idl
+	//	userData   : structure defined above.
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]    	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  |       |                    |             |              |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationKey (in AdmData) is valid
+	//	userId exists
+	// Postconditions			
+	// 	state unchanged
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+omsDefs::Result getUserData2(in oamSupport::AdmData data,
+                             in string userId,
+                             out UserData2 uData )
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+        //      Does necessary checks on the parameter "data" and returns
+	//	the data belonging to the user specified in userId.
+	// Parameters
+	//	data    : structure defined in oamSupport.idl
+	//	userId	: identifies the user to retrieve data for
+	//	uData   : structure defined above.
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]    	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_userId" |[]           |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationKey (in AdmData) is valid
+	//	userId exists
+	// Postconditions			
+	// 	state unchanged	
+	//******************************************************************
+	// #SM_ASD: oms_sm_user_admin_passive: contains operations for user administration part of security management.  These allow user to login, logout, change his/her own password, view the list of existing users and their administrative information
+	omsDefs::Result getAllUsersData2(in oamSupport::AdmData data,
+	                                out UserDataList2 userData )
+			raises(omsDefs::OperationFailed);
+  	// Purpose
+        //      Does necessary checks on the parameter "data" and returns
+	//	the data belonging to the users.
+	// Parameters
+	//	data    : structure defined in oamSupport.idl
+	//	userData   : structure defined above.
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]    	    |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  |       |                    |             |              |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationKey (in AdmData) is valid
+	//	userId exists
+	// Postconditions			
+	// 	state unchanged
+
+  };      
+
+  interface RoleAdministration {
+  //*****************************************************************
+  // This interface can be used by the management clients to perform
+  // role-administration.
+  //*****************************************************************
+
+        // The version of this interface, only to be changed when
+        // the signatures or semantics of this interface change
+        const long IF_VERSION = 1;
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_active: contains privileged operations for role administration part of security management.  These allow user to create, delete, modify and assign roles to the users. 
+	omsDefs::Result setRoleToUser(in oamSupport::AdmData data, 
+					in string userId, 
+					in string roleId,
+					inout oamSupport::TimeStamp timeStamp) 
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and assigns
+        //      the specified role to this user.  An existing role is 
+	//	overwritten.  In case if userID == root operation fails.
+	//	This is necessary in order to avoid the situations when there
+	//	are no users who have SysAdminRole.  By defal there must be
+	//	at least one user with SysAdminRole.
+	//	Operation fails if either userId or the roleId are invalid
+	// Parameters							
+	//	data    : structure defined in oamSupport.idl
+	//	userId 	: identifies the user
+	//	roleId  : identifies the role
+	//	timeStamp: the Time Stamp corresponding to the data when it was
+	//			first retrieved
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_cannot_change_root"|[]        |   ""            | 
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]          	    |   Reason        |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_userId"|[userId]      |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_roleId"|[roleId]      |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_timeStampTooOld"|[]               |                 |
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	role is assigned to the user.  An old role is overwritten
+	//	time stamp corresponding to the user data is updated
+	// 		
+
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_active: contains privileged operations for role administration part of security management.  These allow user to create, delete, modify and assign roles to the users. 
+	omsDefs::Result createRole(in oamSupport::AdmData data, 
+					in string roleId,
+					in oamSupport::StringList actionIds) 
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and creates the 
+        //      specified role, unless the roleId is not unique 
+	// Parameters							
+	//	data    : structure defined in oamSupport.idl
+	//	roleId   : identifies the role
+	//	actionIds: list of action set Ids
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"   |[]                 |    Reason       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_roleId_is_not_unique"|[roleId] |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// 	roleId is unique (i.e there is no role in DB with such ID)
+	// Postconditions			
+	// 	role is created
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_active: contains privileged operations for role administration part of security management.  These allow user to create, delete, modify and assign roles to the users. 
+	omsDefs::Result deleteRole(in oamSupport::AdmData data, 
+					in string roleId) 
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and deletes the 
+        //      specified role, unless the role is the default system admin
+	//	role or read-only default role or roleId is invalid
+	// Parameters							
+	//	data    : structure defined in oamSupport.idl
+	//	roleId   : identifies the role
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]                |   Reason        |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_sm_invalid_roleId"|[roleId]      |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_permanent_role"|[roleId]       |"Role cannnot be |
+	//  |       |                    |                  |deleted.  One of |
+        //  |       |                    |                  |default roles"   |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	role is deleted from database
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_passive: contains operations for role administration part of security management.  These allow user to view existing roles and their configurations, as well as view all existing action sets.
+	omsDefs::Result getAllRoles(in oamSupport::AdmData data, 
+					out oamSupport::StringList roleIds) 
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and returns a list
+        //      of existing roles.
+	// Parameters							
+	//	data    : structure defined in oamSupport.idl
+	//	roleIds   : list of defined roleIds
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]                |   Reason        |
+        //  |       |                    |                  |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	state unchanged
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_passive: contains operations for role administration part of security management.  These allow user to view existing roles and their configurations, as well as view all existing action sets.
+	omsDefs::Result getRoleMapping(in oamSupport::AdmData data, 
+					in string roleId,
+					out oamSupport::TimeStamp timeStamp,
+					out oamSupport::StringList actionIds) 
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and returns a list
+        //      of action sets within the role. 
+	// Parameters	
+	//	data    : structure defined in oamSupport.idl
+        //      roleId     : identifies the role 
+	//	actionIds  : list of defined action sets
+	//	timeStamp: the Time Stamp corresponding to the data when it was
+	//			first retrived
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]          	    |   Reason        |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_invalid_role"|[roleId]         |   ""            |
+        //  |       |                    |                  |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	state unchanged
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_active: contains privileged operations for role administration part of security management.  These allow user to create, delete, modify and assign roles to the users. 
+	omsDefs::Result setRoleMapping(in oamSupport::AdmData data, 
+					in string roleId,
+					in oamSupport::StringList actionIds,
+					inout oamSupport::TimeStamp timeStamp) 
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and sets the specified
+        //      action sets to the role.  Error returned if action sets of type
+	// other than passive are being added to ReadOnlyRole
+	// Parameters	
+	//	data    : structure defined in oamSupport.idl
+        //      roleId     : identifies the role
+	//	actionIds  : list of actioni sets for this role
+	//	timeStamp: the Time Stamp corresponding to the data when it was
+	//			first retrieved
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]                |   Reason        |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_invalid_role"|[roleId]         |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_not_modifiable_role"|[roleId]  |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_illegal_actionsets"|[Type]     |   ""            |
+        //  |       |                    |                  |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_timeStampTooOld"|[]               |                 |
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	//
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	action sets are mapped to this role
+	//	time stamp of the role is updated
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_active: contains privileged operations for role administration part of security management.  These allow user to create, delete, modify and assign roles to the users. 
+	omsDefs::Result addAction(in oamSupport::AdmData data, 
+                                  in string roleId,
+                                  in oamSupport::StringList actionIds,
+                                  inout oamSupport::TimeStamp timeStamp) 
+          raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and adds the specified
+        //      action sets to the role.  Error returned if action sets of type
+	// other than passive are being added to ReadOnlyRole
+	// Parameters	
+	//	data    : structure defined in oamSupport.idl
+        //      roleId     : identifies the role
+	//	actionIds  : list of action sets for this role
+	//	timeStamp: the Time Stamp corresponding to the data when it was
+	//			first retrieved
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]                |   Reason        |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_invalid_role"|[roleId]         |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_not_modifiable_role"|[roleId]  |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_illegal_actionsets"|[Type]     |   ""            |
+        //  |       |                    |                  |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_timeStampTooOld"|[]               |                 |
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	//
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	action sets are mapped to this role
+	//	time stamp of the role is updated
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_active: contains privileged operations for role administration part of security management.  These allow user to create, delete, modify and assign roles to the users. 
+	omsDefs::Result removeAction(in oamSupport::AdmData data, 
+                                     in string roleId,
+                                     in oamSupport::StringList actionIds,
+                                     inout oamSupport::TimeStamp timeStamp) 
+          raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and removes the specified
+        //      action sets from the role.
+	// Parameters	
+	//	data    : structure defined in oamSupport.idl
+        //      roleId     : identifies the role
+	//	actionIds  : list of action sets for this role
+	//	timeStamp: the Time Stamp corresponding to the data when it was
+	//			first retrieved
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]                |   Reason        |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_invalid_role"|[roleId]         |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_not_modifiable_role"|[roleId]  |   ""            |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  |"oms_sm_illegal_actionsets"|[Type]     |   ""            |
+        //  |       |                    |                  |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_timeStampTooOld"|[]               |                 |
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	//
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	action sets are mapped to this role
+	//	time stamp of the role is updated
+
+
+
+	//******************************************************************
+	// #SM_ASD: oms_sm_role_admin_passive: contains operations for role administration part of security management.  These allow user to view existing roles and their configurations, as well as view all existing action sets.
+	omsDefs::Result getAllActionSets(in oamSupport::AdmData data,
+					out oamSupport::StringList actionIds) 
+			raises(omsDefs::OperationFailed);
+
+  	// Purpose
+	//	Does necessary checks on the parameter "data" and returns a list 
+        //      of all action sets from which the operator can select the approriate ones 
+        //      for a specific role.
+	// Parameters	
+	//	data    : structure defined in oamSupport.idl
+	//	actionIds  : list of available action sets
+	// Return value			
+	//   	according to definitions from omsDefs.idl
+	//	Possible return codes are:
+	//
+	//  +-------+--------------------+------------------+-----------------+
+        //  | error | errorCode          | extra            | debugInfo       |
+        //  +-------+--------------------+------------------+-----------------+
+        //  +-------+--------------------+------------------+-----------------+
+        //  | false |                    |[]                |                 |
+        //  +-------+--------------------+------------------+-----------------+
+        //  | true  | "oms_dbFailure"    |[]                |   Reason        |
+        //  |       |                    |                  |                 |
+        //  +-------+--------------------+------------------+-----------------+
+	// The following omsDefs::OperationFailed exception may be thrown:
+	//  +--------------------+------------------+-----------------+
+        //  | errorCode          | extra            | debugInfo       |
+        //  +--------------------+------------------+-----------------+
+        //  +--------------------+------------------+-----------------+
+        //  |"oam_versionMismatch""|[]              |                 |
+        //  +--------------------+------------------+-----------------+
+	//  | see sm.idl for other errorCodes			      |
+	//  +---------------------------------------------------------
+	//
+	// Preconditions				
+	// 	authenticationkey (in AdmData) is valid
+	// Postconditions			
+	// 	state unchanged
+
+   };
+
+  interface GroupAdministration {
+    //*****************************************************************
+    // This interface can be used by the management clients to perform
+    // group-administration.
+    //*****************************************************************
+
+    // The version of this interface, only to be changed when
+    // the signatures or semantics of this interface change
+    const long IF_VERSION = 1;
+    
+    //******************************************************************
+    // #SM_ASD: oms_sm_group_admin_active: contains privileged operations for group administration part of security management.
+    omsDefs::Result setGroupsToUser(in oamSupport::AdmData data, 
+                                    in string userId, 
+                                    in oamSupport::StringList groups,
+                                    inout oamSupport::TimeStamp timeStamp) 
+      raises(omsDefs::OperationFailed);
+    
+    // Purpose
+    //	Does necessary checks on the parameter "data" and assigns
+    //  the specified groups to this user. Existing groups are 
+    //	overwritten.
+    //	Operation fails if either userId or the roleId are invalid
+    // Parameters							
+    //	data    : structure defined in oamSupport.idl
+    //	userId 	: identifies the user
+    //	groups  : identifies the groups
+    //	timeStamp: the Time Stamp corresponding to the data when it was
+    //			first retrieved
+    // Return value			
+    //   	according to definitions from omsDefs.idl
+    //	Possible return codes are:
+    //
+    //  +-------+--------------------+------------------+-----------------+
+    //  | error | errorCode          | extra            | debugInfo       |
+    //  +-------+--------------------+------------------+-----------------+
+    //  +-------+--------------------+------------------+-----------------+
+    //  | false |                    |[]                |                 |
+    //  +-------+--------------------+------------------+-----------------+
+    //  | true  | "oms_dbFailure"    |[]          	|   Reason        |
+    //  +-------+--------------------+------------------+-----------------+
+    //  | true  | "oms_sm_invalid_userId"|[userId]      |   ""            |
+    //  +-------+--------------------+------------------+-----------------+
+    //  | true  | "oms_sm_invalid_group"|[group]        |   ""            |
+    //  +-------+--------------------+------------------+-----------------+
+    // The following omsDefs::OperationFailed exception may be thrown:
+    //  +--------------------+------------------+-----------------+
+    //  | errorCode          | extra            | debugInfo       |
+    //  +--------------------+------------------+-----------------+
+    //  +--------------------+------------------+-----------------+
+    //  |"oam_timeStampTooOld"|[]               |                 |
+    //  +--------------------+------------------+-----------------+
+    //  |"oam_versionMismatch""|[]              |                 |
+    //  +--------------------+------------------+-----------------+
+    //  | see sm.idl for other errorCodes			  |
+    //  +---------------------------------------------------------+
+    // Preconditions				
+    // 	authenticationkey (in AdmData) is valid
+    // Postconditions			
+    // 	groups is assigned to the user.  Old groups are overwritten
+    //	time stamp corresponding to the user data is updated
+    // 		
+    
+    //******************************************************************
+    // #SM_ASD: oms_sm_group_admin_passive: contains operations for grope administration part of security management.
+    omsDefs::Result getAllGroups(in oamSupport::AdmData data, 
+                                 out oamSupport::StringList groups) 
+      raises(omsDefs::OperationFailed);
+    
+    // Purpose
+    //	Does necessary checks on the parameter "data" and returns a list
+    //  of existing groupes.
+    // Parameters							
+    //	data    : structure defined in oamSupport.idl
+    //	groups  : list of defined groups
+    // Return value			
+    //   	according to definitions from omsDefs.idl
+    //	Possible return codes are:
+    //
+    //  +-------+--------------------+------------------+-----------------+
+    //  | error | errorCode          | extra            | debugInfo       |
+    //  +-------+--------------------+------------------+-----------------+
+    //  +-------+--------------------+------------------+-----------------+
+    //  | false |                    |[]                |                 |
+    //  +-------+--------------------+------------------+-----------------+
+    //  | true  | "oms_dbFailure"    |[]                |   Reason        |
+    //  |       |                    |                  |                 |
+    //  +-------+--------------------+------------------+-----------------+
+    // The following omsDefs::OperationFailed exception may be thrown:
+    //  +--------------------+------------------+-----------------+
+    //  | errorCode          | extra            | debugInfo       |
+    //  +--------------------+------------------+-----------------+
+    //  +--------------------+------------------+-----------------+
+    //  |"oam_versionMismatch""|[]              |                 |
+    //  +--------------------+------------------+-----------------+
+    //  | see sm.idl for other errorCodes			  |
+    //  +---------------------------------------------------------+
+    // Preconditions				
+    // 	authenticationkey (in AdmData) is valid
+    // Postconditions			
+    // 	state unchanged
+    
+  };
+  
+};
+#endif

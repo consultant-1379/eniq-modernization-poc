@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:02:43 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>title</momTitle>
+        <momSubTitle>sub title</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>date</docDate>
+        </momIdentity>
+    </momMetaData>
+    <mim author="EAB/FBA/TN Stefan Nilsson XC" contact="QNILSTE" correction="2" date="2014-01-15" docNo="2/155 19-AXB 250 17" name="SgsnMmeTop" namespace="urn:com:ericsson:ecim:SgsnMmeTop" namespacePrefix="sgsnmmetop" organization="EAB/FBA/T - NDO SGSN-MME" release="9" revision="A1" version="1">
+        <description>ECIM Top Level Model. This is the root level for the Ericsson Common Information Model. It contains the singleton, root Managed Object Class, ManagedElement under which the complete model is contained. Directly under ManagedElement are managed-function level classes SystemFunctions, Transport, Equipment  and the root MOC of any managed functions. The Equipment Root MOC is in the Equipment MOM.  The root MOC for a managed function is hosted in the managed function MOM.
+</description>
+        <domainExtension domain="ECIM">
+            <extension name="ecimMomName" value="ECIM_Top"/>
+            <extension name="ecimMomVersion" value="1"/>
+            <extension name="ecimMomRelease" value="2"/>
+        </domainExtension>
+        <implements name="ECIM_Top" release="2" version="1"/>
+        <struct name="ProductIdentity">
+            <description>Contains product infomation for a Managed Element and ManagedFunction(s).&#13;
+This entity is deprecated.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="productNumber">
+                <description>The product number in Ericsson's ABC format.See Ericsson Corporate Basic Standards for information.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isKey" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pnum"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productRevision">
+                <description>The product revision in the form R[1-9][A-Z].See Ericsson Corporate Basic Standards for information.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="prev"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productDesignation">
+                <description>The product designation is the common name for the product. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pdes"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string>
+                    <defaultValue/>
+                </string>
+            </structMember>
+        </struct>
+        <derivedDataType name="DateTimeWithoutOffset">
+            <description>Represents the local date and time ( ISO 8601) . 
+The following pattern describes the DateTimeWithoutOffset format in detail:
+YYYY-MM-DDThh:mm:ss[.S+]
+Where:
+YYYY    = four digit year
+MM      = two digit month (01=January, etc.)
+DD      = two digit day of month (01 through 31)
+T       = time designator (shows start of time component)
+hh      = two digits of hour (00 through 23, AM/PM not allowed)
+mm      = two digits of minute (00 through 59)
+ss      = two digits of second (00 through 59, leap second not allowed)
+S+      = one or more digits of decimal fraction of a second
+
+DateTimeWithoutOffset values are compliant with ISO 8601 (Representation of dates and times) but are restricted according to RFC 3339 (Date and Time on the Internet: Timestamps). The DateTimeWithoutOffset format is further restricted:
+- T designator is upper case.
+- . (dot) is used to indicate start of fractions of seconds (ISO 8601 also allows comma)
+</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>19</min>
+                        <max>19</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>19</min>
+                            <max>19</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+)*$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+)*$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="DifferenceFromUTC">
+            <description>Time zone difference between the local current time  and UTC (Coordinated Universal Time).
+The following format shall be used
+[+/-]hh:mm
+
+It is expressed as positive (i.e. with the leading plus sign [+]) if the local time is ahead of or equal to UTC and as negative (i.e. with the leading minus sign [-]) if it is behind UTC.
+Example:  +01:00</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>6</min>
+                        <max>6</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>6</min>
+                            <max>6</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([+|-])(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9])$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([+|-])(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9])$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <class name="ManagedElement">
+            <description>The top-level class in the Common Information Model is the Managed Element root Managed Object Class (MOC).  
+From this class, all model entities are contained.  The MOC has attributes that provide information on the Managed Element Identity, primary location and the products it contains.  </description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="NLWG"/>
+                <extension name="smTag" value="config"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <attribute name="managedElementId">
+                <description>The value component of the RDN.  
+The allowed character set is defined by 3GPP TS 32.300.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mei"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="siteLocation">
+                <description>A freetext attribute describing the geographic location of a Managed Element.
+</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sl"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="userLabel">
+                <description>A freetext string for additional information to assist Managed Element identification.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ul"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="productIdentity">
+                <description>Contains product information for the Managed Element and its Managed Function(s). 
+This attribute is deprecated.</description>
+                <noNotification/>
+                <dataType>
+                    <sequence>
+                        <structRef name="ProductIdentity">
+                            <mimName>SgsnMmeTop</mimName>
+                        </structRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+                <deprecated/>
+                <statusInformation>This attribute is deprecated. Information exists in SgsnMmwSwIM model.</statusInformation>
+            </attribute>
+            <attribute name="localDateTime">
+                <description>This is the local date and time for the Managed Element.
+The following format is used: YYYY-MM-DDThh:mm:ss
+
+The meaning of each field is as follows:
+YYYY is a 4-digit year.
+MM is the month within the year (starting with 01).
+DD is the day within the month (starting with 01).
+T is used as time designator to indicate the start of the time of day component in the expression.
+hh is the hour within the day (24-hour clock, starting with 00).
+mm is the minute within the hour (starting with 00).
+ss is the second within the minute (starting with 00).
+
+The hyphen [-] and the colon [:] are used as separators within the date and time of day expressions, respectively.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="true"/>
+                    <extension name="cliOperand" value="ldt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTimeWithoutOffset">
+                        <mimName>SgsnMmeTop</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+                <specification>ISO 8601:2004(E)</specification>
+            </attribute>
+            <attribute name="timeZone">
+                <description>This is the timeZone that the Managed Element resides in.
+The possible values for this attribute are defined in the public-domain zoneinfo (or Olson) database.
+Locations are identified by a string indicating the continent or ocean and then the name of the location, which is typically the largest city within the region. 
+See http://www.twinsun.com/tz/tz-link.htm for more information.
+
+Example: Europe/Stockholm
+</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tz"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="dateTimeOffset">
+                <description>Difference between the value of the localDateTime attribute and UTC (Coordinated Universal Time).</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dto"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DifferenceFromUTC">
+                        <mimName>SgsnMmeTop</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="dnPrefix">
+                <description>It provides additional naming context that allows  the managed objects to be partitioned into logical domains.
+A Distingushed Name (DN) is defined by 3GPP TS 32.300  which splits the DN in a DN Prefix and Local DN e.g.   DN format: dnPrefix=&lt;DN Prefix&gt;, localDn =&lt;Local DN&gt;</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="managedElementType">
+                <description>The type of product being managed. 
+For example the type could be  RBS or CSCF.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="met"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="release">
+                <description>The release of the type of product specified by the attribute managedElementType.
+It commonly contains the Managed Element release e.g. L12.0, 13A, R1A </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rel"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="SystemFunctions">
+            <description>This is a container class for all common OAM functions provided by the Managed Element.  
+Examples of these functions include Fault Management, Performance Management, System Management and Heartbeat Management. </description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="systemFunctionsId">
+                <description>The value component of the RDN.
+The allowed character set is defined by 3GPP TS 32.300.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sfi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="Transport">
+            <description>This is a container for common transport functions used within the Managed Element. 
+
+</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="transportId">
+                <description>The value component of the RDN.  
+The allowed character set is defined by 3GPP TS 32.300.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ti"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <relationship name="ManagedElement_to_SystemFunctions">
+            <containment>
+                <parent>
+                    <hasClass name="ManagedElement">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="SystemFunctions">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="ManagedElement_to_Transport">
+            <description>Containment association of the Transport MOC</description>
+            <containment>
+                <parent>
+                    <hasClass name="ManagedElement">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="Transport">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </mim>
+</models>

@@ -1,0 +1,184 @@
+<EntityDef name="BASE_E_SGSNMME_R1A01">
+<TECHPACK_NAME>BASE_E_SGSNMME</TECHPACK_NAME>
+	<TECHPACK_RELEASE>R1A01</TECHPACK_RELEASE>
+	<PRODUCT_NUMBER>CXP111112</PRODUCT_NUMBER>
+	<FEATURE_NAME>LTE</FEATURE_NAME>
+	<ENTITY_DESCRIPTION>Base support for SGSNMME node</ENTITY_DESCRIPTION>
+	<LICENSE>CXP111112</LICENSE>
+	<TECHPACK_TYPE>BASE</TECHPACK_TYPE>
+	<VENDOR>E</VENDOR>
+	<TECHNOLOGY>SGSNMME</TECHNOLOGY>
+
+	
+	<Components section="REPORTABLE_ENTITIES">
+	
+		<EntityDef name="BASE_E_SGSNMME_COMMON">
+			<DESCRIPTION>Base keys view properties</DESCRIPTION>
+			<ENTITY_TYPE>BASE</ENTITY_TYPE>
+			
+			<Components section="REPORTABLE_ENTITIES_COLUMNS">
+				<EntityDef name="date_id">
+					<ENTITY_COLUMN_ORDER>0</ENTITY_COLUMN_ORDER>
+					<ENTITY_COLUMN_TYPE>STRING</ENTITY_COLUMN_TYPE>
+					<ENTITY_DESCRIPTION>DATE_ID</ENTITY_DESCRIPTION>
+					<ENTITY_COLUMN_TYPE>key</ENTITY_COLUMN_TYPE>
+					<ENTITY_DATA_TYPE>STRING</ENTITY_DATA_TYPE>
+					<ENTITY_COUNTER_TYPE>TEXT</ENTITY_COUNTER_TYPE>
+					<PARTITION_BY>1</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="granularity">
+					<ENTITY_COLUMN_ORDER>1</ENTITY_COLUMN_ORDER>
+					<ENTITY_COLUMN_TYPE>key</ENTITY_COLUMN_TYPE>
+					<ENTITY_DATA_TYPE>BIGINT</ENTITY_DATA_TYPE>
+					<ENTITY_COUNTER_TYPE>TEXT</ENTITY_COUNTER_TYPE>
+					<ENTITY_DESCRIPTION>GRANULARITY</ENTITY_DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="moid">
+					<ENTITY_COLUMN_ORDER>2</ENTITY_COLUMN_ORDER>
+					<ENTITY_COLUMN_TYPE>key</ENTITY_COLUMN_TYPE>
+					<ENTITY_DATA_TYPE>STRING</ENTITY_DATA_TYPE>
+					<ENTITY_COUNTER_TYPE>TEXT</ENTITY_COUNTER_TYPE>
+					<ENTITY_DESCRIPTION>MOID</ENTITY_DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="node">
+					<ENTITY_COLUMN_ORDER>4</ENTITY_COLUMN_ORDER>
+					<ENTITY_COLUMN_TYPE>key</ENTITY_COLUMN_TYPE>
+					<ENTITY_DATA_TYPE>STRING</ENTITY_DATA_TYPE>
+					<ENTITY_COUNTER_TYPE>TEXT</ENTITY_COUNTER_TYPE>
+					<ENTITY_DESCRIPTION>NODE NAME</ENTITY_DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="ropendtime">
+					<ENTITY_COLUMN_ORDER>5</ENTITY_COLUMN_ORDER>
+					<ENTITY_COLUMN_TYPE>key</ENTITY_COLUMN_TYPE>
+					<ENTITY_DATA_TYPE>TIMESTAMP</ENTITY_DATA_TYPE>
+					<ENTITY_COUNTER_TYPE>TEXT</ENTITY_COUNTER_TYPE>
+					<ENTITY_DESCRIPTION>ROP ENDTIME</ENTITY_DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="utc_timestamp">
+					<ENTITY_COLUMN_ORDER>6</ENTITY_COLUMN_ORDER>
+					<ENTITY_COLUMN_TYPE>key</ENTITY_COLUMN_TYPE>
+					<ENTITY_DATA_TYPE>TIMESTAMP</ENTITY_DATA_TYPE>
+					<ENTITY_COUNTER_TYPE>TEXT</ENTITY_COUNTER_TYPE>
+					<ENTITY_DESCRIPTION>UTC TIMESTAMP</ENTITY_DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="local_timestamp">
+					<ENTITY_COLUMN_ORDER>7</ENTITY_COLUMN_ORDER>
+					<ENTITY_COLUMN_TYPE>key</ENTITY_COLUMN_TYPE>
+					<ENTITY_DATA_TYPE>TIMESTAMP</ENTITY_DATA_TYPE>
+					<ENTITY_COUNTER_TYPE>TEXT</ENTITY_COUNTER_TYPE>
+					<ENTITY_DESCRIPTION>LOCAL TIMESTAMP</ENTITY_DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+			</Components>
+				
+		</EntityDef>
+	</Components>
+
+	<Components section="Flows">
+		<EntityDef name="PM_E_SGSNMME">
+		
+			<Components section="Actions">
+				<EntityDef name="FileCollection">
+					<WORKER_NAME>com.ericsson.kyo.workers.FileCollectionWorker</WORKER_NAME>
+					<REOCCURING>True</REOCCURING>
+					<ROP_INTERVAL>15</ROP_INTERVAL>
+					<ROP_OFFSET>0</ROP_OFFSET>
+					<ENABLED>0</ENABLED>
+					<CONFIG_inputDirectory>/mnt/nfsshare/data/sgw/sgwcg/xml/gsn/sgsnmmecom/ </CONFIG_inputDirectory>
+				</EntityDef>
+
+				<EntityDef name="FileParsing">
+					<WORKER_NAME>com.ericsson.kyo.workers.SparkLauncherWorker</WORKER_NAME>
+					<DEPENDENCY_FLOW_NAME>PM_E_SGSNMME</DEPENDENCY_FLOW_NAME>
+					<DEPENDENCY_ACTION_NAME>FileCollection</DEPENDENCY_ACTION_NAME>
+					<!--<CONFIG_ExecEnv>Spark</CONFIG_ExecEnv> -->
+					<CONFIG_SparkLauncherMainClass>com.ericsson.kyo.workers.SGSNSparkStarter</CONFIG_SparkLauncherMainClass>
+					<CONFIG_rowTag>measData</CONFIG_rowTag>
+					<CONFIG_OutputPath>maprfs:///PM/E/SGSNMME/$VERSION</CONFIG_OutputPath>
+				</EntityDef>
+
+			</Components>
+			
+		</EntityDef>
+		
+		<EntityDef name="PM_E_SGSNMME_AGEING">
+			<Components section="Actions">
+				<EntityDef name="DataAgeing">
+					<WORKER_NAME>com.ericsson.kyo.workers.SparkLauncherWorker</WORKER_NAME>
+					<REOCCURING>True</REOCCURING>
+					<ROP_INTERVAL>1440</ROP_INTERVAL>
+					<ROP_OFFSET>0</ROP_OFFSET>
+					<ENABLED>0</ENABLED>
+					<!--<CONFIG_ExecEnv>Spark</CONFIG_ExecEnv> -->
+					<CONFIG_SparkLauncherMainClass>com.ericsson.kyo.workers.AgeingSparkStarter</CONFIG_SparkLauncherMainClass>
+					<CONFIG_OutputPath>maprfs:///PM/E/SGSNMME/$VERSION</CONFIG_OutputPath>
+				</EntityDef> 
+				
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="PM_E_SGSNMME_ADD_PARTITION">
+			<Components section="Actions">
+			
+				<EntityDef name="AddPartitions">
+					<WORKER_NAME>com.ericsson.kyo.workers.AddPartitions</WORKER_NAME>
+					<REOCCURING>True</REOCCURING>
+					<ROP_INTERVAL>1440</ROP_INTERVAL>
+					<ROP_OFFSET>0</ROP_OFFSET>
+					<ENABLED>0</ENABLED>
+				</EntityDef> 
+				
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="PM_E_SGSNMME_DELETE_PARTITION">
+			<Components section="Actions">
+			
+				<EntityDef name="DeletePartitions">
+					<WORKER_NAME>com.ericsson.kyo.workers.DropPartitions</WORKER_NAME>
+					<REOCCURING>True</REOCCURING>
+					<ROP_INTERVAL>1440</ROP_INTERVAL>
+					<ROP_OFFSET>0</ROP_OFFSET>
+					<ENABLED>0</ENABLED>
+				</EntityDef> 
+				
+			</Components>
+		</EntityDef>
+		
+	</Components>
+	
+	<Components section="DESIGNRULES">
+		<EntityDef name="PM_E_SGSNMME">
+		
+			<Components section="Rules">
+				<EntityDef name="RuleForAllMOs">
+					<MATCH_TYPE>ALL</MATCH_TYPE>
+					
+						<Components section="Rules">
+														
+							<EntityDef name="Gauge/Peg">
+								<MATCH_TYPE>ALL</MATCH_TYPE>
+							</EntityDef>
+
+						</Components>
+				</EntityDef>
+
+			</Components>
+		</EntityDef>
+	
+	</Components>
+
+
+</EntityDef>

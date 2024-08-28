@@ -1,0 +1,3809 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eventspecification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./1_LMI-09:1899.xsd">
+	<general>
+		<docno>2/1551-CRA 250 58</docno>
+		<revision>Z37</revision>
+		<date>2019-05-13</date>
+		<author>ZPRBNMR</author>
+		<ffv>4</ffv>
+		<fiv>91</fiv>
+		<!--
+			Add new revisionhistoryelem for each new external delivery
+		-->
+	<revisionhistory>
+		<revisionhistoryelem>
+			<revision>A</revision>
+			<comment>2009-10-14, SGSN-MME 2009B RP01. rev A with new doc no.</comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>B</revision>
+			<comment>2009-10-15, SGSN-MME 2009B RP02. EMWTEND: Added tag information and revisionhistory.
+				QNILSTE: Added Streaming records, revisionhistory and Capabilities.  </comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>C</revision>
+			<comment>2010-01-12, SGSN-MME 2010A.
+				QNILSTE: Added multiple PDN.  </comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>D</revision>
+			<comment>2010-03-24, SGSN-MME 2010A.
+				QNILSTE: Added time zone info in stream header record.  </comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>E</revision>
+			<comment>2010-05-19, SGSN-MME 2010B.
+				Events DETACH and SERVICE_REQUEST added + updates
+to existing events.  </comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>F</revision>
+			<comment>2010-08-20, SGSN-MME 2010B FP.
+				Added: QoS info in BEARER struct, Duration/MilliSec in
+all SGSN events, Request retries to several events, L_TAU changes</comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>G</revision>
+			<comment>2010-10-27, SGSN-MME 2011A RP01.
+                                EAB/FLP/TK Anna Hansen: TAU Type From Gn SGSN added.
+                                  </comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>G1</revision>
+			<comment>2010-11-03, SGSN-MME 2011A.
+                                ERVBOLM: Added RNC to the DEACTIVATION_TRIGGER enum.
+                                  </comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>H</revision>
+			<comment>2011-04-05, SGSN-MME 2011A FP01.
+                                EJUNQZH: Added SGW to the DEACTIVATION_TRIGGER
+enum. EMWCLR: Added L_TAU event parameters for ISC TAU
+                                  </comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+                        <revision>PH1</revision>
+                        <comment>2011-01-11, SGSN-MME 2011B.
+                                EHANBZH: IRAT HO between MME and SGSN for 11B, L_HANDOVER changes.
+                        </comment>
+                </revisionhistoryelem>
+		<revisionhistoryelem>
+                        <revision>J</revision>
+                        <comment>2011-05-16, SGSN-MME 2011B.
+                                QNILSTE: IMS Emergency changes to L_ATTACH,L_PDN_CONNECT.
+                        </comment>
+                </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>J1</revision>
+                        <comment>2011-07-29, SGSN-MME 2011B.
+                                QNILSTE:  Minor textual update on three HLR/HSS
+enum values.
+                        </comment>
+                </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>J2</revision>
+                        <comment>2011-08-10, SGSN-MME 2011B.
+                                QNILSTE: HSS added to DECONNECT_PDN_TYPE.
+                        </comment>
+                </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>K</revision>
+                        <comment>2011-11-03, SGSN-MME 2012A.
+                                QNILSTE: GTPv2 added to CAUSE_PROT_TYPE (for use in ACTIVATE event). MSISDN added to all MME L_ events.
+                        </comment>
+                </revisionhistoryelem>
+     	<revisionhistoryelem>
+                        <revision>L</revision>
+                        <comment>2012-05-02, SGSN-MME 13A.
+                                EMWTEND: Enhanced comment field information. QNILSTE: SRVCC parameters added in L_HANDOVER event,
+                                GTP_PIGGYBACKED added in L_DEDICATED_BEARER_ACTIVATE event.
+                                ERVLLHE: MSC and TARGET_LAI added to L_ATTACH and L_TAU for combined event info.
+                        </comment>
+                </revisionhistoryelem>
+<revisionhistoryelem>
+                        <revision>L1</revision>
+                        <comment>2012-06-21, SGSN-MME 13A.
+                                EMWTEND: Enhanced comment field information. QNILSTE: SRVCC parameters added in L_HANDOVER event,
+                                GTP_PIGGYBACKED added in
+L_DEDICATED_BEARER_ACTIVATE event. Event L_BEARER_MODIFY added.
+                                ERVLLHE: MSC and TARGET_LAI added to L_ATTACH and L_TAU for combined event info.
+                        </comment>
+                </revisionhistoryelem>
+         <revisionhistoryelem>
+                        <revision>L2</revision>
+                        <comment>2012-06-26, SGSN-MME 13A.
+                                EMWTEND: Enhanced description field information for the BEARER_CAUSE parameter
+                        </comment>
+                </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>M</revision>
+                        <comment>2012-10-28, SGSN-MME 13B.
+                                PERIODIC_TAU_TIMER added to L_ATTACH and L_TAU.
+                                SERVICE_REQUEST: 3G Direct Tunnel info added
+                        </comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>N1</revision>
+                        <comment>2013-03-12,, SGSN-MME 13B final version
+                                Rel97/98, Rel99 and EPS QOS parameters added in ACTIVATE event.
+                                Added new event L_CDMA2000 including parameter types
+                                L_SERVICE_REQUEST: 3 paging parameters added.
+                        </comment>
+                </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>S</revision>
+                        <comment>2013-06-26, SGSN-MME 14A.
+                                Preliminary version L_SERVICE_REQUEST: trigger2 parameter added. ERVFMAN: ORIGINATING_CAUSE_PROT_TYPE and ORIGINATING_CAUSE_CODE added to L_ATTACH, L_DETACH, L_HANDOVER, L_SERVICE_REQUEST, L_BEARER_MODIFY L_DEDICATED_BEARER_ACTIVATE, L_PDN_DISCONNECT. L_SERVICE_REQUEST: 2 parameters added for Geographical Redundancy Session Continuity. EMMNDDL: Added three new optional parameters to L_CDMA2000: HANDOVER_STATUS, SRVCC_HANDOVER, EMERGENCY
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>S1</revision>
+                        <comment>2013-08-15, SGSN-MME 14A.
+                                L_TAU: trigger2 parameter added for Geographical Redundancy Session Continuity.
+                                L_ATTACH: Added optional parameter UE_REQUESTED_APN.
+                                L_PDN_CONNECT: Added optional parameter UE_REQUESTED_APN.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>S2</revision>
+                        <comment>2013-09-23, SGSN-MME 14A.
+                                L_CDMA2000: Renamed parameter HANDOVER_STATUS to HANDOFF_STATUS.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>T</revision>
+                        <comment>2014-01-16, SGSN-MME 14B.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>T1</revision>
+                        <comment>2014-02-12, SGSN-MME 14B CP01.
+                                L_TAU: add UE_RETURN_DURATION parameter
+                                L_SERVICE_REQUEST: add UE_RETURN_DURATION parameter
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>U</revision>
+                        <comment>2014-03-26, SGSN-MME 15A.
+                                Renamed COMBINED_UPDATE to PERIODIC_UPDATE
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>U1</revision>
+                        <comment>2014-04-15, SGSN-MME 15A.
+                                L_TAU: Added optional parameter ORIGINATING_CAUSE_PROT_TYPE and ORIGINATING_CAUSE_CODE.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>U2</revision>
+                        <comment>2014-07-31, SGSN-MME 15A.
+                                Added "PDN_INFO2" in L_ATTACH, L_PDN_CONNECT, L_TAU and L_HANDOVER.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>V</revision>
+                        <comment>2014-11-05, SGSN-MME 15B.
+                                L_PDN_DISCONNECT: Add BEARER struct
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>V1</revision>
+                        <comment>2014-12-31, SGSN-MME 15B.
+                                Added "SX_INFO" in RAU and ISRAU.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>V2</revision>
+                        <comment>2014-03-30, SGSN-MME 15B.
+                                Added Cell Access Mode, CSG Membership Status and CSG Id from source.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>W</revision>
+                        <comment>2016-01-28, SGSN-MME 16A.
+                                Added "PDN_CONNECT_REQUEST_TYPE" to L_ATTACH.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>X1</revision>
+                        <comment>2016-02-23, SGSN-MME 16A.
+                                Added "ORIGINATING_CAUSE_PROT_TYPE" and "ORIGINATING_CAUSE_CODE" to event L_PDN_CONNECT.
+          </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Y</revision>
+                        <comment>2016-02-28, SGSN-MME 16A.
+                               Added "NAS_SIGNALING_LOW_PRIORITY" in L_ATTACH, L_TAU, L_SERVICE_REQUEST.
+                               Added "BACK_OFF_TIMER" in L_ATTACH, L_SERVICE_REQUEST                          
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Y1</revision>
+                        <comment>2016-04-22, SGSN-MME 16A.
+                               Added "SDS_SERVICE" in L_ATTACH, L_TAU, L_SERVICE_REQUEST, L_DETACH.
+                               Added "SDS_GW" in L_ATTACH, L_TAU, LDETACH       
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Y2</revision>
+                        <comment>2016-06-28, SGSN-MME 16A.
+                               Added "SDS_SERVICE" in L_HANDOVER.      
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Y3</revision>
+                        <comment>2016-08-18, SGSN-MME 16A.
+                               Added "DONAS" in L_ATTACH.
+                               Added "DATA_SERVICE_TYPE" and "DATA_LENGTH" in L_SERVICE_REQUEST.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Y4</revision>
+                        <comment>2016-10-17, R65, SGSN-MME 1.4, SGSN-MME 16A CP10.
+                               Added "A_MSISDN" in L_ATTACH, L_HANDOVER, and L_TAU.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Y5</revision>
+                        <comment>2016-11-01.
+                               Added PSM parameters ACTIVE_TIMER and PERIODIC_RAU_TIMER in ATTACH, DETACH and RAU.
+                               Added new event EXIT_PSM containing ACTIVE_TIMER, PERIODIC_RAU_TIMER and DURATION_PSM.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Y6</revision>
+                        <comment>2016-11-15.
+                               Added PSM parameter ACTIVE_TIMER in L_ATTACH, L_DETACH, L_SERVICE_REQUEST and L_TAU.
+                               Added PERIODIC_TAU_TIMER in L_DETACH and L_SERVICE_REQUEST.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Z</revision>
+                        <comment>2016-12-08.
+                               Modify description of UE_RETURN_DURATION in L_TAU and L_SERVICE_REQUEST.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Z1</revision>
+                        <comment>2017-01-12.
+                               Added parameter types EDRX_TEDRX, EDRX_PTW, EDRX_TEDRX_REQ and EDRX_PTW  
+                               Added struct type EDRX_INFO_LTE.
+                               Added struct type EDRX_INFO_LTE to L_ATTACH.
+                         </comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>  
+                         <revision>Z2</revision>
+                        <comment>2017-01-25.
+                               Added parameter type EDRX_DELAY_PAGING_TIME
+                               Added EDRX_DELAY_PAGING_TIME to L_SERVICE_REQUEST
+                         </comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Z3</revision>
+                        <comment>2017-01-26.
+                               Added struct type EDRX_INFO_LTE to L_TAU.
+                         </comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Z4</revision>
+                        <comment>2017-02-07.
+                            Added struct type EDRX_INFO_GSM to ATTACH, RAU and ISRAU
+                        </comment> 
+        </revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>Z5</revision>
+			<comment>2017-03-30.
+				Added "SMS_LENGTH" in L_SERVICE_REQUEST.
+			</comment>
+		</revisionhistoryelem>
+		<revisionhistoryelem>
+			<revision>Z6</revision>
+			<comment>2017-04-12.
+				Added parameter types ENB_UE_S1AP_ID and MME_UE_S1AP_ID.
+			</comment>
+		</revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Z7</revision>
+                        <comment>2017-04-14.
+                            Update "DATA_SERVICE_TYPE", "DATA_LENGTH" and "SMS_LENGTH" in L_SERVICE_REQUEST.
+                        </comment> 
+        </revisionhistoryelem>
+        <revisionhistoryelem>                        
+                        <revision>Z8</revision>
+                        <comment>2017-05-15.
+                            Move "SMS_LENGTH" to the end in L_SERVICE_REQUEST.
+                        </comment> 
+        </revisionhistoryelem>
+	<revisionhistoryelem>
+                        <revision>Z9</revision>
+                        <comment>2017-07-07, ECHUDAI: Rename Sx to Smp for descriptions</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                        <revision>Z10</revision>
+                        <comment>2017-08-21.
+                               Add DONAS in L_TAU.
+                        </comment>
+        </revisionhistoryelem>
+	    <revisionhistoryelem>
+	    	<revision>Z10</revision>
+	    	<comment>2017-08-17.
+                            Added "UE_REQUESTED_ROHC_PROFILE" and "UE_REQUESTED_ROHC_MAX_CID" at the end of L_ATTACH.</comment>
+	    </revisionhistoryelem>
+        <revisionhistoryelem>                        
+          <revision>Z11</revision>
+          <comment>2017-09-03
+             Clarified description text for EDRX_DELAY_PAGING_TIME</comment> 
+        </revisionhistoryelem> 
+        <revisionhistoryelem>
+            <revision>Z12</revision>
+            <comment>2017-09-11, EANDEBJ: Add L_CONNECTION_RESUME, add UP CIOT to L_ATTACH</comment>
+        </revisionhistoryelem>           
+        <revisionhistoryelem>
+            <revision>Z13</revision>
+            <comment>2017-09-28, ERVAN(anna.hansen), add CONNECTION_SUSPEND_AND_RESUME to L_ATTACH</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z14</revision>
+            <comment>2017-11-10, XVIKSOD: add CONNECTION_SUSPEND_AND_RESUME in L_TAU</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z15</revision>
+            <comment>2017-12-20, EELLYAN: add HANDOVER_OF_EMERGENCY_BEARER_SERVICES in PDN_CONNECT_REQUEST_TYPE</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z16</revision>
+            <comment>2018-01-19, EHUIHNG: add BACK_OFF_TIMER in L_TAU</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z17</revision>
+            <comment>2018-01-10, ZMAHABB: add L_RAT to L_ATTACH, L_BEARER_MODIFY, L_CONNECTION_RESUME, L_DEDICATED_BEARER_ACTIVATE, L_DEDICATED_BEARER_DEACTIVATE, L_DETACH, L_PDN_CONNECT, L_PDN_DISCONNECT, L_SERVICE_REQUEST, L_HANDOVER, L_TAU</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z18</revision>
+            <comment>2018-01-26, ZSAYKAR:Modified NodeId length from 20 to 32 characters. FIV change to 68 </comment>
+        </revisionhistoryelem>  
+            <revisionhistoryelem>
+            <revision>Z19</revision>
+            <comment>2018-02-22, ZTXXGNA: Modified low range of ENB_LIST_LENGTH from 1 to 0 and EPS_BEARER_ID from 5 to 0. 
+		FIV changed to 69 </comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z20</revision>
+            <comment>2018-02-28, ECFFGGX: add UE_SUPPORT_WITHOUT_PDN and ESM_DUMMY_MSG_IN_REG in L_ATTACH, UE_SUPPORT_WITHOUT_PDN in L_TAU. FIV change to 70</comment>
+        </revisionhistoryelem> 
+        <revisionhistoryelem>
+            <revision>Z21</revision>
+            <comment>2018-03-05, EZDARLI: add NR_AS_SECONDARY_RAT to L_ATTACH, L_TAU, L_HANDOVER, L_SERVICE_REQUEST. 
+                FIV changed to 71 </comment>
+        </revisionhistoryelem> 
+        <revisionhistoryelem>
+            <revision>Z22</revision>
+            <comment>2018-03-15, XLARTID: Add PDN_INFO3 to L_ATTACH, L_PDN_CONNECT and add PDNS_3 to L_TAU and L_HANDOVER.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z22</revision>
+            <comment>2018-03-21, ECFFGGX: modify UE_SUPPORT_ER_WO_PDN to UE_SUPPORT_WITHOUT_PDN. FIV change to 73</comment>
+        </revisionhistoryelem>        
+        <revisionhistoryelem>
+            <revision>Z23</revision>
+            <comment>2018-03-30, ZSAYKAR:Modified NodeId length from 32 to 31 characters. FIV change to 74 </comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z24</revision>
+            <comment>2018-05-07, XLARTID: Make PDN_TYPE value names upper case to fulfill XML schema. FIV change to 75.</comment>
+        </revisionhistoryelem>
+         <revisionhistoryelem>
+            <revision>Z25</revision>
+            <comment>2018-05-07, EZDARLI: Add BEARER_2 struct with EXT_GBR_DL. Add BEARER_2 to L_ATTACH, L_TAU, L_HANDOVER, L_SERVICE_REQUEST, L_BEARER_MODIFY, L_DEDICATED_BEARER_ACTIVATE, L_DEDICATED_BEARER_DEACTIVATE, L_PDN_CONNECT, L_PDN_DISCONNECT.
+                FIV changed to 76</comment>
+        </revisionhistoryelem> 
+        <revisionhistoryelem>
+            <revision>Z26</revision>
+            <comment>2018-06-12, ECHUDAI: SGW_INITIATED of DECONNECT_PDN_TYPE  was changed to SGW_OR_SCEF_INITIATED. FIV change to 77.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z27</revision>
+            <comment>2018-06-19, EZHUAIN: Add struct "SCEF" to struct "PDN_INFO".</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z27</revision>
+            <comment>2018-06-19, EZDUAZH: DETACH_TRIGGER is expanded to value 5: SCEF. FIV change to 78.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+            <revision>Z28</revision>
+            <comment>2018-07-16, EZDUAZH: SERVICE_TRIGGER  value 1 is expanded to: SGW_OR_SCEF. FIV change to 79.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+        	<revision>Z29</revision>
+        	<comment>2018-08-03,EZHAOCH: Add new optional Event Parameter Groups:PSM_INFO_LTE, EDRX_INFO2_LTE.FIV change to 80.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                <revision>Z30</revision>
+                <comment>2018-09-26,EKLLOPR: Add new optional Event Parameter SCEF to L_PDN_DISCONNECT. FIV change to 82.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+        	<revision>Z31</revision>
+        	<comment>2018-11-14,EZCHEDE: Add new optional Event Parameter SMS_IN_MME_REGISTERED to L_ATTACH and L_TAU. FIV change to 84.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                <revision>Z32</revision>
+                <comment>2019-01-14,EZCHESU: Add new optional Event Parameter CAUSE_CODE2 to L_BEARER_MODIFY and L_PDN_DISCONNECT.
+                                             Add new optional Event Parameter SCEF to L_BEARER_MODIFY.
+                                             Extend L-CAUSE_PROT_TYPE to include DIAMETER_RESULT_CODE and DIAMETER_EXPERIMENTAL_RESULT_CODE.
+                                             FIV change to 85.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                <revision>Z33</revision>
+                <comment>2019-01-22,EKLLOPR: Modify the description for L_BEARER_MODIFY.
+                                             FIV change to 86.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                <revision>Z34</revision>
+                <comment>2019-01-31,ETANYIX: Add new optional Event Parameter Group PSM_INFO2_LTE in L_ATTACH and L_TAU.
+                                             Add new optional Event Parameter PERIODIC_TAU_TIMER_EXT in L_ATTACH, L_TAU, L_DETACH and L_SERVICE_REQUEST.
+                                             FIV change to 87.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+                <revision>Z35</revision>
+                <comment>2019-03-20,ETANYIX: update pdn disconnect ebm description.
+                                             FIV change to 88.</comment>
+        </revisionhistoryelem>
+        <revisionhistoryelem>
+        	<revision>Z36</revision>
+        	<comment>2019-04-17,EZCHEDE: Replace upper case 'REGISTERED' and 'DEREGISTERED' instead of 'Registered' and 'Deregistered' for ENM validation.  FIV change to 89.</comment>
+        </revisionhistoryelem>
+	<revisionhistoryelem>
+        	<revision>Z37</revision>
+        	<comment>2019-05-13, ZPRBNMR: FIV change to 91.</comment>
+        </revisionhistoryelem>
+	</revisionhistory>
+		<Capabilities>
+			<JobPersistence>RESTART</JobPersistence>
+			<EventCapabilities>
+				<OutputFormat>Ericsson_Binary</OutputFormat>
+				<Protocol>SFTP</Protocol>
+				<Method>PULL</Method>
+				<Directory>/tmp/OMS_LOGS/ebs/ready</Directory>
+				<ReportingPeriod>15</ReportingPeriod>
+				<AlignedReportingPeriod>true</AlignedReportingPeriod>
+				<Retention>2</Retention>
+				<Compression>NONE</Compression>
+			</EventCapabilities>
+			<EventCapabilities>
+				<OutputFormat>Ericsson_Binary</OutputFormat>
+				<Protocol>STREAM</Protocol>
+				<Compression>NONE</Compression>
+			</EventCapabilities>
+		</Capabilities>
+	</general>
+	<parametertypes>
+		<parametertype>
+			<name>RECORD_LENGTH</name>
+			<type>UINT</type>
+			<description>Total numer of bytes in this binary</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>4</low>
+				<high>65532</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>FILE_FORMAT_VERSION</name>
+			<type>UINT</type>
+			<description>The file format version is incremented if there is a change in the file format - changes in file structure that requires updates of the controlling XML schema.</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>1</low>
+				<high>255</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>FILE_INFORMATION_VERSION</name>
+			<type>UINT</type>
+			<description>The file information version is incremented if there is a change in the file information, e.g. new events or parameters in events.</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>1</low>
+				<high>255</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>TIME_YEAR</name>
+			<type>UINT</type>
+			<description>Year</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>1970</low>
+				<high>9999</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>TIME_MONTH</name>
+			<type>UINT</type>
+			<description>Month</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>1</low>
+				<high>12</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>TIME_DAY</name>
+			<type>UINT</type>
+			<description>Year</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>1</low>
+				<high>31</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>TIME_HOUR</name>
+			<type>UINT</type>
+			<description>Timestamp (Hour) at the time when the signaling procedure for the event was started (Hour. HH)</description>
+			<numberofbits>5</numberofbits>
+			<range>
+				<low>0</low>
+				<high>23</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>TIME_MINUTE</name>
+			<type>UINT</type>
+			<description>Timestamp (Minute) at the time when the signaling procedure for the event was started (Minute. MM)</description>
+			<numberofbits>6</numberofbits>
+			<range>
+				<low>0</low>
+				<high>59</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>TIME_SECOND</name>
+			<type>UINT</type>
+			<description>Timestamp (Second) at the time when the signaling procedure for the event was started (Second. SS)</description>
+			<numberofbits>6</numberofbits>
+			<range>
+				<low>0</low>
+				<high>60</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>TIME_MILLISECOND</name>
+			<type>UINT</type>
+			<description>Timestamp (MilliSecond) at the time when the signaling procedure for the event was started (Millisecond)</description>
+			<numberofbits>10</numberofbits>
+			<range>
+				<low>0</low>
+				<high>999</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>DURATION</name>
+			<type>UINT</type>
+			<description>Duration provides timing information with millisecond granularity calculated from when the signaling procedure starts until it ends for the event.</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>0</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>UE_RETURN_DURATION</name>
+			<type>UINT</type>
+			<description>This parameter provides a period of time in milliseconds from the time when the MME receives a UE Context Release Request message with a cause code configured in the MME by the S1RelCauseDelayGbrBearerDeact parameter, to the time when the UE reconnects to the network. If the actual UE return duration exceeds the upper limit of 65535 milliseconds, the MME still records the UE return duration as 65535 milliseconds in the Event-Based Monitoring Log file. The precondition for this parameter to be present is that the Timer Based Deactivation of GBR Bearers feature is active and the UE has GBR bearer(s) when S1 connection is releasing.</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>0</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+                        <name>DURATION_PSM</name>
+                        <type>UINT</type>
+                        <description>This parameter provides timing information in seconds calculated from when the UE enters PSM until the UE exits PSM.</description>
+                        <numberofbits>21</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>1116240</high>
+                        </range>
+                </parametertype>
+		<parametertype>
+                        <name>ACTIVE_TIMER</name>
+                        <type>UINT</type>
+                        <description>Active timer provides timing information in seconds of how long time a PSM-type UE is active before it enters PSM.</description>
+                        <numberofbits>14</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>11160</high>
+                        </range>
+                </parametertype>
+		<parametertype>
+                        <name>PERIODIC_RAU_TIMER</name>
+                        <type>UINT</type>
+                        <description>The value of the periodic RAU timer, which is sent to the UE in the Periodic RA update timer or T3312 extended value IEs.</description>
+                        <numberofbits>21</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>1116240</high>
+                        </range>
+                </parametertype>
+		<parametertype>
+			<name>FILE_TERMINATION_CAUSE</name>
+			<type>ENUM</type>
+			<description>Reason for ending the logging</description>
+			<numberofbits>8</numberofbits>
+			<enumeration>
+				<enum internal="TIME" value="0">OK (default)</enum>
+				<enum internal="SIZE" value="1">Max file size exceeded</enum>
+				<enum internal="UNDEFINED" value="2">Other</enum>
+				<enum internal="ROP" value="3">ROP reconfigured</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>RECORD_TYPE</name>
+			<type>ENUM</type>
+			<description>Record type</description>
+			<numberofbits>8</numberofbits>
+			<enumeration>
+				<enum internal="HEADER_RECORD" value="0">Header</enum>
+				<enum internal="EVENT_RECORD" value="1">Event</enum>
+				<enum internal="ERROR_RECORD" value="2">Error</enum>
+				<enum internal="FOOTER_RECORD" value="3">Footer</enum>
+				<enum internal="STREAM_HEADER_RECORD" value="4">Stream Header</enum>
+				<enum internal="STREAM_ERROR_RECORD" value="5">Stream Error</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>EVENT_ID</name>
+			<type>ENUM</type>
+			<description>Event identity</description>
+			<numberofbits>8</numberofbits>
+			<enumeration>
+				<enum internal="ATTACH" value="0">ATTACH</enum>
+				<enum internal="ACTIVATE" value="1">ACTIVATE</enum>
+				<enum internal="RAU" value="2">RAU</enum>
+				<enum internal="ISRAU" value="3">ISRAU</enum>
+				<enum internal="DEACTIVATE" value="4">DEACTIVATE</enum>
+				<enum internal="L_ATTACH" value="5">L_ATTACH</enum>
+				<enum internal="L_DETACH" value="6">L_DETACH</enum>
+				<enum internal="L_HANDOVER" value="7">L_HANDOVER</enum>
+				<enum internal="L_TAU" value="8">L_TAU</enum>
+				<enum internal="L_DEDICATED_BEARER_ACTIVATE" value="9">L_DEDICATED_BEARER_ACTIVATE</enum>
+				<enum internal="L_DEDICATED_BEARER_DEACTIVATE" value="10">L_DEDICATED_BEARER_DEACTIVATE</enum>
+				<enum internal="L_PDN_CONNECT" value="11">L_PDN_CONNECT</enum>
+				<enum internal="L_PDN_DISCONNECT" value="12">L_PDN_DISCONNECT</enum>
+				<enum internal="L_SERVICE_REQUEST" value="13">L_SERVICE_REQUEST</enum>
+				<enum internal="DETACH" value="14">DETACH</enum>
+				<enum internal="SERVICE_REQUEST" value="15">SERVICE_REQUEST</enum>
+				<enum internal="L_BEARER_MODIFY" value="16">L_BEARER_MODIFY</enum>
+				<enum internal="L_CDMA2000" value="17">L_CDMA2000</enum>
+				<enum internal="EXIT_PSM" value="18">EXIT_PSM</enum>
+				<enum internal="L_CONNECTION_RESUME" value="19">L_CONNECTION_RESUME</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>RAT</name>
+			<type>ENUM</type>
+			<description>Radio Access Type, either GSM or WCDMA</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="GSM" value="0">Gsm</enum>
+				<enum internal="WCDMA" value="1">Wcdma</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>EVENT_RESULT</name>
+			<type>ENUM</type>
+			<description>Result of the Event Procedure</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="SUCCESS" value="0">Success</enum>
+				<enum internal="REJECT" value="1">Reject</enum>
+				<enum internal="ABORT" value="2">Abort</enum>
+				<enum internal="IGNORE" value="3">Ignore</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>CAUSE_PROT_TYPE</name>
+			<type>ENUM</type>
+			<description>Protocol type of the failure cause.</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="RIL3_CAUSE" value="0">RIL3</enum>
+				<enum internal="GTP_CAUSE" value="1">GTP</enum>
+				<enum internal="RIL3_CAUSE2" value="2">RIL3_2</enum>
+				<enum internal="GTPV2_CAUSE" value="3">GTPV2</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>PAGING_ATTEMPTS</name>
+			<type>UINT</type>
+			<description>This parameter indicates the number of the Paging procedures that have been performed.</description>
+			<numberofbits>3</numberofbits>
+			<range>
+				<low>0</low>
+				<high>7</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>PAGING_ATTEMPTS_ENB</name>
+			<type>UINT</type>
+			<description>This parameter indicates the number of paging attempts to the Last Visited eNodeB in the used paging profile.</description>
+			<numberofbits>3</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>PAGING_ATTEMPTS_ENB_LIST</name>
+			<type>UINT</type>
+			<description>This parameter indicates the number of paging attempts to the Last Visited eNodeB List in the used paging profile.</description>
+			<numberofbits>3</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>PAGING_ATTEMPTS_TA</name>
+			<type>UINT</type>
+			<description>This parameter indicates the number of paging attempts to the Last Visited TA in the used paging profile.</description>
+			<numberofbits>3</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>PAGING_ATTEMPTS_TA_LIST</name>
+			<type>UINT</type>
+			<description>This parameter indicates the number of paging attempts to the Last Visited TA List in the used paging profile.</description>
+			<numberofbits>3</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>ENB_SN</name>
+			<type>UINT</type>
+			<description>This parameter indicates the serial number of the eNodeB, which returns the paging response, among the Latest Visited eNodeB List.</description>
+			<numberofbits>4</numberofbits>
+			<range>
+				<low>1</low>
+				<high>10</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>ENB_LIST_LENGTH</name>
+			<type>UINT</type>
+			<description>This parameter indicates the number of the latest visited eNodeB in the Latest Visited eNodeB List.</description>
+			<numberofbits>4</numberofbits>
+			<range>
+				<low>0</low>
+				<high>10</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>L_CAUSE_PROT_TYPE</name>
+			<type>ENUM</type>
+			<description>This information element indicates from which protocol the cause code originates</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="S1AP" value="0">S1AP</enum>
+				<enum internal="NAS" value="1">NAS</enum>
+				<enum internal="GTPV2" value="2">GTPV2</enum>
+				<enum internal="GTP" value="3">GTP</enum>
+				<enum internal="A21" value="4">A21</enum>
+				<enum internal="DIAMETER_RESULT_CODE" value="5">DIAMETER_RESULT_CODE</enum>
+				<enum internal="DIAMETER_EXPERIMENTAL_RESULT_CODE" value="6">DIAMETER_EXPERIMENTAL_RESULT_CODE</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>CS_FALLBACK_SERVICE_TYPE</name>
+			<type>ENUM</type>
+			<description>This information element indicates the service type in extended service request message</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+					<enum internal="ORIGINATING" value="0">originating</enum>
+					<enum internal="TERMINATING" value="1">terminating</enum>
+					<enum internal="EMERGENCY" value="2">emergency</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>SERVICE_REQUEST_TYPE</name>
+			<type>ENUM</type>
+			<description>This information element indicates the type of service request message that triggered the service request event</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+					<enum internal="NORMAL" value="0">normal</enum>
+					<enum internal="EXTENDED" value="1">extended</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>CAUSE_CODE</name>
+			<type>UINT</type>
+			<description>This information element provides "Reason for failure" information using 3GPP defined cause codes.  In order to get the protocol from where the Cause Code in an event originates, the parameter value of "CAUSE_PROT_TYPE" or "L_CAUSE_PROT_TYPE" should be analyzed.</description>
+			<numberofbits>10</numberofbits>
+			<range>
+				<low>0</low>
+				<high>1023</high>
+			</range>
+		</parametertype>
+                <parametertype>
+                        <name>CAUSE_CODE2</name>
+                        <type>UINT</type>
+                        <description>This information element provides "Reason for failure" information using 3GPP defined cause codes.  In order to get the protocol from where the Cause Code in an event originates, the parameter value of "CAUSE_PROT_TYPE" or "L_CAUSE_PROT_TYPE" should be analyzed.</description>
+                        <numberofbits>16</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>65535</high>
+                        </range>
+                </parametertype>
+		<parametertype>
+			<name>SUB_CAUSE_CODE</name>
+			<type>UINT</type>
+			<description>This information element provides "Detailed reason for failure" information. This information should be analyzed together with the "Cause Code" parameter and the "CAUSE_PROT_TYPE" or "L_CAUSE_PROT_TYPE" parameter.</description>
+			<numberofbits>10</numberofbits>
+			<range>
+				<low>0</low>
+				<high>1023</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>BEARER_ID</name>
+			<type>UINT</type>
+			<description>The EPS Bearer ID identifies one of several bearers in a bearer setup list</description>
+			<numberofbits>4</numberofbits>
+			<range>
+				<low>0</low>
+				<high>15</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>BEARER_QCI</name>
+			<type>UINT</type>
+			<description>Provides information on a QoS class identifier for each bearer in a bearer setup list</description>
+			<numberofbits>9</numberofbits>
+			<range>
+				<low>0</low>
+				<high>255</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>ARP_PRIORITY_LEVEL</name>
+			<type>UINT</type>
+			<description>Provides information on Priority Level of Allocation and Retention Priority for each bearer in a bearer setup list</description>
+			<numberofbits>4</numberofbits>
+			<range>
+				<low>1</low>
+				<high>15</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>ARP_PCI</name>
+			<type>ENUM</type>
+			<description>Provides information on Pre-emption-Capability of Allocation and Retention Priority for each bearer in a bearer setup list</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+					<enum internal="ENABLED" value="0">enabled</enum>
+					<enum internal="DISABLED" value="1">disabled</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>ARP_PVI</name>
+			<type>ENUM</type>
+			<description>Provides information on Pre-emption-Vulnerability of Allocation and Retention Priority for each bearer in a bearer setup list</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+					<enum internal="ENABLED" value="0">enabled</enum>
+					<enum internal="DISABLED" value="1">disabled</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>GBR_UPLINK</name>
+			<type>UINT</type>
+			<description>Provides Guaranteed Bit Rate Uplink (kbps) for each GBR bearer in a bearer setup list</description>
+			<numberofbits>24</numberofbits>
+			<range>
+				<low>0</low>
+				<high>10000000</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>GBR_DOWNLINK</name>
+			<type>UINT</type>
+			<description>Provides Guaranteed Bit Rate Downlink (kbps) for each GBR bearer in a bearer setup list for bit rates up to 10,000,000 kbps.</description>
+			<numberofbits>24</numberofbits>
+			<range>
+				<low>0</low>
+				<high>10000000</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>BEARER_CAUSE</name>
+			<type>UINT</type>
+			<description>Provides success/failure information for each bearer in a bearer setup list.</description>
+			<numberofbits>10</numberofbits>
+			<range>
+				<low>0</low>
+				<high>1023</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>GTP_PIGGYBACKED</name>
+			<type>ENUM</type>
+			<description>Indicates if the dedicated bearer activation was done in parallel with the default bearer activation as a result of a piggybacked Create Bearer Request or not</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+					<enum internal="NOT_PIGGYBACKED" value="0">Not Piggybacked GTP message</enum>
+					<enum internal="PIGGYBACKED" value="1">Piggybacked GTP message</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>MCC</name>
+			<type>IBCD</type>
+			<description>Mobile Country Code.</description>
+			<numberofbits>12</numberofbits>
+			<range>
+				<low>0</low>
+				<high>1023</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>MNC</name>
+			<type>IBCD</type>
+			<description>Mobile Network Code.</description>
+			<numberofbits>12</numberofbits>
+			<range>
+				<low>0</low>
+				<high>1023</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>LAC</name>
+			<type>UINT</type>
+			<description>Location Area Code</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>0</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>RAC</name>
+			<type>UINT</type>
+			<description>Routing Area Code</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>0</low>
+				<high>255</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>RNCID</name>
+			<type>UINT</type>
+			<description>RNC ID</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>0</low>
+				<high>65535</high>
+			</range>
+	    </parametertype>
+		<parametertype>
+			<name>CI</name>
+			<type>UINT</type>
+			<description>Cell Identity</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>1</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>SAC</name>
+			<type>UINT</type>
+			<description>Service Area Code</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>0</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>IMSI</name>
+			<type>TBCD</type>
+			<description>International Mobile Subscriber Identity. This information element contains information which is commonly used to identify the UE in the CN.</description>
+			<numberofbits>64</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>PTMSI</name>
+			<type>UINT</type>
+			<description>Packet-Temporary Mobile Subscriber Identity</description>
+			<numberofbits>32</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4294967295</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>IMEISV</name>
+			<type>TBCD</type>
+			<description>International Mobile Equipment Identity Software Version</description>
+			<numberofbits>64</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>MSISDN</name>
+			<type>TBCD</type>
+			<description>Mobile Subscriber Integrated Services Digital Network Number</description>
+			<numberofbits>72</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>STN_SR</name>
+			<type>TBCD</type>
+			<description>Session Transfer Number for SR-VCC</description>
+			<numberofbits>72</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>HLR</name>
+			<type>TBCD</type>
+			<description>Home Location Register address</description>
+			<detaileddescription>9 octets,  TBCD (Telephony Binary Coded Decimal)
+			NULL-padding (x00) for unused characters upto a total length of 18 octets.
+			No HLR is indicated with (xFF).
+			</detaileddescription>
+			<numberofbits>72</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>APN</name>
+			<type>DNSNAME</type>
+			<description>This parameter specifies the resulting APN after APN Resolving.</description>
+			<lengthbits>7</lengthbits>
+			<validlength>
+				<low>0</low>
+				<high>100</high>
+			</validlength>
+		</parametertype>
+		<parametertype>
+				<name>MS_REQUESTED_APN</name>
+				<type>DNSNAME</type>
+				<description>This parameter specifies the APN the MS requested. The parameter is included in a successful event when the MS-requested APN is different from the resulting APN after APN Resolving. The parameter is also included in a rejected event with cause code 27 (UNKNOWN_OR_MISSING_APN) or cause code 33 (REQUESTED_SERVICE_OPTION_NOT_SUBSCRIBED).</description>
+				<lengthbits>7</lengthbits>
+				<validlength>
+						<low>0</low>
+						<high>100</high>
+				</validlength>
+		</parametertype>
+		<parametertype>
+                                <name>UE_REQUESTED_APN</name>
+                                <type>DNSNAME</type>
+                                <description>This parameter specifies the APN the UE requested.  The parameter is always included if the UE-requested APN exists. The parameter is displayed as "NULL" when the UE-requested APN is empty or in incorrect format.</description>
+                                <lengthbits>7</lengthbits>
+                                <validlength>
+                                                <low>0</low>
+                                                <high>100</high>
+                                </validlength>
+                </parametertype>
+                <parametertype>
+			<name>GSN</name>
+			<type>IPADDRESS</type>
+			<description>GSN IP address (a.b.c.d)</description>
+			<numberofbits>32</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>IPV4</name>
+			<type>IPADDRESS</type>
+			<description>IP address V4</description>
+			<numberofbits>32</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>IPV6</name>
+			<type>IPADDRESSV6</type>
+			<description>IP address V6</description>
+			<numberofbits>128</numberofbits>
+		</parametertype>
+		<parametertype>
+			<name>DIRECT_TUNNEL</name>
+			<type>ENUM</type>
+			<description>Indicates if direct tunnel is capable or not to setup for the activated PDP</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+					<enum internal="FALSE" value="0">Direct tunnel is incapable to be used</enum>
+					<enum internal="TRUE" value="1">Direct tunnel is capable to be used</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>TRANSFERRED_PDP</name>
+			<type>UINT</type>
+			<description>Number of transferred PDP Contexts</description>
+			<numberofbits>4</numberofbits>
+			<range>
+				<low>0</low>
+				<high>11</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>DROPPED_PDP</name>
+			<type>UINT</type>
+			<description>Number of dropped PDP Contexts</description>
+			<numberofbits>4</numberofbits>
+			<range>
+				<low>0</low>
+				<high>11</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>ATTACH_TYPE</name>
+			<type>ENUM</type>
+			<description>GPRS attach type, either GPRS attach, GPRS attach while IMSI is attached, or Combined GPRS IMSI attach</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="GPRS_ATTACH" value="0">GPRS Attach</enum>
+				<enum internal="GPRS_ATTACH_WHILE_IMSI_ATTACHED" value="1">GPRS Attach while IMSI Attached</enum>
+				<enum internal="COMBINED_GPRS_IMSI_ATTACH" value="2">Combined GPRS/IMSI Attach</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>ACTIVATION_TYPE</name>
+			<type>ENUM</type>
+			<description>Primary,Network initiated or MS initiated Secondary PDP Context</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="GPRS_PRIMARY" value="0">Primary Context</enum>
+				<enum internal="GPRS_MS_SECONDARY" value="1">MS initiated Secondary Context</enum>
+				<enum internal="GPRS_NW_SECONDARY" value="2">Network initiated Secondary Context</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+                        <name>PDP_CONTEXT_REQUEST_TYPE</name>
+                        <type>ENUM</type>
+                        <description>PDP context request type, initial activate a PDP context, or handover from a non-3GPP access network.</description>
+                        <numberofbits>3</numberofbits>
+                        <enumeration>
+                                <enum internal="INITIAL_REQUEST" value="0">UE request a new PDP context</enum>
+                                <enum internal="NON3GPP_HANDOVER" value="1">Handover from non-3GPP access</enum>
+                        </enumeration>
+                </parametertype>		
+		<parametertype>
+			<name>INTRA_RAU_TYPE</name>
+			<type>ENUM</type>
+			<description>Indicates whether it's an Inter System Change or not (GSM and WCDMA)</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+				<enum internal="INTRA_RAU" value="0">Normal Intra Rau</enum>
+				<enum internal="INTRA_RAU_ISC" value="1">Inter System Change</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>UPDATE_TYPE</name>
+			<type>ENUM</type>
+			<description>Routing Area Update type</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="RA_UPDATING" value="0">RA Update</enum>
+				<enum internal="COMBINED_RA_LA" value="1">Combined Ra La Update</enum>
+				<enum internal="COMBINED_RA_LA_WITH_IMSI" value="2">Combined Ra La Update with Imsi</enum>
+				<enum internal="PERIODIC_UPDATE" value="3">Periodic Update</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>DEACTIVATION_TRIGGER</name>
+			<type>ENUM</type>
+			<description>Deactivation Trigger. The value represents the initiated origin for deactivation.</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="SGSN" value="0">Sgsn</enum>
+				<enum internal="MS" value="1">Ms</enum>
+				<enum internal="GGSN" value="2">Ggsn</enum>
+				<enum internal="CAMEL" value="3">Camel</enum>
+				<enum internal="HLR_OR_HSS" value="4">HLR or HSS</enum>
+				<enum internal="RNC" value="5">Rnc</enum>
+				<enum internal="SGW" value="6">Sgw</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>HOMEZONE_IDENTITY</name>
+			<type>BYTEARRAY</type>
+			<description>Homezone identity. A name for the current homezone.</description>
+			<lengthbits>5</lengthbits>
+			<validlength>
+				<low>0</low>
+				<high>31</high>
+			</validlength>
+		</parametertype>
+		<parametertype>
+			<name>L_ATTACH_TYPE</name>
+			<type>ENUM</type>
+			<description>EPS attach type, either EPS attach, Combined EPS IMSI attach or EPS emergency attach.</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="EPS_ATTACH" value="0">EPS Attach</enum>
+				<enum internal="COMBINED_EPS_IMSI_ATTACH" value="1">IMSI Attach</enum>
+				<enum internal="EPS_EMERGENCY_ATTACH" value="2">EPS Emergency Attach</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>PDN_CONNECT_REQUEST_TYPE</name>
+			<type>ENUM</type>
+			<description>Request type according to 3GPP 24.008.</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="INITIAL" value="0">UE request new connectivity to a PDN</enum>
+				<enum internal="HANDOVER" value="1">Handover from non-3GPP access</enum>
+				<enum internal="EMERGENCY" value="2">UE request new connectivity to a PDN providing emergency bearer services</enum>
+				<enum internal="HANDOVER_OF_EMERGENCY_BEARER_SERVICES" value="3">UE requests a transfer of an emergency PDN connection from non-3GPP access to 3GPP access</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>TAC</name>
+			<type>UINT</type>
+			<description>Tracking Area Code. This element is used to uniquely identify a Tracking Area Code.</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>0</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>ECI</name>
+			<type>UINT</type>
+			<description>E-UTRAN Cell Identity. Used to identify cells within a PLMN.</description>
+			<numberofbits>28</numberofbits>
+			<range>
+				<low>0</low>
+				<high>268435455</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>MMEGI</name>
+			<type>UINT</type>
+			<description>MME Group ID.</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>1</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>MMEC</name>
+			<type>UINT</type>
+			<description>MME Code</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>0</low>
+				<high>255</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>MTMSI</name>
+			<type>UINT</type>
+			<description>M-Temporary Mobile Subscriber Identity</description>
+			<numberofbits>32</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4294967295</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>L_DETACH_TRIGGER</name>
+			<type>ENUM</type>
+			<description>EPS Detach Trigger. The value represents the initiated origin for detach.</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="UE" value="0">UE</enum>
+				<enum internal="MME" value="1">MME</enum>
+				<enum internal="HSS" value="2">HSS</enum>
+				<enum internal="SGW" value="3">SGW</enum>
+				<enum internal="SGSN" value="4">SGSN</enum>
+				<enum internal="SCEF" value="5">SCEF</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>L_DETACH_TYPE</name>
+			<type>ENUM</type>
+			<description>EPS Detach Type</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="EPS_DETACH" value="0">EPS detach</enum>
+				<enum internal="IMSI_DETACH" value="1">IMSI detach</enum>
+				<enum internal="COMBINED_DETACH" value="2">Combined eps imsi detach</enum>
+				<enum internal="REATTACH_REQUIRED" value="3">Re-attach required</enum>
+				<enum internal="REATTACH_NOT_REQUIRED" value="4">Re-attach not required</enum>
+				<enum internal="IMPLICIT_DETACH" value="5">Implicit detach by MME</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>HANDOVER_TYPE</name>
+			<type>ENUM</type>
+			<description>Type of Handover</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="X2" value="2">X2 based handover</enum>
+				<enum internal="S1" value="7">S1 based handover</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>HANDOVER_RAT_CHANGE_TYPE</name>
+			<type>ENUM</type>
+			<description>RAT Change Type of Handover</description>
+			<numberofbits>4</numberofbits>
+			<enumeration>
+				<enum internal="INTRA_LTE" value="0">Intra LTE handover</enum>
+				<enum internal="LTE_TO_UTRAN" value="1">LTE to UTRAN handover</enum>
+				<enum internal="LTE_TO_GERAN" value="2">LTE to GERAN handover</enum>
+				<enum internal="UTRAN_TO_LTE" value="3">UTRAN to LTE handover</enum>
+				<enum internal="GERAN_TO_LTE" value="4">GERAN to LTE handover</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>HANDOVER_SGW_CHANGE_TYPE</name>
+			<type>ENUM</type>
+			<description>SGW Change Type of Handover</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="FALSE" value="0">Handover without SGW relocation</enum>
+				<enum internal="TRUE" value="1">Handover with SGW relocation</enum>
+				<enum internal="UNKNOWN" value="2">Unknown</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>SRVCC_TYPE</name>
+			<type>ENUM</type>
+			<description>SRVCC PS to CS HANDOVER TYPE</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="PS_AND_CS" value="0">SRVCC with PS and CS</enum>
+				<enum internal="CS_ONLY" value="1">SRVCC CS only</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>HANDOVER_NODE_ROLE</name>
+			<type>ENUM</type>
+			<description>The role of the node generating this event in the handover.</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="SOURCE" value="0">The source MME in an inter node handover</enum>
+				<enum internal="TARGET" value="1">The target MME in an inter node handover</enum>
+				<enum internal="INTRA" value="2">The MME in an intra node handover</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>TAU_TYPE</name>
+			<type>ENUM</type>
+			<description>Tracking Area Update Type</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="INTER" value="0">Inter TAU type</enum>
+				<enum internal="INTRA" value="1">Intra TAU type</enum>
+				<enum internal="PERIODIC" value="2">Periodic TAU type</enum>
+				<enum internal="ISC_TAU" value="3">ISC TAU type</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>COMBINED_TAU_TYPE</name>
+			<type>ENUM</type>
+			<description>Combined Tracking Area Update Type. When included, indicates the type of a combined TAU procedure the SGSN-MME has successfully handled.</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+				<enum internal="COMBINED_TA_LA" value="0">Combined Ta La Update</enum>
+				<enum internal="COMBINED_TA_LA_WITH_IMSI" value="1">Combined Ta La Update with Imsi</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>SMS_ONLY</name>
+			<type>ENUM</type>
+			<description>When included, indicates that the SGSN-MME has successfully handled a combined Attach or TAU procedure for EPS services and SMS only.</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+				<enum internal="SMS_ONLY" value="0">SMS Only</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>DONAS</name>
+			<type>ENUM</type>
+			<description>This parameter indicates if the UE is granted use of the Data over NAS feature, 
+                        or if the UE supports but is not granted use of the Data over NAS feature.
+                        </description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="GRANTED" value="0">Granted</enum>
+                                <enum internal="SUPPORTED" value="1">Supported by UE</enum>
+                        </enumeration>
+		</parametertype>
+                <parametertype>
+                        <name>CONNECTION_SUSPEND_AND_RESUME</name>
+                        <type>ENUM</type>
+                        <description>
+                        This parameter indicates if the UE is granted use of the Connection Suspend and Resume feature, 
+                        or if the UE supports but is not granted the Connection Suspend and Resume feature.
+                        </description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="GRANTED" value="0">Granted</enum>
+                                <enum internal="SUPPORTED" value="1">Supported by UE</enum>
+                        </enumeration>
+                </parametertype>
+		<parametertype>
+			<name>L_DEACTIVATION_TRIGGER</name>
+			<type>ENUM</type>
+			<description>EPS Deactivation Trigger</description>
+			<detaileddescription/>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="UE" value="0">UE</enum>
+				<enum internal="MME" value="1">MME</enum>
+				<enum internal="HSS" value="2">HSS</enum>
+				<enum internal="SGW" value="3">SGW</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>REQUEST_RETRIES</name>
+			<type>UINT</type>
+			<description>Number of retry messages that are initiated by the UE</description>
+			<numberofbits>6</numberofbits>
+			<range>
+				<low>0</low>
+				<high>63</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>NSAPI</name>
+			<type>UINT</type>
+			<description>Network Service Access Point Identifier</description>
+			<numberofbits>4</numberofbits>
+			<range>
+				<low>5</low>
+				<high>15</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>DETACH_TRIGGER</name>
+			<type>ENUM</type>
+			<description>Origin of Detach initiation</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="MS" value="0">MS</enum>
+				<enum internal="SGSN" value="1">SGSN</enum>
+				<enum internal="HLR_OR_HSS" value="2">HLR or HSS</enum>
+				<enum internal="MSC" value="3">MSC</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>SERVICE_REQ_TRIGGER</name>
+			<type>ENUM</type>
+			<description>Origin of Service Request initiation</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="MS" value="0">MS</enum>
+				<enum internal="SGSN" value="1">SGSN</enum>
+				<enum internal="GGSN" value="2">GGSN</enum>
+				<enum internal="HLR_OR_HSS" value="3">HLR or HSS</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>L_SERVICE_REQ_TRIGGER</name>
+			<type>ENUM</type>
+			<description>Origin of LTE Service Request initiation</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="UE" value="0">UE</enum>
+				<enum internal="SGW" value="1">SGW</enum>
+				<enum internal="MME" value="2">MME</enum>
+				<enum internal="MSC" value="3">MSC</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>L_SERVICE_REQ_TRIGGER2</name>
+			<type>ENUM</type>
+			<description>Origin of LTE Service Request initiation</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="NO_VALUE" value="0">NO_VALUE</enum>
+				<enum internal="HSS" value="1">HSS</enum>
+                                <enum internal="SDS_GW" value="2">SDS GW</enum>
+                                <enum internal="SCEF" value="3">SCEF</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>DETACH_TYPE</name>
+			<type>ENUM</type>
+			<description>Detach Type</description>
+			<numberofbits>4</numberofbits>
+			<enumeration>
+				<enum internal="GPRS_DETACH" value="0">MS initiated normal GPRS Detach</enum>
+				<enum internal="IMSI_DETACH" value="1">MS initiated normal IMSI Detach</enum>
+				<enum internal="COMBINED_DETACH" value="2">MS initiated normal combined GPRS IMSI Detach</enum>
+				<enum internal="POWER_OFF_GPRS_DETACH" value="3">MS initiated power off GPRS Detach</enum>
+				<enum internal="POWER_OFF_IMSI_DETACH" value="4">MS initiated power off IMSI Detach</enum>
+				<enum internal="POWER_OFF_COMBINED_DETACH" value="5">MS initiated power off combined GPRS IMSI Detach</enum>
+				<enum internal="REATTACH_REQUIRED" value="6">Network initiated reattach required</enum>
+				<enum internal="REATTCH_NOT_REQUIRED" value="7">Network initiated reattach not required</enum>
+				<enum internal="IMSI_DETACH_VLR_FAILURE" value="8">Network initiated IMSI Detach</enum>
+				<enum internal="IMPLICIT_DETACH" value="9">SGSN implicit detach</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>SERVICE_TYPE</name>
+			<type>ENUM</type>
+			<description>Service Request Type for GSM and WCDMA</description>
+			<numberofbits>3</numberofbits>
+			<enumeration>
+				<enum internal="SIGNALLING" value="0">Signalling</enum>
+				<enum internal="DATA" value="1">Data</enum>
+				<enum internal="PAGING_RESPONSE" value="2">Paging Response</enum>
+				<enum internal="MBMS_MULTICAST_SER_RECP" value="3">MBMS Multicast Service Reception</enum>
+				<enum internal="MBMS_BROADCAST_SER_RECP" value="4">MBMS Broadcast Service Reception</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>DECONNECT_PDN_TYPE</name>
+			<type>ENUM</type>
+			<description>PDN Disconnection type</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="UE_INITIATED" value="0">UE initiated</enum>
+				<enum internal="MME_INITIATED" value="1">MME initiated</enum>
+				<enum internal="SGW_OR_SCEF_INITIATED" value="2">SGW or SCEF initiated</enum>
+				<enum internal="HSS_INITIATED" value="3">HSS initiated</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>BYTE_HOUR</name>
+			<type>UINT</type>
+			<description>Timestamp, Hour. HH</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>0</low>
+				<high>23</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>BYTE_MINUTE</name>
+			<type>UINT</type>
+			<description>Timestamp, Minute. MM</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>0</low>
+				<high>59</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>BYTE_SECOND</name>
+			<type>UINT</type>
+			<description>Timestamp, Second. SS</description>
+			<numberofbits>8</numberofbits>
+			<range>
+				<low>0</low>
+				<high>59</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>ERROR_TYPE</name>
+			<type>ENUM</type>
+			<description>Error type</description>
+			<numberofbits>8</numberofbits>
+			<enumeration>
+				<enum internal="OTHER" value="0">Other error</enum>
+				<enum internal="CONN_COM_ERR" value="1">Connection failed</enum>
+				<enum internal="CONGESTION" value="2">Connection congested</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>CAUSE_OF_HEADER</name>
+			<type>ENUM</type>
+			<description>Reason why a header record is sent in the stream</description>
+			<numberofbits>8</numberofbits>
+			<enumeration>
+				<enum internal="STREAM_ENABLED" value="0">Stream enabled</enum>
+				<enum internal="STREAM_RESTART_AFTER_COMM_FAILURE" value="1">Stream restart after communication failure</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>NODE_ID</name>
+			<type>BYTEARRAY</type>
+			<description>Node Id of the SGSN-MME.</description>
+			<lengthbits>5</lengthbits>
+			<validlength>
+				<low>0</low>
+				<high>31</high>
+			</validlength>
+		</parametertype>
+		<parametertype>
+			<name>TIME_ZONE</name>
+			<type>BYTEARRAY</type>
+			<description>Time-zone of the SGSN-MME.</description>
+			<lengthbits>8</lengthbits>
+			<validlength>
+				<low>0</low>
+				<high>40</high>
+			</validlength>
+		</parametertype>
+		<parametertype>
+			<name>NUMBER_OF_DROPPED_EVENTS</name>
+			<type>UINT</type>
+			<description>Indicates how many events that have been lost during a period before the streaming was functional again.</description>
+			<numberofbits>32</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4294967295</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>PERIODIC_TAU_TIMER</name>
+			<type>UINT</type>
+			<description>The value of the periodic TAU timer, which is sent to the UE in the T3412 value IE. The PERIODIC_TAU_TIMER parameter and the PERIODIC_TAU_TIMER_EXT parameter are mutually exclusive.</description>
+			<numberofbits>21</numberofbits>
+			<range>
+				<low>2</low>
+				<high>1116000</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>RELIABILITY_CLASS</name>
+			<type>UINT</type>
+			<description>Reliability Class in R97/98 QoS profile.</description>
+			<numberofbits>3</numberofbits>
+			<range>
+				<low>0</low>
+				<high>7</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>DELAY_CLASS</name>
+			<type>UINT</type>
+			<description>Delay Class in R97/98 QoS profile.</description>
+			<numberofbits>3</numberofbits>
+			<range>
+				<low>0</low>
+				<high>7</high>
+			</range>
+		</parametertype>
+		<parametertype>
+				<name>PRECEDENCE_CLASS</name>
+				<type>UINT</type>
+				<description>Precedence Class in R97/98 QoS profile.</description>
+				<numberofbits>3</numberofbits>
+				<range>
+						<low>0</low>
+						<high>7</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>PEAK_THROUGHPUT</name>
+				<type>UINT</type>
+				<description>Peak Throughput in R97/98 QoS profile, represent the Peak Throughput Class 1 to 9.</description>
+				<numberofbits>4</numberofbits>
+				<range>
+						<low>0</low>
+						<high>15</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>MEAN_THROUGHPUT</name>
+				<type>UINT</type>
+				<description>Mean Throughput in R97/98 QoS profile, represent the Mean Throughput Class 1 to 18. Mean Throughput Class 30 is reserved and 31 is best effort.</description>
+				<numberofbits>5</numberofbits>
+				<range>
+						<low>0</low>
+						<high>31</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>DELIVERY_OF_ERR_SDU</name>
+				<type>UINT</type>
+				<description>Delivery of erroneous SDUs in R99 QoS profile.</description>
+				<numberofbits>3</numberofbits>
+				<range>
+						<low>0</low>
+						<high>7</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>DELIVERY_ORDER</name>
+				<type>UINT</type>
+				<description>Delivery Order in R99 QoS profile.</description>
+				<numberofbits>2</numberofbits>
+				<range>
+						<low>0</low>
+						<high>3</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>TRAFFIC_CLASS</name>
+				<type>UINT</type>
+				<description>Traffic Class in R99 QoS profile.</description>
+				<numberofbits>3</numberofbits>
+				<range>
+						<low>0</low>
+						<high>7</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>MAX_SDU_SIZE</name>
+				<type>UINT</type>
+				<description>Maximum SDU size in R99 QoS profile.</description>
+				<numberofbits>8</numberofbits>
+				<range>
+						<low>0</low>
+						<high>255</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>BITRATE</name>
+				<type>UINT</type>
+				<description>Bitrate in kbps.</description>
+				<numberofbits>24</numberofbits>
+				<range>
+						<low>0</low>
+						<high>16000000</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>RESIDUAL_BER</name>
+				<type>UINT</type>
+				<description>Residual Bit Error Rate in R99 QoS profile.</description>
+				<numberofbits>4</numberofbits>
+				<range>
+						<low>0</low>
+						<high>15</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>SDU_ERROR_RATIO</name>
+				<type>UINT</type>
+				<description>SDU error ratio in R99 QoS profile.</description>
+				<numberofbits>4</numberofbits>
+				<range>
+						<low>0</low>
+						<high>15</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>TRAFFIC_HANDLING_PRIORITY</name>
+				<type>UINT</type>
+				<description>Traffic handling priority in R99 QoS profile.</description>
+				<numberofbits>2</numberofbits>
+				<range>
+						<low>0</low>
+						<high>3</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>TRANSFER_DELAY</name>
+				<type>UINT</type>
+				<description>Transfer delay in R99 QoS profile.</description>
+				<numberofbits>6</numberofbits>
+				<range>
+						<low>0</low>
+						<high>63</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>SOURCE_STATISTICS_DESCRIPTOR</name>
+				<type>UINT</type>
+				<description>Source Statistics Descriptor in R99 QoS profile.</description>
+				<numberofbits>4</numberofbits>
+				<range>
+						<low>0</low>
+						<high>15</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>SIGNALLING_INDICATION</name>
+				<type>UINT</type>
+				<description>Signalling Indication in R99 QoS profile.</description>
+				<numberofbits>1</numberofbits>
+				<range>
+						<low>0</low>
+						<high>1</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>CDMA2000_TYPE</name>
+				<type>ENUM</type>
+				<description>CDMA2000 Type</description>
+				<numberofbits>2</numberofbits>
+				<enumeration>
+						<enum internal="DOWNLINK" value="0">Downlink CDMA2000 type</enum>
+						<enum internal="UPLINK" value="1">Uplink CDMA2000 type</enum>
+				</enumeration>
+		</parametertype>
+		<parametertype>
+				<name>A21_MESSAGE_TYPE</name>
+				<type>ENUM</type>
+				<description>A21 Message Type</description>
+				<numberofbits>2</numberofbits>
+				<enumeration>
+					<enum internal="AIS" value="0">A21 AIS message type</enum>
+					<enum internal="EVENT_NOTIFICATION" value="1">A21 Event Notification type</enum>
+				</enumeration>
+		</parametertype>
+		<parametertype>
+				<name>EVENT_NOTIFICATION_CAUSE</name>
+				<type>ENUM</type>
+				<description>A21 Event Notification Cause</description>
+				<numberofbits>4</numberofbits>
+				<enumeration>
+					<enum internal="CONNECTION_CLOSED" value="3">UE Power Down/Connection Closed</enum>
+					<enum internal="REDIRECTION" value="11">S102 Redirection</enum>
+				</enumeration>
+		</parametertype>
+		<parametertype>
+				<name>SEND_ATTEMPTS</name>
+				<type>UINT</type>
+				<description>Number of attempts to send an A21 message to current IWS that are initiated by the MME</description>
+				<numberofbits>4</numberofbits>
+				<range>
+					<low>0</low>
+					<high>15</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>MARKET_ID</name>
+				<type>UINT</type>
+				<description>Market ID. This element is used to uniquely identify a Market ID.</description>
+				<numberofbits>16</numberofbits>
+				<range>
+					<low>0</low>
+					<high>65535</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>SWITCH_NUMBER</name>
+				<type>UINT</type>
+				<description>Switch number. This element is used to uniquely identify a Switch Number.</description>
+				<numberofbits>8</numberofbits>
+				<range>
+					<low>0</low>
+					<high>255</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>CELL</name>
+				<type>UINT</type>
+				<description>Cell. This element is used to uniquely identify a Cell.</description>
+				<numberofbits>12</numberofbits>
+				<range>
+					<low>0</low>
+					<high>4095</high>
+				</range>
+		</parametertype>
+		<parametertype>
+				<name>SECTOR</name>
+				<type>UINT</type>
+				<description>Sector. This element is used to uniquely identify a Sector.</description>
+				<numberofbits>4</numberofbits>
+				<range>
+					<low>0</low>
+					<high>15</high>
+				</range>
+		</parametertype>
+		<parametertype>
+			<name>ORIGINATING_CAUSE_PROT_TYPE</name>
+			<type>ENUM</type>
+			<description>Protocol type of a peer failure cause, or other originating cause type.</description>
+			<numberofbits>5</numberofbits>
+			<enumeration>
+				<enum internal="RIL3" value="0">RIL3</enum>
+				<enum internal="GTP" value="1">GTP</enum>
+				<enum internal="RIL3_2" value="2">RIL3_2</enum>
+				<enum internal="GTPV2" value="3">GTPV2</enum>
+				<enum internal="S1AP" value="4">S1AP</enum>
+				<enum internal="NAS" value="5">NAS</enum>
+				<enum internal="A21" value="6">A21</enum>
+                                <enum internal="GTPV2_SRVCC" value="7">GTPV2_SRVCC</enum>
+                                <enum internal="DIAMETER_RESULT" value="8">DIAMETER_RESULT_CODE</enum>
+                                <enum internal="DIAMETER_EXPERIMENTAL_RESULT" value="9">DIAMETER_EXPERIMENTAL_RESULT_CODE</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>ORIGINATING_CAUSE_CODE</name>
+			<type>UINT</type>
+			<description>This information element provides peer "Reason for failure" information using 3GPP defined cause codes, or other originating cause. In order to get the protocol from where the peer Cause Code in an event originates or other originating cause type, the parameter value of "ORIGINATING_CAUSE_PROT_TYPE" should be analyzed.</description>
+			<numberofbits>16</numberofbits>
+			<range>
+				<low>0</low>
+				<high>65535</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>UE_RESTORATION</name>
+			<type>ENUM</type>
+			<description>Indicates UE restoration occurred in Service Request or TAU procedure</description>
+			<numberofbits>1</numberofbits>
+			<enumeration>
+				<enum internal="TRUE" value="1">Ue Restoration occurred</enum>
+			</enumeration>
+		</parametertype>
+		<parametertype>
+			<name>SGW_RELOCATION</name>
+			<type>ENUM</type>
+			<description>Indicates SGW relocation occurred due to S11 or S4 link down or SGW restarted.</description>
+			<numberofbits>2</numberofbits>
+			<enumeration>
+				<enum internal="S11S4_LINK_DOWN" value="1">S11 or S4 link down</enum>
+				<enum internal="SGW_RESTARTED" value="2">SGW restarted</enum>
+			</enumeration>
+		</parametertype>
+                <parametertype>
+                        <name>HANDOFF_STATUS</name>
+                        <type>ENUM</type>
+                        <description>The handover status for the S102 interface</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="FAILURE" value="0">FAILURE</enum>
+                                <enum internal="SUCCESS" value="1">SUCCESS</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>SRVCC_HANDOVER</name>
+                        <type>ENUM</type>
+                        <description>Indicates that the UE wants to perform a SRVCC Handover to 1xRTT.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="INDICATION" value="1">INDICATION</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>EMERGENCY</name>
+                        <type>ENUM</type>
+                        <description>Indicates if current procedure is related to an IMS emergency call.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="INDICATION" value="1">INDICATION</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+		        <name>CSG_ID</name>
+		        <type>UINT</type>
+		        <description>Closed Subscriber Group Identity</description>
+		        <numberofbits>27</numberofbits>
+		        <range>
+		                <low>0</low>
+		                <high>134217727</high>
+		        </range>
+		</parametertype>
+                <parametertype>
+                        <name>TARGET_CSG_ID_FROM_SOURCE</name>
+                        <type>UINT</type>
+                        <description>This parameter is optional and included to indicate the CSG ID of the target cell that the target MME receives from the source S4-SGSN/MME during IRAT/inter-MME S1-based handover procedures or 
+                        the MME receives from the source HeNB/HeNB GW during the intra-MME S1-based handover procedure.</description>
+                        <numberofbits>27</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>134217727</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>CELL_ACCESS_MODE</name>
+                        <type>ENUM</type>
+                        <description>This parameter is optional and included to indicate in which access mode the UE is accessing a cell.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="HYBRID" value="0">Hybrid</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>CSG_MEMBERSHIP_STATUS</name>
+                        <type>ENUM</type>
+                        <description>This parameter is optional and included to indicate the CSG membership status that the MME sends to the HeNB or HeNB GW when the UE is accessing a hybrid cell. 
+                        The CSG membership status indicates whether the UE is a member of the hybrid cell.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="MEMBER" value="0">Member</enum>
+                                <enum internal="NOT_MEMBER" value="1">Not member</enum> 
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>CSFB_TRIGGERED</name>
+                        <type>ENUM</type>
+                        <description>Indicates if an IRAT HO from LTE was triggered in relation to CSFB.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="FALSE" value="0">The HO was not triggered in relation to CSFB</enum>
+                                <enum internal="TRUE" value="1">The HO was triggered in relation to CSFB</enum> 
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>SX_FAILURE_REASON</name>
+                        <type>ENUM</type>
+                        <description>Reason for Sx/Smp session establishment failure</description>
+                        <numberofbits>4</numberofbits>
+                        <enumeration>
+                               <enum internal="RESULT_CODE_5003" value="0">Result Code 5003 </enum>
+                               <enum internal="OTHER_FAILURE_RESULT_CODE" value="1">Other Failure Result Code Included in CCA</enum>
+                               <enum internal="SEMANTIC_ERROR_OF_CCA" value="2">Semantic Error in CCA</enum>
+                               <enum internal="OLP" value="3">Overload Protection</enum>
+                               <enum internal="OTHER_FAILURE_REASON" value="4">Other Failure Reason</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>SX_EVENT_TRIGGER</name>
+                        <type>ENUM</type>
+                        <description>Event trigger armed by the Sx/Smp peer</description>
+                        <numberofbits>4</numberofbits>
+                        <enumeration>
+                               <enum internal="ULI_CHANGE" value="0">ULI Change</enum>
+                               <enum internal="PRA_CHANGE" value="1">User Presence Area Change</enum>  
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>SX_EVENT_REPORT_MODE</name>
+                        <type>ENUM</type>
+                        <description>Mode of event reporting</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                               <enum internal="SX_GX" value="0">Sx and Gx</enum>
+                               <enum internal="SX_ONLY" value="1">Sx Only</enum>       
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>SAPC_NUMBER</name>
+                        <type>UINT</type>
+                        <description>Locally configured SapcNumber</description>
+                        <numberofbits>8</numberofbits>
+                        <range>
+                                <low>1</low>
+                                <high>255</high>
+                        </range>
+                </parametertype>                                 
+                <parametertype>
+                        <name>PGW_FROM_SAPC</name>
+                        <type>ENUM</type>
+                        <description>This event parameter indicates that the SAPC provides the PGW address.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                               <enum internal="PGW_FROM_SAPC" value="0">PGW from SAPC</enum>
+                        </enumeration>
+                </parametertype>  
+                <parametertype>
+                        <name>GW_FROM_SAPC</name>
+                        <type>ENUM</type>
+                        <description>This event parameter indicates that the SAPC provides GGSN/PGW address.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                               <enum internal="GW_FROM_SAPC" value="0">GGSN/PGW from SAPC</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>PRA_ID</name>
+                        <type>UINT</type>
+                        <description>Presence Reporting Area Identifier</description>
+                        <numberofbits>24</numberofbits>
+                        <range>
+                               <low>0</low>
+                               <high>16777215</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>PRA_MODE</name>
+                        <type>ENUM</type>
+                        <description>This event parameter indicates how the PRA is defined.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="CN_PRE_CONFIG" value="0">CN preconfigured PRA</enum>
+                                <enum internal="UE_DEDICATED" value="1">UE dedicated PRA</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>PDP_STATUS</name>
+                        <type>UINT</type>
+                        <description>This event parameter indicates which PDP contexts are activated for a certain Sx/Smp session. The values of bit0 to bit4 are reserved as "0". The value of each bit from bit5 to bit15 indicates the status of PDP context. 
+                        For example, if bit5 is set to 1, it means that the PDP context with NSAPI 5 belongs to the Sx/Smp session.</description>
+                        <numberofbits>16</numberofbits>
+                        <range>
+                                <low>32</low>
+                                <high>65504</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>HOME_ENODEB_ID</name>
+                        <type>UINT</type>
+                        <description>the Home eNodeB ID</description>
+                        <numberofbits>28</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>268435455</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>MACRO_ENODEB_ID</name>
+                        <type>UINT</type>
+                        <description>the Macro eNodeB ID</description>
+                        <numberofbits>20</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>1048575</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>IS_IMEISV_CHANGED</name>
+                        <type>ENUM</type>
+                        <description>This event parameter indicates that if MME detects the IMEISV change in the GUTI Attach or inter TAU procedeure.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="FALSE" value="0">False</enum>
+                                <enum internal="TRUE" value="1">True</enum>
+                        </enumeration>
+                </parametertype>      
+                <parametertype>
+                        <name>BACK_OFF_TIMER</name>
+                        <type>UINT</type>
+                        <description>This parameter is optional and is included in the T3346 IE to indicate the value of the back-off timer that the MME sends to the UE.</description>
+                        <numberofbits>15</numberofbits>
+                        <range>
+                                <low>2</low>
+                                <high>22320</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>NAS_SIGNALING_LOW_PRIORITY</name>
+                        <type>ENUM</type>
+                        <description>This parameter is optional and is included in the Device Properties IE to indicate the NAS signaling priority value of UE, which is sent from the UE to the MME.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="NOT_LOW_PRIORITY" value="0">Not Low Priority</enum>
+                                <enum internal="LOW_PRIORITY" value="1">Low Priority</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>SDS_SERVICE</name>
+                        <type>ENUM</type>
+                        <description>This parameter is optional and indicates an SDS-capable UE.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="SDS_ONLY" value="0">SDS Only</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>SDS_GW</name>
+                        <type>BYTEARRAY</type>
+                        <description>This parameter is optional and indicates the SDS GW in use.</description>
+                        <lengthbits>5</lengthbits>
+                        <validlength>
+                                <low>0</low>
+                                <high>20</high>
+                        </validlength>
+                </parametertype>
+                <parametertype>
+                        <name>DATA_SERVICE_TYPE</name>
+                        <type>ENUM</type>
+                        <description>This parameter is optional and indicates the type of data service that triggers the Control Plane Service Request procedure.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="ORIGINATING" value="0">originating</enum>
+                                <enum internal="TERMINATING" value="1">terminating</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>DATA_LENGTH</name>
+                        <type>UINT</type>
+                        <description>This parameter is optional and indicates the length of the EPS user data that is carried in the Control Plane Service Request message.</description>
+                        <numberofbits>15</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>8000</high>
+                        </range>
+                </parametertype> 
+                <parametertype>
+                        <name>SMS_LENGTH</name>
+                        <type>UINT</type>
+                        <description>This parameter is optional and indicates the length of the SMS message that is carried in the Control Plane Service Request message.</description>
+                        <numberofbits>8</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>255</high>
+                        </range>
+                </parametertype>                 
+                <parametertype>
+                        <name>PREVIOUS_S1_RELEASE_TRIGGERED_NODE</name>
+                        <type>ENUM</type>
+                        <description>This parameter indicates the node that triggered the previous S1 release procedure.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="MME" value="0">MME</enum>
+                                <enum internal="ENODEB" value="1">ENODEB</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>PREVIOUS_S1_RELEASE_CAUSE</name>
+                        <type>UINT</type>
+                        <description>This parameter indicates the cause for the previous S1 release.
+                        Each value stands for a cause. For the mapping between the value and the cause, see section S1AP Cause Codes in EBM Cause Codes.</description>
+                        <numberofbits>10</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>1023</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>IDLE_DURATION_SINCE_PREVIOUS_S1_RELEASE</name>
+                        <type>UINT</type>
+                        <description>This parameter indicates the duration for which the UE has been in the ECM-IDLE state since the previous S1 release.
+                        The duration is measured in milliseconds. If the actual duration exceeds the upper limit, the MME records the duration as the upper limit.</description>
+                        <numberofbits>27</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>134217727</high>
+                        </range>
+                </parametertype>               
+                <parametertype>
+                        <name>A_MSISDN</name>
+                        <type>TBCD</type>
+                        <description>Additional Mobile Subscriber Integrated Services Digital Network Number</description>
+                        <numberofbits>72</numberofbits>                
+                </parametertype>
+               <parametertype>
+                  <name>EDRX_TEDRX_REQ</name>
+                  <type>UINT</type>
+                  <description>This parameter provides the requested value of the eDRX cycle parameter (TeDRX).</description>
+                  <numberofbits>11</numberofbits>
+                  <range>
+                    <low>0</low>
+                    <high>1024</high>
+                  </range>
+                </parametertype>
+                <parametertype>
+                  <name>EDRX_TEDRX</name>
+                  <type>UINT</type>
+                  <description>This parameter provides the value of the negotiated eDRX cycle parameter (TeDRX).</description>
+                  <numberofbits>11</numberofbits>
+                  <range>
+                    <low>0</low>
+                    <high>1024</high>
+                  </range>
+                </parametertype>
+		<parametertype>
+                  <name>EDRX_PTW_REQ</name>
+                  <type>UINT</type>
+                  <description>This parameter provides the requested length of the eDRX paging time window in milliseconds.</description>
+                  <numberofbits>16</numberofbits>
+                  <range>
+                    <low>0</low>
+                    <high>40960</high>
+                  </range>
+                </parametertype>
+                <parametertype>
+                  <name>EDRX_PTW</name>
+                  <type>UINT</type>
+                  <description>This parameter provides the length of the negotiated paging time window in milliseconds used for UEs in eDRX mode.</description>
+                  <numberofbits>16</numberofbits>
+                  <range>
+                    <low>0</low>
+                    <high>40960</high>
+                  </range>
+                </parametertype>
+                <parametertype>
+                  <name>EDRX_DELAY_PAGING_TIME</name>
+                  <type>UINT</type>
+                  <description>This parameter provides the time, in seconds, the MME delays the paging procedure for a UE using eDRX mode. It specifies the time from the original paging request, until the first paging attempt (UE not responding), or until the UE becomes available.</description>
+                  <numberofbits>14</numberofbits>
+                  <range>
+                    <low>0</low>
+                    <high>10800</high>
+                  </range>
+                </parametertype>
+                <parametertype>
+                	<name>EDRX_STATUS</name>
+                	<type>ENUM</type>
+                	<description>This parameter indicates whether the eDRX mode is activated for the MS.</description>
+                    <numberofbits>2</numberofbits>
+                    <enumeration>
+                        <enum internal="UNDEFINED" value="0">undefined</enum>
+                        <enum internal="ACTIVATED" value="1">activated</enum>
+                        <enum internal="DEACTIVATED" value="2">deactivated</enum>
+                	</enumeration>
+                </parametertype>
+                <parametertype>
+                	<name>EDRX_CYCLE_VALUE</name>
+                	<type>ENUM</type>
+                    <description>The eDRX cycle value for the MS, as specified in 3GPP TS 24.008.</description>
+                    <numberofbits>4</numberofbits>
+                	<enumeration>
+                        <enum internal="0000" value="0">0000</enum>
+                        <enum internal="0001" value="1">0001</enum>
+                        <enum internal="0010" value="2">0010</enum>
+                        <enum internal="0011" value="3">0011</enum>
+                        <enum internal="0100" value="4">0100</enum>
+                        <enum internal="0101" value="5">0101</enum>
+                        <enum internal="0110" value="6">0110</enum>
+                        <enum internal="0111" value="7">0111</enum>
+                        <enum internal="1000" value="8">1000</enum>
+                        <enum internal="1001" value="9">1001</enum>
+                        <enum internal="1010" value="10">1010</enum>
+                        <enum internal="1011" value="11">1011</enum>
+                	</enumeration>
+                </parametertype>
+                <parametertype>
+                	<name>EDRX_CYCLE_LENGTH</name>
+                	<type>ENUM</type>
+                    <description>The eDRX cycle length for the MS, in milliseconds.</description>
+                    <numberofbits>4</numberofbits>
+                	<enumeration>
+                        <enum internal="1880" value="0">1880</enum>
+                        <enum internal="3760" value="1">3760</enum>
+                        <enum internal="7530" value="2">7530</enum>
+                        <enum internal="12240" value="3">12240</enum>
+                        <enum internal="24480" value="4">24480</enum>
+                        <enum internal="48960" value="5">48960</enum>
+                        <enum internal="97920" value="6">97920</enum>
+                        <enum internal="195840" value="7">195840</enum>
+                        <enum internal="391680" value="8">391680</enum>
+                        <enum internal="783360" value="9">783360</enum>
+                        <enum internal="1566720" value="10">1566720</enum>
+                        <enum internal="3133440" value="11">3133440</enum>
+                	</enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>DECOR_RESULT</name>
+                        <type>ENUM</type>
+                        <description>Result of DECOR Procedure.</description>
+                        <numberofbits>5</numberofbits>
+                        <enumeration>
+                            <enum internal="REROUTE_OUT" value="0">UE is rerouted out.</enum>
+                            <enum internal="ACCEPT" value="1">UE is accepted to continue the procedure with the supported UE Usage Type.</enum>
+                            <enum internal="ACCEPT_UNSUPPORTED_UE" value="2">UE is accepted to continue the procedure though the UE Usage Type is not supported or the MMEGI is mismatching.</enum>
+                            <enum internal="REJECT" value="3">UE is rejected due to unsupported UE Usage Type or mismatched MMEGI.</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>DECOR_MMEGI</name>
+                        <type>UINT</type>
+                        <description>MME Group ID of rerouting. This parameter is not present if it equals to the local MME Group ID.</description>
+                        <numberofbits>16</numberofbits>
+                        <range>
+                            <low>1</low>
+                            <high>65535</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>DECOR_UE_USAGE_TYPE</name>
+                        <type>UINT</type>
+                        <description>UE Usage Type used in DECOR procedure.</description>
+                        <numberofbits>16</numberofbits>
+                        <range>
+                            <low>0</low>
+                            <high>65535</high>
+                        </range>
+                </parametertype>
+		<parametertype>
+			<name>ENB_UE_S1AP_ID</name>
+			<type>UINT</type>
+			<description>The eNodeB UE S1 Application Protocol Identity information element is used to uniquely identify UE over the S1 interface within an eNodeB.</description>
+			<numberofbits>24</numberofbits>
+			<range>
+				<low>0</low>
+				<high>16777215</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>MME_UE_S1AP_ID</name>
+			<type>UINT</type>
+			<description>The MME UE S1 Application Protocol Identity information element is used to uniquely identify UE over the S1 interface within the MME.</description>
+			<numberofbits>32</numberofbits>
+			<range>
+				<low>0</low>
+				<high>4294967295</high>
+			</range>
+		</parametertype>
+		<parametertype>
+			<name>UE_REQUESTED_ROHC_MAX_CID</name>
+			<type>UINT</type>
+			<description>This parameter specifies the UE requested MAX_CID for the PDN connection.</description>
+			<numberofbits>14</numberofbits>
+			<range>
+				<low>1</low>
+				<high>16383</high>
+			</range>
+		</parametertype>
+                <parametertype>
+                        <name>ROHC_UDP</name>
+                        <type>ENUM</type>
+                        <description>ROHC header compression profile UDPIP indicator which UE requests.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="NOT_REQUESTED" value="0">not requested</enum>
+                                        <enum internal="REQUESTED" value="1">requested</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>UE_SUPPORT_WITHOUT_PDN</name>
+                        <type>ENUM</type>
+                        <description>This parameter indicates that the UE supports EMM REGISTERED without PDN connection according to the UE network capability IE in the Attach Request or TAU Request message.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="FALSE" value="0"> UE does not support EMM-REGISTERED without PDN connection.</enum>
+                                        <enum internal="TRUE" value="1">UE supports EMM-REGISTERED without PDN connection.</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>ESM_DUMMY_MSG_IN_REQ</name>
+                        <type>ENUM</type>
+                        <description>This parameter indicates that the ESM message container IE in the Attach Request message includes ESM dummy message.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="FALSE" value="0">ESM message container does not include ESM DUMMY MESSAGE</enum>
+                                        <enum internal="TRUE" value="1">ESM message container includes ESM DUMMY MESSAGE</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>ROHC_ESP</name>
+                        <type>ENUM</type>
+                        <description>ROHC header compression profile ESPIP indicator which UE requests.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="NOT_REQUESTED" value="0">not requested</enum>
+                                        <enum internal="REQUESTED" value="1">requested</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>ROHC_IP</name>
+                        <type>ENUM</type>
+                        <description>ROHC header compression profile IP indicator which UE requests.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="NOT_REQUESTED" value="0">not requested</enum>
+                                        <enum internal="REQUESTED" value="1">requested</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>ROHC_TCP</name>
+                        <type>ENUM</type>
+                        <description>ROHC header compression profile TCPIP indicator which UE requests.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="NOT_REQUESTED" value="0">not requested</enum>
+                                        <enum internal="REQUESTED" value="1">requested</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>ROHC_UDP_V2</name>
+                        <type>ENUM</type>
+                        <description>ROHC header compression profile UDPIP_V2 indicator which UE requests.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="NOT_REQUESTED" value="0">not requested</enum>
+                                        <enum internal="REQUESTED" value="1">requested</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>ROHC_ESP_V2</name>
+                        <type>ENUM</type>
+                        <description>ROHC header compression profile ESPIP_V2 indicator which UE requests.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="NOT_REQUESTED" value="0">not requested</enum>
+                                        <enum internal="REQUESTED" value="1">requested</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>ROHC_IP_V2</name>
+                        <type>ENUM</type>
+                        <description>ROHC header compression profile IP_V2 indicator which UE requests.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="NOT_REQUESTED" value="0">not requested</enum>
+                                        <enum internal="REQUESTED" value="1">requested</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>L_RAT</name>
+                        <type>ENUM</type>
+                        <description>Radio Access Type, either wideband or narrowband</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                <enum internal="WB" value="0">WB</enum>
+                                <enum internal="NB" value="1">NB</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>NR_AS_SECONDARY_RAT</name>
+                        <type>ENUM</type>
+                        <description>This parameter indicates whether the UE is restricted from using NR as Secondary RAT. If parameter is omitted, the UE does not support NR as Secondary RAT.</description>
+                        <numberofbits>1</numberofbits>
+                        <enumeration>
+                                        <enum internal="RESTRICTED"     value="1">restricted</enum>
+                                        <enum internal="NOT_RESTRICTED" value="0">not restricted</enum>                                 
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>PDN_TYPE</name>
+                        <type>ENUM</type>
+                        <description>The actual used PDN Type is displayed if available, otherwise the PDN Type requested by the UE is displayed.</description>
+                        <numberofbits>3</numberofbits>
+                        <enumeration>
+                                <enum internal="IPV4" value="1">IPv4</enum>
+                                <enum internal="IPV6" value="2">IPv6</enum>
+                                <enum internal="IPV4V6" value="3">IPv4v6</enum>
+                                <enum internal="NONIP" value="5">Non-IP</enum>
+                        </enumeration>
+                </parametertype>
+                <parametertype>
+                        <name>EXT_GBR_DOWNLINK</name>
+                        <type>UINT</type>
+                        <description>Provides extended Guaranteed Bit Rate Downlink (kbps) for each GBR bearer in a bearer setup list, for bit rates higher than 10,000,000 kbps.</description>
+                        <numberofbits>32</numberofbits>
+                        <range>
+                                <low>0</low>
+                                <high>4000000000</high>                             
+                        </range>
+                </parametertype>
+                <parametertype>
+                	<name>EDRX_TEDRX_SUB</name>
+                	<type>UINT</type>
+                	<description>This parameter provides the HSS-subscribed value of the eDRX cycle length parameter (TeDRX).</description>
+                	<numberofbits>11</numberofbits>
+                	<range>
+                		<low>0</low>
+                		<high>1024</high></range></parametertype>
+                <parametertype>
+                	<name>EDRX_PTW_SUB</name>
+                	<type>UINT</type>
+                	<description>This parameter provides the HSS-subscribed value of the eDRX paging time window length parameter in milliseconds.</description>
+                	<numberofbits>16</numberofbits>
+                	<range>
+                		<low>0</low>
+                		<high>40960</high></range></parametertype>
+                <parametertype>
+                	<name>ACTIVE_TIMER_REQ</name>
+                	<type>UINT</type>
+                	<description>This parameter provides the UE-requested value of the timing information in seconds of how long time a PSM-type UE is active before it enters PSM.</description>
+                	<numberofbits>14</numberofbits>
+                	<range>
+                		<low>0</low>
+                		<high>11160</high></range></parametertype>
+                <parametertype>
+                	<name>PERIODIC_TAU_TIMER_REQ</name>
+                	<type>UINT</type>
+                	<description>This parameter provides the UE-requested value of the periodic TAU timer, which is included in the T3412 extended value IE if it is sent to the UE. The PERIODIC_TAU_TIMER_REQ parameter and the PERIODIC_TAU_TIMER_EXT_REQ parameter are mutually exclusive.</description>
+                	<numberofbits>21</numberofbits>
+                	<range>
+                		<low>0</low>
+                		<high>1116000</high></range></parametertype>
+                <parametertype>
+                	<name>ACTIVE_TIMER_SUB</name>
+                	<type>UINT</type>
+                	<description>This parameter provides the HSS-subscribed value of the timing information in seconds of how long time a PSM-type UE is active before it enters PSM.</description>
+                	<numberofbits>14</numberofbits>
+                	<range>
+                		<low>0</low>
+                		<high>11160</high></range></parametertype>
+                <parametertype>
+                	<name>PERIODIC_TAU_TIMER_SUB</name>
+                	<type>UINT</type>
+                	<description>This parameter provides the HSS-subscribed value of the periodic TAU timer, which is included in the T3412 extended value IE if it is sent to the UE. The PERIODIC_TAU_TIMER_SUB parameter and the PERIODIC_TAU_TIMER_EXT_SUB parameter are mutually exclusive.</description>
+                	<numberofbits>21</numberofbits>
+                	<range>
+                		<low>0</low>
+                		<high>1116000</high></range></parametertype>
+                <parametertype>
+                	<name>SMS_IN_MME_REGISTERED</name>
+                	<type>ENUM</type>
+                	<description>This parameter is optional and included to indicate if SMS in MME is registered or deregistered. </description>
+                	<numberofbits>1</numberofbits>
+                	<enumeration>
+                		<enum internal="REGISTERED" value="1">registered</enum>
+                		<enum internal="DEREGISTERED" value="0">deregistered</enum>
+                	</enumeration>
+                </parametertype>
+                                <parametertype>
+                        <name>PERIODIC_TAU_TIMER_EXT</name>
+                        <type>UINT</type>
+                        <description>This parameter provides the extended value range of the periodic TAU timer, which is sent to the UE in the T3412 value IE. The PERIODIC_TAU_TIMER_EXT parameter and the PERIODIC_TAU_TIMER parameter are mutually exclusive.</description>
+                        <numberofbits>26</numberofbits>
+                        <range>
+                                <low>1116001</low>
+                                <high>35712000</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>PERIODIC_TAU_TIMER_EXT_REQ</name>
+                        <type>UINT</type>
+                        <description>This parameter provides the extended value range of the UE-requested periodic TAU timer, which is included in the T3412 extended value IE if it is sent to the UE. The PERIODIC_TAU_TIMER_EXT_REQ parameter and the PERIODIC_TAU_TIMER_REQ parameter are mutually exclusive.</description>
+                        <numberofbits>26</numberofbits>
+                        <range>
+                                <low>1116001</low>
+                                <high>35712000</high>
+                        </range>
+                </parametertype>
+                <parametertype>
+                        <name>PERIODIC_TAU_TIMER_EXT_SUB</name>
+                        <type>UINT</type>
+                        <description>This parameter provides the extended value range of the HSS-subscribed periodic TAU timer, which is included in the T3412 extended value IE if it is sent to the UE. The PERIODIC_TAU_TIMER_EXT_SUB parameter and the PERIODIC_TAU_TIMER_SUB parameter are mutually exclusive.</description>
+                        <numberofbits>26</numberofbits>
+                        <range>
+                                <low>1116001</low>
+                                <high>35712000</high>
+                        </range>
+                </parametertype>
+	</parametertypes>
+	<structuretypes>
+		<structuretype>
+			<name>HEADER</name>
+			<elements>
+				<param type="EVENT_ID">EVENT_ID</param>
+				<param type="EVENT_RESULT">EVENT_RESULT</param>
+				<param type="TIME_HOUR">TIME_HOUR</param>
+				<param type="TIME_MINUTE">TIME_MINUTE</param>
+				<param type="TIME_SECOND">TIME_SECOND</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>L_HEADER</name>
+			<elements>
+				<struct type="HEADER"/>
+				<param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+				<param type="DURATION">DURATION</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>LOCATION</name>
+			<elements>
+				<param type="MCC">MCC</param>
+				<param type="MNC">MNC</param>
+				<param type="LAC">LAC</param>
+				<param type="RAC">RAC</param>
+				<param type="CI" usevalid="true">CI</param>
+				<param type="SAC" usevalid="true">SAC</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>OLD_LOCATION</name>
+			<elements>
+				<param type="MCC">OLD_MCC</param>
+				<param type="MNC">OLD_MNC</param>
+				<param type="LAC">OLD_LAC</param>
+				<param type="RAC">OLD_RAC</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+				<name>RAI</name>
+				<elements>
+						<param type="MCC" optional="true">MCC</param>
+						<param type="MNC" optional="true">MNC</param>
+						<param type="LAC" optional="true">LAC</param>
+						<param type="RAC" optional="true">RAC</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+				<name>OLD_RAI</name>
+				<elements>
+						<param type="MCC" usevalid="true">MCC</param>
+						<param type="MNC" usevalid="true">MNC</param>
+						<param type="LAC" usevalid="true">LAC</param>
+						<param type="RAC" usevalid="true">RAC</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+				<name>LAI</name>
+				<elements>
+						<param type="MCC" optional="true">MCC</param>
+						<param type="MNC" optional="true">MNC</param>
+						<param type="LAC" optional="true">LAC</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+			<name>TAI</name>
+			<elements>
+				<param type="MCC">MCC</param>
+				<param type="MNC">MNC</param>
+				<param type="TAC">TAC</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>OLD_TAI</name>
+			<elements>
+				<param type="MCC" usevalid="true">OLD_MCC</param>
+				<param type="MNC" usevalid="true">OLD_MNC</param>
+				<param type="TAC" usevalid="true">OLD_TAC</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>MMEI</name>
+			<elements>
+				<param type="MMEGI" usevalid="true">MMEGI</param>
+				<param type="MMEC" usevalid="true">MMEC</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>UEID</name>
+			<elements>
+				<param type="MTMSI" usevalid="true">MTMSI</param>
+				<param type="IMSI">IMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>MSID</name>
+			<elements>
+				<param type="IMSI">IMSI</param>
+				<param type="PTMSI" usevalid="true">PTMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+				<param type="MSISDN">MSISDN</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>IPADDRESS</name>
+			<elements>
+				<param type="IPV4" optional="true">IPV4</param>
+				<param type="IPV6" optional="true">IPV6</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>BEARER</name>
+			<elements>
+				<param type="BEARER_ID" usevalid="true">EPS_BEARER_ID</param>
+				<param type="BEARER_QCI">BEARER_QCI</param>
+				<param type="ARP_PRIORITY_LEVEL" optional="true">ARP_PL</param>
+				<param type="ARP_PCI" optional="true">ARP_PCI</param>
+				<param type="ARP_PVI" optional="true">ARP_PVI</param>
+				<param type="GBR_UPLINK" optional="true">GBR_UL</param>
+				<param type="GBR_DOWNLINK" optional="true">GBR_DL</param>
+				<param type="BEARER_CAUSE">BEARER_CAUSE</param>
+				<param type="BEARER_ID" usevalid="true">DEFAULT_BEARER_ID</param>
+			</elements>
+		</structuretype>
+		<structuretype>
+			<name>PDN_INFO</name>
+			<elements>
+				<param type="BEARER_ID">DEFAULT_BEARER_ID</param>
+				<struct type="IPADDRESS">PAA</struct>
+				<struct type="IPADDRESS">P_GW</struct>
+				<struct type="IPADDRESS">SCEF</struct>
+			</elements>
+                </structuretype>
+                <structuretype>
+                        <name>SX_EVENT_TRIGGERS</name>
+                        <elements>
+                                <param type="SX_EVENT_TRIGGER" optional="true">SX_EVENT_TRIGGER1</param>
+                                <param type="SX_EVENT_TRIGGER" optional="true">SX_EVENT_TRIGGER2</param>
+                                <param type="SX_EVENT_TRIGGER" optional="true">SX_EVENT_TRIGGER3</param>
+                                <param type="SX_EVENT_TRIGGER" optional="true">SX_EVENT_TRIGGER4</param>
+                                <param type="SX_EVENT_TRIGGER" optional="true">SX_EVENT_TRIGGER5</param>
+                                <param type="SX_EVENT_TRIGGER" optional="true">SX_EVENT_TRIGGER6</param>
+                                <param type="SX_EVENT_TRIGGER" optional="true">SX_EVENT_TRIGGER7</param>
+                        </elements>
+                </structuretype>
+                <structuretype>
+                        <name>PDN_INFO2</name>
+                        <elements>
+                                <param type="BEARER_ID" optional="true">DEFAULT_BEARER_ID</param>
+                                <param type="SX_FAILURE_REASON" optional="true">SX_SESSION_ESTABLISH_FAILURE_REASON</param>
+                                <struct type="SX_EVENT_TRIGGERS">SX_EVENT_TRIGGERS</struct>
+                                <param type="SX_EVENT_REPORT_MODE" optional="true">EVENT_REPORT_MODE</param>
+                                <param type="SAPC_NUMBER" optional="true">SAPC_NUMBER</param>
+                                <param type="PGW_FROM_SAPC" optional="true">PGW_FROM_SAPC</param>
+                        </elements>
+                </structuretype>
+                <structuretype>
+                        <name>PDN_INFO3</name>
+                        <elements>
+                                <param type="BEARER_ID" optional="true">DEFAULT_BEARER_ID</param>
+                                <param type="PDN_TYPE" optional="true">PDN_TYPE</param>
+                        </elements>
+                </structuretype>
+                <structuretype>
+                        <name>SX_INFO</name>
+                        <elements>
+                                <param type="PDP_STATUS" optional="true">SX_SESSION_PDP_LIST</param>
+                                <param type="SX_FAILURE_REASON" optional="true">SX_SESSION_ESTABLISH_FAILURE_REASON</param>
+                                <param type="SAPC_NUMBER" optional="true">SAPC_NUMBER</param>
+                                <struct type="SX_EVENT_TRIGGERS">SX_EVENT_TRIGGERS</struct>
+                                <param type="PRA_ID" optional="true">PRA_ID</param>
+                                <param type="PRA_MODE" optional="true">PRA_DEFINED_MODE</param>                                
+                        </elements>
+                </structuretype>
+                <structuretype>
+			<name>PDP_INFO</name>
+			<elements>
+				<param type="NSAPI">NSAPI</param>
+				<param type="GSN">GGSN</param>
+				<struct type="IPADDRESS">MS_ADDRESS</struct>
+			</elements>
+		</structuretype>
+		<structuretype>
+				<name>PDP_INFO2</name>
+				<elements>
+						<param type="NSAPI">NSAPI</param>
+						<param type="DIRECT_TUNNEL">DIRECT_TUNNEL</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+				<name>EXT_QOS_REQ</name>
+				<elements>
+						<param type="RELIABILITY_CLASS">RELIABILITY_CLASS</param>
+						<param type="DELAY_CLASS">DELAY_CLASS</param>
+						<param type="PRECEDENCE_CLASS">PRECEDENCE_CLASS</param>
+						<param type="PEAK_THROUGHPUT">PEAK_THROUGHPUT</param>
+						<param type="MEAN_THROUGHPUT">MEAN_THROUGHPUT</param>
+						<param type="DELIVERY_OF_ERR_SDU" optional="true">DELIVERY_OF_ERR_SDU</param>
+						<param type="DELIVERY_ORDER" optional="true">DELIVERY_ORDER</param>
+						<param type="TRAFFIC_CLASS" optional="true">TRAFFIC_CLASS</param>
+						<param type="MAX_SDU_SIZE" optional="true">MAX_SDU_SIZE</param>
+						<param type="BITRATE" optional="true">MBR_UL</param>
+						<param type="BITRATE" optional="true">MBR_DL</param>
+						<param type="SDU_ERROR_RATIO" optional="true">SDU_ERROR_RATIO</param>
+						<param type="RESIDUAL_BER" optional="true">RESIDUAL_BER</param>
+						<param type="TRAFFIC_HANDLING_PRIORITY" optional="true">TRAFFIC_HANDLING_PRIORITY</param>
+						<param type="TRANSFER_DELAY" optional="true">TRANSFER_DELAY</param>
+						<param type="BITRATE" optional="true">GBR_UL</param>
+						<param type="BITRATE" optional="true">GBR_DL</param>
+						<param type="SOURCE_STATISTICS_DESCRIPTOR" optional="true">SOURCE_STATISTICS_DESCRIPTOR</param>
+						<param type="SIGNALLING_INDICATION" optional="true">SIGNALLING_INDICATION</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+				<name>EXT_QOS_EPS_REQ</name>
+				<elements>
+						<param type="BEARER_QCI" optional="true">BEARER_QCI</param>
+						<param type="ARP_PRIORITY_LEVEL" optional="true">EPS_ARP_PL</param>
+						<param type="ARP_PCI" optional="true">EPS_ARP_PCI</param>
+						<param type="ARP_PVI" optional="true">EPS_ARP_PVI</param>
+						<param type="BITRATE" optional="true">EPS_GBR_UL</param>
+						<param type="BITRATE" optional="true">EPS_GBR_DL</param>
+						<param type="BITRATE" optional="true">EPS_MBR_UL</param>
+						<param type="BITRATE" optional="true">EPS_MBR_DL</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+				<name>EXT_QOS_NEG</name>
+				<elements>
+						<param type="RELIABILITY_CLASS">RELIABILITY_CLASS</param>
+						<param type="DELAY_CLASS">DELAY_CLASS</param>
+						<param type="PRECEDENCE_CLASS">PRECEDENCE_CLASS</param>
+						<param type="PEAK_THROUGHPUT">PEAK_THROUGHPUT</param>
+						<param type="MEAN_THROUGHPUT">MEAN_THROUGHPUT</param>
+						<param type="DELIVERY_OF_ERR_SDU" optional="true">DELIVERY_OF_ERR_SDU</param>
+						<param type="DELIVERY_ORDER" optional="true">DELIVERY_ORDER</param>
+						<param type="TRAFFIC_CLASS" optional="true">TRAFFIC_CLASS</param>
+						<param type="MAX_SDU_SIZE" optional="true">MAX_SDU_SIZE</param>
+						<param type="BITRATE" optional="true">MBR_UL</param>
+						<param type="BITRATE" optional="true">MBR_DL</param>
+						<param type="SDU_ERROR_RATIO" optional="true">SDU_ERROR_RATIO</param>
+						<param type="RESIDUAL_BER" optional="true">RESIDUAL_BER</param>
+						<param type="TRAFFIC_HANDLING_PRIORITY" optional="true">TRAFFIC_HANDLING_PRIORITY</param>
+						<param type="TRANSFER_DELAY" optional="true">TRANSFER_DELAY</param>
+						<param type="BITRATE" optional="true">GBR_UL</param>
+						<param type="BITRATE" optional="true">GBR_DL</param>
+						<param type="SOURCE_STATISTICS_DESCRIPTOR" optional="true">SOURCE_STATISTICS_DESCRIPTOR</param>
+						<param type="SIGNALLING_INDICATION" optional="true">SIGNALLING_INDICATION</param>
+						<param type="ARP_PRIORITY_LEVEL" optional="true">ARP_PL</param>
+						<param type="ARP_PCI" optional="true">ARP_PCI</param>
+						<param type="ARP_PVI" optional="true">ARP_PVI</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+				<name>EXT_QOS_EPS_NEG</name>
+				<elements>
+						<param type="BEARER_QCI" optional="true">BEARER_QCI</param>
+						<param type="ARP_PRIORITY_LEVEL" optional="true">EPS_ARP_PL</param>
+						<param type="ARP_PCI" optional="true">EPS_ARP_PCI</param>
+						<param type="ARP_PVI" optional="true">EPS_ARP_PVI</param>
+						<param type="BITRATE" optional="true">EPS_GBR_UL</param>
+						<param type="BITRATE" optional="true">EPS_GBR_DL</param>
+						<param type="BITRATE" optional="true">EPS_MBR_UL</param>
+						<param type="BITRATE" optional="true">EPS_MBR_DL</param>
+						<param type="BITRATE" optional="true">APN_AMBR_UL</param>
+						<param type="BITRATE" optional="true">APN_AMBR_DL</param>
+				</elements>
+		</structuretype>
+		<structuretype>
+			<name>SECTOR_ID</name>
+			<elements>
+				<param type="MARKET_ID" optional="true">MARKET_ID</param>
+				<param type="SWITCH_NUMBER" optional="true">SWITCH_NUMBER</param>
+				<param type="CELL" optional="true">CELL</param>
+				<param type="SECTOR" optional="true">SECTOR</param>
+			</elements>
+		</structuretype>
+                <structuretype>
+                        <name>GLOBAL_ENODEB_ID</name>
+                        <elements>
+                                <param type="MCC" optional="true">MCC</param>
+                                <param type="MNC" optional="true">MNC</param>
+                                <param type="MACRO_ENODEB_ID" optional="true">MACRO_ENODEB_ID</param>
+                                <param type="HOME_ENODEB_ID" optional="true">HOME_ENODEB_ID</param>
+                        </elements>
+                </structuretype>
+                <structuretype>
+                        <name>CIOT</name>
+                        <elements>
+                                <param type="DATA_SERVICE_TYPE" optional="true">DATA_SERVICE_TYPE</param>
+                                <param type="DATA_LENGTH" optional="true">DATA_LENGTH</param>
+                        </elements>
+                </structuretype>
+                 <structuretype>
+                        <name>S1_RELEASE_HISTORY</name>
+                        <elements>
+                                <param type="PREVIOUS_S1_RELEASE_TRIGGERED_NODE" optional="true">PREVIOUS_S1_RELEASE_TRIGGERED_NODE</param>
+                                <param type="PREVIOUS_S1_RELEASE_CAUSE" optional="true">PREVIOUS_S1_RELEASE_CAUSE</param>
+                                <param type="IDLE_DURATION_SINCE_PREVIOUS_S1_RELEASE" optional="true">IDLE_DURATION_SINCE_PREVIOUS_S1_RELEASE</param>
+                        </elements>
+                 </structuretype>
+                 <structuretype>
+                        <name>EDRX_INFO_LTE</name>
+                        <elements>
+                                <param type="EDRX_TEDRX_REQ" optional="true">EDRX_TEDRX_REQ</param>
+                                <param type="EDRX_PTW_REQ" optional="true">EDRX_PTW_REQ</param>
+                                <param type="EDRX_TEDRX" optional="true">EDRX_TEDRX</param>
+                                <param type="EDRX_PTW" optional="true">EDRX_PTW</param>
+                        </elements>
+                </structuretype>
+                 <structuretype>
+                        <name>EDRX_INFO_GSM</name>
+                        <elements>
+                                <param type="EDRX_STATUS" optional="true">EDRX_STATUS</param>
+                                <param type="EDRX_CYCLE_VALUE" optional="true">EDRX_CYCLE_VALUE</param>
+                                <param type="EDRX_CYCLE_LENGTH" optional="true">EDRX_CYCLE_LENGTH</param>
+                        </elements>
+                </structuretype>
+                 <structuretype>
+                         <name>DECOR_INFO</name>
+                         <elements>
+                                 <param type="DECOR_RESULT" optional="true">DECOR_RESULT</param>
+                                 <param type="DECOR_MMEGI" optional="true">DECOR_MMEGI</param>
+                                 <param type="DECOR_UE_USAGE_TYPE" optional="true">DECOR_UE_USAGE_TYPE</param>
+                         </elements>
+                 </structuretype>
+                 <structuretype>
+                        <name>UE_REQUESTED_ROHC_PROFILE</name>
+                        <elements>
+                                <param type="ROHC_UDP" optional="true">ROHC_UDP</param>
+                                <param type="ROHC_ESP" optional="true">ROHC_ESP</param>
+                                <param type="ROHC_IP" optional="true">ROHC_IP</param>
+                                <param type="ROHC_TCP" optional="true">ROHC_TCP</param>
+                                <param type="ROHC_UDP_V2" optional="true">ROHC_UDP_V2</param>
+                                <param type="ROHC_ESP_V2" optional="true">ROHC_ESP_V2</param>
+                                <param type="ROHC_IP_V2" optional="true">ROHC_IP_V2</param>
+                        </elements>
+                </structuretype> 
+                <structuretype>
+                        <name>BEARER_2</name>
+                        <elements>
+                                <param type="BEARER_ID" usevalid="true">EPS_BEARER_ID</param>
+                                <param type="EXT_GBR_DOWNLINK" optional="true">EXT_GBR_DL</param>
+                        </elements>
+                </structuretype>
+                <structuretype>
+                	<name>EDRX_INFO2_LTE</name>
+                	<elements>
+                		<param type="EDRX_TEDRX_SUB" optional="true">EDRX_TEDRX_SUB</param>
+                		<param type="EDRX_PTW_SUB" optional="true">EDRX_PTW_SUB</param>
+                        </elements>
+                </structuretype>
+                <structuretype>
+                	<name>PSM_INFO_LTE</name>
+                	<elements>
+                		<param type="ACTIVE_TIMER_REQ" optional="true">ACTIVE_TIMER_REQ</param>
+                		<param type="PERIODIC_TAU_TIMER_REQ" optional="true">PERIODIC_TAU_TIMER_REQ</param>
+                		<param type="ACTIVE_TIMER_SUB" optional="true">ACTIVE_TIMER_SUB</param>
+                		<param type="PERIODIC_TAU_TIMER_SUB" optional="true">PERIODIC_TAU_TIMER_SUB</param>
+                        </elements>
+                </structuretype>
+                <structuretype>
+                        <name>PSM_INFO2_LTE</name>
+                        <elements>
+                                <param type="PERIODIC_TAU_TIMER_EXT_REQ" optional="true">PERIODIC_TAU_TIMER_EXT_REQ</param>
+                                <param type="PERIODIC_TAU_TIMER_EXT_SUB" optional="true">PERIODIC_TAU_TIMER_EXT_SUB</param>
+                        </elements>
+                </structuretype>
+	</structuretypes>
+	<events>
+		<event>
+			<name>ATTACH</name>
+			<id>0</id>
+			<triggerdescription/>
+			<comment>The GSM/WCDMA Attach procedure.
+			The Attach procedure attaches the MS to the SGSN and announces the presence of the MS in the Packet-Switched (PS) network.</comment>
+			<elements>
+				<struct type="HEADER"/>
+				<param type="ATTACH_TYPE">ATTACH_TYPE</param>
+				<param type="RAT">RAT</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="LOCATION"/>
+				<param type="IMSI">IMSI</param>
+				<param type="PTMSI" usevalid="true">PTMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+				<param type="HLR">HLR</param>
+				<param type="MSISDN">MSISDN</param>
+				<param type="CAUSE_PROT_TYPE">CAUSE_PROT_TYPE</param>
+				<param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+				<param type="DURATION">DURATION</param>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+				<param type="PERIODIC_RAU_TIMER" optional="true">PERIODIC_RAU_TIMER</param>
+				<struct type="EDRX_INFO_GSM">EDRX_INFO_GSM</struct>
+			</elements>
+		</event>
+		<event>
+			<name>ACTIVATE</name>
+			<id>1</id>
+			<triggerdescription/>
+			<comment>The GSM/WCDMA PDP Context Activation procedure.
+			The PDP Context Activation procedure establishes a virtual data channel between the MS and a Packet Data Network (PDN) through the General Packet Radio Service (GPRS) network. A successful PDP context activation enables the subscriber to communicate with the corresponding PDN, announcing the presence of the MS in the GGSN.
+Event-Based Monitoring supports the following PDP context activation procedures and corresponding QOS layout:
+- Primary PDP context activation, with QOS_REQUESTED, QOS_NEGOTIATED and QOS_EPS_NEGOTIATED(S4 only)
+- MS-initiated Secondary PDP activation, with QOS_REQUESTED and QOS_NEGOTIATED
+- Network-requested Secondary PDP activation, with QOS_REQUESTED and QOS_NEGOTIATED for Gn, with QOS_EPS_REQUESTED, QOS_NEGOTIATED and QOS_EPS_NEGOTIATED for S4</comment>
+			<elements>
+				<struct type="HEADER"/>
+				<param type="ACTIVATION_TYPE">ACTIVATION_TYPE</param>
+				<param type="RAT">RAT</param>
+				<param type="CAUSE_PROT_TYPE">CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="LOCATION"/>
+				<param type="IMSI">IMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+				<param type="GSN" usevalid="true">GGSN</param>
+				<param type="APN">APN</param>
+				<param type="HOMEZONE_IDENTITY">HOMEZONE_IDENTITY</param>
+				<param type="MSISDN">MSISDN</param>
+				<param type="NSAPI">NSAPI</param>
+				<param type="NSAPI" usevalid="true">LINKED_NSAPI</param>
+				<struct type="IPADDRESS">MS_ADDRESS</struct>
+				<param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+				<param type="DURATION">DURATION</param>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="PTMSI" usevalid="true">PTMSI</param>
+				<param type="MS_REQUESTED_APN" optional="true">MS_REQUESTED_APN</param>
+				<struct type="EXT_QOS_REQ" seqmaxlen="1">QOS_REQUESTED</struct>
+				<struct type="EXT_QOS_EPS_REQ" seqmaxlen="1">QOS_EPS_REQUESTED</struct>
+				<struct type="EXT_QOS_NEG" seqmaxlen="1">QOS_NEGOTIATED</struct>
+				<struct type="EXT_QOS_EPS_NEG" seqmaxlen="1">QOS_EPS_NEGOTIATED</struct>
+				<param type="PDP_CONTEXT_REQUEST_TYPE" optional="true">PDP_CONTEXT_REQUEST_TYPE</param>
+				<param type="SX_FAILURE_REASON" optional="true">SX_SESSION_ESTABLISH_FAILURE_REASON</param>
+				<param type="SAPC_NUMBER" optional="true">SAPC_NUMBER</param>
+				<struct type="SX_EVENT_TRIGGERS">SX_EVENT_TRIGGERS</struct>
+				<param type="PRA_ID" optional="true">PRA_ID</param>
+				<param type="PRA_MODE" optional="true">PRA_DEFINED_MODE</param>   
+				<param type="GW_FROM_SAPC" optional="true">GW_FROM_SAPC</param>
+			</elements>
+		</event> 
+		<event>
+			<name>RAU</name>
+			<id>2</id>
+			<triggerdescription/>
+			<comment>The GSM/WCDMA Routing Area Update (RAU) procedure.
+			The RAU procedure updates the SGSN with information on the routing area in which the MS is located.
+The RAU event supports the following RAU procedures:
+- Normal
+- Periodic</comment>
+			<elements>
+				<struct type="HEADER"/>
+				<param type="RAT">RAT</param>
+				<param type="INTRA_RAU_TYPE">INTRA_RAU_TYPE</param>
+				<param type="UPDATE_TYPE">UPDATE_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="LOCATION"/>
+				<param type="IMSI">IMSI</param>
+				<param type="PTMSI" usevalid="true">PTMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+				<struct type="OLD_LOCATION"/>
+				<param type="TRANSFERRED_PDP" usevalid="true">TRANSFERRED_PDP</param>
+				<param type="DROPPED_PDP" usevalid="true">DROPPED_PDP</param>
+				<param type="HOMEZONE_IDENTITY">HOMEZONE_IDENTITY</param>
+				<param type="MSISDN">MSISDN</param>
+				<struct type="PDP_INFO" seqmaxlen="11">PDP_INFO</struct>
+				<param type="CAUSE_PROT_TYPE">CAUSE_PROT_TYPE</param>
+				<param type="HLR">HLR</param>
+				<param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+				<param type="DURATION">DURATION</param>
+                <param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+                <param type="SGW_RELOCATION" optional="true">SGW_RELOCATION</param>
+                <struct type="SX_INFO" seqmaxlen="11">SX_INFO</struct>
+                <param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+                <param type="PERIODIC_RAU_TIMER" optional="true">PERIODIC_RAU_TIMER</param>
+                <struct type="EDRX_INFO_GSM">EDRX_INFO_GSM</struct>
+			</elements>
+		</event>
+		<event>
+			<name>ISRAU</name>
+			<id>3</id>
+			<triggerdescription/>
+			<comment>The GSM/WCDMA Inter SGSN Routing Area Update (ISRAU) procedure.
+			The ISRAU procedure updates the SGSN with information on when an MS moves between routing areas controlled by different SGSNs.</comment>
+			<elements>
+				<struct type="HEADER"/>
+				<param type="RAT">RAT</param>
+				<param type="UPDATE_TYPE">UPDATE_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="LOCATION"/>
+				<param type="IMSI">IMSI</param>
+				<param type="PTMSI" usevalid="true">PTMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+				<param type="GSN" usevalid="true">OLD_SGSN</param>
+				<struct type="OLD_LOCATION"/>
+				<param type="HLR">HLR</param>
+				<param type="TRANSFERRED_PDP" usevalid="true">TRANSFERRED_PDP</param>
+				<param type="DROPPED_PDP" usevalid="true">DROPPED_PDP</param>
+				<param type="HOMEZONE_IDENTITY">HOMEZONE_IDENTITY</param>
+				<param type="MSISDN">MSISDN</param>
+				<struct type="PDP_INFO" seqmaxlen="11">PDP_INFO</struct>
+				<param type="CAUSE_PROT_TYPE">CAUSE_PROT_TYPE</param>
+				<param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+				<param type="DURATION">DURATION</param>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="SGW_RELOCATION" optional="true">SGW_RELOCATION</param>
+				<struct type="SX_INFO" seqmaxlen="11">SX_INFO</struct>
+				<struct type="EDRX_INFO_GSM">EDRX_INFO_GSM</struct>
+			</elements>
+		</event>
+		<event>
+			<name>DEACTIVATE</name>
+			<id>4</id>
+			<triggerdescription/>
+			<comment>The GSM/WCDMA PDP Context Deactivation procedure.
+			The PDP Context Deactivation procedure revokes the virtual data channel between the MS and PDN, preventing the subscriber from communicating with PDNs.</comment>
+			<elements>
+				<struct type="HEADER"/>
+				<param type="RAT">RAT</param>
+				<param type="DEACTIVATION_TRIGGER">DEACTIVATION_TRIGGER</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="LOCATION"/>
+				<param type="IMSI">IMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+				<param type="GSN" usevalid="true">GGSN</param>
+				<param type="APN">APN</param>
+				<param type="HOMEZONE_IDENTITY">HOMEZONE_IDENTITY</param>
+				<param type="MSISDN">MSISDN</param>
+				<param type="NSAPI">NSAPI</param>
+				<struct type="IPADDRESS">MS_ADDRESS</struct>
+				<param type="CAUSE_PROT_TYPE">CAUSE_PROT_TYPE</param>
+				<param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+				<param type="DURATION">DURATION</param>
+				<param type="PTMSI" usevalid="true">PTMSI</param>
+			</elements>
+		</event>
+		<event>
+			<name>L_ATTACH</name>
+			<id>5</id>
+			<triggerdescription/>
+			<comment>The LTE Attach procedure.
+			The Attach procedure for LTE Access initiated by the User Equipment (UE) establishes a connection between the UE and the MME announcing the presence of the UE in the EPS.</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="L_ATTACH_TYPE">ATTACH_TYPE</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<param type="APN">APN</param>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<struct type="IPADDRESS">S_GW</struct>
+				<struct type="PDN_INFO">PDN_INFO</struct>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="SMS_ONLY" optional="true">SMS_ONLY</param>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<struct type="IPADDRESS">MSC</struct>
+				<struct type="LAI">TARGET_LAI</struct>
+				<param type="PERIODIC_TAU_TIMER" optional="true">PERIODIC_TAU_TIMER</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="CAUSE_CODE" optional="true">NAS_ESM_CAUSE_CODE</param>
+				<param type="UE_REQUESTED_APN" optional="true">UE_REQUESTED_APN</param>
+				<param type="CSG_ID" optional="true">CSG_ID</param>
+				<struct type="PDN_INFO2">PDN_INFO2</struct>
+				<param type="CELL_ACCESS_MODE" optional="true">CELL_ACCESS_MODE</param>
+				<param type="CSG_MEMBERSHIP_STATUS" optional="true">CSG_MEMBERSHIP_STATUS</param>
+				<param type="DURATION_PSM" optional="true">DURATION_PSM</param>
+				<param type="IS_IMEISV_CHANGED">IS_IMEISV_CHANGED</param>
+				<param type="NAS_SIGNALING_LOW_PRIORITY" optional="true">NAS_SIGNALING_LOW_PRIORITY</param>
+				<param type="BACK_OFF_TIMER" optional="true">BACK_OFF_TIMER</param>
+				<param type="SDS_SERVICE" optional="true">SDS_SERVICE</param>
+				<param type="SDS_GW" optional="true">SDS_GW</param>
+				<param type="PDN_CONNECT_REQUEST_TYPE">PDN_CONNECT_REQUEST_TYPE</param>
+				<param type="DONAS" optional="true">DONAS</param>
+				<struct type="S1_RELEASE_HISTORY">S1_RELEASE_HISTORY</struct>
+				<param type="A_MSISDN" optional="true">A_MSISDN</param>
+				<param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+				<struct type="EDRX_INFO_LTE">EDRX_INFO_LTE</struct>
+				<struct type="DECOR_INFO">DECOR_INFO</struct>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="UE_REQUESTED_ROHC_MAX_CID" optional="true">UE_REQUESTED_ROHC_MAX_CID</param>
+				<struct type="UE_REQUESTED_ROHC_PROFILE">UE_REQUESTED_ROHC_PROFILE</struct>
+				<param type="CONNECTION_SUSPEND_AND_RESUME" optional="true">CONNECTION_SUSPEND_AND_RESUME</param>
+				<param type="L_RAT">L_RAT</param>
+				<param type="NR_AS_SECONDARY_RAT" optional="true">NR_AS_SECONDARY_RAT</param>
+				<param type="UE_SUPPORT_WITHOUT_PDN" optional="true">UE_SUPPORT_WITHOUT_PDN</param>
+                                <param type="ESM_DUMMY_MSG_IN_REQ" optional="true">ESM_DUMMY_MSG_IN_REQ</param>
+                                <struct type="PDN_INFO3">PDN_INFO3</struct>
+                                <struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>
+                                <struct type="EDRX_INFO2_LTE">EDRX_INFO2_LTE</struct>
+                                <struct type="PSM_INFO_LTE">PSM_INFO_LTE</struct>
+                                <param type="SMS_IN_MME_REGISTERED" optional="true">SMS_IN_MME_REGISTERED</param>
+                                <param type="PERIODIC_TAU_TIMER_EXT" optional="true">PERIODIC_TAU_TIMER_EXT</param>
+                                <struct type="PSM_INFO2_LTE">PSM_INFO2_LTE</struct>
+			</elements>
+		</event>
+		<event>
+			<name>L_DETACH</name>
+			<id>6</id>
+			<triggerdescription/>
+			<comment>The LTE Detach procedure.
+			The Detach procedure for LTE Access revokes the connection between the UE and the MME. The UE is detached either explicitly or implicitly. The detach procedure may be initiated by the UE, MME, SGSN or by the Home Subscriber Server (HSS).</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="L_DETACH_TRIGGER">DETACH_TRIGGER</param>
+				<param type="L_DETACH_TYPE">DETACH_TYPE</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<struct type="IPADDRESS">S_GW</struct>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="CSG_ID" optional="true">CSG_ID</param>
+				<param type="CELL_ACCESS_MODE" optional="true">CELL_ACCESS_MODE</param>
+				<param type="CSG_MEMBERSHIP_STATUS" optional="true">CSG_MEMBERSHIP_STATUS</param>
+				<param type="DURATION_PSM" optional="true">DURATION_PSM</param>
+				<param type="SDS_SERVICE" optional="true">SDS_SERVICE</param>
+				<param type="SDS_GW" optional="true">SDS_GW</param>
+				<struct type="S1_RELEASE_HISTORY">S1_RELEASE_HISTORY</struct>
+				<param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+				<param type="PERIODIC_TAU_TIMER" optional="true">PERIODIC_TAU_TIMER</param>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="L_RAT">L_RAT</param>
+				<param type="PERIODIC_TAU_TIMER_EXT" optional="true">PERIODIC_TAU_TIMER_EXT</param>
+			</elements>
+		</event>
+		<event>
+			<name>L_HANDOVER</name>
+			<id>7</id>
+			<triggerdescription/>
+			<comment>The LTE Handover procedure.
+			The UE Handover procedure results in the handover of the UE from a source eNodeB to a target eNodeB over the S1 or X2 interface, or IRAT PS handover between LTE and WCDMA (the event is triggered in the MME regardless of direction of the IRAT) when the UE changes its location. 
+The event is also used for the SRVCC Handover signalling procedure.
+In this event, some parameters provide source information and target information. The type and amount of the information that can be provided by this event depends on HANDOVER_NODE_ROLE and HANDOVER_RAT_CHANGE_TYPE. 
+The source information can be provided by parameters OLD_TAI, OLD_MMEGI, OLD_MMEC, OLD_S_GW,OLD_MTMSI,OLD_ECI, and OLD_SGSN. The target information can be provided by parameters TAI, MMEGI, MMEC, S_GW, MTMSI, ECI, TARGET_RNC_ID, TARGET_GLOBAL_ENB_ID, and SGSN. </comment>           
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="HANDOVER_TYPE">HANDOVER_TYPE</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<struct type="IPADDRESS">S_GW</struct>
+				<struct seqmaxlen="11" type="PDN_INFO">PDNS</struct>
+				<struct type="OLD_TAI">OLD_TAI</struct>
+				<param type="ECI">OLD_ECI</param>
+				<struct type="MMEI">OLD_MME</struct>
+				<param type="MTMSI" usevalid="true">OLD_MTMSI</param>
+				<struct type="IPADDRESS">OLD_S_GW</struct>
+				<struct type="RAI">RAI</struct>
+				<param type="CI" optional="true">CI</param>
+				<struct type="IPADDRESS">SGSN</struct>
+				<struct type="IPADDRESS">OLD_SGSN</struct>
+				<param type="HANDOVER_NODE_ROLE">HANDOVER_NODE_ROLE</param>
+				<param type="HANDOVER_RAT_CHANGE_TYPE">HANDOVER_RAT_CHANGE_TYPE</param>
+				<param type="HANDOVER_SGW_CHANGE_TYPE">HANDOVER_SGW_CHANGE_TYPE</param>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="SRVCC_TYPE" optional="true">SRVCC_TYPE</param>
+				<struct type="IPADDRESS">MSC_ON_SV</struct>
+				<param type="STN_SR" optional="true">STN_SR</param>
+				<struct type="LAI">SRVCC_TARGET_LAI</struct>
+				<param type="RNCID" optional="true">SRVCC_TARGET_RNC_ID</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="CSG_ID" optional="true">CSG_ID</param>
+				<param type="CSFB_TRIGGERED">CSFB_TRIGGERED</param>
+				<struct seqmaxlen="11" type="PDN_INFO2">PDNS_2</struct>
+				<param type="CELL_ACCESS_MODE" optional="true">CELL_ACCESS_MODE</param>
+				<param type="CSG_MEMBERSHIP_STATUS" optional="true">CSG_MEMBERSHIP_STATUS</param>
+				<param type="TARGET_CSG_ID_FROM_SOURCE" optional="true">TARGET_CSG_ID_FROM_SOURCE</param>
+				<param type="RNCID" optional="true">TARGET_RNC_ID</param>
+				<struct type="GLOBAL_ENODEB_ID">TARGET_GLOBAL_ENB_ID</struct>
+				<param type="SDS_SERVICE" optional="true">SDS_SERVICE</param>
+				<param type="A_MSISDN" optional="true">A_MSISDN</param>
+				<struct type="DECOR_INFO">DECOR_INFO</struct>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="L_RAT">L_RAT</param>
+				<param type="NR_AS_SECONDARY_RAT" optional="true">NR_AS_SECONDARY_RAT</param>
+				<struct seqmaxlen="11" type="PDN_INFO3">PDNS_3</struct>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>				
+			</elements>
+		</event>
+		<event>
+			<name>L_TAU</name>
+			<id>8</id>
+			<triggerdescription/>
+			<comment>The LTE Tracking Area Update (TAU) procedure.
+			The TAU procedure updates the MME with information on the tracking area in which the UE is located. The procedure is started by the UE when it enters a tracking area outside its current Tracking Area Identity (TAI) list or when the periodic TAU timer has expired.
+Event-Based Monitoring supports the following TAU procedures:
+- Periodic TAU
+- Intra-MME TAU
+- Inter-MME TAU</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="TAU_TYPE">TAU_TYPE</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<struct type="IPADDRESS">S_GW</struct>
+				<struct seqmaxlen="11" type="PDN_INFO">PDNS</struct>
+				<struct type="OLD_TAI">OLD_TAI</struct>
+				<struct type="MMEI">OLD_MME</struct>
+				<param type="MTMSI" usevalid="true">OLD_MTMSI</param>
+				<struct type="IPADDRESS">OLD_S_GW</struct>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="COMBINED_TAU_TYPE" optional="true">COMBINED_TAU_TYPE</param>
+				<param type="SMS_ONLY" optional="true">SMS_ONLY</param>
+				<struct type="OLD_RAI">OLD_RAI</struct>
+				<struct type="IPADDRESS">OLD_SGSN_IP</struct>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<struct type="IPADDRESS">MSC</struct>
+				<struct type="LAI">TARGET_LAI</struct>
+				<param type="PERIODIC_TAU_TIMER" optional="true">PERIODIC_TAU_TIMER</param>
+				<param type="UE_RESTORATION" optional="true">UE_RESTORATION</param>
+				<param type="SGW_RELOCATION" optional="true">SGW_RELOCATION</param>
+				<param type="UE_RETURN_DURATION" optional="true">UE_RETURN_DURATION</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="CSG_ID" optional="true">CSG_ID</param>
+				<struct seqmaxlen="11" type="PDN_INFO2">PDNS_2</struct>
+				<param type="CELL_ACCESS_MODE" optional="true">CELL_ACCESS_MODE</param>
+				<param type="CSG_MEMBERSHIP_STATUS" optional="true">CSG_MEMBERSHIP_STATUS</param>
+				<param type="DURATION_PSM" optional="true">DURATION_PSM</param>
+				<param type="IS_IMEISV_CHANGED">IS_IMEISV_CHANGED</param>
+				<param type="NAS_SIGNALING_LOW_PRIORITY" optional="true">NAS_SIGNALING_LOW_PRIORITY</param>
+				<param type="SDS_SERVICE" optional="true">SDS_SERVICE</param>
+				<param type="SDS_GW" optional="true">SDS_GW</param>
+				<struct type="S1_RELEASE_HISTORY">S1_RELEASE_HISTORY</struct>
+				<param type="A_MSISDN" optional="true">A_MSISDN</param>
+				<param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+				<struct type="EDRX_INFO_LTE">EDRX_INFO_LTE</struct>
+				<struct type="DECOR_INFO">DECOR_INFO</struct>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="DONAS" optional="true">DONAS</param>
+				<param type="CONNECTION_SUSPEND_AND_RESUME" optional="true">CONNECTION_SUSPEND_AND_RESUME</param>
+				<param type="BACK_OFF_TIMER" optional="true">BACK_OFF_TIMER</param>
+				<param type="L_RAT">L_RAT</param>
+				<param type="NR_AS_SECONDARY_RAT" optional="true">NR_AS_SECONDARY_RAT</param>
+				<param type="UE_SUPPORT_WITHOUT_PDN" optional="true">UE_SUPPORT_WITHOUT_PDN</param>
+				<struct seqmaxlen="11" type="PDN_INFO3">PDNS_3</struct>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>
+				<struct type="EDRX_INFO2_LTE">EDRX_INFO2_LTE</struct>
+				<struct type="PSM_INFO_LTE">PSM_INFO_LTE</struct>
+				<param type="SMS_IN_MME_REGISTERED" optional="true">SMS_IN_MME_REGISTERED</param>
+				<param type="PERIODIC_TAU_TIMER_EXT" optional="true">PERIODIC_TAU_TIMER_EXT</param>
+				<struct type="PSM_INFO2_LTE">PSM_INFO2_LTE</struct>
+			</elements>
+		</event>
+		<event>
+			<name>L_DEDICATED_BEARER_ACTIVATE</name>
+			<id>9</id>
+			<triggerdescription/>
+			<comment>The LTE Dedicated Bearer Activation procedure.
+			One default bearer is established through the Attach or Standalone PDN Connectivity procedure.
+When the UE or the network requests services, additional bearers need to be established on the PDN connection.
+These bearers are referred to as dedicated bearers. They are activated through the Dedicated Bearers Activation procedure, or as part of the Attach or Standalone PDN Connectivity procedures in case of GTP_PIGGYBACKED == Piggybacked.
+This event is triggered in all these scenarios.</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<param type="APN">APN</param>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<struct type="IPADDRESS">S_GW</struct>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="GTP_PIGGYBACKED">GTP_PIGGYBACKED</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="L_RAT">L_RAT</param>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>				
+			</elements>
+		</event>
+		<event>
+			<name>L_DEDICATED_BEARER_DEACTIVATE</name>
+			<id>10</id>
+			<triggerdescription/>
+			<comment>The LTE Dedicated Bearer Deactivation procedure.
+			The Dedicated Bearer Deactivation procedure is initiated by the PGW or MME to remove dedicated bearers for a PDN connection.
+This procedure only removes dedicated bearers, no default bearers, for the PDN connection.</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="L_DEACTIVATION_TRIGGER">DEACTIVATION_TRIGGER</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<param type="APN">APN</param>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<struct type="IPADDRESS">S_GW</struct>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="L_RAT">L_RAT</param>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>								
+			</elements>
+		</event>
+		<event>
+			<name>L_PDN_CONNECT</name>
+			<id>11</id>
+			<triggerdescription/>
+			<comment>The LTE Standalone PDN Connectivity procedure.
+			The PDN Connectivity procedure initiated by the UE is used when the UE is attached in the network and requests set up of additional PDN connections.</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<param type="APN">APN</param>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<struct type="IPADDRESS">S_GW</struct>
+				<struct type="PDN_INFO">PDN_INFO</struct>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="PDN_CONNECT_REQUEST_TYPE">PDN_CONNECT_REQUEST_TYPE</param>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="UE_REQUESTED_APN" optional="true">UE_REQUESTED_APN</param>
+				<struct type="PDN_INFO2">PDN_INFO2</struct>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="L_RAT">L_RAT</param>
+				<struct type="PDN_INFO3">PDN_INFO3</struct>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>				
+			</elements>
+		</event>
+		<event>
+			<name>L_PDN_DISCONNECT</name>
+			<id>12</id>
+			<triggerdescription/>
+			<comment>The LTE PDN Disconnection procedure.
+			The PDN Disconnection procedure initiated by the UE, MME, PGW or SCEF is used when the UE is attached in the network and the UE, MME, PGW or SCEF requests disconnection of PDN connections.</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="DECONNECT_PDN_TYPE">DECONNECT_PDN_TYPE</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<param type="APN">APN</param>
+				<struct type="IPADDRESS">S_GW</struct>
+				<param type="BEARER_ID">DEFAULT_BEARER_ID</param>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="L_RAT">L_RAT</param>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>
+                                <struct type="IPADDRESS">SCEF</struct>
+                                <param type="CAUSE_CODE2">CAUSE_CODE2</param>
+			</elements>
+		</event>
+		<event>
+			<name>L_SERVICE_REQUEST</name>
+			<id>13</id>
+			<triggerdescription/>
+			<comment>The LTE UE-Initiated Service Request, Network-Initiated Service Request (including Paging), Extended Service Request and Control Plane Service Request procedures.
+			The UE-Initiated Service Request procedure is used when UE in ECM-IDLE state attempts to send user data or short messages.
+It can also be used when the UE in ECM-IDLE state wants to send uplink signaling messages to reestablish one or several EPS bearers.
+The Service Request procedure is also used as a Paging Response message when preceded by a paging procedure.
+A successful UE-Initiated Service Request procedure changes the ECM state to ECM-CONNECTED, allowing the UE to send or receive data or signaling.
+The Extended Service Request message is sent from the UE to the MME to support CS Fallback service.
+The Control Plane Service Request is sent from the UE to the MME to support Data over NAS service.</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="PAGING_ATTEMPTS">PAGING_ATTEMPTS</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<struct type="IPADDRESS">S_GW</struct>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<param type="CS_FALLBACK_SERVICE_TYPE" optional="true">CS_FALLBACK_SERVICE_TYPE</param>
+				<param type="SERVICE_REQUEST_TYPE">SERVICE_REQUEST_TYPE</param>
+				<param type="L_SERVICE_REQ_TRIGGER">L_SERVICE_REQ_TRIGGER</param>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="PAGING_ATTEMPTS_ENB">PAGING_ATTEMPTS_ENB</param>
+				<param type="PAGING_ATTEMPTS_TA">PAGING_ATTEMPTS_TA</param>
+				<param type="PAGING_ATTEMPTS_TA_LIST">PAGING_ATTEMPTS_TA_LIST</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="L_SERVICE_REQ_TRIGGER2">L_SERVICE_REQ_TRIGGER2</param>
+				<param type="UE_RESTORATION" optional="true">UE_RESTORATION</param>
+				<param type="SGW_RELOCATION" optional="true">SGW_RELOCATION</param>
+				<param type="PAGING_ATTEMPTS_ENB_LIST">PAGING_ATTEMPTS_ENB_LIST</param>
+				<param type="ENB_SN" optional="true">ENB_SN</param>
+				<param type="ENB_LIST_LENGTH" optional="true">ENB_LIST_LENGTH</param>
+				<param type="UE_RETURN_DURATION" optional="true">UE_RETURN_DURATION</param>
+				<param type="CSG_ID" optional="true">CSG_ID</param>
+				<param type="CELL_ACCESS_MODE" optional="true">CELL_ACCESS_MODE</param>
+				<param type="CSG_MEMBERSHIP_STATUS" optional="true">CSG_MEMBERSHIP_STATUS</param>
+				<param type="DURATION_PSM" optional="true">DURATION_PSM</param>
+				<param type="NAS_SIGNALING_LOW_PRIORITY" optional="true">NAS_SIGNALING_LOW_PRIORITY</param>
+				<param type="BACK_OFF_TIMER" optional="true">BACK_OFF_TIMER</param>
+				<param type="SDS_SERVICE" optional="true">SDS_SERVICE</param>
+				<struct type="CIOT">CIOT</struct>
+				<struct type="S1_RELEASE_HISTORY">S1_RELEASE_HISTORY</struct>
+				<param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+				<param type="PERIODIC_TAU_TIMER" optional="true">PERIODIC_TAU_TIMER</param>
+				<param type="EDRX_TEDRX" optional="true">EDRX_TEDRX</param>
+				<param type="EDRX_PTW" optional="true">EDRX_PTW</param>
+				<param type="EDRX_DELAY_PAGING_TIME" optional="true">EDRX_DELAY_PAGING_TIME</param>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="SMS_LENGTH" optional="true">SMS_LENGTH</param>
+				<param type="L_RAT">L_RAT</param>
+				<param type="NR_AS_SECONDARY_RAT" optional="true">NR_AS_SECONDARY_RAT</param>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>
+				<param type="PERIODIC_TAU_TIMER_EXT" optional="true">PERIODIC_TAU_TIMER_EXT</param>
+			</elements>
+		</event>
+		<event>
+			<name>DETACH</name>
+			<id>14</id>
+			<triggerdescription/>
+			<comment>The GSM/WCDMA Detach procedure.
+			The Detach procedure disconnects the MS from the PS network. If the Gs interface between SGSN and MSC exists, the MS can also be disconnected from the CS network on command.
+Event-Based Monitoring supports the detach procedures initiated by the MS, HLR, SGSN, or MSC:
+- MS-initiated GPRS detach procedure
+- Network-initiated GPRS detach procedure</comment>
+			<elements>
+				<struct type="L_HEADER">L_HEADER</struct>
+				<param type="RAT">RAT</param>
+				<param type="DETACH_TRIGGER">DETACH_TRIGGER</param>
+				<param type="DETACH_TYPE">DETACH_TYPE</param>
+				<param type="CAUSE_PROT_TYPE">CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="LOCATION"/>
+				<struct type="MSID">MSID</struct>
+				<param type="HLR">HLR</param>
+				<param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+				<param type="PERIODIC_RAU_TIMER" optional="true">PERIODIC_RAU_TIMER</param>
+			</elements>
+		</event>
+		<event>
+			<name>SERVICE_REQUEST</name>
+			<id>15</id>
+			<triggerdescription/>
+			<comment>The WCDMA Service Request procedure.
+			The Service Request procedure is used when a WCDMA Systems MS wants to send user data or a paging response. It can also be used when it wants to send uplink signaling messages when in PMM-IDLE state (for example, to reestablish a PDP context), or when no Radio Access Bearer (RAB) exists for a PDP context.
+Event-Based Monitoring supports the following service request procedures:
+- MS-initiated service request procedure
+- Network-initiated paging procedure</comment>
+			<elements>
+				<struct type="L_HEADER">L_HEADER</struct>
+				<param type="RAT">RAT</param>
+				<param type="SERVICE_REQ_TRIGGER">SERVICE_REQ_TRIGGER</param>
+				<param type="SERVICE_TYPE">SERVICE_TYPE</param>
+				<param type="PAGING_ATTEMPTS">PAGING_ATTEMPTS</param>
+				<param type="REQUEST_RETRIES">REQUEST_RETRIES</param>
+				<param type="CAUSE_PROT_TYPE">CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="LOCATION"/>
+				<struct type="MSID">MSID</struct>
+				<struct type="PDP_INFO" seqmaxlen="11">PDP_INFO</struct>
+				<struct type="PDP_INFO2" seqmaxlen="11">PDP_INFO2</struct>
+				<param type="SGW_RELOCATION" optional="true">SGW_RELOCATION</param>
+			</elements>
+		</event>
+		<event>
+			<name>L_BEARER_MODIFY</name>
+			<id>16</id>
+			<triggerdescription/>
+			<comment>The LTE PGW-Initiated Bearer Modification procedure or the SCEF-Initiated T6a Connection Update procedure.
+			The PGW-Initiated Bearer Modification procedure is used when one or several of the EPS Bearer QoS parameters or APN-AMBR or TFT is to be modified. The SCEF-Initiated T6a Connection Update procedure is used to update the parameters (e.g. Extended PCO information) associated to a T6a connection between the MME and the SCEF.
+This event will be generated before MME sends Update Bearer Response to SGW during the PGW-Initiated Bearer Modification procedure or before MME sends Connection Management Answer to SCEF during the SCEF-Initiated T6a Connection Update procedure.</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<param type="APN">APN</param>
+				<struct seqmaxlen="11" type="BEARER">BEARERS</struct>
+				<struct type="IPADDRESS">S_GW</struct>
+				<struct type="IPADDRESS">P_GW</struct>
+				<param type="MSISDN" optional="true">MSISDN</param>
+				<param type="ORIGINATING_CAUSE_PROT_TYPE" optional="true">ORIGINATING_CAUSE_PROT_TYPE</param>
+				<param type="ORIGINATING_CAUSE_CODE" optional="true">ORIGINATING_CAUSE_CODE</param>
+				<param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+				<param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+				<param type="L_RAT">L_RAT</param>
+				<struct seqmaxlen="11" type="BEARER_2">BEARERS_2</struct>
+				<param type="CAUSE_CODE2">CAUSE_CODE2</param>
+				<struct type="IPADDRESS">SCEF</struct>
+			</elements>
+		</event>
+		<event>
+			<name>L_CDMA2000</name>
+			<id>17</id>
+			<triggerdescription/>
+			<comment>The LTE CDMA2000 Uplink and Downlink procedures.
+			The CDMA2000 procedure provides a tunnel for sending and receiving messages between the UE and the 1xRTT CS System. The procedure also includes sending of Event Notification from MME to 1xIWS in CS System to inform about UEs relocated to this MME or UEs leaving LTE.
+Event-Based Monitoring supports the following CMDA2000 procedures:
+- Downlink
+- Uplink</comment>
+			<elements>
+				<struct type="L_HEADER"/>
+				<param type="CDMA2000_TYPE">CDMA2000_TYPE</param>
+				<param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+				<param type="CAUSE_CODE">CAUSE_CODE</param>
+				<param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+				<struct type="TAI"/>
+				<param type="ECI">ECI</param>
+				<struct type="MMEI"/>
+				<struct type="UEID"/>
+				<param type="A21_MESSAGE_TYPE">A21_MESSAGE_TYPE</param>
+				<param type="EVENT_NOTIFICATION_CAUSE" optional="true">EVENT_NOTIFICATION_CAUSE</param>
+				<struct type="IPADDRESS">IWS_ADDRESS</struct>
+				<param type="SEND_ATTEMPTS" optional="true">SEND_ATTEMPTS</param>
+				<struct type="SECTOR_ID">SECTOR_ID</struct>
+				<param type="HANDOFF_STATUS" optional="true">HANDOFF_STATUS</param>
+				<param type="SRVCC_HANDOVER" optional="true">SRVCC_HANDOVER</param>
+				<param type="EMERGENCY" optional="true">EMERGENCY</param>
+			</elements>
+		</event>
+		<event>
+			<name>EXIT_PSM</name>
+			<id>18</id>
+			<triggerdescription/>
+			<comment>The GSM EXIT_PSM event.
+			The event announces that MS is activated after a period of power saving</comment>
+			<elements>
+				<struct type="HEADER"/>
+				<param type="IMSI">IMSI</param>
+				<param type="IMEISV" usevalid="true">IMEISV</param>
+				<param type="MSISDN">MSISDN</param>
+				<param type="ACTIVE_TIMER" optional="true">ACTIVE_TIMER</param>
+				<param type="PERIODIC_RAU_TIMER" optional="true">PERIODIC_RAU_TIMER</param>
+				<param type="DURATION_PSM" optional="true">DURATION_PSM</param>
+			</elements>
+		</event>
+                <event>
+                        <name>L_CONNECTION_RESUME</name>
+                        <id>19</id>
+                        <triggerdescription/>
+                        <comment>The LTE Connection Resume procedure.
+                        The Connection Resume procedure is initiated by the eNodeB, and is used to request the S1 connection of a UE attached to the network to be resumed.</comment>
+                        <elements>
+                                <struct type="L_HEADER"/>
+                                <param type="L_CAUSE_PROT_TYPE">L_CAUSE_PROT_TYPE</param>
+                                <param type="CAUSE_CODE">CAUSE_CODE</param>
+                                <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+                                <struct type="TAI"/>
+                                <param type="ECI">ECI</param>
+                                <struct type="MMEI"/>
+                                <struct type="UEID"/>
+                                <param type="ENB_UE_S1AP_ID" optional="true">ENB_UE_S1AP_ID</param>
+                                <param type="MME_UE_S1AP_ID" optional="true">MME_UE_S1AP_ID</param>
+                                <param type="L_RAT">L_RAT</param>
+                        </elements>
+                </event>
+	</events>
+	<records>
+		<record>
+			<name>HEADER_RECORD</name>
+			<type>0</type>
+			<elements>
+				<param type="RECORD_LENGTH">RECORD_LENGTH</param>
+				<param type="RECORD_TYPE">RECORD_TYPE</param>
+				<param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+				<param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+				<param type="TIME_YEAR">TIME_YEAR</param>
+				<param type="TIME_MONTH">TIME_MONTH</param>
+				<param type="TIME_DAY">TIME_DAY</param>
+				<param type="BYTE_HOUR">BYTE_HOUR</param>
+				<param type="BYTE_MINUTE">BYTE_MINUTE</param>
+				<param type="BYTE_SECOND">BYTE_SECOND</param>
+			</elements>
+		</record>
+		<record>
+			<name>EVENT_RECORD</name>
+			<type>1</type>
+			<elements>
+				<param type="RECORD_LENGTH">RECORD_LENGTH</param>
+				<param type="RECORD_TYPE">RECORD_TYPE</param>
+				<content/>
+			</elements>
+		</record>
+		<record>
+			<name>ERROR_RECORD</name>
+			<type>2</type>
+			<elements>
+				<param type="RECORD_LENGTH">RECORD_LENGTH</param>
+				<param type="RECORD_TYPE">RECORD_TYPE</param>
+				<param type="BYTE_HOUR">BYTE_HOUR</param>
+				<param type="BYTE_MINUTE">BYTE_MINUTE</param>
+				<param type="BYTE_SECOND">BYTE_SECOND</param>
+				<param type="ERROR_TYPE">ERROR_TYPE</param>
+			</elements>
+		</record>
+		<record>
+			<name>FOOTER_RECORD</name>
+			<type>3</type>
+			<elements>
+				<param type="RECORD_LENGTH">RECORD_LENGTH</param>
+				<param type="RECORD_TYPE">RECORD_TYPE</param>
+				<param type="FILE_TERMINATION_CAUSE">FILE_TERMINATION_CAUSE</param>
+			</elements>
+		</record>
+		<record>
+			<name>STREAM_HEADER_RECORD</name>
+			<type>4</type>
+			<elements>
+				<param type="RECORD_LENGTH">RECORD_LENGTH</param>
+				<param type="RECORD_TYPE">RECORD_TYPE</param>
+				<param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+				<param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+				<param type="TIME_YEAR">TIME_YEAR</param>
+				<param type="TIME_MONTH">TIME_MONTH</param>
+				<param type="TIME_DAY">TIME_DAY</param>
+				<param type="BYTE_HOUR">BYTE_HOUR</param>
+				<param type="BYTE_MINUTE">BYTE_MINUTE</param>
+				<param type="BYTE_SECOND">BYTE_SECOND</param>
+				<param type="TIME_ZONE">TIME_ZONE</param>
+				<param type="CAUSE_OF_HEADER">CAUSE_OF_HEADER</param>
+				<param type="NODE_ID">NODE_ID</param>
+			</elements>
+		</record>
+		<record>
+			<name>STREAM_ERROR_RECORD</name>
+			<type>5</type>
+			<elements>
+				<param type="RECORD_LENGTH">RECORD_LENGTH</param>
+				<param type="RECORD_TYPE">RECORD_TYPE</param>
+				<param type="BYTE_HOUR">BYTE_HOUR</param>
+				<param type="BYTE_MINUTE">BYTE_MINUTE</param>
+				<param type="BYTE_SECOND">BYTE_SECOND</param>
+				<param type="ERROR_TYPE">ERROR_TYPE</param>
+				<param type="NUMBER_OF_DROPPED_EVENTS">NUMBER_OF_DROPPED_EVENTS</param>
+			</elements>
+		</record>
+	</records>
+</eventspecification>

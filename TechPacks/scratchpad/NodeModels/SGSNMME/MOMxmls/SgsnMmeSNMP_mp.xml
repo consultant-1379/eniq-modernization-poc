@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:02:45 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>ECIM SNMP </momTitle>
+        <momSubTitle>MOM Fragment</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>2013 03 15</docDate>
+        </momIdentity>
+        <createdBy>
+            <signature>Patrik Buhr</signature>
+        </createdBy>
+    </momMetaData>
+    <mim author="EAB/IBA/TN Johan Landtmansson" contact="EAB/FBA/TN Johan Landtmansson" correction="6" date="2015-02-04" docNo="" name="SgsnMmeSNMP" namespace="urn:com:ericsson:ecim:SgsnMmeSNMP" namespacePrefix="sgsnmmesnmp" organization="EAB/IBA/T - NDO SGSN-MME" release="10" revision="B" version="1">
+        <description>SGSN-MME SNMP model, based on ECIM SNMP Fragment.
+Introduced in SGSN-MME 15B CP 01</description>
+        <domainExtension domain="ECIM">
+            <extension name="ecimMomName" value="ECIM_SNMP"/>
+            <extension name="ecimMomVersion" value="1"/>
+            <extension name="ecimMomRelease" value="2"/>
+        </domainExtension>
+        <implements name="ECIM_SNMP" release="2" version="1"/>
+        <struct name="HostAndPort">
+            <description>Host (IP address or DNS name) and port number. </description>
+            <structMember name="host">
+                <description>IP address to listen for SNMP requests.
+This is is typically 0.0.0.0, which means that requests on any interface is accepted. </description>
+                <derivedDataTypeRef name="IPAddress">
+                    <mimName>SgsnMmeSNMP</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="port">
+                <description>Port number used to listen for incoming SNMP requests. Must be port 25161  in SGSN-MME.</description>
+                <uint32/>
+            </structMember>
+        </struct>
+        <struct name="EcimPassword">
+            <description>This struct stores the password.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="cleartext">
+                <description>Indicates if the password is entered in cleartext or not. </description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="ct"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="EcimEmpty">
+                    <mimName>SgsnMmeSNMP</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="password">
+                <description>Holds the password or passphrase text.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pwd"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <enum name="PrivProtocol">
+            <description>Allowed values are DES and AES128 cipher.</description>
+            <enumMember name="NONE">
+                <value>0</value>
+            </enumMember>
+            <enumMember name="DES">
+                <value>1</value>
+            </enumMember>
+            <enumMember name="AES128">
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="NotifyType">
+            <description>The type of method to use, can be TRAP or INFORM.</description>
+            <enumMember name="TRAP">
+                <value>1</value>
+            </enumMember>
+            <enumMember name="INFORM">
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="AuthProtocol">
+            <description>Valid values for authorization Protocol.</description>
+            <enumMember name="NONE">
+                <value>0</value>
+            </enumMember>
+            <enumMember name="MD5">
+                <value>1</value>
+            </enumMember>
+            <enumMember name="SHA1">
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="SecurityLevel">
+            <description>Used security level.</description>
+            <enumMember name="NO_AUTH_NO_PRIV">
+                <description>Unauthenticated and unencrypted.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="AUTH_NO_PRIV">
+                <description>Authenticated but not encrypted.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="AUTH_PRIV">
+                <description>Authenticated and encrypted.</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="BasicAdmState">
+            <description>The basic administrative states for a resource.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="LOCKED">
+                <description> The resource is administratively prohibited from performing services for its users.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="UNLOCKED">
+                <description>The resource is administratively permitted to perform services for its users. &#13;
+This is independent of its inherent operability.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <enum name="OperState">
+            <description>The operational states of a resource.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="DISABLED">
+                <description> The resource is  totally inoperable.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="ENABLED">
+                <description> The resource is partially or fully operable.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <derivedDataType name="IPAddress">
+            <description>IPv4 address in dotted decimal notation, IPv6 address in colon hexadecimal notation or DNS name</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>1</min>
+                        <max>253</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>1</min>
+                            <max>253</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>(^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:)))(%.+)?\s*$)|(^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$)</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[(^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}))|:)))(%.+)?\s*$)|(^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$)]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="SnmpSecurityName">
+            <description>SNMP security name string.</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>1</min>
+                        <max>28</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>1</min>
+                            <max>28</max>
+                        </subrange>
+                    </stringLength>
+                </string>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="SnmpEngineId">
+            <description>SNMP EngineId String.</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>1</min>
+                        <max>27</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>1</min>
+                            <max>27</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>[!-~]*</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[[!-~]*]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="SnmpCommunity">
+            <description>SNMP community string.</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>1</min>
+                        <max>28</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>1</min>
+                            <max>28</max>
+                        </subrange>
+                    </stringLength>
+                </string>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="SnmpOid">
+            <description>SNMP Object Identifier.</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>1</min>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>1</min>
+                            <max>*</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([0-9\.]*)$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([0-9\.]*)$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="Timeout">
+            <description>Restricts the Timeout intervals. 
+</description>
+            <baseType>
+                <uint32>
+                    <range>
+                        <min>0</min>
+                        <max>2147483647</max>
+                    </range>
+                    <ranges>
+                        <subrange>
+                            <min>0</min>
+                            <max>2147483647</max>
+                        </subrange>
+                    </ranges>
+                </uint32>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="EcimEmpty">
+            <description>This type represents a leaf that has no value, it conveys information by its presence or absence.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <boolean/>
+            </baseType>
+        </derivedDataType>
+        <class name="Snmp">
+            <description>Configuration of the SNMP protocol. 
+For instance configuration of the IP addresses and ports used for SNMP are supported.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <attribute name="snmpId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="id"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="operationalState">
+                <description>The operational status of the SNMP functionality. 
+If DISABLED, there is some problem that degrades the SNMP functionality.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="true"/>
+                    <extension name="cliOperand" value="os"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="OperState">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="administrativeState">
+                <description>The administrative state for the SNMP protocol.
+If LOCKED, no SNMP Traps (alarm, alerts or heartbeats) are generated and all access to the SNMP protocol is disabled.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="BasicAdmState">
+                        <defaultValue>UNLOCKED</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="agentAddress">
+                <description>Listen addresses for the SNMP agent.
+This attribute defines on which ports and IP addresses the agent shall listen for incoming SNMP requests using the UDP protocol. The typical configuration is using one port with IP address 0.0.0.0 and port 161, which means that the standard SNMP port is used on all interfaces. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aa"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <structRef name="HostAndPort">
+                            <mimName>SgsnMmeSNMP</mimName>
+                        </structRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="agentAddressDtls">
+                <description>Listen addresses for the SNMP agent using DTLS. 
+This attribute defines on which ports and IP addresses the agent shall listen for incoming SNMP requests using the DTLS transport protocol. The typical configuration is using one port with IP address 0.0.0.0 and port 10161, which means that the standard port for SNMP over DTLS is used on all interfaces. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aad"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <structRef name="HostAndPort">
+                            <mimName>SgsnMmeSNMP</mimName>
+                        </structRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="engineId">
+                <description>Engine id of snmp agent</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="eId"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="SnmpEngineId">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="SnmpTargetV2C">
+            <description>An SNMP target defines a Trap receiver and gives access privileges. 
+This class, defines V2C protocol attributes</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="snmpTargetV2CId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="idV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="community">
+                <description>The SNMP community string.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="coV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <derivedDataTypeRef name="SnmpCommunity">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="informRetryCount">
+                <description>The number of retries to be attempted when a response is not received for a notification.
+This value has only relevance if transportMethod is set to INFORM.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ircV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint32>
+                        <defaultValue>1</defaultValue>
+                    </uint32>
+                </dataType>
+            </attribute>
+            <attribute name="address">
+                <description>Host address (or DNS name) for the SNMP Trap target.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <derivedDataTypeRef name="IPAddress">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="port">
+                <description>UDP port number for this SNMP trap target.
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="poV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint32>
+                        <defaultValue>162</defaultValue>
+                    </uint32>
+                </dataType>
+            </attribute>
+            <attribute name="informTimeout">
+                <description>Timeout for SNMP INFORM. 
+When an SNMP INFORM is not  acknowledged within this time period, an implementation may assume that the notification has not been delivered. This value has only relevance if transportMethod is set to INFORM. The unit is centisecond (0.01 seconds).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="itV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="Timeout">
+                        <defaultValue>300</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="transportMethod">
+                <description>The type of method to use, can be TRAP or INFORM.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tmV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="NotifyType">
+                        <defaultValue>TRAP</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="isMibWritable">
+                <description>Specifies if the user has write access to MIB or not.
+If false, the user is only allowed to perform read access (SNMP GET etc.)
+The value of this attribute has no relevance if there is a SnmpViewV2C for the community of this instance. The permissions in the view will then override this attribute. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="imwV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="operationalState">
+                <description> The operational status of this SNMP target.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="true"/>
+                    <extension name="cliOperand" value="osV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="OperState">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="administrativeState">
+                <description>Administrative state for the SNMP target. 
+When LOCKED, for this MO instance traps will not be sent and access is not allowed.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="asV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="BasicAdmState">
+                        <defaultValue>UNLOCKED</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="SnmpTargetV3">
+            <description>An SNMP target defines a Trap receiver and gives access privileges. 
+This class, defines V3 USM protocol attributes.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="snmpTargetV3Id">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="idV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="user">
+                <description>The SNMP V3 user name for the SNMP V3 message.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="usV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <derivedDataTypeRef name="SnmpSecurityName">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="authProtocol">
+                <description>The authentication protocol used.
+This value attribute has only relevance if authorization is enabled (see attribute snmpSecurityLevel).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="apV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="AuthProtocol">
+                        <defaultValue>MD5</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="privProtocol">
+                <description>The privacy protocol used.
+This value attribute has only relevance if privacy is enabled (see attribute snmpSecurityLevel).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ppV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="PrivProtocol">
+                        <defaultValue>DES</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="informRetryCount">
+                <description>The number of retries to be attempted when a response is not received for a notification.
+This value has only relevance if transportMethod is set to INFORM.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ircV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint32>
+                        <defaultValue>1</defaultValue>
+                    </uint32>
+                </dataType>
+            </attribute>
+            <attribute name="administrativeState">
+                <description>Administrative state for the SNMP target.
+When LOCKED, for this MO instance traps will not be sent and access is not allowed.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="asV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="BasicAdmState">
+                        <defaultValue>UNLOCKED</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="address">
+                <description>Host address (or DNS name) for the SNMP Trap target.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <derivedDataTypeRef name="IPAddress">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="port">
+                <description>UDP port number for this SNMP trap target.
+ </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="poV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint32>
+                        <defaultValue>162</defaultValue>
+                    </uint32>
+                </dataType>
+            </attribute>
+            <attribute name="informTimeout">
+                <description>Timeout for SNMP INFORM.
+When an SNMP INFORM is not  acknowledged within this time period, an implementation may assume that the notification has not been delivered. This value has only relevance if transportMethod is set to INFORM. The unit is centisecond (0.01 seconds).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="itV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="Timeout">
+                        <defaultValue>300</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="transportMethod">
+                <description>The type of method to use, can be TRAP or INFORM.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tmV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="NotifyType">
+                        <defaultValue>TRAP</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="snmpSecurityLevel">
+                <description>The SNMP security level.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sslV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="SecurityLevel">
+                        <defaultValue>AUTH_PRIV</defaultValue>
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="privKey">
+                <description>Privacy key used for encryption.
+Encryption is performed by using a user's privKey to encrypt the data portion of the message being sent.
+Note that the length of the key must be at least 8 characters.
+This value attribute has only relevance if privacy is enabled (see attribute snmpSecurityLevel).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pkV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <structRef name="EcimPassword">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="authKey">
+                <description>The authentication key used for signing SNMP notifications.
+Authentication is performed by using a user's authKey to sign the messages being sent. Note that the length of the key must be at least 8 characters. This value attribute has only relevance if authorization is enabled (see attribute snmpSecurityLevel).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="akV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <structRef name="EcimPassword">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="isMibWritable">
+                <description>Specifies if the user has write access to MIB or not.
+If false, the user is only allowed to perform read access (SNMP GET etc.).
+The value of this attribute has no relevance if there is a SnmpViewV3 for the user of this instance. The permissions in the view will then override this attribute. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="imwV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="operationalState">
+                <description>The operational status of this SNMP target.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="true"/>
+                    <extension name="cliOperand" value="osV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="OperState">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="SnmpViewV2C">
+            <description>An SNMP view gives users access to SNMP MIBs. 
+This class explicitly defines a view for one or several SNMP V2C users. A user is identified by a community name.  
+
+Communities that are not configured in any view, are by default given access to the following SNMP MIBs: 
+- Ericsson Alarm MIB
+- SNMP-FRAMEWORK-MIB
+- MIB-2
+
+The default denies access to other SNMP MIBs. An explicit view configuration must be created if this default behaviour is not sufficient.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="snmpViewV2CId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="idVV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="community">
+                <description>The SNMP V2C communities that this view shall be applied on. 
+If a specific community is set in more than one V2 view, the user will get access to the sum of the views. The information in this object will override the attribute isMibWriteable in all SnmpTargetV2C for these communities.  </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="coVV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <string/>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="readOids">
+                <description>Defines which SNMP OIDs the user is allowed to read. 
+The defined OIDs and all their contained OIDs will be readable. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="roVV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <derivedDataTypeRef name="SnmpOid">
+                            <mimName>SgsnMmeSNMP</mimName>
+                        </derivedDataTypeRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="writeOids">
+                <description>Defines which SNMP OIDs the user is allowed to write. 
+The defined OIDs and all their contained OIDs will be writeable.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="woVV2C"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <derivedDataTypeRef name="SnmpOid">
+                            <mimName>SgsnMmeSNMP</mimName>
+                        </derivedDataTypeRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="SnmpViewV3">
+            <description>An SNMP view gives users access to SNMP MIBs. 
+This class explicitly defines a view for one or several SNMP V3 users. A user is identified by a user name. 
+
+Users that are not configured in any view, are by default given access to the following SNMP MIBs: 
+- Ericsson Alarm MIB
+- SNMP-FRAMEWORK-MIB
+- MIB-2
+
+The default denies access to other SNMP MIBs. An explicit view configuration must be created if this default behaviour is not sufficient.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="snmpViewV3Id">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="idVV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="user">
+                <description>The SNMP V3 users that this view shall be applied on. 
+If a specific user is defined in more than one V3 view, the user will get access to the sum of the views. The information in this object will override the attribute isMibWriteable in all SnmpTargetV3 for these users.  </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="usVV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <string/>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="readOids">
+                <description>Defines which SNMP OIDs the user is allowed to read. 
+The defined OIDs and all their contained OIDs will be readable. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="roVV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <derivedDataTypeRef name="SnmpOid">
+                            <mimName>SgsnMmeSNMP</mimName>
+                        </derivedDataTypeRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="writeOids">
+                <description>Defines which SNMP OIDs the user is allowed to write. 
+The defined OIDs and all their contained OIDs will be writeable.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="woVV3"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <derivedDataTypeRef name="SnmpOid">
+                            <mimName>SgsnMmeSNMP</mimName>
+                        </derivedDataTypeRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+        </class>
+        <relationship name="Snmp_to_SnmpTargetV2C">
+            <containment>
+                <parent>
+                    <hasClass name="Snmp">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="SnmpTargetV2C">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="Snmp_to_SnmpTargetV3">
+            <containment>
+                <parent>
+                    <hasClass name="Snmp">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="SnmpTargetV3">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="Snmp_to_SnmpViewV2C">
+            <containment>
+                <parent>
+                    <hasClass name="Snmp">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="SnmpViewV2C">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="Snmp_to_SnmpViewV3">
+            <containment>
+                <parent>
+                    <hasClass name="Snmp">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="SnmpViewV3">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+    </mim>
+    <interMim>
+        <relationship name="SysM_to_Snmp">
+            <containment>
+                <parent>
+                    <hasClass name="SysM">
+                        <mimName>SgsnMmeSysM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="Snmp">
+                        <mimName>SgsnMmeSNMP</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </interMim>
+</models>

@@ -1,0 +1,182 @@
+%% ------------------------------------------------------------------
+{oe_dpeDefs}.
+{oe_swcMI}.
+
+%% checkpoint {[-rel ReleaseName] -cpn CheckpointName } [-default_sc SetAsDefaultSc]
+%% Trigger a checkpointing operation of active SoftwareConfiguration.
+%%
+%% Parameters
+%% rel: the release name of the SC
+%% cpn: the checkpoint name of the SC
+{checkpoint,[swcMI_SLO],checkpointSoftwareConfiguration_2,[oam,cps,software],[
+        {m,_,_,{struct,[dpeDefs,'SoftwareConfigurationName'],[
+                {o,rel,'ReleaseName',text,""},
+                {m,cpn,'CheckpointName',text,_}]},_},
+        {o,default_sc,'SetAsDefaultSc',bool,false}
+]}.
+
+
+%% --------------------- * WPPARS-803 * ------------------------
+
+%% set_active_sc {-rel ReleaseName [-cpn CheckpointName] }
+{set_active_sc,[swcMI_SLO],activateSoftwareConfiguration,[oam,cps,software],[
+        {m,_,_,{struct,[dpeDefs,'SoftwareConfigurationName'],[
+                {m,rel,'ReleaseName',text,_},
+                {o,cpn,'CheckpointName',text,""}]},_}
+]}.
+
+
+%% set_default_sc
+{set_default_sc,[swcMI_SLO],setDefaultSoftwareConfiguration,[oam,cps,software],[]}.
+
+
+%% get_active_sc
+{get_active_sc,[swcMI_SLO],getActiveSoftwareConfiguration,[oam,cps,software],[]}.
+{format,get_active_sc,[{struct,
+                     [{atom,r},  % SoftwareConfigurationName rec
+                     {text,[{addF,"ReleaseName  : "},nl]},  %
+                     {text,[{addF,"CheckpointName: "},nl]}   %
+                 ],na}
+                 ]}.
+
+%% get_next_sc
+{get_next_sc,[swcMI_SLO],getNextSoftwareConfiguration,[oam,cps,software],[]}.
+{format,get_next_sc,[{struct,
+                     [{atom,r},  % SoftwareConfigurationName rec
+                     {text,[{addF,"ReleaseName  : "},nl]},  %
+                     {text,[{addF,"CheckpointName: "},nl]}   %
+                 ],na}
+                 ]}.
+
+
+%% get_default_sc
+{get_default_sc,[swcMI_SLO],getDefaultSoftwareConfiguration,[oam,cps,software],[]}.
+{format,get_default_sc,[{struct,
+                     [{atom,r},  % SoftwareConfigurationName rec
+                     {text,[{addF,"ReleaseName  : "},nl]},  %
+                     {text,[{addF,"CheckpointName: "},nl]}   %
+                 ],na}
+                 ]}.
+
+
+%% get_booted_sc
+{get_booted_sc,[swcMI_SLO],getBootedSoftwareConfiguration,[oam,cps,software],[]}.
+{format,get_booted_sc,[{struct,
+                     [{atom,r},  % SoftwareConfigurationName rec
+                     {text,[{addF,"ReleaseName  : "},nl]},  %
+                     {text,[{addF,"CheckpointName: "},nl]}   %
+                 ],na}
+                 ]}.
+
+
+%% This CLI command removes a Software Configuration:
+%% ----------- Part of FS WPP-DNE-037 ---------------
+%%
+%% Usage: rm_sc {-rel ReleaseName [-cpn CheckpointName] }
+{rm_sc,[swcMI_SLO],removeSoftwareConfiguration,[oam,cps,software],[
+        {m,_,_,{struct,[dpeDefs,'SoftwareConfigurationName'],[
+                {m,rel,'ReleaseName',text,_},
+                {o,cpn,'CheckpointName',text,""}]},_}
+]}.
+
+
+%% This CLI command returns the path for patch uploading
+%% ------ not a part of WPPARS-753.1-6 (yet) -----------
+%%
+%% Usage: get_patch_path
+%{get_patch_path,[swcMI_SLO],getPatchUploadPath,[oam,cps,software],[]}.
+%{format,get_patch_path,[{text,nl}]
+%}.
+
+
+
+%% redeploy_sc {-sc SCName { [-hw Hw] [-type Type] [-sau SAU] [-tmo
+%%             [-ss7 Ss7StackStandard] }
+%% ----------- ATM-228 ---------------
+%% Trigger an installation of an NDP located in the DeliveryPackages directory.
+%%
+%% Parameters
+%% sc: the name of the SC to create)
+%% hw:      optional deployment parameter for HW
+%% type:    optional deployment parameter for node type
+%% sau:     optional deployment parameter for SAU
+%% tmo:     optional deployment parameter for TMO
+%% ss7:     optional deployment parameter for SS7
+{redeploy_sc,[swcMI_SLO],redeploySoftwareConfiguration,[oam,cps,software],[
+    {m,sc,'SCName',text,_},
+    {m,_,_,{struct,[dpeDefs,'DeploymentInfo'],[
+                {o,hw,'HardwareType',text,""},
+                {o,type,'NodeType',text,""},
+                {o,sau,'SAUvalue',text,""},
+                {o,tmo,'TMOvalue',text,""},
+                {o,ss7,'Ss7StackStandard',text,""}]},
+                                         {dpeDefs_DeploymentInfo,"","","","",""}}
+]}.
+
+%% deploy_sc { [-hw Hw] -type Type -sau SAU -tmo TMO
+%%             -ss7 Ss7StackStandard }
+%% ----------- ATM-228 ---------------
+%% Set deloyment on a newly installed, unconfigured, node.
+%%
+%% Parameters
+%% hw:      optional deployment parameter for HW
+%% type:    optional deployment parameter for node type
+%% sau:     optional deployment parameter for SAU
+%% tmo:     optional deployment parameter for TMO
+%% ss7:     optional deployment parameter for SS7
+{deploy_sc,[swcMI_SLO],resetDeployment,[oam,cps,software],[
+    {m,_,_,{struct,[dpeDefs,'DeploymentInfo'],[
+                {o,hw,'HardwareType',text,""},
+                {o,type,'NodeType',text,""},
+                {o,sau,'SAUvalue',text,""},
+                {o,tmo,'TMOvalue',text,""},
+                {o,ss7,'Ss7StackStandard',text,""}]},
+                                         {dpeDefs_DeploymentInfo,"","","","",""}}
+]}.
+
+
+%% ----------- ATM-23, SGSN R6 ---------------
+
+%% get_patch_status only used for testing, should be removed
+%% get_patch_status -patchView [-argument] [{ -rel ReleaseName [-cpn CheckpointName] }]
+%{get_patch_status,[swcMI_SLO],getPatchStatus,[oam,cps,software],[
+%        {m,patchView,'cp',text,_},
+%        {o,argument,'arg',text,""},
+%        {o,_,_,{struct,[dpeDefs,'SoftwareConfigurationName'],[
+%                {m,rel,'ReleaseName',text,""},
+%                {o,cpn,'CheckpointName',text,""}]},
+%                        {dpeDefs_SoftwareConfigurationName,"",""}}
+%]}.
+%{format,get_patch_status,
+%        [{text,[{addF,"PatchStatus  : \n"},nl]}
+%]}.
+
+%% get_node_info -info InfoAttribute [{ -rel ReleaseName [-cpn CheckpointName] }]
+{get_node_info,[swcMI_SLO],getNodeInformation,[oam,cps,software],[
+        {m,info,'Type|Hw|SAU|TMO|SS7|SWLevel|NDPbuild|CPName',text,_},
+        {o,_,_,{struct,[dpeDefs,'SoftwareConfigurationName'],[
+                {m,rel,'ReleaseName',text,""},
+                {o,cpn,'CheckpointName',text,""}]},
+                        {dpeDefs_SoftwareConfigurationName,"",""}}
+]}.
+
+
+
+
+%% ----------- ATM-72, SGSN R6 ---------------
+%% add_isplog_comment
+%% This CLI command adds a comment to the ISP Log
+%%
+%% Usage: add_isplog_comment "Comment"
+{add_isplog_comment,[swcMI_SLO],addISPLogComment,[oam,cps,software],[
+        {m,_,'"Comment"',text,_}
+]}.
+
+
+%% exit_maint_mode
+{exit_maint_mode,[swcMI_SLO],exitMaintMode,[oam,cps,software],[]}.
+
+%% check_pre_redeploy
+{check_pre_redeploy, [swcMI_SLO], preUpgradeConfigurationCheck, [oam,cps,software],
+ [{m,'sc', 'SoftwareConfigrationName', text, _}]}.
+

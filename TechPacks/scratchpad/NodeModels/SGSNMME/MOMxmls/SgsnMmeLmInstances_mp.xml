@@ -1,0 +1,2368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:04:04 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>title</momTitle>
+        <momSubTitle>sub title</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>2015-02-03</docDate>
+        </momIdentity>
+    </momMetaData>
+    <mib correction="0" name="SgsnMmeLmInstances" release="11" version="1">
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>detach_inactive_subscriber_da</value>
+            </slot>
+            <slot name="description">
+                <value>The detach_inactive_subscriber_da parameter is the feature parameter for the licensed feature DoIS for Dual Access. The feature is valid for SGSN-MMEs for GSM and WCDMA access types. If this feature is active, the state of the DoIS features for GSM and for WCDMA (detach_inactive_subscriber and detach_inactive_subscriber_wcdma) is irrelevant.
+
+The timer that is used to control the DoIS feature is transferred between the GSM and WCDMA domains when the MS performs an Intra-SGSN ISC. Upon an Inter-SGSN ISC, to external SGSN-MMEs, the timer is not transferred.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2052</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>apn_conversion_lte</value>
+            </slot>
+            <slot name="description">
+                <value>The apn_conversion_lte parameter is the feature parameter for the licensed feature APN Conversion.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2048</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>data_compression_v42bis</value>
+            </slot>
+            <slot name="description">
+                <value>The data_compression_v42bis parameter is one of two feature parameters for the licensed feature Compression on the Gb Interface. It indicates whether V.42bis data compression should be used in the SNDCP layer on the Gb interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2005</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>dual_connectivity_support</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2116</value>
+            </slot>
+            <slot name="description">
+                <value>The dual_connectivity_support parameter is the feature parameter for the licensed feature Dual Connectivity Support.</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>apn_resolution_extension</value>
+            </slot>
+            <slot name="description">
+                <value>The apn_resolution_extension parameter is the feature parameter for the licensed feature APN Resolution Functional Extension.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2047</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>srns_relocation</value>
+            </slot>
+            <slot name="description">
+                <value>The srns_relocation is the feature parameter for the licensed feature SRNS Relocation.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2031</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gtpc_network_load_control</value>
+            </slot>
+            <slot name="description">
+                <value>"The gtpc_network_load_control parameter is the feature parameter for the licensed feature GTP-C Network Load Control."
+
+</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2123</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>national_roaming_restriction</value>
+            </slot>
+            <slot name="description">
+                <value>The national_roaming_restriction parameter is the feature parameter for the licensed feature Roaming Restrictions based on IMSI number series.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2007</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mocn_gsm</value>
+            </slot>
+            <slot name="description">
+                <value>The mocn_gsm parameter is the feature parameter for the licensed feature Multi-Operator Core Network for GSM.
+</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2030</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>msc_pool_sgs</value>
+            </slot>
+            <slot name="description">
+                <value>The msc_pool_sgs parameter is the feature parameter for the licensed feature SGSN-MME Support for MSC in Pool for SGs interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2098</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>presence_reporting_area_support</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2108</value>
+            </slot>
+            <slot name="description">
+                <value>The presence_reporting_area_support parameter is the feature parameter for the licensed feature Presence Reporting Area (PRA) Support.
+
+#Note: The presence _reporting_area_support is mutually exclusive with mobility_based_policy_lte, mobility_based_policy_wcdma, and cell_change_reporting.Note#</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>csfb_to_1xrtt</value>
+            </slot>
+            <slot name="description">
+                <value>The csfb_to_1xrtt parameter is the feature parameter for the licensed feature CS Fallback to 1xRTT.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2063</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>dual_access_lw</value>
+            </slot>
+            <slot name="description">
+                <value>The dual_access_lw parameter is the feature parameter for the licensed feature Dual Access for WCDMA and LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2064</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>access_restriction</value>
+            </slot>
+            <slot name="description">
+                <value>The access_restriction parameter is the feature parameter for the licensed feature Access Restriction.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2028</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>conversational_qos_class</value>
+            </slot>
+            <slot name="description">
+                <value>The conversational_qos_class parameter is the feature parameter for the licensed feature Conversational QoS.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2032</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>closed_subscriber_group</value>
+            </slot>
+            <slot name="description">
+                <value>The closed_subscriber_group parameter is the feature parameter for the licensed feature Closed Subscriber Group. This feature includes CSG access control, CSG subscription handling and Paging Optimization.
+</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2088</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>apn_oi_replacement</value>
+            </slot>
+            <slot name="description">
+                <value>The apn_oi_replacement parameter is the feature parameter for the licensed feature APN-OI Replacement.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2086</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>automated_acceptance_tests</value>
+            </slot>
+            <slot name="description">
+                <value>The automated_acceptance_tests parameter controls support for the external Automated Acceptance Tests (AAT) tool.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2092</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>3gdt</value>
+            </slot>
+            <slot name="description">
+                <value>The 3gdt parameter is the feature parameter for the licensed feature 3G Direct Tunnel.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2040</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>equivalent_plmns</value>
+            </slot>
+            <slot name="description">
+                <value>The equivalent_plmns parameter is the feature parameter for the licensed feature Selective Equivalent PLMN.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2012</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>adc</value>
+            </slot>
+            <slot name="description">
+                <value>The adc parameter is the feature parameter for the licensed feature Automatic Device Configuration.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2013</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mdt</value>
+            </slot>
+            <slot name="description">
+                <value>The mdt is the feature parameter for the licensed feature Minimization of Drive Tests (MDT). For more information about this feature, see Minimization of Drive Tests.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2113</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>triple_access_lwg</value>
+            </slot>
+            <slot name="description">
+                <value>The triple_access_lwg parameter is the feature parameter for the licensed feature Triple Access for GSM, WCDMA, and LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2066</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mobility_based_policy_lte</value>
+            </slot>
+            <slot name="description">
+                <value>The mobility_based_policy_lte parameter is the feature parameter for the licensed feature Mobility-Based Policy for LTE.
+
+#Note: The mobility_based_policy_lte and cell_change_reporting parameters are mutually exclusive.Note#</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2090</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>apn_local_breakout_control</value>
+            </slot>
+            <slot name="description">
+                <value>The apn_local_breakout_control parameter is the feature parameter for the licensed feature APN Local Breakout Control.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2082</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>nw_init_sec_pdpctxt</value>
+            </slot>
+            <slot name="description">
+                <value>The nw_init_sec_pdpctxt parameter is the feature parameter for the licensed feature Network Requested Secondary PDP Context.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2057</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>anr_support</value>
+            </slot>
+            <slot name="description">
+                <value>The anr_support parameter is the feature parameter for the licensed feature ANR Support.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2059</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gw_blacklisting</value>
+            </slot>
+            <slot name="description">
+                <value>The gw_blacklisting parameter is the feature parameter for the licensed feature Gateway Blacklisting in the S4-SGSN and MME.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2081</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>pci_compression_rfc1144</value>
+            </slot>
+            <slot name="description">
+                <value>The pci_compression_rfc1144 parameter is one of two feature parameters for the licensed feature Compression on the Gb Interface. It indicates whether RFC1144 PCI compression should be used in the SNDCP layer on the Gb interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2006</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mocn_lte</value>
+            </slot>
+            <slot name="description">
+                <value>The mocn_lte parameter is the feature parameter for the licensed feature Multi-Operator Core Network for LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2097</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>lawful_intercept_hi2_and_xml_based_x1</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2035</value>
+            </slot>
+            <slot name="description">
+                <value>The Lawful Intercept HI2 and XML-based X1 feature is a market-specific variant of Lawful Intercept. For more information about LI, contact the local Ericsson support.</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>paging_suppression_for_fwa</value>
+            </slot>
+            <slot name="description">
+                <value>The paging_suppression_for_fwa parameter is the feature parameter for licensed feature Paging Suppression for Fixed Wireless Access.
+Note: This feature parameter can be activated only when the feature parameter lte_adaptive_paging is activated.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2122</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>monitoring_enhancements</value>
+            </slot>
+            <slot name="description">
+                <value>The monitoring_enhancements parameter is the feature parameter for the licensed feature Monitoring Enhancements (MONTE). This feature allows for MME events to be made available to the Service Capability Exposure Function (SCEF) node.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2124</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mobility_based_policy_gsm</value>
+            </slot>
+            <slot name="description">
+                <value>The mobility_based_policy_gsm parameter is the feature parameter for the licensed feature Mobility-Based Policy for GSM.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2121</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>pfc_flow_control</value>
+            </slot>
+            <slot name="description">
+                <value>The pfc_flow_control parameter is the feature parameter for the licensed feature Packet Flow Control per PFC.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2020</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>aace_support</value>
+            </slot>
+            <slot name="description">
+                <value>The aace_support is the feature parameter for licensed feature Access Aware Core Edge Support.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2022</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gtp_user_location</value>
+            </slot>
+            <slot name="description">
+                <value>The gtp_user_location parameter is the feature parameter for the licensed feature GTP User Location.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2044</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>highest_qos_rnc</value>
+            </slot>
+            <slot name="description">
+                <value>The highest_qos_rnc parameter is the feature parameter for the licensed feature QoS Based on RNC.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2061</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>blacklisting_ggsn</value>
+            </slot>
+            <slot name="description">
+                <value>The blacklisting_ggsn parameter is the feature parameter for the licensed feature Blacklisting of GGSN. This feature is not available for new customers.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2043</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>support_henb</value>
+            </slot>
+            <slot name="description">
+                <value>The support_henb is the feature parameter for the licensed feature MME Support of HeNB.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2084</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>lawful_interception_var2</value>
+            </slot>
+            <slot name="description">
+                <value>The lawful_interception_var2 parameter is the feature parameter for the licensed feature Lawful Intercept, Exp 1.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2089</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>geo_redundant_pool</value>
+            </slot>
+            <slot name="description">
+                <value>The geo_redundant_pool parameter is the feature parameter for the licensed feature Geographically Redundant Pool.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2083</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mmtel</value>
+            </slot>
+            <slot name="description">
+                <value>The mmtel parameter is the feature parameter for the licensed feature IMS-Based Telephony - MMTel.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2075</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>lte_adaptive_paging</value>
+            </slot>
+            <slot name="description">
+                <value>The lte_adaptive_paging parameter is the feature parameter for licensed feature Adaptive Paging for LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2103</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>dual_access_support</value>
+            </slot>
+            <slot name="description">
+                <value>The dual_access_support parameter is the feature parameter for the licensed feature Dual Access for GSM and WCDMA.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2019</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>nr_access_control</value>
+            </slot>
+            <slot name="description">
+                <value>The nr_access_control parameter is the feature parameter for the licensed feature NR Access Control.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2119</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>edrx_gsm</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2110</value>
+            </slot>
+            <slot name="description">
+                <value>The edrx_gsm parameter is a feature parameter for the licensed feature Extended DRX (eDRX) for GSM access. The SGSN-MME supports extended DRX functionality, used by devices, for instance M2M and IoT devices, which require longer battery life than conventional UEs.</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gb_over_ip</value>
+            </slot>
+            <slot name="description">
+                <value>The gb_over_ip parameter is feature parameter for the licensed feature Gb over IP.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2014</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>subscription_restriction</value>
+            </slot>
+            <slot name="description">
+                <value>The subscription_restriction is a feature parameter used to enable or disable the Operator Determined Barring (ODB) feature, included in the licensed Subscription Based Restrictions feature for the SGSN-MME.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2079</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>combined_procedures_gs_if</value>
+            </slot>
+            <slot name="description">
+                <value>The combined_procedures_gs_if parameter is the feature parameter of the licensed feature Combined Procedures, Gs Interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2004</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>msc_pool_sv</value>
+            </slot>
+            <slot name="description">
+                <value>The msc_pool_sv parameter is the feature parameter for the licensed feature SGSN-MME Support for MSC in Pool for Sv interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2099</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>nr_gw_selection</value>
+            </slot>
+            <slot name="description">
+                <value>The nr_gw_selection parameter is used to enable or disable the feature GW Selection for NR Usage.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2119</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>roaming_restriction_based_on_imei_tac</value>
+            </slot>
+            <slot name="description">
+                <value>The roaming_restriction_based_on_imei_tac parameter is the feature parameter for the licensed feature Roaming Restrictions based on IMEI-TAC or IMEI-TAC SV.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2100</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>sms_over_sgd</value>
+            </slot>
+            <slot name="description">
+                <value>The sms_over_sgd parameter is the feature parameter for the licensed feature SMS over SGd.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2125</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>donas_rohc</value>
+            </slot>
+            <slot name="description">
+                <value>The donas_rohc parameter is the feature parameter for the licensed feature DoNAS with Robust Header Compression (RoHC).
+Note: Available only for Narrowband Internet of Things (NB IoT). </value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2117</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>misconfig_mt_id</value>
+            </slot>
+            <slot name="description">
+                <value>The misconfig_mt_id is the feature parameter for the licensed feature Misconfigured MT Identification. The MT is identified by the logging of cause code 33 in the session event log.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2045</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>detach_inactive_subscriber_wcdma</value>
+            </slot>
+            <slot name="description">
+                <value>The detach_inactive_subscriber_wcdma parameter is the feature parameter for the licensed feature DoIS for WCDMA. The feature is valid for SGSN-MMEs for WCDMA access type. The feature does not cover synchronization of the timer that is used to control the DoIS feature between the GSM and WCDMA domains when the MS performs an Intra-SGSN ISC.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2051</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>data_over_nas</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2112</value>
+            </slot>
+            <slot name="description">
+                <value>The data_over_nas parameter is a feature parameter for the optional licensed feature Data over NAS.
+
+#Note: Available only for Narrowband Internet of Things (NB IoT).Note#</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ue_signalling_control</value>
+            </slot>
+            <slot name="description">
+                <value>The ue_signalling_control parameter is the feature parameter for the licensed feature UE Signaling Control.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2067</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>psm_gsm</value>
+            </slot>
+            <slot name="description">
+                <value>The psm_gsm parameter is the feature parameter for the licensed feature UE Power Saving for GSM access. The SGSN-MME supports Power Saving Mode (PSM) enabled devices, for instance M2M and IoT devices, which require longer battery life than conventional UEs.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2093</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>public_warning_system</value>
+            </slot>
+            <slot name="description">
+                <value>The public_warning_system parameter is the feature parameter for the licensed feature Public Warning System (PWS) for LTE access. This PWS feature is also applicable for ETWS and CMAS services.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2076</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mobility_based_policy_wcdma</value>
+            </slot>
+            <slot name="description">
+                <value>The mobility_based_policy_wcdma parameter is the feature parameter for the licensed feature Mobility-Based Policy for WCDMA.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2106</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>s_cdr_cause_code_ext</value>
+            </slot>
+            <slot name="description">
+                <value>The s_cdr_cause_code_ext is the feature parameter for the licensed feature S-CDR Cause Code Extension. If activated, extended diagnostics are included in the S-CDR. If a PDP context is deactivated due to an error detected in the RANAP or BSSGP communication, the RANAP or BSSGP cause code is provided as extended diagnostics in the S-CDR.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2046</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>authentication_stationary_subscriber</value>
+            </slot>
+            <slot name="description">
+                <value>The authentication_stationary_subscriber parameter is the feature name of the licensed feature Authentication of Stationary Subscriber.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2011</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>integrated_traffic_capture</value>
+            </slot>
+            <slot name="description">
+                <value>The integrated_traffic_capture parameter is the feature parameter for the licensed feature Integrated Traffic Capture (ITC).
+
+Integrated Traffic Capture Gb (ITC Gb) captures Gb traffic to and from an SGSN, including traffic from external Gb interfaces.
+
+Integrated Traffic Capture GTP-U (ITC GTP-U) captures GTP-U traffic to and from an SGSN, including traffic from external Gn and Iu interfaces.
+
+ITC captures the PDUs on the NS layer (ITC Gb) or the GTP-U layer (ITC GTP-U) and stores them in circular logs on the DPs, in the RAM memory. The logs are transferred and stored on the NCB upon request. ITC is managed by using CLI commands.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2037</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>iot_m2m_low_complexity_ue_support</value>
+            </slot>
+            <slot name="description">
+                <value>The iot_m2m_low_complexity_ue_support parameter is the feature parameter for the licensed feature Low Complexity UE support.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2095</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>decor_lte</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2114</value>
+            </slot>
+            <slot name="description">
+                <value>The decor_lte parameter is the feature parameter for the licensed feature Dedicated Core Network (DECOR) for LTE.</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>srvcc</value>
+            </slot>
+            <slot name="description">
+                <value>The srvcc is the feature parameter for the licensed feature Single Radio Voice Call Continuity.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2073</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>sgsn_pool</value>
+            </slot>
+            <slot name="description">
+                <value>The sgsn_pool parameter is the feature parameter for the licensed feature  SGSN Pool.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2018</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>wifi_ue_throughput_mobility</value>
+            </slot>
+            <slot name="description">
+                <value>The wifi_ue_throughput_mobility parameter is the feature parameter for the licensed feature UE Throughput Based Mobility from/to Wi-Fi.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2087</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>edrx_lte</value>
+            </slot>
+            <slot name="description">
+                <value>The edrx_lte parameter is the feature parameter for the licensed feature Extended DRX (eDRX) for LTE access. MME supports extended DRX functionality, used by devices, for instance M2M and IoT devices, which require longer battery life than conventional UEs.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2110</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>rim_transfer</value>
+            </slot>
+            <slot name="description">
+                <value>The rim_transfer is the feature parameter for the licensed feature RAN Information Management (RIM), using the rim transfer procedures among GSM, WCDMA, and LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2025</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>loc_based_ip_allocation_lte</value>
+            </slot>
+            <slot name="description">
+                <value>The loc_based_ip_allocation_lte parameter is the feature parameter for the licensed feature Location Based IP Address Allocation for LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2102</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>dedicated_bearers</value>
+            </slot>
+            <slot name="description">
+                <value>The dedicated_bearers parameter is the feature parameter for the licensed feature Network-Initiated Dedicated Bearers.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2054</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>dual_transfer_mode</value>
+            </slot>
+            <slot name="description">
+                <value>The dual_transfer_mode parameter is the feature parameter of the licensed feature Dual Transfer Mode.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2016</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>loadbased_ho</value>
+            </slot>
+            <slot name="description">
+                <value>The loadbased_ho parameter is the feature parameter for the licensed feature Load Based Handover.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2038</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ran_cause_codes_in_scdr</value>
+            </slot>
+            <slot name="description">
+                <value>The ran_cause_codes_in_scdr parameter is the feature parameter for the licensed feature RAN Cause Codes in CDR. If activated, extended diagnostics information (maximum of three BSSGP or RANAP cause codes if available) is included in the recordExtensions field of an S-CDR when the record is closed for each activated PDP context.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2058</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ue_trace_mme</value>
+            </slot>
+            <slot name="description">
+                <value>The ue_trace_mme parameter is the feature parameter for the licensed feature UE Tracer for GSM, WCDMA, and LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2055</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>loc_based_ip_allocation_gsm</value>
+            </slot>
+            <slot name="description">
+                <value>The loc_based_ip_allocation_gsm parameter is the feature parameter for the licensed feature Location Based IP Address Allocation for GSM.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2091</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>secondary_context</value>
+            </slot>
+            <slot name="description">
+                <value>The secondary_context parameter is the feature parameter for the licensed feature MS Initiated Secondary PDP Context.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2009</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mocn_wcdma</value>
+            </slot>
+            <slot name="description">
+                <value>The mocn_wcdma parameter is the feature parameter for the licensed feature Multi-Operator Core Network for WCDMA.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2096</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>prioritise_payload_users</value>
+            </slot>
+            <slot name="description">
+                <value>The prioritise_payload_users is the feature name of the licensed feature  Prioritization of Payload Users After Restart.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2017</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>edge_support</value>
+            </slot>
+            <slot name="description">
+                <value>The edge_support parameter is the feature parameter for the licensed feature EDGE Support.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2002</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>multiple_plmn_support</value>
+            </slot>
+            <slot name="description">
+                <value>The multiple_plmn_support parameter is the feature parameter for the licensed feature Multiple PLMN Support.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2003</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>location_services</value>
+            </slot>
+            <slot name="description">
+                <value>The location_services parameter is the feature name for the licensed feature Location Services.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2036</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>connection_suspend_and_resume</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2118</value>
+            </slot>
+            <slot name="description">
+                <value>The connection_suspend_and_resume parameter is the feature parameter for the licensed feature Connection Suspend and Resume.</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>detach_inactive_subscriber</value>
+            </slot>
+            <slot name="description">
+                <value>The detach_inactive_subscriber parameter is the feature parameter for the licensed feature DoIS for GSM. The feature is valid for SGSN-MMEs for GSM access type.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2010</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ss7_over_ip</value>
+            </slot>
+            <slot name="description">
+                <value>The ss7_over_ip parameter is the feature parameter for the licensed feature SS7 over IP.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2024</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>psm_lte</value>
+            </slot>
+            <slot name="description">
+                <value>The psm_lte parameter is the feature parameter for the licensed feature UE Power Saving for LTE access. MME supports Power Saving Mode (PSM) enabled devices, for instance M2M and IoT devices, which require longer battery life than conventional UEs.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2111</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>cell_change_reporting</value>
+            </slot>
+            <slot name="description">
+                <value>The cell_change_reporting parameter is the feature parameter for the licensed feature Cell Change Reporting for MME.
+
+#Note: The mobility_based_policy_lte and cell_change_reporting parameters are mutually exclusive.Note#</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2074</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ps_ho</value>
+            </slot>
+            <slot name="description">
+                <value>The ps_ho parameter is the feature parameter for the licensed feature PS Handover / IRAT PS Handover.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2039</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gw_failure_restoration_gsm</value>
+            </slot>
+            <slot name="description">
+                <value>The gw_failure_restoration_gsm parameter is used to enable or disable the Gateway Restoration Procedures feature for GSM.
+</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2080</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>selective_service_request</value>
+            </slot>
+            <slot name="description">
+                <value>The selective_service_request parameter is the feature parameter for the licensed feature Selective Service Request Handling.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2072</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ec_gsm_iot_support</value>
+            </slot>
+            <slot name="description">
+                <value>The ec_gsm_iot_support parameter is a feature parameter for the optional licensed feature Extended Coverage (EC)-GSM IoT Support.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2109</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>highest_qos_imsi</value>
+            </slot>
+            <slot name="description">
+                <value>The highest_qos_imsi parameter is the feature parameter for the licensed feature QoS Based on IMSI Series.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2021</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>apn_conversion_wg</value>
+            </slot>
+            <slot name="description">
+                <value>The apn_conversion_wg parameter is the feature parameter for the licensed feature APN Conversion.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2048</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>streaming_qos_class</value>
+            </slot>
+            <slot name="description">
+                <value>The streaming_qos_class is the feature parameter for the licensed feature Streaming QoS.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2027</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>monte_location_awareness</value>
+            </slot>
+            <slot name="description">
+                <value>The monte_location_awareness parameter is the feature parameter for the licensed feature Monitoring Enhancements (MONTE) Location awareness. This feature allows for MONTE to also support the configuration and reporting of Location Reporting events.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2120</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gtpprime</value>
+            </slot>
+            <slot name="description">
+                <value>The gtpprime parameter is the feature parameter for licensed feature Near Real-Time Provision of CDRs.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2015</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gw_failure_restoration_wcdma</value>
+            </slot>
+            <slot name="description">
+                <value>The gw_failure_restoration_wcdma parameter is used to enable or disable the Gateway Restoration Procedures feature for WCDMA.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2104</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>msc_pool_gs</value>
+            </slot>
+            <slot name="description">
+                <value>The msc_pool_gs parameter is the feature parameter for the licensed feature SGSN-MME Support for MSC in Pool for Gs interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2056</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ipsec_support</value>
+            </slot>
+            <slot name="description">
+                <value>The ipsec_support parameter is the feature parameter of the licensed feature IPsec for Secure Network Traffic.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2034</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>sds_support</value>
+            </slot>
+            <slot name="description">
+                <value>The sds_support parameter is the feature parameter for the licensed feature M2M/IoT: Direct Short Data Service.
+
+#Note: This parameter is restricted and not for general use.Note#</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2107</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>embms_support</value>
+            </slot>
+            <slot name="description">
+                <value>The embms_support parameter is the feature parameter for the licensed feature LTE Broadcast.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2077</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>add</value>
+            </slot>
+            <slot name="description">
+                <value>The add parameter is the feature parameter for the licensed feature ADD. This feature is valid for WCDMA Systems only.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2049</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>csfb_to_wg</value>
+            </slot>
+            <slot name="description">
+                <value>The csfb_to_wg parameter is the feature parameter for the licensed feature CS fallback to WCDMA or GSM. To activate this feature it is required that the licensed feature SMS over SGs is activated.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2062</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>donas_non_ip_over_scef</value>
+            </slot>
+            <slot name="description">
+                <value>This licensed feature parameter controls the support for Non-IP data over NAS using the T6a interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2115</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>regional_subscription</value>
+            </slot>
+            <slot name="description">
+                <value>The regional_subscription is a feature parameter used to enable or disable the Regional Subscription feature, included in the licensed Subscription Based Restrictions feature for the SGSN-MME.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2085</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mme_pool</value>
+            </slot>
+            <slot name="description">
+                <value>The mme_pool parameter is the feature parameter for the licensed feature  MME Pool.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2053</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>loc_based_ip_allocation_wcdma</value>
+            </slot>
+            <slot name="description">
+                <value>The loc_based_ip_allocation_wcdma parameter is the feature parameter for the licensed feature Location Based IP Address Allocation for WCDMA.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2101</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gsm_adaptive_paging</value>
+            </slot>
+            <slot name="description">
+                <value>The gsm_adaptive_paging parameter is the feature parameter for the licensed feature Adaptive Paging for GSM.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2078</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>apn_redirection</value>
+            </slot>
+            <slot name="description">
+                <value>The apn_redirection parameter is the feature parameter for the licensed feature APN Redirection.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2048</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>mbms_broadcast</value>
+            </slot>
+            <slot name="description">
+                <value>The mbms_broadcast parameter is the feature parameter for the licensed feature Broadcast Service for SGSN (MBMS).</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2041</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>sms_over_sgs</value>
+            </slot>
+            <slot name="description">
+                <value>The sms_over_sgs parameter is the feature parameter for the licensed feature SMS over SGs.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2060</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>gw_failure_restoration_lte</value>
+            </slot>
+            <slot name="description">
+                <value>The gw_failure_restoration_lte parameter is used to enable or disable the Gateway Restoration Procedures feature for LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2105</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ebm</value>
+            </slot>
+            <slot name="description">
+                <value>The ebm parameter is the feature parameter for the licensed feature Event Based Monitoring (EBM).</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2042</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>nr_usage_data_reporting</value>
+            </slot>
+            <slot name="description">
+                <value>The nr_usage_data_reporting parameter is used to enable or disable the feature NR Usage Data Reporting.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2119</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>camel_phase3</value>
+            </slot>
+            <slot name="description">
+                <value>The camel_phase3 parameter is the feature parameter for the licensed feature Real-Time Charging Control Using CAMEL.
+</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2001</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>ec_lte_iot_support</value>
+            </slot>
+            <slot name="description">
+                <value>The ec_lte_iot_support parameter is a feature parameter for the optional licensed feature Coverage Extension Support, LTE.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2109</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>imei_check</value>
+            </slot>
+            <slot name="description">
+                <value>The imei_check parameter is the feature parameter for the licensed feature IMEI check.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2023</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>lawful_interception</value>
+            </slot>
+            <slot name="description">
+                <value>The lawful_interception parameter is the feature parameter for the licensed feature Lawful Intercept.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2035</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>s3_s4_architecture_support</value>
+            </slot>
+            <slot name="description">
+                <value>The s3_s4_architecture_support parameter is the feature parameter for the licensed feature S3/S4 Architecture Support.
+
+#Note: When the S3/S4 Architecture Support feature is set from on to off, Ericsson recommends to perform large restart to immediately clean up PDN connections using the S4 interface. Hence, the UE can quickly get data services by connecting to the GGSN.Note#</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2065</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>donas_non_ip_over_sgi</value>
+            </slot>
+            <slot name="description">
+                <value>This licensed feature parameter controls the support for Non-IP data over NAS using the SGi interface.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2115</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="FeatureState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="featureStateId">
+                <value>non_3gpp_compliant_ue</value>
+            </slot>
+            <slot name="description">
+                <value>This is the name of the licensing parameter that specifies if it is network support for non 3GPP compliant UEs.
+
+The parameter does not distinguish between GSM and WCDMA.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/2050</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>attach_iot_limit</value>
+            </slot>
+            <slot name="description">
+                <value>The attach_iot_limit parameter is a license parameter (in kSAU) that specifies the maximum number of simultaneously attached IoT users. Soft limit is always applied to this capacity. When the soft limit is reached, an alarm is generated and IoT devices that attach after the license is exceeded are counted towards SAU capacity license. Soft limit accepts UE Attach or TAU Requests even when the total number of simultaneously attached IoT users exceeds the purchased capacity limit, until node resource limits are reached or possibly hard license limits on SAU are reached.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3010</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>kSAU</value>
+            </slot>
+            <slot name="range">
+                <value>0-60000</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>qos_hsdpa_mbr</value>
+            </slot>
+            <slot name="description">
+                <value>The qos_hsdpa_mbr parameter is the feature parameter for the licensed feature HSDPA Support. The values 8, 16, 32, 48 and 84 indicate that the feature is enabled and that the MBR is 8, 16, 32, 48 or 84 Mbps, respectively. The value 2 indicates that the feature is disabled and that MBR is 2 Mbps.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3005</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>Mbps</value>
+            </slot>
+            <slot name="range">
+                <value>2-84</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>context_limit</value>
+            </slot>
+            <slot name="description">
+                <value>The context_limit parameter is a licensing parameter (in kIP) that specifies the maximum number of IP Sessions. An IP Session is a Primary PDP Context for GSM or WCDMA, or a Default Bearer for LTE. The number of IP Sessions is the sum of the number of primary PDP Contexts and the number of Default Bearers. 
+
+When hard limit is applied for IP Session capacity and the number of IP Sessions reaches the licensed capacity limit, an alarm is generated and Activation Reject message is sent to the MS with cause code 26 - Insufficient resources. 
+
+When the SGSN Pool license or the MME Pool license exists, soft limit is applied for IP Session capacity instead. Soft limit implies that an alarm is generated and further IP Session activations are still accepted when the number of IP Sessions exceeds the licensed capacity limit up to the system defined hard limit.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3001</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>kIP Sessions</value>
+            </slot>
+            <slot name="range">
+                <value>5-144000</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>attach_lte_limit</value>
+            </slot>
+            <slot name="description">
+                <value>The attach_lte_limit parameter is a license parameter (in kSAU) that specifies the maximum number of simultaneously attached LTE users. When hard limit is applied to the LTE SAU capacity, and the total number of simultaneously attached LTE users reaches the purchased capacity limit, an alarm is generated, and an Attach or TAU Reject message is sent to the UE with cause code 22 - Congestion. 
+
+When an SGSN or MME Pool license exists, soft limit is applied to the LTE SAU capacity. Soft limit accepts UE Attach or TAU Requests even when the total number of simultaneously attached LTE users exceeds the purchased capacity limit, until the system defined hard limit is reached.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3009</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>kSAU</value>
+            </slot>
+            <slot name="range">
+                <value>1-36000</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>LTE</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>payload_limit</value>
+            </slot>
+            <slot name="description">
+                <value>The payload_limit parameter specifies the number of license steps for the payload capacity. The payload capacity comes in steps of 10 kPPS for GSM and in steps of 50 kPPS for WCDMA, starting from entry levels of 10 kPPS (for GSM) and 50 kPPS (for WCDMA) respectively. The entry level is the capacity license that is included by default. The max throughput capacities for the different hardware configurations can not be evenly divided with 10 (GSM) or 50 (WCDMA). Therefore if max payload capacity for a SGSN-MME is needed, it is enough to buy the nearest possible amount of licenses. 
+The number of license steps required is the sum of the quotients given when dividing the actual GSM payload traffic by 10 kpps and the actual WCDMA payload traffic by 50 kpps. Each license step can be shared by both GSM and WCDMA but equals to different amounts of payload capacity depending on the traffic: 10 kpps for GSM or 50 kpps for WCDMA. 
+
+For example, two license steps can be used for granting one of the following: 
+
+*A: 20 (2x10) kpps GSM traffic;
+*B: 100 (2x50) kpps WCDMA traffic;
+*C: 10 (1x10) kpps GSM traffic and 50 (1x50) kpps WCDMA traffic.;
+
+The total amount of GTP packets during a defined interval is measured at each payload DP and is aggregated for the whole SGSN-MME. The aggregated value is compared to the licensed payload capacity limit, defined by the number of license steps. This capacity limit is a soft limit, i.e. the license can be exceeded without traffic impact, but alarms are generated and all extra use of capacity is logged by the SGSN-MME.
+
+When the payload is 85% of the licensed capacity limit, defined by the number of license steps, the admPayloadLicenseReached alarm is raised indicating that the licensed capacity is soon reached. The alarm is cleared when the payload drops below 70% of the licensed capacity.
+
+When the payload is 100% of the licensed capacity limit, defined by the number of license steps, the admPayloadLicenseExceeded alarm is raised indicating that the licensed capacity is reached. The alarm is cleared when the payload drops below 85% of the licensed capacity limit.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3003</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>kPPS</value>
+            </slot>
+            <slot name="range">
+                <value>1-320</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>attach_limit</value>
+            </slot>
+            <slot name="description">
+                <value>The attach_limit parameter is a license parameter (in kSAU) that specifies the maximum number of SAU. When hard limit is applied for SAU capacity and the number of SAU reaches the licensed capacity limit, an alarm is generated and an Attach/RAU/TAU Reject message is sent to the MS or UE with cause code 22 - Congestion. 
+
+When the SGSN or MME Pool license exists, soft limit is applied for SAU capacity. Soft limit implies that further MS or UE Attach/RAU/TAU Requests are still accepted when the number of SAU exceeds the licensed capacity limit up to the system defined hard limit.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3002</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>kSAU</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+            <slot name="range">
+                <value>25-36000</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>enhanced_uplink_mbr</value>
+            </slot>
+            <slot name="description">
+                <value>The enhanced_uplink_mbr parameter is the feature parameter for the licensed feature Enhanced Uplink Support. The value 4,8 and 16 indicate that the feature is enabled and that the maximum MBR is 4, 8 or 16 Mbps, respectively. The value 2 indicates that the feature is disabled and that the MBR is 2 Mbps.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3006</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>Mbps</value>
+            </slot>
+            <slot name="range">
+                <value>2-16</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>WCDMA</value>
+            </slot>
+        </object>
+        <object parentDn="">
+            <hasClass name="CapacityState">
+                <mimName>SgsnMmeLM</mimName>
+            </hasClass>
+            <slot name="capacityStateId">
+                <value>sms_limit</value>
+            </slot>
+            <slot name="description">
+                <value>The sms_limit parameter is a licensing parameter (in SMS/s) that specifies the SMS capacity license limit. This capacity limit is a soft limit, that is the license can be exceeded without traffic impact. All extra use of capacity is logged by the SGSN-MME.</value>
+            </slot>
+            <slot name="keyId">
+                <value>FAT 102 3381/3008</value>
+            </slot>
+            <slot name="capacityUnit">
+                <value>SMS/s</value>
+            </slot>
+            <slot name="range">
+                <value>50-1500</value>
+            </slot>
+            <slot name="validForRAT">
+                <value>GSM, WCDMA, LTE</value>
+            </slot>
+        </object>
+    </mib>
+</models>

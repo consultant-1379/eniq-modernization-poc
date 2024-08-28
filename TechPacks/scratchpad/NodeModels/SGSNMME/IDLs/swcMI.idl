@@ -1,0 +1,1694 @@
+// ==================================================================
+//
+// NAME
+//   swcMI - API for Software Configurations Management and(!) Software
+//          Management Functions towards the Management interface
+//
+// INTERFACES       REGISTERED NAME
+//   swcMI::SLO     "oam/cps/software"
+//
+// FILE
+//   swcMI.idl
+//
+// Copyright Ericsson AB 1998-2013
+// The copyright to the computer program(s) herein is the property of
+// Ericsson AB, Sweden. The program(s) may be used and/or copied only
+// with the written permission from Ericsson AB or in accordance with
+// the terms and conditions stipulated in the agreement/contract under
+// which the program(s) have been supplied.
+//
+// DESCRIPTION
+//   See documentation comments below.
+//
+// REVISION HISTORY
+//            Date    Author   Item changed
+//   GSN R8   070604  ervpabj  swcMI::SLO::postUploadNDPwDeplData()
+//              Support installation of one or more SuperCPs.
+//   GSN R8   070516  qjanste  swcMI::SLO::installSuperCP()
+//              Support installation of more than one SuperCP.
+//   GSN R7   060522  qguneko  swcMI::SLO::removeSoftwareConfiguration()
+//              New error code, swm_sc_in_use_erlang.
+//   GSN R6   040906  ervpeas  swcMI::SLO::addISPLogComment()
+//              New method.
+//   GSN R6   040906  ervpeas  swcMI::SLO::getNodeInformation()
+//              New method.
+//   GSN R6   040906  ervpeas  swcMI::SLO::getPatchStatus()
+//              New method.
+//   GSN R6   040906  ervpeas  swcMI::SLO::checkpointSoftwareConfiguration()
+//              Release part of SC name can be "".
+//            110503  ejenlid  swcMI::SLO::checkpointSoftwareConfiguration()
+//              SetAsDefault paramter added
+//            110503  ejenlid  postUploadNDPwDeplData and installSuperCP
+//              diskWarning parameter added
+//            120512  xyursok  swcMI::SLO::checkpointSoftwareConfiguration()
+//              Renamed to checkpointSoftwareConfiguration_2()
+//            120512  xyursok  swcMI::SLO::checkpointSoftwareConfiguration()
+//              Added old interface checkpointSoftwareConfiguration
+//              for export 3 arguments to keep the external interface
+//              backwards compatible
+//
+// ==================================================================
+
+/**
+ ** @file
+ **
+ ** API for Software Configurations Management and(!) Software
+ ** Management Functions towards the Management interface.
+ **/
+
+#ifndef swc_MI_Idl
+#define swc_MI_Idl
+
+// Include general OMS and DPE types and definitions.
+#include "omsDefs.idl"
+#include "dpeDefs.idl"
+
+#include "oamSupport.idl"
+
+/**
+ ** Namespace for Software Configuration Management and Software Management
+ ** Functions towards the Management interface.
+ ** <p>
+ ** This API provides the access to the software management functions
+ ** towards the IIOP interface.
+ ** Most functions in this Module use API towards DPE (NCL) to access the
+ ** software manangement resources
+ ** <p>
+ ** This interface can be used by the management clients both to retrieve
+ ** information about the software management resources and to affect
+ ** the software management resources.
+ **/
+
+
+
+module swcMI {
+
+  /**
+   ** API for Software Configurations Management and Software
+   ** Management Functions towards the Management interface
+   ** <p>
+   ** The <code>swcMI::SLO</code> interface is registered with the name
+   ** <b><code>oam/cps/software</code></b> on the node.
+   **
+   **/
+
+   interface SLO {
+
+      const long IF_VERSION = 1;
+
+      // =================================//
+      // Information Retrieval Functions  //
+      // =================================//
+
+    //*****************************************************************
+    /**
+     ** Returns a list of all applications belonging to the specified SC.
+     **
+     ** @param data     OAM session context data.
+     ** @param scn      Software Configuration Name.
+     ** @param appList  List of applications.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_dir"</code>,
+     **               &lt;DPE_ROOT&gt; is not a directory or does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_complete_path"</code>,
+     **               &lt;DPE_ROOT&gt; is not a complete path.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_do_not_exist"</code>,
+     **               the software configuration &lt;SC&gt; does not exist.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: swcm_slo_passive: retrieve data
+      void getApplicationsOfSoftwareConfiguration(in oamSupport::AdmData data,
+                                    in dpeDefs::SoftwareConfigurationName scn,
+                                    out dpeDefs::ApplicationNameList appList)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //*****************************************************************
+    /**
+     ** Returns the name of the currently active Software Configuration.
+     **
+     ** @param data     OAM session context data.
+     ** @param active   Software Configuration Name.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_FailedToObtainSC"</code>,
+     **               unable to form the full path name of the software
+     **               configuration. Can have a number of causes, from memory
+     **               overflow to a syntactic error in the contents of a file
+     **               that should indicate the name of the software
+     **               configuration to be used.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: swcm_slo_passive: retrieve data
+      void getActiveSoftwareConfiguration(in oamSupport::AdmData data,
+                                  out dpeDefs::SoftwareConfigurationName active)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns the name of the Software Configuration to be used for
+     ** next Node restart.
+     **
+     ** @param data     OAM session context data.
+     ** @param next     Software Configuration Name.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_FailedToObtainSC"</code>,
+     **               unable to form the full path name of the software
+     **               configuration. Can have a number of causes, from memory
+     **               overflow to a syntactic error in the contents of a file
+     **               that should indicate the name of the software
+     **               configuration to be used.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: swcm_slo_passive: retrieve data
+      void getNextSoftwareConfiguration(in oamSupport::AdmData data,
+                                    out dpeDefs::SoftwareConfigurationName next)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns the name of the Software Configuration used for a default
+     ** restart.
+     **
+     ** @param data         OAM session context data.
+     ** @param defaultName  Software Configuration Name.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_FailedToObtainSC"</code>,
+     **               unable to form the full path name of the software
+     **               configuration. Can have a number of causes, from memory
+     **               overflow to a syntactic error in the contents of a file
+     **               that should indicate the name of the software
+     **               configuration to be used.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: swcm_slo_passive: retrieve data
+      void getDefaultSoftwareConfiguration(in oamSupport::AdmData data,
+                              out dpeDefs::SoftwareConfigurationName defaultName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns the name of the Software Configuration used at latest Node
+     ** restart.
+     **
+     ** @param data     OAM session context data.
+     ** @param booted   Software Configuration Name.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_FailedToObtainSC"</code>,
+     **               unable to form the full path name of the software
+     **               configuration. Can have a number of causes, from memory
+     **               overflow to a syntactic error in the contents of a file
+     **               that should indicate the name of the software
+     **               configuration to be used.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: swcm_slo_passive: retrieve data
+      void getBootedSoftwareConfiguration(in oamSupport::AdmData data,
+                                  out dpeDefs::SoftwareConfigurationName booted)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns a list of all present Software Configurations.
+     **
+     ** @param data     OAM session context data.
+     ** @param scList   list of Software Configurations.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_dir"</code>,
+     **               &lt;DPE_ROOT&gt; is not a directory or does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_complete_path"</code>,
+     **               &lt;DPE_ROOT&gt; is not a complete path.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: swcm_slo_passive: retrieve data
+      void getSoftwareConfigurationList(in oamSupport::AdmData data,
+                                  out dpeDefs::SoftwareConfigurationList scList)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R7. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_passive: retrieve data
+      void verifySoftwareConfiguration(in oamSupport::AdmData data,
+                         in dpeDefs::SoftwareConfigurationName scn)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** The output will be the formated string returned from the
+     ** getPatchStatus binary.
+     **
+     ** @param data        OAM session context data.
+     ** @param patchView   the option that should be passed to getPatchStatus.
+     **   <table>
+     **     <tr><th>Option</th><th>Description</th></tr>
+     **     <tr>
+     **       <td><code>l</code></td>
+     **       <td>gives a listing of all still active patch files in
+     **           the chosen SC as well as non-SC patches at CP level.
+     **           Solved TRs are listed for each file. TRs within
+     **           parentheses stems from predecessors of the current file
+     **           and are most likely included in the current file as well.</td>
+     **     </tr><tr>
+     **       <td><code>scp</code></td>
+     **       <td>gives a listing of the number of still active
+     **           patch files (out of the original number of patch files)
+     **           in the chosen SC as well as non-SC patches at SuperCP level.
+     **       </td>
+     **     </tr><tr>
+     **       <td><code>cp</code></td>
+     **       <td>gives a listing of the number of still active patch files
+     **           (out of the original number of patch files) in the
+     **           chosen SC as well as non-SC patches at CP level.</td>
+     **     </tr><tr>
+     **       <td><code>f</code></td>
+     **       <td>gives a full file summary for the still active patch file(s)
+     **           in the chosen SC as  well as non-SC patch files, whose
+     **           name(s) matches the pattern &lt;file&gt; (which may be a
+     **           substring of the complete file name(s)).
+     **           TRs within parentheses stems from predecessors of the
+     **           current file and are most likely included in the current
+     **           file as well.</td>
+     **     </tr>
+     **     </tr><tr>
+     **       <td><code>a</code></td>
+     **       <td>gives full file summaries for all currently active
+     **           patch files in the chosen SC as well as non-SC patch files.
+     **           TRs within parentheses stems from predecessors of the
+     **           current file and are most likely included in the current
+     **           file as well.</td>
+     **     </tr>
+     **   </table>
+     ** @param argument    filename (only used with patchView = "f").
+     ** @param scName      the SC that patch status should be retrieved for
+     **                    (if scName is empty (["",""]), current SC is used).
+     ** @param patchStatus the patch information.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_do_not_exist"</code>,
+     **               the SC &lt;SC&gt; does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_inconsistent_links"</code>,
+     **               the following links are inconsistent: &lt;link&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_file_missing"</code>,
+     **               failed to open file: &lt;file&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_file_unreadable"</code>,
+     **               failed to read file: &lt;file&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_patchinfo_corrupt"</code>,
+     **               patchinfo is corrupt.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_not_patched"</code>,
+     **               the softwareconfiguration is probably not patched.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_wrong_arguments"</code>,
+     **               wrong combination of arguments given.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: swcm_slo_passive: retrieve data
+    void getPatchStatus(in oamSupport::AdmData data,
+                        in string patchView,
+                        in string argument,
+                        in dpeDefs::SoftwareConfigurationName scName,
+                        out string patchStatus)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns the value for the given node attribute.
+     **
+     ** @param data           OAM session context data.
+     ** @param nodeAttribute  name of a node attribute.
+     **   <table>
+     **     <tr><th>Examples of Node Attributes</th></tr>
+     **     <tr>
+     **       <td><code>Type</code></td>
+     **     </tr><tr>
+     **       <td><code>Hw</code></td>
+     **     </tr><tr>
+     **       <td><code>SS7</code></td>
+     **     </tr><tr>
+     **       <td><code>SAU</code></td>
+     **     </tr><tr>
+     **       <td><code>SWLevel</code></td>
+     **     </tr><tr>
+     **       <td><code>NDPbuild</code></td>
+     **     </tr><tr>
+     **       <td><code>CPName</code></td>
+     **     </tr>
+     **   </table>
+     ** @param scName         the SC that the attribute should be retrieved for
+     **                       (if scName is empty (["",""]), current SC is used).
+     ** @param attributeValue the node attribute value.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_node_info_missing"</code>,
+     **               the &lt;0&gt; attribute is not defined.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: swcm_slo_passive: retrieve data
+    void getNodeInformation(in oamSupport::AdmData data,
+                            in string nodeAttribute,
+                            in dpeDefs::SoftwareConfigurationName scName,
+                            out string attributeValue)
+      raises(omsDefs::OperationFailed);
+
+
+
+      // =================================//
+      // Control Functions                //
+      // =================================//
+
+      //******************************************************************
+    /**
+     ** Calls the NDM operation activateSoftwareConfiguration.
+     **
+     ** @param data         OAM session context data.
+     ** @param toactivate   Software Configuration Name.
+     ** @param allowescalation Whether escalation to ISP-affecting restart is allowed
+     **                        (only relevant it smooth activation was expected).
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_NodeNotInStableState"</code>,
+     **               the node is not stable, i.e., not all the applications
+     **               known to DPE are up and running. Upgrade is not allowed
+     **               in such a state.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_SoftwareConfInWrongState"</code>,
+     **               the software configuration is in one of the following two
+     **               states: InstalledModifiable, CheckpointStarted.
+     **               This means that the software configuration is unusable,
+     **               possibly due to an earlier failure in the midst of
+     **               writing to a file.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "dpe_err_SoftwareConfIncompatibleWithOSRev"</code>,
+     **               the software configuration is not compatible with
+     **               the current GPBOS revision.
+     **               This means that the software configuration is unusable
+     **               except after a restore of the old GPBOS.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_CannotDetermineRestartLevel"</code>,
+     **               the proper restart level cannot be determined. May be due
+     **               to a number of reasons: see the accompanying events.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_FailedToObtainPAP"</code>,
+     **               the configuration does not contain the file with the names
+     **               of persistent applications.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_IncompatibleRevisions"</code>,
+     **               an application that has specified "internal action" has
+     **               different revisions in its BLU files (in the old and new
+     **               software configuration).
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_CannotWriteSoftwareConfState"</code>,
+     **               DPE cannot update a file that contains the state of a
+     **               software configuration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_NewSoftwareConfNotFound"</code>,
+     **               the new software configuration could not be found in
+     **               the file system.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OperationNotAllowedOnKindOfSC"</code>,
+     **               an attempt to update the name of the last activated or
+     **               last booted software configuration via a wrong operation.
+     **               Should not happen, unless there is an error in NDM code.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_CannotRunScripts"</code>,
+     **               NCL is unable to run the scripts that are needed to perform
+     **               software upgrade successfully.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_upgrade_vetoed"</code>,
+     **               The new software configuration was not accepted for upgrade
+     **               by some ADP (most likely adp_oam_basic) .
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_update_vetoed"</code>,
+     **               The new software configuration was not accepted for update
+     **               by some ADP (most likely adp_oam_basic).
+     **
+     ** @pre
+     **
+     ** @post
+     **   New Software Configuration activated.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void activateSoftwareConfiguration(in oamSupport::AdmData data,
+                                         in dpeDefs::SoftwareConfigurationName toactivate)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R8 FP01 CP01. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void setNextSoftwareConfiguration(in oamSupport::AdmData data,
+                                      in dpeDefs::SoftwareConfigurationName next)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Calls the NDM operation setDefaultSoftwareConfiguration.
+     **
+     ** @param data         OAM session context data.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_InternalError"</code>,
+     **               an internal error in NCL. Shouldn't happen, indicates
+     **               some serious error in the NCL software. The specific
+     **               manifestation will be described by an event.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_NewSoftwareConfNotFound"</code>,
+     **               cannot find the new software configuration in the file
+     **               system.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_FailedToObtainSC"</code>,
+     **               unable to form the full path name of the software
+     **               configuration. Can have a number of causes, from memory
+     **               overflow to a syntactic error in the contents of a file
+     **               that should indicate the name of the software
+     **               configuration to be used.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_SoftwareConfInWrongState"</code>,
+     **               the software configuration is in one of the following two
+     **               states: InstalledModifiable, CheckpointStarted.
+     **               This means that the software configuration is unusable,
+     **               possibly due to an earlier failure in the midst of writing
+     **               to a file.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OperationNotAllowedOnKindOfSC"</code>,
+     **               the software configuration is in a state that does not
+     **               admit this operation.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_SoftwareConfAlreadyActive"</code>,
+     **               the SC is already active.
+     **
+     ** @pre
+     **
+     ** @post
+     **   The currently active Software Configuration is set to the default.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void setDefaultSoftwareConfiguration(in oamSupport::AdmData data)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Calls the NDM operation checkpointSoftwareConfiguration.
+     ** If the releaseName part of the checkpoint parameter is "",
+     ** the current SCs releaseName is used.
+     **
+     ** @param data         OAM session context data.
+     ** @param checkpoint   Software Configuration Name.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_dir_already_exist"</code>,
+     **               software configuration already exists.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_dir"</code>,
+     **               &lt;DPE_ROOT&gt; is not a directory or does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_complete_path"</code>,
+     **               &lt;DPE_ROOT&gt; is not a complete path.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_last_activated"</code>,
+     **               unable to access the file
+     **               LastActivatedSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_disk_full"</code>,
+     **               there is not enough disk space for this operation.
+     **
+     ** @exception
+     ** omsDefs::OperationFailed:
+     ** <code>errorCode = "swm_unable_to_read_state"</code>,
+     **             unable to access the file
+     **             StateOfSoftwareConfiguration.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_write_sc_state"</code>,
+     **               unable to write in file StateOfSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_cp_timeout"</code>,
+     **               &lt;List of applications&gt; didn't checkpoint before the
+     **               timeout.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_not_allowed_cpName_30"</code>,
+     **               the checkpoint name must not exceed 30 characters.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_not_allowed_cpName_char"</code>,
+     **               the checkpoint name must consist of digits and letters
+     **               only.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_bad_sc_name_1"</code>,
+     **               first character in SC name must be a letter
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_bad_sc_name_2"</code>,
+     **               SC name may only contain letters, digits and underscores.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_operation_temporarily_unavailable"</code>,
+     **               the checkpoint operation is temporarily unavailable; e.g.,
+     **               node not in stable state.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_checkpoint_operation_temporarily_unavailable"</code>,
+     **               The checkpoint operation is not yet available. Please wait.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_relName_err"</code>,
+     **               release name must be the same as the current active
+     **               software configuration release name.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_os_cmd_failure"</code>,
+     **               an OS command failed unexpectedly.
+     **
+     ** @pre
+     **
+     ** @post
+     **   A copy of the current active Software Configuration is stored with
+     **   the name given by the checkpoint parameter.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void checkpointSoftwareConfiguration(in oamSupport::AdmData data,
+                                in dpeDefs::SoftwareConfigurationName checkpoint)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Calls the NDM operation checkpointSoftwareConfiguration.
+     ** If the releaseName part of the checkpoint parameter is "",
+     ** the current SCs releaseName is used.
+     **
+     ** @param data         OAM session context data.
+     ** @param checkpoint   Software Configuration Name.
+     ** @param setAsDefault set as default SC if this argument is set to true
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_dir_already_exist"</code>,
+     **               software configuration already exists.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_dir"</code>,
+     **               &lt;DPE_ROOT&gt; is not a directory or does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_complete_path"</code>,
+     **               &lt;DPE_ROOT&gt; is not a complete path.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_last_activated"</code>,
+     **               unable to access the file
+     **               LastActivatedSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_disk_full"</code>,
+     **               there is not enough disk space for this operation.
+     **
+     ** @exception
+     ** omsDefs::OperationFailed:
+     ** <code>errorCode = "swm_unable_to_read_state"</code>,
+     **             unable to access the file
+     **             StateOfSoftwareConfiguration.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_write_sc_state"</code>,
+     **               unable to write in file StateOfSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_cp_timeout"</code>,
+     **               &lt;List of applications&gt; didn't checkpoint before the
+     **               timeout.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_not_allowed_cpName_30"</code>,
+     **               the checkpoint name must not exceed 30 characters.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_not_allowed_cpName_char"</code>,
+     **               the checkpoint name must consist of digits and letters
+     **               only.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_bad_sc_name_1"</code>,
+     **               first character in SC name must be a letter
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_bad_sc_name_2"</code>,
+     **               SC name may only contain letters, digits and underscores.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_operation_temporarily_unavailable"</code>,
+     **               the checkpoint operation is temporarily unavailable; e.g.,
+     **               node not in stable state.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_checkpoint_operation_temporarily_unavailable"</code>,
+     **               The checkpoint operation is not yet available. Please wait.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_relName_err"</code>,
+     **               release name must be the same as the current active
+     **               software configuration release name.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_os_cmd_failure"</code>,
+     **               an OS command failed unexpectedly.
+     **
+     ** @pre
+     **
+     ** @post
+     **   A copy of the current active Software Configuration is stored with
+     **   the name given by the checkpoint parameter.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void checkpointSoftwareConfiguration_2(in oamSupport::AdmData data,
+                                in dpeDefs::SoftwareConfigurationName checkpoint,
+                                in boolean setAsDefault)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Calls the SWM operation removeSoftwareConfiguration.
+     **
+     ** @param data         OAM session context data.
+     ** @param remove       Software Configuration Name.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_dir"</code>,
+     **               &lt;DPE_ROOT&gt; is not a directory or does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_complete_path"</code>,
+     **               &lt;DPE_ROOT&gt; is not a complete path.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_version_mismatch"</code>,
+     **               version mismatch &lt;SC&gt; <-> &lt;remove SC tool&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_do_not_exist"</code>,
+     **               the software configuration &lt;SC&gt; does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_state"</code>,
+     **               unable to access the file StateOfSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_wrong_sc_state"</code>,
+     **               the software configuration has the wrong state for
+     **               this operation.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_permanent"</code>,
+     **               unable to access the file PermanentSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_permanent"</code>,
+     **               the software configuration is referenced by
+     **               PermanentSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_last_booted"</code>,
+     **               unable to access the file LastBootedSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_in_use_erlang"</code>,
+     **               the software configuration is in use as root dir
+     **               by at least one Erlang capsule.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_last_booted"</code>,
+     **               the software configuration is referenced by
+     **               LastBootedSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_last_activated"</code>,
+     **               unable to access the file
+     **               LastActivatedSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_last_activated"</code>,
+     **               the software configuration is referenced by
+     **               LastActivatedSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_next"</code>,
+     **               unable to access the file NextSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_next"</code>,
+     **               the software configuration is referenced by
+     **               NextSoftwareConfiguration.
+     **
+     ** @pre
+     **
+     ** @post
+     **   The Software Configuration named according to the
+     **   remove parameter is removed.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void removeSoftwareConfiguration(in oamSupport::AdmData data,
+                                   in dpeDefs::SoftwareConfigurationName remove)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Checks that the SC is not already created.
+     **
+     ** @param data              OAM session context data.
+     ** @param uploadFileNameMt  relative name of the file which is to be
+     **                          uploaded (MT side).
+     ** @param uploadToName      full path name of the file to be uploaded
+     **                          on the NE side, relative to the NE FTP server
+     **                          root.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_dir_exist"</code>,
+     **               the software configuration can not be created as
+     **               it already exists.
+     **
+     ** @pre
+     **
+     ** @post
+     **   The Software Configuration named according to the
+     **   upload parameter is locked.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void preUploadNDP(in oamSupport::AdmData data,
+                        in string  uploadFileNameMt,
+                        out string uploadToName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Installs a Software Configuration from the uploaded NDP.
+     **
+     ** @param data              OAM session context data.
+     ** @param uploadFileName    name of the file which was uploaded to the NE.
+     ** @param copyActiveConfig  not used anymore.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_dir"</code>,
+     **               &lt;DPE_ROOT&gt; is not a directory or does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_dpe_root_not_complete_path"</code>,
+     **               &lt;DPE_ROOT&gt; is not a complete path.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_ndp_do_not_exist"</code>,
+     **               &lt;NDP&gt; does not exist under DPE_ROOT/DeliveryPackages.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_dir_exist"</code>,
+     **               the software configuration can not be created as
+     **               it already exists.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_cb_dir_exist"</code>,
+     **               the cb dir can not be created as it already exists.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_invalid_ndp_name"</code>,
+     **               &lt;NDP&gt; is an invalid NDP name.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_invalid_character_in_ndp_name"</code>,
+     **               &lt;NDP&gt; name is invalid, the name may only contain
+     **               letters, digits, and '_'.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_invalid_initial_digit_in_ndp_name"</code>,
+     **               &lt;NDP&gt; name is invalid, the AS field may not begin with a
+     **               digit.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_revision_missing"</code>,
+     **               &lt;File&gt; has no revision.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_revision_too_long"</code>,
+     **               revision of &lt;file&gt; is too long.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_ndp_not_complete"</code>,
+     **               the NDP is not complete, &lt;directory or file&gt; is missing.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_undefined_file_in_ndp"</code>,
+     **               the NDP contains an undefined file, &lt;file&gt;, in directory
+     **               ADPs.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_write_sc_state"</code>,
+     **               unable to write in file StateOfSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_inconsistent_config_file"</code>,
+     **               configuration files in &lt;NDP&gt; are inconsistent.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_adp_installation_failed"</code>,
+     **               failed to install ADP in software configuration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_inconsistent_pap_file"</code>,
+     **               persistent applications file is inconsistent.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_adp_missing"</code>,
+     **               application &lt;ADP&gt; in the persistent applications file
+     **               is not represented by an ADP.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_illegal_combination_of_deployment_parameters"</code>,
+     **               illegal combination of deployment parameters for (at least)
+     **               deployment file type: &lt;file type&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unsupported_migration_path"</code>,
+     **               unsupported migration path: &lt;path&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_wrong_sc_state"</code>,
+     **               the software configuration has the wrong state for
+     **               this operation.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_write_sc_state"</code>,
+     **               unable to write in file StateOfSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_ndp_corrupt"</code>,
+     **               error when unpacking NDP, the NDP package is corrupt.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_command_failed"</code>,
+     **               the following command failed: &lt;command&gt;.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_otp_installation_failed"</code>,
+     **               the installation of OTP failed.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_file_update_failed"</code>,
+     **               failed to update file: &lt;file&gt;.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_internal_error"</code>,
+     **               internal error in the SWM scripts.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_supercp_installation_failed"</code>,
+     **               Installation of SuperCP failed.
+     **
+     ** @pre
+     **
+     ** @post
+     **   The Software Configuration named according to the
+     **   upload parameter is installed and unlocked.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+       void postUploadNDP(in oamSupport::AdmData data,
+                          in string uploadFileName,
+                          in boolean copyActiveConfig)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Installs a Software Configuration from the uploaded NDP, and
+     ** supply deployment information.
+     **
+     ** @param data              OAM session context data.
+     ** @param uploadFileName    name of the file which was uploaded to the NE.
+     ** @param deploymentData    Deployment arguments passed to deployNDP
+     **                          inside createSoftwareConfiguration.
+     ** @param superCPs          A list of SuperCPs to install
+     ** @param diskWarning       A warning message about low disk space,
+     **                          or the empty string.
+     **
+     ** For information about exceptions, @see postUploadNDP.
+     **
+     ** @pre
+     **
+     ** @post
+     **   The Software Configuration named according to the
+     **   upload parameter is installed and unlocked.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+       void postUploadNDPwDeplData(in oamSupport::AdmData data,
+                                   in string uploadFileName,
+                                   in dpeDefs::DeploymentInfo deploymentData,
+                                   in dpeDefs::ListOfStrings superCPs,
+                                   out string diskWarning)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Creates a new Software Configuration with supplied deployment
+     ** information.
+     **
+     ** @param data              OAM session context data.
+     ** @param scName            Name of new software configuration
+     ** @param deploymentData    Deployment arguments passed to deployNDP
+     **                          inside redeploySC.
+     **
+     ** For information about exceptions, @see postUploadNDP.
+     **
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+       void redeploySoftwareConfiguration(in oamSupport::AdmData data,
+                                   in string scName,
+                                   in dpeDefs::DeploymentInfo deploymentData)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Reset deloyment on an unconfigured SC.
+     **
+     ** @param data              OAM session context data.
+     ** @param deploymentData    Deployment arguments passed to deployNDP
+     **                          inside redeploySC.
+     **
+     **
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+       void resetDeployment(in oamSupport::AdmData data,
+                            in dpeDefs::DeploymentInfo deploymentData)
+         raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void preUploadADP(in oamSupport::AdmData data,
+                        in dpeDefs::SoftwareConfigurationName upload,
+                        in string  uploadFileNameMt,
+                        out string uploadToName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void postUploadADP(in oamSupport::AdmData data,
+                         in dpeDefs::SoftwareConfigurationName upload,
+                         in string uploadFileName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void preUpload(in oamSupport::AdmData data,
+                     in string  uploadFileNameMt,
+                     out string uploadToName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void postUpload(in oamSupport::AdmData data,
+                      in string uploadFileName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void preDownload(in oamSupport::AdmData data,
+                       in dpeDefs::SoftwareConfigurationName download,
+                       out string downloadFromName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "swm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5. No replacement method.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void postDownload(in oamSupport::AdmData data,
+                        in dpeDefs::SoftwareConfigurationName download)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Starts the script installSuperCP.
+     **
+     ** @param data            OAM session context data.
+     ** @param superCPs        List of superCPs to be installed
+     **                        (e.g. superCP_GPRS_R1A01_1_0.tar).
+     ** @param configName      The name of the software configuration to
+     **                        be used as base for installation (e.g. SC_1).
+     ** @param newSCName       Suggested name of the software configuration
+     **                        that will be created as result of the patching.
+     ** @param patchedSCName   The name of the software configuration that
+     **                        was created due to the patching.
+     ** @param diskWarning     An error message about disk space, or the
+     **                        empty string.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_otp_installation_failed"</code>,
+     **               The installation of OTP failed.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_version_mismatch"</code>,
+     **               version mismatch &lt;SC&gt; <-> &lt;patch tool&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_version_mismatch"</code>,
+     **               version mismatch &lt;SuperCP&gt; <-> &lt;patch tool&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_pre_post_script_failure"</code>,
+     **               &lt;pre-/postscript&gt failed;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_supercp_does_not_exist"</code>,
+     **               the SuperCP &lt;SuperCP&gt; does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_supercp_not_correctly_assembled"</code>,
+     **               the SuperCP &lt;SuperCP&gt; is not correctly assembled.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_cp_not_correctly_assembled"</code>,
+     **               (at least) CP &lt;CP&gt; is not correctly assembled with
+     **               respect to mandatory directories or files.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_illegal_path_to_patch_file"</code>,
+     **               (at least) CP &lt;CP&gt; contains at least one illegal
+     **               path to a patch file.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_wrong_sc_state"</code>,
+     **               the software configuration has the wrong state for this
+     **               operation.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_do_not_exist"</code>,
+     **               the software configuration &lt;SC&gt; does not exist.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_write_sc_state"</code>,
+     **               unable to write in file StateOfSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_disk_full"</code>,
+     **               there is not enough disk space for this operation.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_unable_to_read_state"</code>,
+     **               unable to access the file StateOfSoftwareConfiguration.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_inconsistent_checksum"</code>,
+     **               patching aborted due to inconsistent checksum in CP &lt;CP&gt;.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_sc_not_yet_activated"</code>,
+     **               SC &lt;0&gt; must have been activated (at least) once
+     **               prior to patching it. Patching aborted.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_corrupt_versioned_file"</code>,
+     **               the file &lt;0&gt; already exists on the node with
+     **               differing contents. Patching aborted.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_bad_sc_name_1"</code>,
+     **               first character in SC name must be a letter.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_bad_sc_name_2"</code>,
+     **               SC name may only contain letters, digits and underscore.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swm_bad_sc_name_50"</code>,
+     **               SC name may only be 50 characters long.
+     ** @pre
+     **
+     ** @post
+     **   A new Software Configuration is created from the patch.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void installSuperCP(in oamSupport::AdmData data,
+                          in dpeDefs::SoftwareConfigurationName configName,
+                          in string newSCName,
+                          in dpeDefs::ListOfStrings superCPs,
+                          out string patchedSCName,
+                          out string diskWarning)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns the path to where to upload SuperCPs.
+     **
+     ** @param data            OAM session context data.
+     ** @param patchPathName   full path name of where to ftp the superCP.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void getPatchUploadPath( in oamSupport::AdmData data,
+                               out string patchPathName)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Adds a comment to the ISP log.
+     **
+     ** @param data      OAM session context data.
+     ** @param comment   the comment to be added to the ISP log
+     **                  (max 255 characters).
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_isp_comment_too_long"</code>,
+     **               an ISP Log comment can not be longer than 255 characters.
+     **
+     ** @pre
+     **
+     ** @post
+     **   A comment is added to the ISP log.
+     **/
+    // #SM_ASD: swcm_slo_active: change on node
+    void addISPLogComment( in oamSupport::AdmData data,
+                           in string comment)
+      raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** Leave maintenance mode
+     **
+     ** @param data OAM session context data.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "swcm_slo_dpe_err_NotInMaintenanceMode"</code>,
+     **               Can not leave maintenance mode when not in maintenance mode.
+     **
+     ** @pre
+     **
+     ** @post
+     **/
+      // #SM_ASD: swcm_slo_active: change on node
+      void exitMaintMode( in oamSupport::AdmData data )
+           raises(omsDefs::OperationFailed);
+
+       //******************************************************************
+       /**
+        ** Perform preUpdateConfigurationCheck
+        **
+        ** @param data OAM session context data.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swcm_slo_eversion"</code>,
+        **               interface versions does not match.
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swcm_slo_eadmin"</code>,
+        **               could not contact sequrity management.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swcm_slo_pre_install_config_check_failed"</code>,
+        **               preUpdateConfigurationCheck unsuccesful.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swm_internal_error"</code>,
+        **               Internal error in preUpdateConfigurationCheck scripts.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swm_sc_do_not_exist"</code>,
+        **               The SC did not exist.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swm_wrong_sc_state"</code>,
+        **               The SC is not in state Patched.
+        ** @pre
+        **
+        ** @post
+        **/
+       // #SM_ASD: swcm_slo_active: change on node
+       void preUpdateConfigurationCheck(in oamSupport::AdmData data, in string SCName)
+         raises(omsDefs::OperationFailed);
+      
+       //******************************************************************
+       /**
+        ** Perform preUpgradeConfigurationCheck
+        **
+        ** @param data OAM session context data.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swcm_slo_eversion"</code>,
+        **               interface versions does not match.
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swcm_slo_eadmin"</code>,
+        **               could not contact sequrity management.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swcm_slo_pre_install_config_check_failed"</code>,
+        **               preUpgradeConfigurationCheck unsuccesful.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swm_internal_error"</code>,
+        **               Internal error in preUpdateConfigurationCheck scripts.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swm_sc_do_not_exist"</code>,
+        **               The SC did not exist.
+        **
+        ** @exception
+        **   omsDefs::OperationFailed:
+        **   <code>errorCode = "swm_wrong_sc_state"</code>,
+        **               The SC is not in state Installed.
+        ** @pre
+        **
+        ** @post
+        **/
+       // #SM_ASD: swcm_slo_active: change on node
+       void preUpgradeConfigurationCheck(in oamSupport::AdmData data, in string SCName)
+           raises(omsDefs::OperationFailed);
+   };
+};
+#endif

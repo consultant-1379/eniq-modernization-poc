@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:03:26 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>title</momTitle>
+        <momSubTitle>sub title</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>date</docDate>
+        </momIdentity>
+    </momMetaData>
+    <mim author="EAB/FBA/TN Johan Landtmansson" contact="EAB/FBA/TN Johan Landtmansson" correction="0" date="2014-07-02" docNo="" name="SgsnMmeHwIM" namespace="urn:com:ericsson:ecim:SgsnMmeHwIM" namespacePrefix="sgsnmmehwim" organization="EAB/FBA/T - NDO SGSN-MME" release="11" revision="A" version="1">
+        <description>ECIM Hardware Inventory.
+Introduced in SGSN-MME 15A</description>
+        <domainExtension domain="ECIM">
+            <extension name="ecimMomName" value="ECIM_HwIM"/>
+            <extension name="ecimMomVersion" value="1"/>
+            <extension name="ecimMomRelease" value="2"/>
+            <extension name="ecimMomCorrection" value="0"/>
+        </domainExtension>
+        <implements correction="0" name="ECIM_HwIM" release="2" version="1"/>
+        <struct name="ProductIdentity">
+            <description>Contains product infomation for a Managed Element and ManagedFunction(s).&#13;
+This entity is deprecated.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="productNumber">
+                <description>The product number in Ericsson's ABC format.See Ericsson Corporate Basic Standards for information.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isKey" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pnum"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productRevision">
+                <description>The product revision in the form R[1-9][A-Z].See Ericsson Corporate Basic Standards for information.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="prev"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productDesignation">
+                <description>The product designation is the common name for the product. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pdes"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string>
+                    <defaultValue/>
+                </string>
+            </structMember>
+        </struct>
+        <struct name="HwItemAttribute">
+            <description>The HwItemAttribute allows for the addition of attributes that are considered application specific.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="name">
+                <description>Attribute name.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="na"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="value">
+                <description>Attribute value.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="va"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <enum name="HwDataEntry">
+            <description>The mode for handling the inventory data insertion.
+Indicates whether the unit is passive (manual insertion of inventory data is required) or active (inventory data can be read from the unit).</description>
+            <enumMember name="PASSIVE">
+                <description>Manual insertion of inventory data is required. </description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="ACTIVE">
+                <description>Inventory data can be read from the hardware item.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <derivedDataType name="DateTime">
+            <description>DateTime in format YYYY-MM-DDThh:mm:ss.SSSZ .</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>19</min>
+                        <max>31</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>19</min>
+                            <max>31</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <class name="HwInventory">
+            <description>The HW Inventory.&#13;
+&#13;
+This MO is created by the system.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <attribute name="hwInventoryId">
+                <description>The unique identifier for this object instance. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="hid"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="timeOfLatestInvChange">
+                <description>The time of the latest inventory change. An inventory change results in an AVC notification.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tolic"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="userLabel">
+                <description>Label that should be used by the operator or commissioning engineer to provide relevant information.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ul"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="HwItem">
+            <description>HwItem represents any kind of Ericsson hardware which is present on the ME.
+This MO is created by the system.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="hwItemId">
+                <description>The unique identifier for this object instance.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="hii"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="vendorName">
+                <description>The name of the hardware item vendor (or vendors may provide manufacturer name).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="vn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="hwModel">
+                <description>The hardware configuration. 
+E.g. standard hw unit or a variant that may contain additional disk capacity.
+Compared to hwName, this is yet a futher specification of the HwItem, e.g. a DUG or GEP5.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="hm"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="hwType">
+                <description>The hardware item type. 
+Used for a general classification of the HwItem, e.g. Blade or ReplaceableUnit.
+The hwType shall correspond to the MO Class of the corresponding MO in ECIM Equipment, e.g. Blade or FieldReplaceableUnit.
+If a managed element does not support ECIM Equipment, it may choose one of the ECIM Optional Constructs – Cabinet, Shelf , Rack, PluginUnit, Blade, Card, PhysicalConnector, FanModule – as appropriate.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ht"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="hwName">
+                <description>Mnemonic of hw inventory unit family type.
+Compared to hwType, this is a more specific classification of the HwItem, e.g. Fan, Digital Unit or Generic Processor.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="hn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="hwCapability">
+                <description>A freetext description of the hardware capability e.g. capacity, size.
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="hc"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="equipmentMoRef">
+                <description>Reference to a managed object from the Equipment model.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="emr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <moRef name="ManagedObject"/>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="additionalInformation">
+                <description>Supplementary information about the inventory data (if any).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ai"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="hwUnitLocation">
+                <description>The position of the hardware item. 
+Depending on the implementation of the unit in the managed system, the value and meaning of this attribute may vary. 
+For example, if a system has three levels and types of units representing Rack, Shelf and Slot respectively (i.e. the Managed Element contains multiple Rack inventory units, each Rack inventory unit contains multiple Shelf inventory units and each Shelf inventory unit contains multiple Slot inventory units), then for this example:
+- for the Inventory Unit representing a Rack, the Frame Identification code may be used as the value of this attribute
+- for the Inventory Unit representing a Shelf, the Rack Shelf code may be used as the value of this attribute
+- for the Inventory Unit representing a Slot, the position code may be used as the value of this attribute
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="hul"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="manualDataEntry">
+                <description>The mode for handling the inventory data insertion.
+Indicates whether the unit is passive (manual insertion of inventory data is needed) or active (inventory data can be read from the unit).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mde"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="HwDataEntry">
+                        <defaultValue>ACTIVE</defaultValue>
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="serialNumber">
+                <description>The serial number of the hardware.
+The serial number consists of max 35 alphanumerical characters. However, it typically consists of 13 characters grouped as 6 plus 7 characters. The first 6 characters are to be used for factory codes and the last 7 characters are used for an individual number or batch number. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="dateOfLastService">
+                <description>The date of last service or repair of the hardware item.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dols"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="dateOfManufacture">
+                <description>The date of manufacture of the hardware item.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dom"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="swInvMoRef">
+                <description>Reference to a managed object from the SwIM model.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="simr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <moRef name="ManagedObject"/>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="licMgmtMoRef">
+                <description>Reference to a managed object from the Licence Management model.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lmmr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <moRef name="ManagedObject"/>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="additionalAttributes">
+                <description>Additional HwItem attributes that are considered application specific.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aa"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <structRef name="HwItemAttribute">
+                            <mimName>SgsnMmeHwIM</mimName>
+                        </structRef>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="productIdentity">
+                <description>ProductIdentity contains product designation, number, and revision information.
+The product designation, i.e. productNumber + productRevision should correspond to what is defined in PRIM.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <structRef name="ProductIdentity">
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+        </class>
+        <relationship name="HwInventory_to_HwItem">
+            <containment>
+                <parent>
+                    <hasClass name="HwInventory">
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="HwItem">
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </mim>
+    <interMim>
+        <relationship name="SystemFunctions_to_HwInventory">
+            <containment>
+                <parent>
+                    <hasClass name="SystemFunctions">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="HwInventory">
+                        <mimName>SgsnMmeHwIM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </interMim>
+</models>

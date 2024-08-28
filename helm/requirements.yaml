@@ -1,0 +1,16 @@
+dependencies:
+- name: hdfs
+  repository: "file://./kubernetes-HDFS-master/charts/hdfs-k8s/"
+  version: "0.1.1"
+- name: eric-data-engine-sk
+  repository: https://arm.epk.ericsson.se/artifactory/proj-helm_aia-generic-local/releases/eric-data-engine-sk
+  version: 1.0.0-20
+- name: drill
+  repository: "file://./drill/"
+  version: "0.1.0"
+- name: eric-pm-server
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm/
+  version: 1.3.0-7
+- name: eric-data-coordinator-zk
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-gs-all-helm/
+  version: 1.4.0+6

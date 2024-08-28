@@ -1,0 +1,1154 @@
+// ==================================================================
+//
+// NAME
+//   eqMI - API for Equipment Management Functions towards
+//        the Management interface
+//
+// INTERFACES       REGISTERED NAME
+//   eqMI::SLO      "oam/cps/equipment"
+//
+// FILE
+//   eqMI.idl
+//
+// Copyright Ericsson AB 1998-2015
+//   The copyright to the computer program(s) herein is the
+//   property of ERICSSON AB, Sweden. The program(s) may be used
+//   and/or copied only with the written permission from ERICSSON AB
+//   or in accordance with the terms and conditions stipulated
+//   in the agreement/contract under which the program(s) have
+//   been supplied.
+//
+// DESCRIPTION
+//   See documentation comments below.
+//
+// ==================================================================
+
+/**
+ ** @file
+ **
+ ** API for Equipment Management Functions towards the Management
+ ** interface.
+ **/
+
+#ifndef eq_MI_Idl
+#define eq_MI_Idl
+
+// Include general OMS and DPE types and definitions.
+#include "omsDefs.idl"
+#include "dpeDefs.idl"
+
+#include "oamSupport.idl"
+
+/**
+ ** Namespace for Equipment Management Functions towards the Management
+ ** interface.
+ ** <p>
+ ** This API provides the access to the equipment management functions of
+ ** GPRS Core 2.0 towards the IIOP interface.
+ ** Most functions in this Module use API towards DPE (NCL) to access the
+ ** equipment manangement resources
+ ** <p>
+ ** This interface can be used by the management clients both to retrieve
+ ** information about the equipment management resources and to affect
+ ** the equipment management resources.
+ **/
+
+module eqMI {
+
+  /**
+   ** API for Equipment Management Functions towards the Management
+   ** interface.
+   ** <p>
+   ** The <code>eqMI::SLO</code> interface is registered with the name
+   ** <b><code>oam/cps/equipment</code></b> on the node.
+   **
+   **/
+
+   interface SLO {
+
+      const long IF_VERSION = 1;
+
+      // =================================//
+      // Information Retrieval Functions  //
+      // =================================//
+
+      //*****************************************************************
+    /**
+     ** Returns a list of all installed, not foreign, equipment. The list
+     ** contains for each equipment element, the equipment id
+     ** and the equipment class. All the equipment ids have the
+     ** "start" attribute of 0.
+     **
+     ** @param data     OAM session context data.
+     ** @param eqList   list of all allowed equipment elements (PIUs and PMs).
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_dpe_err_OutOfResources"</code>,
+     **               failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_dpe_timeout"</code>,
+     **               timeout during a call to DPE.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: eqma_slo_passive: retrieve data
+      void getInstalledEquipmentList(in oamSupport::AdmData data,
+                                     out dpeDefs::EquipmentInstanceList eqList)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //*****************************************************************
+    /**
+     ** Returns a list of equipment according to the specified listType.
+     ** The list contains for each equipment element, the equipment id
+     ** and the equipment class. All the equipment ids have the
+     ** "start" attribute of 0.
+     **
+     ** @param data     : OAM session context data.
+     ** @param listType : type of requested equipment.
+     **   <table>
+     **     <tr><th>Type</th><th>Description</th></tr>
+     **     <tr>
+     **       <td><code>EqListAll</code></td>
+     **       <td>All installed, not foreign, equipments (PIUs and PMs)</td>
+     **     </tr><tr>
+     **       <td><code>EqListPIU</code></td>
+     **       <td>All installed, not foreign, equipments (PIUs)</td>
+     **     </tr><tr>
+     **       <td><code>EqListUp</code></td>
+     **       <td>All installed, not blocked and not foreign, equipments (PIUs)
+     **           with status Up</td>
+     **     </tr><tr>
+     **       <td><code>EqListDown</code></td>
+     **       <td>All installed, not foreign, equipments (PIUs) with status
+     **           Down</td>
+     **     </tr><tr>
+     **       <td><code>EqListBlocked</code></td>
+     **       <td>All blocked equipments (PIUs)</td>
+     **     </tr><tr>
+     **       <td><code>EqListForeign</code></td>
+     **       <td>All foreign equipments (PIUs)</td>
+     **     </tr>
+     **   </table>
+     ** @param eqList   list of equipments .
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_OutOfResources"</code>,
+     **                     failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: eqma_slo_passive: retrieve data
+    void getEquipmentList(in oamSupport::AdmData data,
+                          in  dpeDefs::EqListType listType,
+                          out dpeDefs::EquipmentInstanceList eqList)
+      raises(omsDefs::OperationFailed);
+
+
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::getEquipmentElementInfo_3</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5.
+     **   Use <code>eqMI::SLO::getEquipmentElementInfo_3</code>.
+     **/
+      // #SM_ASD: eqma_slo_passive: retrieve data
+      void getEquipmentElementInfo(in oamSupport::AdmData data,
+                                   in  dpeDefs::EquipmentId eqElement,
+                                   out dpeDefs::EquipmentInfo eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::getEquipmentElementInfo_3</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R6.
+     **   Use <code>eqMI::SLO::getEquipmentElementInfo_3</code>.
+     **/
+      // #SM_ASD: eqma_slo_passive: retrieve data
+      void getEquipmentElementInfo_2(in oamSupport::AdmData data,
+                                     in  dpeDefs::EquipmentId eqElement,
+                                     out dpeDefs::EquipmentInfo_2 eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Returns elaborated equipment
+     ** information for the selected equipment element.
+     **
+     ** @param data          OAM session context data.
+     ** @param eqElement     the id of the equipment element, for which
+     **                      the information is to be retrieved.
+     ** @param eqElementInfo the elaborated information about the specific
+     **                      equipment element.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_OutOfResources"</code>,
+     **                     failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_TcieEntryNotFound"</code>,
+     **                     table of curently installed equipment not found.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: eqma_slo_passive: retrieve data
+    void getEquipmentElementInfo_3(in oamSupport::AdmData data,
+                                   in  dpeDefs::EquipmentId eqElement,
+                                   out dpeDefs::EquipmentInfo_3 eqElementInfo)
+      raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** Returns elaborated equipment
+     ** information for the selected equipment element.
+     **
+     ** @param data          OAM session context data.
+     ** @param eqElement     the id of the equipment element, for which
+     **                      the information is to be retrieved.
+     ** @param eqElementInfo the elaborated information about the specific
+     **                      equipment element.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_OutOfResources"</code>,
+     **                     failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_TcieEntryNotFound"</code>,
+     **                     table of curently installed equipment not found.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: eqma_slo_passive: retrieve data
+    void getEquipmentElementInfo_4(in oamSupport::AdmData data,
+                                   in  dpeDefs::EquipmentId eqElement,
+                                   out dpeDefs::EquipmentInfo_4 eqElementInfo)
+      raises(omsDefs::OperationFailed);
+
+    //*****************************************************************
+    /** Returns elaborated FSB equipment information.
+     **
+     ** @param data    OAM session context data
+     ** @param FSBinfo the elaborated FSB equipment information.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions do not match.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_OutOfResources"</code>,
+     **                     failed to allocate memory to hold the result data.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: eqma_slo_passive: retrieve data
+    void getFSBinfo( in  oamSupport::AdmData data,
+                     out string FSBinfo)
+      raises(omsDefs::OperationFailed);
+
+
+    //*****************************************************************
+    /**
+     ** Retrieves a list of equipment id's matching the specified logical name
+     ** defined in the Crane Board Dictionary(CBD). See "DPE interfaces for
+     ** applications written in C".
+     **
+     ** @param data    OAM session context data.
+     ** @param lName   logical name.
+     ** @param eqList  list of equipment id's.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_OutOfResources"</code>,
+     **                     failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: eqma_slo_passive: retrieve data
+      void getCBDBoards(in oamSupport::AdmData data,
+                        in string lName,
+                        out dpeDefs::EquipmentList eqList)
+           raises(omsDefs::OperationFailed);
+
+
+    //*****************************************************************
+    /**
+     ** Retrieves the equipment ID for the Active NCB
+     **
+     ** @param data   OAM session context data.
+     ** @param eqId   Id of active NCB .
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_OutOfResources"</code>,
+     **                     failed to allocate memory to hold the result data.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: eqma_slo_passive: retrieve data
+      void getActiveNCB(in oamSupport::AdmData data,
+                        out dpeDefs::EquipmentId eqId)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //*****************************************************************
+    /**
+     ** Retrieves the equipment ID for the Passive NCB
+     **
+     ** @param data   OAM session context data.
+     ** @param eqId   Id of passive NCB.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_OutOfResources"</code>,
+     **                     failed to allocate memory to hold the result data.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_no_passive_ncb"</code>,
+     **                     no passive node found.
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+      // #SM_ASD: eqma_slo_passive: retrieve data
+      void getPassiveNCB(in oamSupport::AdmData data,
+                        out dpeDefs::EquipmentId eqId)
+           raises(omsDefs::OperationFailed);
+
+
+
+
+      // =================================//
+      // Control Functions                //
+      // =================================//
+
+      //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "eqm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R6. No replacement method. Use
+     **   blocking to avoid delaying startup.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void checkpointInstalledEquipment(in oamSupport::AdmData data)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::blockEquipmentElement_2()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5.
+     **   Use <code>eqMI::SLO::blockEquipmentElement_2</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void blockEquipmentElement(in oamSupport::AdmData data,
+                                 in  dpeDefs::EquipmentId eqElement,
+                                 out dpeDefs::EquipmentInfo eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::blockEquipmentElement_3()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R8.
+     **   Use <code>eqMI::SLO::blockEquipmentElement_3</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void blockEquipmentElement_2(in oamSupport::AdmData data,
+                                   in  dpeDefs::EquipmentId eqElement,
+                                   out dpeDefs::EquipmentInfo_2 eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::blockEquipmentElement_4()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from SGSN 2014A.
+     **   Use <code>eqMI::SLO::blockEquipmentElement_4</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void blockEquipmentElement_3(in  oamSupport::AdmData      data,
+                                   in  dpeDefs::EquipmentId     eqElement,
+                                   in  dpeDefs::ForceOperation  force,
+                                   out dpeDefs::EquipmentInfo_2 eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** Calls the EQM operation "blockElement". The elaborated equipment
+     ** information, for the selected equipment element, is returned.
+     ** The state change is propagated to equipment lower in the hierarchy.
+     **
+     ** @param data           OAM session context data.
+     ** @param eqElement      the id of the equipment element, which is
+     **                       to be "blocked".
+     ** @param force          Tells DPE if it is acceptable to reject
+     **                       this operation (due to resource shortage) or not.
+     **
+     ** @param poweroff       Tells DPE if a poweroff command will follow
+     **                       the block command.
+     **
+     ** @param eqElementInfo  the elaborated information about the specific
+     **                       equipment element at the time when the operation
+     **                       is started.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockActiveNCB"</code>,
+     **                     cannot block NCB with no backup NCB.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockActiveNCB"</code>,
+     **                     cannot block NCB with no backup NCB.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockRejected"</code>,
+     **                     Blocked operation rejected. E.g., due to
+     **                     resource shortage.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_EqElementSyntaxInvalid"</code>,
+     **                     two parameters required.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state possibly changed.
+     **
+     **
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void blockEquipmentElement_4(in  oamSupport::AdmData          data,
+                                   in  dpeDefs::EquipmentId         eqElement,
+                                   in  dpeDefs::ForceOperation      force,
+                                   in  dpeDefs::PowerStateOperation poweroff,
+                                   out dpeDefs::EquipmentInfo_2     eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** Calls the EQM operation "blockElement". The elaborated equipment
+     ** information, for the selected equipment element, is returned.
+     ** The state change is propagated to equipment lower in the hierarchy.
+     **
+     ** @param data           OAM session context data.
+     ** @param eqElement      the id of the equipment element, which is
+     **                       to be "blocked".
+     **
+     ** @param remove         Tells DPE that this is a scale-in operation
+     **                       and that this PIU is to be cleaned out.
+     **
+     ** @param force          Tells DPE if it is acceptable to reject
+     **                       this operation (due to resource shortage) or not.
+     **
+     ** @param poweroff       Tells DPE if a poweroff command will follow
+     **                       the block command.
+     **
+     ** @param eqElementInfo  the elaborated information about the specific
+     **                       equipment element at the time when the operation
+     **                       is started.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockActiveNCB"</code>,
+     **                     cannot block NCB with no backup NCB.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockActiveNCB"</code>,
+     **                     cannot block NCB with no backup NCB.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockRejected"</code>,
+     **                     Blocked operation rejected. E.g., due to
+     **                     resource shortage.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_EqElementSyntaxInvalid"</code>,
+     **                     two parameters required.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockDeblockAlreadyBlocked"</code>,
+     **                     equipment is already blocked.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state possibly changed.
+     **
+     **
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void blockEquipmentElement_5(in  oamSupport::AdmData          data,
+                                   in  dpeDefs::EquipmentId         eqElement,
+                                   in  dpeDefs::RemoveOperation     remove,
+                                   in  dpeDefs::ForceOperation      force,
+                                   in  dpeDefs::PowerStateOperation poweroff,
+                                   out dpeDefs::EquipmentInfo_2     eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     ** Kept in the interface for backward compability but will always
+     ** throw "eqm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5.
+     **   Use <code>eqMI::SLO::blockEquipmentElement_2</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void permblockEquipmentElement(in oamSupport::AdmData data,
+                                     in  dpeDefs::EquipmentId eqElement,
+                                     out dpeDefs::EquipmentInfo eqElementInfo)
+                raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** This operation is no longer supported.
+     **   Kept in the interface for backward compability but will always
+     **   throw "eqm_operation_not_supported".
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5.
+     **   Use <code>eqMI::SLO::blockEquipmentElement_2</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void permblockEquipmentElement_2(in oamSupport::AdmData data,
+                                       in  dpeDefs::EquipmentId eqElement,
+                                       out dpeDefs::EquipmentInfo_2 eqElementInfo)
+                raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::deblockEquipmentElement_2()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5.
+     **   Use <code>eqMI::SLO::deblockEquipmentElement_2</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void deblockEquipmentElement(in oamSupport::AdmData data,
+                                   in dpeDefs::EquipmentId eqElement,
+                                   out dpeDefs::EquipmentInfo eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Calls the EQM operation "deblockElement". The elaborated equipment
+     ** information, for the selected equipment element, is returned.
+     ** The state change is propagated to equipment lower in the hierarchy.
+     ** This function returns before the deblock operation is completed.
+     **
+     ** @param data          OAM session context data.
+     ** @param eqElement     the id of the equipment element, which
+     **                      is to be "deblocked".
+     ** @param eqElementInfo the elaborated information about the specific
+     **                      equipment element at the time when the operation
+     **                      is started.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_BlockDeblockAlreadyDeblocked"</code>,
+     **                     equipment is already deblocked.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_EqElementSyntaxInvalid"</code>,
+     **                     two parameters required.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state possibly changed.
+     **
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void deblockEquipmentElement_2(in oamSupport::AdmData data,
+                                     in dpeDefs::EquipmentId eqElement,
+                                     out dpeDefs::EquipmentInfo_2 eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::restartEquipmentElement_5()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R5.
+     **   Use <code>eqMI::SLO::restartEquipmentElement_5</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void restartEquipmentElement(in oamSupport::AdmData data,
+                                   in dpeDefs::EquipmentId eqElement,
+                                   out dpeDefs::EquipmentInfo eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::restartEquipmentElement_5()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R6.
+     **   Use <code>eqMI::SLO::restartEquipmentElement_5</code>.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void restartEquipmentElement_2(in oamSupport::AdmData data,
+                                   in dpeDefs::EquipmentId eqElement,
+                                   out dpeDefs::EquipmentInfo_2 eqElementInfo)
+           raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::restartEquipmentElement_5()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from GSN R8.
+     **   Use <code>eqMI::SLO::restartEquipmentElement_5</code>.
+     **
+     ** Calls the EQM operation "restartElement" and adds a restart
+     ** reason comment in the ISP log.
+     **
+     ** @param data          OAM session context data.
+     ** @param eqElement     the id of the equipment element, which
+     **                      is to be "restarted". If the ID represent the
+     **                      root node, a node restart is performed.
+     ** @param reason        the restart reason.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RestartElementFailed"</code>,
+     **                     NCL failed to stop EQMA.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_NoRestartInMaintMode"</code>,
+     **                     the Node is in Maintenance Mode and is not
+     **                     allowed to be restarted.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_EqElementSyntaxInvalid2"</code>,
+     **                     two or zero parameters required.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state possibly changed.
+     **/
+    // #SM_ASD: eqma_slo_active: change on node
+    void restartEquipmentElement_3(in oamSupport::AdmData data,
+                                   in dpeDefs::EquipmentId eqElement,
+                                   in dpeDefs::RestartReason reason)
+      raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Replaced by <code>eqMI::SLO::restartEquipmentElement_5()</code>.
+     **
+     ** @deprecated
+     **   Deprecated from 13B.
+     **   Use <code>eqMI::SLO::restartEquipmentElement_5</code>.
+     **
+     ** Calls the EQM operation "restartElement" and adds a restart
+     ** reason comment in the ISP log.
+     **
+     ** @param data          OAM session context data.
+     ** @param eqElement     the id of the equipment element, which
+     **                      is to be "restarted". If the ID represent the
+     **                      root node, a node restart is performed.
+     ** @param reason        the restart reason.
+     ** @param force         Tells DPE if it is acceptable to reject
+     **                      this operation (due to resource shortage) or not.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RestartRejected"</code>,
+     **                     Restart operation rejected. E.g., due to
+     **                     resource shortage.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RestartAlreadyInProgress"</code>,
+     **                     Non-forced restart operation rejected,
+     **                     a non-forced restart have already been requested.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RestartElementFailed"</code>,
+     **                     NCL failed to stop EQMA.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_NoRestartInMaintMode"</code>,
+     **                     the Node is in Maintenance Mode and is not
+     **                     allowed to be restarted.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_EqElementSyntaxInvalid2"</code>,
+     **                     two or zero parameters required.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state possibly changed.
+     **/
+    // #SM_ASD: eqma_slo_active: change on node
+    void restartEquipmentElement_4(in oamSupport::AdmData     data,
+                                   in dpeDefs::EquipmentId    eqElement,
+                                   in dpeDefs::RestartReason  reason,
+                                   in dpeDefs::ForceOperation force)
+      raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** Calls the EQM operation "restartElement" and adds a restart
+     ** reason comment in the ISP log.
+     **
+     ** @param data          OAM session context data.
+     ** @param eqElement     the id of the equipment element, which
+     **                      is to be "restarted". If the ID represent the
+     **                      root node, a node restart is performed.
+     ** @param reason        the restart reason.
+     ** @param force         Tells DPE if it is acceptable to reject
+     **                      this operation (due to resource shortage) or not.
+     ** @param restartType   Specifies if a cold restart is explicitly
+     **                      requested.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RestartRejected"</code>,
+     **                     Restart operation rejected. E.g., due to
+     **                     resource shortage.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RestartAlreadyInProgress"</code>,
+     **                     Non-forced restart operation rejected,
+     **                     a non-forced restart have already been requested.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RestartElementFailed"</code>,
+     **                     NCL failed to stop EQMA.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_NoRestartInMaintMode"</code>,
+     **                     the Node is in Maintenance Mode and is not
+     **                     allowed to be restarted.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_EqElementSyntaxInvalid2"</code>,
+     **                     two or zero parameters required.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state possibly changed.
+     **/
+    // #SM_ASD: eqma_slo_active: change on node
+    void restartEquipmentElement_5(in oamSupport::AdmData     data,
+                                   in dpeDefs::EquipmentId    eqElement,
+                                   in dpeDefs::RestartReason  reason,
+                                   in dpeDefs::ForceOperation force,
+                                   in dpeDefs::RestartType    restartType)
+      raises(omsDefs::OperationFailed);
+
+
+    //******************************************************************
+    /**
+     ** Calls the EQM operation "removeElement".
+     **
+     ** @param data      OAM session context data.
+     ** @param eqElement the id of the equipment element, which
+     **                  is to be removed.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_TcieEntryNotFound"</code>,
+     **                     unknown equipment.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RemoveNonCraneboard"</code>,
+     **                     an attempt to remove equipment that is not a
+     **                     Craneboard.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_RemoveActiveEquipment"</code>,
+     **                     some or all elements on the Crane board to be
+     **                     removed are up.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_EqElementSyntaxInvalid3"</code>,
+     **                     two or four parameters required.
+     **
+     ** @pre
+     **   the eqId must exist.
+     **
+     ** @post
+     **   state possibly changed.
+     **/
+      // #SM_ASD: eqma_slo_active: change on node
+      void removeEquipmentElement(in oamSupport::AdmData data,
+                                  in  dpeDefs::EquipmentId eqElement)
+           raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** This operation will initiate SAU capacity expansion to the new
+     ** capacity level described by @param sau . The call will return when
+     ** the new capcity level is validated, before the affected boards are
+     ** restarted.
+     **
+     ** @param data           OAM session context data.
+     ** @param sau       name of new sau capacity deployment
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_DeploymentChangeRejected"</code>,
+     **                     Deployment change denied by application.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_unsupported_deployment_change"</code>,
+     **                     The deployment change path is not supported in
+     **                     current release.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_operation_not_allowed"</code>,
+     **                     Deployment change not allowed on current node
+     **                     type and/or hardware..
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_invalid_arguments"</code>,
+     **                     Arguments are not valid.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_internal_error"</code>,
+     **                     Internal error.
+     **
+     ** @pre
+     **/
+     // #SM_ASD: eqma_slo_active: change on node
+     void modifySAU( in oamSupport::AdmData data,
+                     in string sau )
+       raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     ** This operation will initiate Traffic Mix optimization to the new
+     ** mix described by @param tmo . The call will return when
+     ** the new board mix is validated, before the affected boards are
+     ** restarted.
+     **
+     ** @param data      OAM session context data.
+     ** @param mix       name of new traffic mix optimization deployment
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eversion"</code>,
+     **                     interface versions does not match.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_eadmin"</code>,
+     **                     could not contact sequrity management.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_timeout"</code>,
+     **                     timeout during a call to DPE.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_dpe_err_DeploymentChangeRejected"</code>,
+     **                     Deployment change denied by application.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_unsupported_deployment_change"</code>,
+     **                     The deployment change path is not supported in
+     **                     current release.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_operation_not_allowed"</code>,
+     **                     Deployment change not allowed on current node
+     **                     type and/or hardware..
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_invalid_arguments"</code>,
+     **                     Arguments are not valid.
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode= "eqma_slo_internal_error"</code>,
+     **                     Internal error.
+     **
+     ** @pre
+     **/
+       // #SM_ASD: eqma_slo_active: change on node
+       void modifyTMO( in oamSupport::AdmData data,
+                       in string mix )
+           raises(omsDefs::OperationFailed);
+
+       // #SM_ASD: eqma_slo_passive: retrieve data
+       void getEqRole( in  oamSupport::AdmData data,
+                       in  dpeDefs::EquipmentId eqElement,
+                       in  string roleName,
+                       out dpeDefs::EquipmentRoleList roleInfo )
+         raises(omsDefs::OperationFailed);
+
+       // #SM_ASD: eqma_slo_passive: retrieve data
+       void getEqCpuLoad( in  oamSupport::AdmData data,
+                          in  dpeDefs::EquipmentId eqElement,
+                          in  string roleName,
+                          out dpeDefs::CPULoadForRoleList loadInfo )
+           raises(omsDefs::OperationFailed);
+
+       // #SM_ASD: eqma_slo_active: change on node
+       void scaleupEquipment( in oamSupport::AdmData data,
+                              in string size )
+           raises(omsDefs::OperationFailed);
+
+
+
+   };
+};
+#endif

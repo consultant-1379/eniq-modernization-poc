@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "drill.fullname" . }}-config
+  labels:
+    app: {{ include "drill.name" . }}
+    chart: {{ include "drill.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  drill-override.conf: |
+    drill.exec: {
+      cluster-id: {{ include "drill.fullname" . | quote}}
+      zk.connect: {{ .Values.zkUrl | quote }}
+    }
+  logback.xml : |-
+{{ .Files.Get "logback.xml" | indent 4 }}

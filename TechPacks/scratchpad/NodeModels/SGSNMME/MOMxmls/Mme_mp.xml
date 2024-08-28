@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:03:04 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>title</momTitle>
+        <momSubTitle>sub title</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>date</docDate>
+        </momIdentity>
+    </momMetaData>
+    <mim author="EAB/FBA/TN Stefan Nilsson XC" contact="QNILSTE" correction="1" date="2014-01-15" docNo="5/155 19-AXB 250 17" name="Mme" namespace="urn:com:ericsson:ecim:Mme" namespacePrefix="mme" organization="EAB/FBA/T - NDO SGSN-MME" release="9" revision="A2" version="1">
+        <description>This EcimMom hosts the MmeFunction MOC.</description>
+        <class name="MmeFunction">
+            <description>The MmeFunction instance is created if the SGSN-MME node is installed, or re-deployed, with support for LTE radio access type.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="L"/>
+                <extension name="smTag" value="mme"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <attribute name="mmeFunctionId">
+                <description>The naming attribute of the MmeFunction class.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mfi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="release">
+                <description>The product release of the ManagedFunction.
+It commonly contains the Managed Function release e.g. L12.0, 13A, R1A </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rel"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="userLabel">
+                <description>Used for product free-text description. </description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ul"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+    </mim>
+    <interMim>
+        <relationship name="ManagedElement_to_MmeFunction">
+            <containment>
+                <parent>
+                    <hasClass name="ManagedElement">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="MmeFunction">
+                        <mimName>Mme</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </interMim>
+</models>

@@ -1,0 +1,367 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Command Line Interface Definition for checkpointInstalledEquipment.
+%% DPE dumps all the information it has gathered of the hardware in the
+%% node so far to a persistent store.
+%%
+%% ------------------------------------------------------------------
+
+{oe_dpeDefs}.
+{oe_eqMI}.
+
+%% block_eq
+%% Calls the EQM operation "blockEquipmentElement_5".
+%% Params: eq        : Equipment ID of the equipment element which is to be "blocked"
+%%         -remove   : Optional block and perform a scale-in operation
+%%         -force    : Optional force the block operation
+%%         -poweroff : Optional poweroff the board
+%% block_eq -eq { EquipmentID } [-force] [-poweroff]
+{block_eq,[eqMI_SLO],blockEquipmentElement_5,[oam,cps,equipment],[
+  {m,eq,'EquipmentID',{struct,[dpeDefs,'EquipmentId'],[
+    {r,_,start,integer,0},
+    {r,_,depth,integer,4},
+    {m,_,"Magazine Slot",{arrayNoDots,integer,4},-1}
+    ]},_},
+  {o, remove, _, _,  {'Remove', 'NoRemove'}},
+  {o, force, _, _,  {'Forced', 'Vetoable'}},
+  {o, poweroff, _, _, {'BlockPoweroff', 'BlockNoPoweroff'}}
+]}.
+{format,block_eq,[{struct,
+                     [{atom,r},  % EquipmentInfo rec
+                     {atom,[{addF,"Eq Class   = "},nl]},  % PM, FPM, IO, CB
+
+                     {text,[{addF,"Type       = "},nl]},  %
+                     {atom,[{addF,"AdminState = "},nl]},  % Unblocked, Blocked
+                     {atom,[{addF,"OperState  = "},nl]},  % Up, Down
+                     {text,[{addF,"Revision   = "},nl]},  % revision
+                     {text,[{addF,"Extra      = "},nl]},  % extra
+                     {text,[{addF,"BootROM    = "},nl]},  %
+                     {text,[{addF,"MemorySize = "},nl]},  %
+                     {text,[{addF,"Frequency  = "},nl]},  %
+                     {text,[{addF,"ProdNo     = "},nl]},  %
+                     {text,[{addF,"ProdName   = "},nl]},  %
+                     {text,[{addF,"ManWeek    = "},nl]},  %
+                     {text,[{addF,"SerialNo   = "},nl]}   %
+                 ],r}                                     % r= no return values, na= return values.
+                 ]}.
+
+
+%% deblock_eq
+%% Calls the EQM operation "deblockElement".
+%% Params: eq   : Equipment ID of the equipment element which is to be "deblocked"
+%% deblock_eq -eq { EquipmentID }
+{deblock_eq,[eqMI_SLO],deblockEquipmentElement_2,[oam,cps,equipment],[
+  {m,eq,'EquipmentID',{struct,[dpeDefs,'EquipmentId'],[
+    {r,_,start,integer,0},
+    {r,_,depth,integer,4},
+    {m,_,"Magazine Slot",{arrayNoDots,integer,4},-1}
+    ]},_}
+]}.
+{format,deblock_eq,[{struct,
+                     [{atom,r},  % EquipmentInfo rec
+                     {atom,[{addF,"Eq Class   = "},nl]},  % PM, FPM, IO, CB
+
+                     {text,[{addF,"Type       = "},nl]},  %
+                     {atom,[{addF,"AdminState = "},nl]},  % Unblocked, Blocked
+                     {atom,[{addF,"OperState  = "},nl]},  % Up, Down
+                     {text,[{addF,"Revision   = "},nl]},  % revision
+                     {text,[{addF,"Extra      = "},nl]},  % extra
+                     {text,[{addF,"BootROM    = "},nl]},  %
+                     {text,[{addF,"MemorySize = "},nl]},  %
+                     {text,[{addF,"Frequency  = "},nl]},  %
+                     {text,[{addF,"ProdNo     = "},nl]},  %
+                     {text,[{addF,"ProdName   = "},nl]},  %
+                     {text,[{addF,"ManWeek    = "},nl]},  %
+                     {text,[{addF,"SerialNo   = "},nl]}   %
+                 ],r}                                     % r= no return values, na= return values.
+                 ]}.
+
+
+
+%% ------------------- * WPPARS 805 * -------------------
+
+%% get_active_ncb
+{get_active_ncb,[eqMI_SLO],getActiveNCB,[oam,cps,equipment],[]}. %
+{format,get_active_ncb,[{struct,
+                     [{atom,r},                           % EquipmentId rec
+                     {integer,[{addF,"start = "},r]},     % 0
+                     {integer,[{addF,"depth = "},r]},     % 4
+                     {array,[{integer,sp},                % byt sp mot [{addA,"."},na] => 1.2...
+                             {integer,sp},
+                             {integer,sp},
+                             {integer,na}],
+                             [{addF,"EquipmentId: "},na]} % array
+                     ],na}                                % struct
+                   ]}.
+
+
+%% get_passive_ncb
+{get_passive_ncb,[eqMI_SLO],getPassiveNCB,[oam,cps,equipment],[]}. %
+{format,get_passive_ncb,[{struct,
+                     [{atom,r},                           % EquipmentId rec
+                     {integer,[{addF,"start = "},r]},     % 0
+                     {integer,[{addF,"depth = "},r]},     % 4
+                     {array,[{integer,sp},                % byt sp mot [{addA,"."},na] => 1.2...
+                             {integer,sp},
+                             {integer,sp},
+                             {integer,na}],
+                             [{addF,"EquipmentId: "},na]} % array
+                     ],na}                                % struct
+                   ]}.
+
+
+%% restart_eqm_element -eq { [EquipmentID] } -reason [enum RestartReason] [-force]
+{restart_eqm_element,[eqMI_SLO],restartEquipmentElement_5,[oam,cps,equipment],[
+  {m,eq,'EquipmentID',{struct,[dpeDefs,'EquipmentId'],[
+    {r,_,start,integer,0},
+    {r,_,depth,integer,4},
+    {m,_,"Magazine Slot",{arrayNoDots,integer,4},-1}      % mandatory
+    ]},_},
+  {m, reason, 'maint|recover', {enum, [{maint,'Maint'},
+                                         {recover,'Recover'}]}, _},
+  {o, force, _, _,  {'Forced', 'Vetoable'}},
+  {o, cold, _, _, {'Cold', 'Normal'}}
+]}.
+
+
+%% rm_eqm_element  -eq { EquipmentID }
+{rm_eqm_element,[eqMI_SLO],removeEquipmentElement,[oam,cps,equipment],[
+  {m,eq,'EquipmentID',{struct,[dpeDefs,'EquipmentId'],[
+    {r,_,start,integer,0},
+    {r,_,depth,integer,4},
+    {m,_,"Magazine Slot [SubBoard ProcessingModule]",{arrayNoDots,integer,4},-1}
+    ]},_}
+]}.
+
+
+%% ------------------- * ETOtr13963 * -------------------
+
+%% get_eq_info
+%% Calls the EQM operation "getEquipmentElementInfo_4".
+%% Params: eq   : Equipment ID of the equipment element to get info from
+%% get_eq_info -eq { EquipmentID }
+{get_eq_info,[eqMI_SLO],getEquipmentElementInfo_4,[oam,cps,equipment],[
+  {m,eq,'EquipmentID',{struct,[dpeDefs,'EquipmentId'],[
+    {r,_,start,integer,0},
+    {r,_,depth,integer,4},
+    {m,_,"Magazine Slot",{arrayNoDots,integer,4},-1}
+    ]},_}
+]}.
+{format,get_eq_info,[{struct,
+                     [{atom,r},  % EquipmentInfo_4 rec
+                     {atom,[{addF,"Eq Class   = "},nl]},  % PM, FPM, IO, CB
+
+                     {text,[{addF,"Type       = "},nl]},  %
+                     {atom,[{addF,"AdminState = "},nl]},  % Unblocked, Blocked, Foreign
+                     {atom,[{addF,"OperState  = "},nl]},  % Up, Down
+                     {atom,[{addF,"PowerState = "},nl]},  % Poweron, Poweroff
+                     {text,[{addF,"Revision   = "},nl]},  % revision
+                     {text,[{addF,"Extra      = "},r]},  % extra
+                     {text,[{addF,"BootROM    = "},nl]},  %
+                     {text,[{addF,"MemorySize = "},r]},  %
+                     {text,[{addF,"Frequency  = "},r]},  %
+                     {text,[{addF,"ProdNo     = "},nl]},  %
+                     {text,[{addF,"ProdName   = "},nl]},  %
+                     {text,[{addF,"ManWeek    = "},nl]},  %
+                     {text,[{addF,"SerialNo   = "},nl]}   %
+                 ],na}                                    % r= no return values, na= return values.
+                 ]}.
+
+
+
+%% ------------------- * ATM-23 SGSN R6 * -------------------
+%% list_eq
+%% Calls the EQM operation "getEquipmentList".
+%% Params: Type of equipment list (see enum EqListType in dpeDefs.idl)
+%% list_eq EqListType
+{list_eq,[eqMI_SLO],getEquipmentList,[oam,cps,equipment],[
+        {m,_,'all|up|down|blocked|foreign|poweron|poweroff',
+                {enum, [{all,'EqListPIU'},
+                        {up,'EqListUp'},
+                        {down,'EqListDown'},
+                        {blocked,'EqListBlocked'},
+                        {foreign,'EqListForeign'},
+                        {poweron,'EqListPoweron'},
+                        {poweroff,'EqListPoweroff'}]}, _}
+]}.
+{format,list_eq,
+    [
+    {list,
+        [{struct,  % -------- start of EQ instance rec
+            [
+            {atom,r},
+            {struct, % start of dpeDefs_EquipmentId rec
+                [
+                {atom,r},         % EquipmentId rec
+                {integer,r},
+                {integer,r},
+                {array,
+                    [
+                    {integer,sp},  % array EQPOS
+                    {integer,na},
+                    {integer,r},
+                    {integer,r}
+                    ],
+                {addF,""}}
+                ],
+             na},   % end of dpeDefs_EquipmentId rec
+            {atom,r}   % EquipmentClass
+            ],
+        nl}       % -------- end of EQ instance rec , make new line
+        ],
+    {addF,"Equipments:\n"}}
+    ]
+}.
+
+%%***********************   BEGIN OF HIDING, REASON   *************************
+%% The CLI commands modify_tmo and modify_sau are unsupported on MkVIII and
+%% later  "HW" generations. The commands have one implementation and many
+%% related codes which performs a smooth change of TMO and SAU included in
+%% different system parts (DPE, NCS and OMS). The comands modify_tmo and
+%% modify_sau are hidden in the scope of TR SGSN00084162.
+%% The complete removing of these commands will be done in scope of improvement.
+%%****************************   END OF REASON   ******************************
+%% ----------- ATM-230, SGSN R8 ---------------
+%% modify_tmo
+%% This CLI command triggers a TMOD.
+%%
+%% Usage: modify_tmo -tmo tmo
+%% Parameters
+%% tmo: The new TMO deployment
+%%{modify_tmo,[eqMI_SLO],modifyTMO,[oam,cps,equipment],[
+%%        {m,tmo,'TMOLevel',text,_}
+%%]}.
+
+%% ----------- ATM-231, SGSN R8 ---------------
+%% modify_sau
+%% This CLI command triggers a change of SAU level.
+%%
+%% Usage: modify_sau -sau sau
+%% Parameters
+%% sau: The new SAU level
+%%{modify_sau,[eqMI_SLO],modifySAU,[oam,cps,equipment],[
+%%        {m,sau,'SAULevel',text,_}
+%%]}.
+%%****************************   END OF HIDING   ******************************
+
+%% ----------- ATM-231, SGSN R8 ---------------
+%% get_eq_role
+%% Lists role for a certain PIU or the PIUs associated with a role.
+%%
+%% Usage: get_eq_role [-eq { Mag Slot }] [-role RoleName]
+%% Parameters
+%% -eq:   The PIU we want to look up the role of.
+%% -role: The name of the role we want to see the PUIs for.
+%%
+%% Comment:
+%% Only one parameter is intended to be used at once. It is possible
+%% to use both in conjunction since each act as a filter. The result
+%% will be empty though.
+{get_eq_role, [eqMI_SLO], getEqRole, [oam,cps,equipment],
+ [
+  {o, eq, 'EquipmentID', {struct, [dpeDefs, 'EquipmentId'], [
+    {r, _, start, integer,0},
+    {r, _, depth, integer,4},
+    {o, _, "Magazine Slot", {arrayNoDots, integer, 4}, -1}
+  ]},{dpeDefs_EquipmentId, 0, 4, {-1, -1, -1, -1}}},
+  {o, role, 'RoleName', text, ""}
+ ]
+}.
+{format, get_eq_role,
+ [
+     {list, % dpeDefs_EquipmentRoleList
+      [
+          {struct, % dpeDefs_EquipmentRole
+           [
+               {atom, r},               % Record name
+               {text, [{addA,":"},nl]}, % Role name
+               {list,                   %  dpeDefs_EquipmentList
+                [
+                    {struct, % dpeDefs_EquipmentId
+                    [
+                        {atom,r}, % Record name
+                        {integer,r},
+                        {integer,r},
+                        {array,
+                         [
+                             {integer,{addA,"."}},
+                             {integer,na},
+                             {integer,r},
+                             {integer,r}
+                         ], na}
+                    ], [{addF,"    "},nl]}
+                ], nl}
+            ], na}
+      ], na}
+ ]
+}.
+
+
+%% ----------- ATM-231, SGSN R8 ---------------
+%% get_eq_cpu_load
+%% Lists role and CPU load for a certain PIU or the PIUs associated
+%% with a role.
+%%
+%% Usage: get_eq_cpu_load [-eq { Mag Slot }] [-role RoleName]
+%% Parameters
+%% -eq:   The PIU we want to look up the role of.
+%% -role: The name of the role we want to see the PUIs for.
+%%
+%% Comment:
+%% Only one parameter is intended to be used at once. It is possible
+%% to use both in conjunction since each act as a filter. The result
+%% will be empty though.
+{get_eq_cpu_load, [eqMI_SLO], getEqCpuLoad, [oam,cps,equipment],
+ [
+  {o, eq, 'EquipmentID', {struct, [dpeDefs, 'EquipmentId'], [
+    {r, _, start, integer,0},
+    {r, _, depth, integer,4},
+    {o, _, "Magazine Slot", {arrayNoDots, integer, 4}, -1}
+  ]},{dpeDefs_EquipmentId, 0, 4, {-1, -1, -1, -1}}},
+  {o, role, 'RoleName', text, ""}
+ ]
+}.
+{format, get_eq_cpu_load,
+ [
+     {list, % dpeDefs_CPULoadForRoleList
+      [
+          {struct, % dpeDefs_CPULoadForRole
+           [
+               {atom, r},               % Record name
+               {text, [{addA,":"},nl]}, % Role name
+               {list,                   % dpeDefs_CPULoadList
+                [
+                    {struct, % dpeDefs_CPULoad
+                     [
+                         {atom, r}, % Record name
+                         {struct,   % dpeDefs_EquipmentId
+                          [
+                              {atom,r}, % Record name
+                              {integer,r},
+                              {integer,r},
+                              {array,
+                               [
+                                   {integer,{addA,"."}},
+                                   {integer,na},
+                                   {integer,r},
+                                   {integer,r}
+                               ], na}
+                          ], na},
+                         {text,na}, % Optional instance number ("_n" or "")
+                         {integer, {addF," : "}} % CPU load
+                     ], [{addF,"    "},nl]}
+                ], nl}
+           ],na}
+      ], na}
+ ]
+}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ------------------- FSB info -------------------
+
+%% get_fsb_info
+{get_fsb_info,[eqMI_SLO], getFSBinfo,[oam,cps,equipment],[]}.
+{format, get_fsb_info,[{text,na}]}.
+

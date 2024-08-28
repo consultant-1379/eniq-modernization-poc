@@ -1,0 +1,61 @@
+{
+  "source": "RET",
+  "kpi_definitions": [
+    {
+      "name": "fdd_robust_ra_sr",
+      "alias": "lte_calculation",
+      "expression": "pm_stats://PM_E_ERBS_EUTRANCELLFDD_KPI.pmrasucccbra / pm_stats://PM_E_ERBS_EUTRANCELLFDD_KPI.pmramsg2attcbra",
+      "object_type": "FLOAT",
+      "aggregation_type": "SUM",
+      "aggregation_period": 1440,
+      "aggregation_elements": [
+        "date_id",
+		"ropendtime",
+		"moid",
+		"node"
+      ]
+    },
+	{
+      "name": "tdd_robust_ra_sr",
+      "alias": "lte_calculation",
+      "expression": "pm_stats://PM_E_ERBS_EUTRANCELLTDD_KPI.pmrasucccbra / pm_stats://PM_E_ERBS_EUTRANCELLTDD_KPI.pmramsg2attcbra",
+      "object_type": "FLOAT",
+      "aggregation_type": "SUM",
+      "aggregation_period": 1440,
+      "aggregation_elements": [
+        "date_id",
+		"ropendtime",
+		"moid",
+		"node"
+      ]
+    },
+    {
+      "name": "fdd_ra_msg1_sr",
+      "alias": "lte_calculation",
+      "expression": "pm_stats://PM_E_ERBS_EUTRANCELLFDD_KPI.pmramsg2attcbra / pm_stats://PM_E_ERBS_EUTRANCELLFDD_KPI.pmraattcbra",
+      "object_type": "FLOAT",
+      "aggregation_type": "SUM",
+      "aggregation_period": 1440,
+      "aggregation_elements": [
+        "date_id",
+		"ropendtime",
+		"moid",
+		"node"
+      ]
+    },
+	{
+      "name": "tdd_ra_msg1_sr",
+      "alias": "lte_calculation",
+      "expression": "pm_stats://PM_E_ERBS_EUTRANCELLTDD_KPI.pmramsg2attcbra / pm_stats://PM_E_ERBS_EUTRANCELLTDD_KPI.pmraattcbra",
+      "object_type": "FLOAT",
+      "aggregation_type": "SUM",
+      "aggregation_period": 1440,
+      "aggregation_elements": [
+        "date_id",
+		"ropendtime",
+		"moid",
+		"node"
+      ]
+    }
+  ]
+}

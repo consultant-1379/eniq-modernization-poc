@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eventspecification xsi:noNamespaceSchemaLocation="./1_LMI-09:1899.xsd" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <general>
+      <docno>4/1551-CRA 250 58</docno>
+      <revision>E</revision>
+      <date>2018-03-30</date>
+      <author>Karimulla Sayed</author>
+      <ffv>2</ffv>
+      <fiv>5</fiv>
+      <revisionhistory>
+          <revisionhistoryelem>
+              <revision>PA1</revision>
+              <comment>2009-03-26, QNILSTE: First version, some alignment with EBM included</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>PA2</revision>
+              <comment>2009-05-15, QNILSTE: Added revisionhistory and Capabilities</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>PA3</revision>
+              <comment>2009-05-19, QNILSTE: fixed DeliveryTarget tag and value</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>PB1</revision>
+              <comment>2009-11-09, QNILSTE: Aligned with 1_LMI-09:1899, Streaming added</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>PB2</revision>
+              <comment>2009-12-03, QNILSTE: Added millisec,
+ENODEB_GLOBAL_ID. Rev B steps FFV,FIV to 2,2.</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>B</revision>
+              <comment>2011-04-07, QNILSTE: Just changed docno to correspond to
+current docno (this update will be rev B in CDM of the used docno) used in CDM. No FFV/FIV change.</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>PC1</revision>
+              <comment>2013-04-25, ERVAN: Added field for eNodeB PLMN Id</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>C</revision>
+              <comment>2013-09-23, ERVLLHE: Revision history update for SGSN-MME 14A.FIV change to 3</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>D</revision>
+              <comment>2018-01-24, ZSAYKAR: NodeId length changed from 20 to 32 characters. FIV change to 4</comment>
+          </revisionhistoryelem>
+          <revisionhistoryelem>
+              <revision>E</revision>
+              <comment>2018-03-30, ZSAYKAR: NodeId length changed from 32 to 31 characters. FIV change to 5</comment>
+          </revisionhistoryelem>
+      </revisionhistory>
+      <Capabilities>
+          <JobPersistence>RESTART</JobPersistence>
+          <EventCapabilities>
+              <OutputFormat>Ericsson_Binary</OutputFormat>
+              <Protocol>SFTP</Protocol>
+              <Method>PULL</Method>
+              <Directory>/tmp/OMS_LOGS/ctum/ready</Directory>
+              <ReportingPeriod>15</ReportingPeriod>
+              <AlignedReportingPeriod>true</AlignedReportingPeriod>
+              <Retention>2</Retention>
+              <Compression>NONE</Compression>
+          </EventCapabilities>
+	  <EventCapabilities>
+              <OutputFormat>Ericsson_Binary</OutputFormat>
+              <Protocol>STREAM</Protocol>
+              <Compression>NONE</Compression>
+	  </EventCapabilities>
+      </Capabilities>
+  </general>
+  <parametertypes>
+      <parametertype>
+          <name>TIME_YEAR</name>
+          <type>UINT</type>
+          <description>Timestamp, Year. YYYY</description>
+          <numberofbits>16</numberofbits>
+          <range>
+              <low>1970</low>
+              <high>9999</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>TIME_MONTH</name>
+          <type>UINT</type>
+          <description>Timestamp, Month. MM</description>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>1</low>
+              <high>12</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>TIME_DAY</name>
+          <type>UINT</type>
+          <description>Timestamp, Day. DD</description>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>1</low>
+              <high>31</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>BYTE_HOUR</name>
+          <type>UINT</type>
+          <description>Timestamp, Hour. HH</description>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>0</low>
+              <high>23</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>BYTE_MINUTE</name>
+          <type>UINT</type>
+          <description>Timestamp, Minute. MM</description>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>0</low>
+              <high>59</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>BYTE_SECOND</name>
+          <type>UINT</type>
+          <description>Timestamp, Second. SS.</description>
+          <detaileddescription>The second value 60 indicates a leap second. The time is presented in local time.</detaileddescription>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>0</low>
+              <high>60</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>TIME_MILLISECOND</name>
+          <type>UINT</type>
+          <description>Timestamp (MilliSecond) at the time when the signaling procedure for the event was started (Millisecond)</description>
+          <numberofbits>10</numberofbits>
+          <range>
+              <low>0</low>
+              <high>999</high>
+          </range>
+     </parametertype>
+      <parametertype>
+          <name>FILE_FORMAT_VERSION</name>
+          <type>UINT</type>
+          <description>File Format Version. </description>
+          <detaileddescription>The file format version is incremented if there is a change in the file format - changes in file structure that requires updates of the controlling XML schema..</detaileddescription>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>1</low>
+              <high>255</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>FILE_INFORMATION_VERSION</name>
+          <type>UINT</type>
+          <description>File Information Version. </description>
+          <detaileddescription>The file information version is incremented if there is a change in the file information, e.g. new events or parameters in events.</detaileddescription>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>1</low>
+              <high>255</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>RECORD_TYPE</name>
+          <type>ENUM</type>
+          <description>Defines the available record types in the log file.</description>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>0</low>
+              <high>3</high>
+          </range>
+          <enumeration>
+              <enum internal="HEADER_RECORD" value="0">Header</enum>
+              <enum internal="EVENT_RECORD" value="1">Event</enum>
+              <enum internal="ERROR_RECORD" value="2">Error</enum>
+              <enum internal="FOOTER_RECORD" value="3">Footer</enum>
+              <enum internal="STREAM_HEADER_RECORD" value="4">Stream Header</enum>
+              <enum internal="STREAM_ERROR_RECORD" value="5">Stream Error</enum>
+          </enumeration>
+      </parametertype>
+      <parametertype>
+          <name>RECORD_LENGTH</name>
+          <type>UINT</type>
+          <description>Indicates the record length in bytes. </description>
+          <numberofbits>16</numberofbits>
+          <range>
+              <low>4</low>
+              <high>65532</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>ERROR_TYPE</name>
+          <type>ENUM</type>
+          <description>Indicates reason why some event records has been discarded</description>
+          <numberofbits>8</numberofbits>
+          <enumeration>
+              <enum internal="OTHER" value="0">Other error</enum>
+              <enum internal="CONN_COM_ERR" value="1">Connection failed</enum>
+              <enum internal="CONGESTION" value="2">Connection congested</enum>
+          </enumeration>
+      </parametertype>
+      <parametertype>
+          <name>FILE_TERMINATION_CAUSE</name>
+          <type>ENUM</type>
+          <description>Reason for ending the logging. </description>
+          <numberofbits>8</numberofbits>
+          <enumeration>
+              <enum internal="TIME" value="0">OK (default)</enum>
+              <enum internal="SIZE" value="1">Max file size exceeded</enum>
+              <enum internal="UNDEFINED" value="2">Other</enum>
+          </enumeration>
+      </parametertype>
+      <parametertype>
+          <name>PLMN_IDENTITY</name>
+          <type>TBCD</type>
+          <description>PLMN Identity - 
+          //      The PLMN Id consists of MCC and MNC, which each is 
+          //      a three digit code. 
+          </description>
+          <detaileddescription>
+  MCC and MNC are packed in TBCD
+  //      format into three octets, as defined in:
+  //      3GPP TS 36.413 and S1AP Ericsson Internal Protocol Specification 4/15519-HSC10432/1.
+  //      That is, as TBCD coded digits:
+  //      -------------------
+  //      !  Mcc2  !  Mcc1          ! octet1
+  //      -------------------
+  //      !  Mnc1  !  Mcc3          ! octet2
+  //      -------------------
+  //      !  Mnc3  !  Mnc2          ! octet3
+  //      -------------------
+  //
+  //      If MNC is only two digits, Mnc3 is padded with filler digits HEX#F:
+  //      -------------------
+  //      !  Mcc2  !  Mcc1          ! octet1
+  //      -------------------
+  //      !  Filler digits  !  Mcc3  ! octet2
+  //      -------------------
+  //      !  Mnc2  !  Mnc1          ! octet3
+  //      -------------------
+          </detaileddescription>
+          <numberofbits>24</numberofbits>
+      </parametertype>
+      <parametertype>
+          <name>MMEGI</name>
+          <type>UINT</type>
+          <description>MME Group Id defined in 3GPP TS 36.413</description>
+          <numberofbits>16</numberofbits>
+          <range>
+              <low>1</low>
+              <high>65535</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>MMEC</name>
+          <type>UINT</type>
+          <description>MME Code defined in 3GPP TS 36.413.</description>
+          <detaileddescription>
+              This element represents the MME Code to uniquely identify a MME within an MME pool area.
+          </detaileddescription>
+          <numberofbits>8</numberofbits>
+          <range>
+              <low>0</low>
+              <high>255</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>MACRO_ENODEB_ID</name>
+          <type>UINT</type>
+          <description>Macro ENodeB Id defined in 3GPP TS 36.413</description>
+          <numberofbits>20</numberofbits>
+          <range>
+              <low>0</low>
+              <high>1048575</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>HOME_ENODEB_ID</name>
+          <type>UINT</type>
+          <description>Home ENodeB Id defined in 3GPP TS 36.413</description>
+          <numberofbits>28</numberofbits>
+          <range>
+              <low>0</low>
+              <high>268435455</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>IMSI</name>
+          <type>TBCD</type>
+          <description>International Mobile Subscriber Identity</description>
+          <detaileddescription>
+              5-15 digits, TBCD (Telephony Binary Coded Decimal), each digit represented by 4 bits.Padded with '1111' for each unused digit upto a total length of 8 octets/16 digits.For more information see:3GPP TS 23.003 (ch 2.2) for the composition and TS 29.060 (ch 7.7.2) for the coding.
+          </detaileddescription>
+          <numberofbits>64</numberofbits>
+      </parametertype>
+      <parametertype>
+          <name>IMEISV</name>
+          <type>TBCD</type>
+          <description>International Mobile Equipment Identity Software Version</description>
+          <detaileddescription>
+              3 sets of digits, 8, 6, and 2 digits respectively. TBCD (Telephony Binary Coded Decimal), each digit represented by 4 bits.Padded with '1111' for each unused digit upto a total length of 8 octets/16 digits. A value of all zeros indicates that IMEISV is not available.
+	  </detaileddescription>
+          <numberofbits>64</numberofbits>
+      </parametertype>
+      <parametertype>
+          <name>MME_UE_S1AP_ID</name>
+          <type>UINT</type>
+          <description>MME UE S1AP ID</description>
+          <detaileddescription>
+              For more information see:3GPP TS 36.413.
+          </detaileddescription>
+          <numberofbits>32</numberofbits>
+          <range>
+              <low>0</low>
+              <high>4294967295</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>ENB_UE_S1AP_ID</name>
+          <type>UINT</type>
+          <description>eNodeB UE S1AP ID</description>
+          <detaileddescription>
+              For more information see:3GPP TS 36.413.
+          </detaileddescription>
+          <numberofbits>24</numberofbits>
+          <range>
+              <low>0</low>
+              <high>16777215</high>
+          </range>
+      </parametertype>
+      <parametertype>
+          <name>CAUSE_OF_HEADER</name>
+          <type>ENUM</type>
+          <description>Reason why a header record is sent in the stream</description>
+          <numberofbits>8</numberofbits>
+          <enumeration>
+              <enum internal="STREAM_ENABLED" value="0">Stream enabled</enum>
+              <enum internal="STREAM_RESTART_AFTER_COMM_FAILURE" value="1">Stream restart after communication failure</enum>
+          </enumeration>
+      </parametertype>
+      <parametertype>
+          <name>NODE_ID</name>
+          <type>BYTEARRAY</type>
+          <description>Node Id of the SGSN-MME.</description>
+          <lengthbits>5</lengthbits>
+          <validlength>
+              <low>0</low>
+              <high>31</high>
+          </validlength>
+      </parametertype>
+      <parametertype>
+          <name>NUMBER_OF_DROPPED_EVENTS</name>
+          <type>UINT</type>
+          <description>Indicates how many events that have been lost during a period before the streaming was functional again.</description>
+          <numberofbits>32</numberofbits>
+          <range>
+              <low>0</low>
+              <high>4294967295</high>
+          </range>
+      </parametertype>
+  </parametertypes>
+  <structuretypes>
+      <structuretype>
+          <name>TIMESTAMP</name>
+          <elements>
+              <param type="BYTE_HOUR">BYTE_HOUR</param>
+              <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+              <param type="BYTE_SECOND">BYTE_SECOND</param>
+          </elements>
+      </structuretype>
+      <structuretype>
+          <name>GUMMEI</name>
+          <elements>
+              <param type="PLMN_IDENTITY">PLMN_IDENTITY</param>
+              <param type="MMEGI">MME_GROUP_ID</param>
+              <param type="MMEC">MME_CODE</param>
+          </elements>
+      </structuretype>
+      <structuretype>
+          <name>ENODEB_ID</name>
+          <elements>
+              <param type="MACRO_ENODEB_ID" optional="true">MACRO_ENODEB_ID</param>
+              <param type="HOME_ENODEB_ID" optional="true">HOME_ENODEB_ID</param>
+          </elements>
+      </structuretype>
+  </structuretypes>
+  <events>
+      <event>
+          <name>CTUM</name>
+          <id>0</id>
+          <elements>
+              <struct type="TIMESTAMP"/>
+	      <param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+	      <struct type="ENODEB_ID" />
+              <param type="IMSI">IMSI</param>
+              <param type="IMEISV">IMEISV</param> 
+              <struct type="GUMMEI"/>
+              <param type="MME_UE_S1AP_ID">MME_UE_S1AP_ID</param>
+              <param type="ENB_UE_S1AP_ID">ENB_UE_S1AP_ID</param>
+              <param type="PLMN_IDENTITY">ENODEB_PLMN_ID</param>        
+          </elements>
+      </event>
+  </events>
+  <records>
+      <record>
+          <name>HEADER_RECORD</name>
+          <type>0</type>
+          <elements>
+              <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+              <param type="RECORD_TYPE">RECORD_TYPE</param>
+              <param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+              <param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+              <param type="TIME_YEAR">TIME_YEAR</param>
+              <param type="TIME_MONTH">TIME_MONTH</param>
+              <param type="TIME_DAY">TIME_DAY</param>
+              <struct type="TIMESTAMP"/>
+          </elements>    
+      </record>
+      <record>
+          <name>EVENT_RECORD</name>
+          <type>1</type>
+          <elements>
+              <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+              <param type="RECORD_TYPE">RECORD_TYPE</param>
+              <content />
+          </elements>
+      </record>
+      <record>
+          <name>ERROR_RECORD</name>
+          <type>2</type>
+          <elements>
+              <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+              <param type="RECORD_TYPE">RECORD_TYPE</param>
+              <struct type="TIMESTAMP" />
+              <param type="ERROR_TYPE">ERROR_TYPE</param>
+          </elements>
+      </record>
+      <record>
+          <name>FOOTER_RECORD</name>
+          <type>3</type>
+          <elements>
+              <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+              <param type="RECORD_TYPE">RECORD_TYPE</param>
+              <param type="FILE_TERMINATION_CAUSE">FILE_TERMINATION_CAUSE</param>
+          </elements>
+      </record>
+      <record>
+          <name>STREAM_HEADER_RECORD</name>
+          <type>4</type>
+          <elements>
+              <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+              <param type="RECORD_TYPE">RECORD_TYPE</param>
+              <param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+              <param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+              <param type="TIME_YEAR">TIME_YEAR</param>
+              <param type="TIME_MONTH">TIME_MONTH</param>
+              <param type="TIME_DAY">TIME_DAY</param>
+              <param type="BYTE_HOUR">BYTE_HOUR</param>
+              <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+              <param type="BYTE_SECOND">BYTE_SECOND</param>
+              <param type="CAUSE_OF_HEADER">CAUSE_OF_HEADER</param>
+              <param type="NODE_ID">NODE_ID</param>
+          </elements>
+      </record>
+      <record>
+          <name>STREAM_ERROR_RECORD</name>
+          <type>5</type>
+          <elements>
+              <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+              <param type="RECORD_TYPE">RECORD_TYPE</param>
+              <param type="BYTE_HOUR">BYTE_HOUR</param>
+              <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+              <param type="BYTE_SECOND">BYTE_SECOND</param>
+              <param type="ERROR_TYPE">ERROR_TYPE</param>
+              <param type="NUMBER_OF_DROPPED_EVENTS">NUMBER_OF_DROPPED_EVENTS</param>
+          </elements>
+      </record>
+  </records>
+  </eventspecification>

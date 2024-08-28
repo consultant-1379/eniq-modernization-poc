@@ -1,0 +1,64 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "drill.fullname" . }}
+  labels:
+    app: {{ include "drill.name" . }}
+    chart: {{ include "drill.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "drill.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "drill.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "-c"]
+          args:
+            - "/opt/drill/bin/drillbit.sh start --config /opt/kyo/conf/;sleep infinity"
+          ports:
+            - containerPort: 8047
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8047
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8047
+          volumeMounts:
+            - name: drill-config
+              mountPath: /opt/kyo/conf
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      volumes:
+        - name: drill-config
+          projected:
+            sources:
+              {{- range .Values.config.configMaps }}
+              - configMap:
+                  name: {{ . }}
+              {{- end }}

@@ -1,0 +1,2908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:03:46 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>ECIM License Management</momTitle>
+        <momSubTitle/>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>2016-04-18</docDate>
+        </momIdentity>
+        <createdBy>
+            <signature>EMC/BUCI/DUCN/EI Gustavo Garcia Gomez</signature>
+        </createdBy>
+    </momMetaData>
+    <mim author="EMC/BUCI/DUCN/EI Gustavo Garcia Gomez" contact="eprgggz" correction="0" date="2016-04-18" docNo="" name="SgsnMmeLM" namespace="urn:com:ericsson:ecim:SgsnMmeLM" namespacePrefix="sgsnmmelm" organization="EMC/BUCI/DUCN/EI" release="9" revision="0" version="3">
+        <description>ECIM License Management model fragment.</description>
+        <domainExtension domain="ECIM">
+            <extension name="ecimMomName" value="ECIM_LM"/>
+            <extension name="ecimMomVersion" value="3"/>
+            <extension name="ecimMomRelease" value="1"/>
+            <extension name="ecimMomCorrection" value="0"/>
+        </domainExtension>
+        <implements correction="0" name="ECIM_LM" release="1" version="3"/>
+        <struct name="AsyncActionProgress">
+            <description>This records the progress of an asyncronous action.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="actionName">
+                <description>The name of the invoked asynchronous action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="an"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="additionalInfo">
+                <description>Used for logging significant messages during execution of an action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="adi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <sequence>
+                    <string/>
+                    <minLength>0</minLength>
+                </sequence>
+            </structMember>
+            <structMember name="progressInfo">
+                <description>Textual information describing the actual state of the execution of the action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="progressPercentage">
+                <description>Progress of the action. &#13;
+The range is between 0 and 100.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint8/>
+            </structMember>
+            <structMember name="result">
+                <description>Result state of completed action.&#13;
+This field has the value NOT_AVAILABLE if the action is not finished.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="res"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionResultType">
+                    <mimName>SgsnMmeLM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="resultInfo">
+                <description>Textual description of the outcome/result of the action containing useful info for the NMS.&#13;
+It can contain an error message if the action failed.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="resi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="state">
+                <description>Current state of the action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionStateType">
+                    <mimName>SgsnMmeLM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="actionId">
+                <description>Uniquely identifies the invocation of an action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="ai"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint16/>
+            </structMember>
+            <structMember name="timeActionStarted">
+                <description>The date and time when the current action was started.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tas"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeLM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeActionCompleted">
+                <description>The date and time when the action was completed (successfully or unsuccessfully).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tac"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeLM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeOfLastStatusUpdate">
+                <description>The date and time when the struct member state was last updated.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tlsu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeLM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+        </struct>
+        <struct name="LmCapacityValue">
+            <description>Defines a capacity value.</description>
+            <structMember name="value">
+                <description>The capacity value.
+The value is invalid if "noLimit=true".</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <int32/>
+            </structMember>
+            <structMember name="noLimit">
+                <description>True if the value is unlimited, false if the value is defined by attribute "value".</description>
+                <boolean>
+                    <defaultValue>false</defaultValue>
+                </boolean>
+            </structMember>
+        </struct>
+        <enum name="ActionResultType">
+            <description>Lists the different results of an action.&#13;
+</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="SUCCESS">
+                <description>The asynchronous action has ended with success.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="FAILURE">
+                <description>The asynchronous action has ended with failure.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="NOT_AVAILABLE">
+                <description>No result is available yet.</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="LmLicenseState">
+            <description>The license state of a resource.</description>
+            <enumMember name="DISABLED">
+                <description>There is no valid license available for the feature or capacity.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="ENABLED">
+                <description>There is valid license available for the feature or capacity.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <enum name="ActionStateType">
+            <description>Lists Action states.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="CANCELLING">
+                <description>Cancellation is in progress.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="RUNNING">
+                <description>The execution of the action is currently executing.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="FINISHED">
+                <description>The action is finished.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="CANCELLED">
+                <description>The action has been cancelled and the cancellation is done.</description>
+                <value>4</value>
+            </enumMember>
+        </enum>
+        <enum name="LmState">
+            <description>Operational modes of the License Manager.</description>
+            <enumMember name="LOCKED">
+                <description>No key file is available for the License Manager, so license requests are rejected.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="NORMAL">
+                <description>Key file is available for the License Manager, so license requests are granted accordingly.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="INTEGRATION_UNLOCK">
+                <description>All license requests are granted until first key file is delivered.
+The maximum duration the License Manager can function in this operational mode is pre-defined. When maximum duration expires and no other unlock applies, the License Manager goes into LOCKED operational state.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="MAINTENANCE_UNLOCK">
+                <description>All license requests are granted for maintenance purposes.
+The maximum duration the License Manager can function in this operational state is pre-defined. When maximum duration expires and no other unlock applies, the License Manager goes into LOCKED operational state.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="EMERGENCY_UNLOCK">
+                <description>All license requests are granted due to an emergency situation.
+The maximum duration the License Manager can function in this operational state is pre-defined. When maximum duration expires and no other unlock applies, the License Manager goes into LOCKED operational state.</description>
+                <value>4</value>
+            </enumMember>
+            <enumMember name="AUTONOMOUS_MODE">
+                <description>The key file is not accessible and license requests are granted based on cached license information.
+The maximum duration the License Manager can function in this operational state is pre-defined. When maximum duration expires and no unlock state applies, the License Manager goes into LOCKED operational state.</description>
+                <value>5</value>
+            </enumMember>
+            <enumMember name="SYSTEM_TRIGGERED_UNLOCK">
+                <description>SYSTEM_TRIGGERED_UNLOCK.
+All license requests are granted due to unlock state being triggered by some event in the License Manager.
+The maximum duration the License Manager can function in this operational state is pre-defined.</description>
+                <value>6</value>
+            </enumMember>
+        </enum>
+        <enum name="LmServiceState">
+            <description>Whether a certain service is operable or not based on license and feature states.</description>
+            <enumMember name="INOPERABLE">
+                <value>0</value>
+            </enumMember>
+            <enumMember name="OPERABLE">
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <enum name="LmArwaServerConnectionType">
+            <description>Type of server connection for the Cloud system.</description>
+            <enumMember name="PERMANENT">
+                <description>
+PERMANENT.
+When LM is installed in Arwa permanent connection mode, application license keys are stored in the Arwa license repository.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="INTERMITTENT">
+                <description>INTERMITTENT.
+In Arwa intermittent connection type the ME connects to Arwa at either scheduled pre-determined times (for example, monthly) or manually via an ECIM action.
+In intermittent connection type the connectivity to Arwa is assumed to be intermittent.</description>
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="LmActivationState">
+            <description>Operational modes activation states and License Manager grace period.</description>
+            <enumMember name="INACTIVE">
+                <description>The operational mode or grace period is inactive.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="ACTIVATED">
+                <description>The operational mode or grace period is activated.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="ACTIVATED_EXPIRING">
+                <description>The operational mode or grace period is about to expire.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="EXPIRED">
+                <description>The operational mode or grace period has expired.
+Note: The state is not applicable to all operational modes.</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="NeLSConnectionStatus">
+            <description>Connection Status for NeLS.</description>
+            <enumMember name="UNDEFINED">
+                <description>Enum value represents connection toward NeLS is established,</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="CONNECTED">
+                <description>Enum value represents connection toward NeLS is not established.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="NOT_CONNECTED">
+                <description>Enum value represents initial state before connection attempt to NeLS.</description>
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="LmArwaProxyServerType">
+            <description>Proxy server type for Cloud/ARWA.</description>
+            <enumMember name="MANUAL">
+                <description>MANUAL.
+The proxy's IP address and port are specified directly.</description>
+                <value>0</value>
+            </enumMember>
+        </enum>
+        <enum name="LmFeatureState">
+            <description>Indicates whether or not a certain feature is administratively activated.</description>
+            <enumMember name="DEACTIVATED">
+                <value>0</value>
+            </enumMember>
+            <enumMember name="ACTIVATED">
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <derivedDataType name="LmPercentageType">
+            <description>Defines numeric data type with range 0..100 to express percentage.</description>
+            <baseType>
+                <uint8>
+                    <range>
+                        <min>0</min>
+                        <max>100</max>
+                    </range>
+                    <ranges>
+                        <subrange>
+                            <min>0</min>
+                            <max>100</max>
+                        </subrange>
+                    </ranges>
+                </uint8>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="CapacityLimitType">
+            <description>.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="3"/>
+                <extension name="originatingMimName" value="FeatureParameters"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="isEnumString" value="true"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>4</min>
+                        <max>10</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>4</min>
+                            <max>10</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>hard|soft|softbypool</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[hard|soft|softbypool]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="EcimPasswordString">
+            <description>This type enables secure handling of passwords.</description>
+            <baseType>
+                <string>
+                    <isPassphrase/>
+                </string>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="DateTime">
+            <description>DateTime in format YYYY-MM-DDThh:mm:ss.SSSZ .</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>19</min>
+                        <max>31</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>19</min>
+                            <max>31</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="SgsnMmeLM_ArwaConfiguration_proxyServerPw">
+            <baseType>
+                <string>
+                    <isPassphrase/>
+                </string>
+            </baseType>
+        </derivedDataType>
+        <class name="Lm">
+            <description>Supports activities and contains information related to license management.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <action name="refreshLicenseInventory">
+                <description>Initiates the synchronization of Managed Element's license inventory.
+Return value is true if the synchronization succeeded, otherwise false.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <attribute name="lmId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="li"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="fingerprint">
+                <description>The unique identification of the Managed Element.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="f"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="fingerprintUpdateable">
+                <description>Indicates whether or not the fingerprint of the Managed Element can be updated.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+            </attribute>
+            <attribute name="lmState">
+                <description>The current operational state of the License Manager.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ls"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="lastInventoryChange">
+                <description>Date and time of the last change in the license inventory.
+Change in the license inventory may occur when the key file is updated on the Managed Element or when license information is refreshed by synchronizing with license servers.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lic"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="lastLicenseInventoryRefresh">
+                <description>Date and time when License Manager last synchronized the license inventory of the Managed Element.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="llic"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="referenceToLicenseServer">
+                <description>Reference to the primary license server used by the License Manager.
+For instance, the reference can contain the IP address of the server or locate its configuration interface. The attribute value is NULL if the License Manager does not rely on any license server.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rtls"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="FeatureKey">
+            <description>Key of a licensed feature that is available for the Managed Element.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="featureKeyId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fki"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="state">
+                <description>State information for the feature associated with this key.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <moRef name="FeatureState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </moRef>
+                </dataType>
+            </attribute>
+            <attribute name="name">
+                <description>The name of the feature represented by the key.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="n"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="validFrom">
+                <description>The date and time from which the key is valid.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="vf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="expiration">
+                <description>The key expiry date and time.
+For perpetual keys, the value is NULL.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="e"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="shared">
+                <description>Indicates whether the key is shared among Managed Elements or dedicated to the Managed Element.
+A key is dedicated to the Managed Element if the key can be used only by the Managed Element. This is always the case when the ELIM format is used. A key can be shared among multiple Managed Elements if it is installed on a License Server to which multiple Managed Elements connect.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="s"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>false</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="keyId">
+                <description>Identity of the feature under license control.
+E.g., CXC4011234, FAT1021234</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ki"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="productType">
+                <description>Identifier of the type of product to which the capacity is related.
+This attribute is used only in systems where the different applications use separate key files to identify which application or product the capacity belongs to, e.g. “SASN”, “GSN_GGSN”, “SSR 8000”.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="CapacityKey">
+            <description>Key of a licensed capacity that is available for the Managed Element.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="capacityKeyId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cki"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="licensedCapacityLimit">
+                <description>Licensed capacity limit as defined in the installed key file.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lcl"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <structRef name="LmCapacityValue">
+                        <mimName>SgsnMmeLM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="capacityUnit">
+                <description>The licensed capacity measuring unit.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="grantedCapacityLevel">
+                <description>The capacity level currently granted by the License Manager.
+The attribute value is based on requests and releases of capacity units made by License Users. If such requests and releases are not made by License Users, the value of the attribute defaults to the licensed capacity limit. Note: The value of the attribute is not based on Performance Management data.
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="gcl"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <int32/>
+                </dataType>
+            </attribute>
+            <attribute name="licensedCapacityLimitReached">
+                <description>Indicates whether or not current capacity usage reaches the licensed capacity limit.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lclr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+            </attribute>
+            <attribute name="state">
+                <description>State information for the capacity associated with this key.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <moRef name="CapacityState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </moRef>
+                </dataType>
+            </attribute>
+            <attribute name="name">
+                <description>The name of the feature represented by the key.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="n"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="validFrom">
+                <description>The date and time from which the key is valid.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="vf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="expiration">
+                <description>The key expiry date and time.
+For perpetual keys, the value is NULL.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="e"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="shared">
+                <description>Indicates whether the key is shared among Managed Elements or dedicated to the Managed Element.
+A key is dedicated to the Managed Element if the key can be used only by the Managed Element. This is always the case when the ELIM format is used. A key can be shared among multiple Managed Elements if it is installed on a License Server to which multiple Managed Elements connect.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="s"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>false</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="keyId">
+                <description>Identity of the feature under license control.
+E.g., CXC4011234, FAT1021234</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ki"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="productType">
+                <description>Identifier of the type of product to which the capacity is related.
+This attribute is used only in systems where the different applications use separate key files to identify which application or product the capacity belongs to, e.g. “SASN”, “GSN_GGSN”, “SSR 8000”.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="EmergencyUnlock">
+            <description>Emergency Unlock state information.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="activate">
+                <description>Initiates activation of the Emergency Unlock operational mode.
+Return value is true if the activation succeeded, otherwise false.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <attribute name="emergencyUnlockId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="eui"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="activationState">
+                <description>Activation state of Emergency Unlock.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmActivationState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="expiration">
+                <description>Expiry date and time of Emergency Unlock.
+The value is NULL if the activation state is INACTIVE.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="e"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="activationsLeft">
+                <description>Remaining allowed Emergency Unlock activations left.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="al"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <uint8/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="IntegrationUnlock">
+            <description>Integration Unlock state information.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="activate">
+                <description>Initiates activation of the Integration Unlock operational mode.
+Return value is true if the activation succeeded, otherwise false.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <attribute name="integrationUnlockId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="iui"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="activationState">
+                <description>Activation state of Integration Unlock.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmActivationState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="expiration">
+                <description>Expiry date and time of Integration Unlock.
+The value is NULL if the activation state is INACTIVE.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="e"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="activationsLeft">
+                <description>Remaining allowed Integration Unlock activations left.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="al"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <uint8/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="MaintenanceUnlock">
+            <description>Maintenance Unlock state information.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="activate">
+                <description>Initiates activation of the Maintenance Unlock operational mode.
+Return value is true if the activation succeeded, otherwise false.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+            </action>
+            <attribute name="maintenanceUnlockId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mui"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="activationState">
+                <description>Maintenance Unlock activation state.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmActivationState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="expiration">
+                <description>Expiry date and time of Maintenance Unlock.
+The value is NULL if the activation state is INACTIVE.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="e"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="activationsLeft">
+                <description>Remaining allowed Maintenance Unlock activations left.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="al"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <uint8/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="SystemTriggeredUnlock">
+            <description>System Triggered Unlock state information.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="systemTriggeredUnlockId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="stui"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="activationState">
+                <description>System Triggered Unlock activation state.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmActivationState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="expiration">
+                <description>Expiry date and time of System Triggered Unlock.
+The value is NULL if the activation state is INACTIVE.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="e"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="AutonomousMode">
+            <description>Autonomous Mode state information.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="autonomousModeId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ami"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="activationState">
+                <description>Autonomous Mode activation state.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmActivationState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="expiration">
+                <description>Expiry date and time of Autonomous Mode.
+The value is NULL if the activation state is INACTIVE.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="e"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="GracePeriod">
+            <description>Grace period information of the associated capacity.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="gracePeriodId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="gpi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="gracePeriodState">
+                <description>Grace period state of the capacity.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="gps"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmActivationState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="gracePeriodExpiration">
+                <description>Expiry date and time of the grace period.
+The value is NULL if grace-period state is inactive.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="gpe"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="KeyFileManagement">
+            <description>Enables installation of key files and provides information about the installed key file.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="installKeyFile">
+                <description>Initiates the key file installation defined by the URI given as a parameter.
+The return value is the action Id if the initiation succeeded, otherwise it is 0.
+The installation is an asynchronous operation. Progress is reported via attribute reportProgress.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <uint16/>
+                </returnType>
+                <parameter name="uri">
+                    <description>The URI of the key file that is to be installed.
+The URI may refer to a local (e.g., file://data/dir/subdir/rbs006.xml) or to a remote (e.g., sftp://myuser@myhostname.ericsson.local/dir/subdir/rbs006.xml) file.
+If user name is needed to access the referenced file then the URI shall include the user name. The URI must not contain password.
+The generic URI syntax is defined by RFC 2396.</description>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="password">
+                    <description>Password to access the referenced file.
+If  authentication is not password based, this parameter will be ignored.
+</description>
+                    <in/>
+                    <dataType>
+                        <derivedDataTypeRef name="EcimPasswordString">
+                            <defaultValue>nopass</defaultValue>
+                            <mimName>SgsnMmeLM</mimName>
+                        </derivedDataTypeRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <attribute name="keyFileManagementId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="kfmi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="reportProgress">
+                <description>Reference to the progress report including the result of the initiated key file installation.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <structRef name="AsyncActionProgress">
+                        <mimName>SgsnMmeLM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="KeyFileInformation">
+            <description>Basic information about the key file installed on the Managed Element.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="keyFileInformationId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="kfii"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="sequenceNumber">
+                <description>Sequence number of the key file.
+If sequence number is not available, this value is 0.
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <int32/>
+                </dataType>
+            </attribute>
+            <attribute name="installationTime">
+                <description>Date and time when key file was installed on the Managed Element.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="it"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="locatable">
+                <description>Indicates whether or not the key file can currently be located.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="l"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+            </attribute>
+            <attribute name="productType">
+                <description>Identifier of the product type to which the capacity is related.
+This attribute is used only in systems where different applications use separate key files to identify to which application or product the capacity belongs, e.g: SASN, GSN_GGSN, or SSR 8000.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="softwareLicenseTargetIdentity">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="swlt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+                <preliminary/>
+            </attribute>
+        </class>
+        <class name="WarningThreshold">
+            <description>Warning threshold information of the associated capacity.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="warningThresholdId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="wti"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="warningThreshold">
+                <description>Defines the capacity usage level at which an alarm is raised.
+The threshold is expressed in terms of percentage in range 0-100, where 90 is default value.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="wt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="LmPercentageType">
+                        <defaultValue>90</defaultValue>
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="warningThresholdReached">
+                <description>Indicates whether or not current capacity usage reaches warning threshold.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="wtr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>false</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="FeatureState">
+            <description>This MO class defines different licensing-related states of a feature.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="featureStateId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fsi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="featureState">
+                <description>Indicates whether or not the feature license is administratively activated.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="LmFeatureState">
+                        <defaultValue>DEACTIVATED</defaultValue>
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="licenseState">
+                <description>Indicates whether or not a valid license key enables the feature usage.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ls"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmLicenseState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="serviceState">
+                <description>Indicates whether or not the feature is able to provide its service from a license perspective.
+The value of serviceState is derived from featureState and licenseState. If featureState is ACTIVATED and licenseState is ENABLED, serviceState is OPERABLE. In all other cases, serviceState is INOPERABLE.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ss"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmServiceState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="description">
+                <description>The description of the feature.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="d"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="featureKey">
+                <description>Key instances associated with this feature.</description>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <moRef name="FeatureKey">
+                            <mimName>SgsnMmeLM</mimName>
+                        </moRef>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="keyId">
+                <description>Identity of the feature under license control.
+E.g., CXC4011234, FAT1021234</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ki"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="validForRAT">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="vf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="CapacityState">
+            <description>States of capacities that are supported by a Managed Element.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="capacityStateId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="csi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="licenseState">
+                <description>Indicates whether or not a valid license key enables the capacity usage.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ls"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="LmLicenseState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="description">
+                <description>The description of the capacity.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="d"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="capacityKey">
+                <description>Key instances associated with this capacity.</description>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <moRef name="CapacityKey">
+                            <mimName>SgsnMmeLM</mimName>
+                        </moRef>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="keyId">
+                <description>Identity of the feature under license control.
+E.g., CXC4011234, FAT1021234</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ki"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="currentCapacityLimit">
+                <description>Licensed capacity limit as defined by the currently valid license key.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ccl"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <structRef name="LmCapacityValue">
+                        <mimName>SgsnMmeLM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="capacityUnit">
+                <description>The licensed capacity measuring unit.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="grantedCapacityLevel">
+                <description>The capacity level currently granted by the License Manager.
+The attribute value is based on requests and releases of capacity units made by License Users. If such requests and releases are not made by License Users, the value of the attribute defaults to the licensed capacity limit. Note: The value of the attribute is not based on Performance Management data.
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="gcl"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <int32/>
+                </dataType>
+            </attribute>
+            <attribute name="licensedCapacityLimitReached">
+                <description>Indicates whether or not current capacity usage reaches the licensed capacity limit.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lclr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+            </attribute>
+            <attribute name="featureState">
+                <description>Feature State for the new optional capacity licenses.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="LmFeatureState">
+                        <defaultValue>DEACTIVATED</defaultValue>
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="serviceState">
+                <description>Service State for the new optional capacity licenses.
+</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ss"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="LmServiceState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="validForRAT">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="vf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string>
+                        <defaultValue>GSM, WCDMA, LTE</defaultValue>
+                    </string>
+                </dataType>
+            </attribute>
+            <attribute name="range">
+                <description>Min and max value Min used when no licese and Max when EmergencyUnlock.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="range"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="capacityLimitType">
+                <description>N/A</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="clt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="CapacityLimitType">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="allocationLimit">
+                <description>Limit for allocation of capacity from NeLS.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="al"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <uint32>
+                        <defaultValue>0</defaultValue>
+                    </uint32>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="NeLSConfiguration">
+            <description>Network License Server (NeLS) configuration parameters.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="neLSConfigurationId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="nci"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="host">
+                <description>IPv6, IPv4 or DNS name.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="h"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string>
+                        <defaultValue/>
+                    </string>
+                </dataType>
+            </attribute>
+            <attribute name="port">
+                <description>The port number that is used to connect to NeLS.
+</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="p"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <uint16>
+                        <defaultValue>0</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="connectionStatus">
+                <description>Represents status of the connection toward NeLS.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="NeLSConnectionStatus">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="ArwaConfiguration">
+            <description>Enables configuration of the Arwa server connection properties.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <action name="installCustomerMetadataFile">
+                <description>Initiates the installation of the Client Metadata file defined by the URI given as parameter.
+e.g. installClientMetadataFile file:///tmp/clientMetadata.xml
+Return value is TRUE in case the initiation succeeded or FALSE otherwise.
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <uint16/>
+                </returnType>
+                <parameter name="uri">
+                    <description>The URI of the metadatafile file that is to be installed.
+The URI may refer to a local (e.g., file:///data/dir/subdir/rbs006.xml) or to a remote (e.g., sftp://myuser@myhostname.ericsson.local/dir/subdir/rbs006.xml) file.
+If user name is needed to access the referenced file then the URI shall include the user name. 
+The URI must not contain password.
+The generic URI syntax is defined by RFC 2396.
+</description>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="password">
+                    <description>Password to access the referenced file.
+If  authentication is not password based, this parameter will be ignored.
+</description>
+                    <in/>
+                    <dataType>
+                        <derivedDataTypeRef name="EcimPasswordString">
+                            <mimName>SgsnMmeLM</mimName>
+                        </derivedDataTypeRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="createUsageReport">
+                <description>createUsageReport.
+To be used as:
+createUsageReport URI startDate endDate [filter-reg-ex]
+i.e.
+createUsageReport /tmp/myUsageReport 2015-03-01 2015-03-15</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <boolean/>
+                </returnType>
+                <parameter name="uri">
+                    <description>URI for destination of the usage report.</description>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="startDate">
+                    <description>StartDate for the period of the usage report.</description>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="endDate">
+                    <description>End date for the period of the usage report.</description>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="filter">
+                    <description>Usage.
+filter-reg-ex An optional filter to customize the usage report. e.g. license=FAT123</description>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="connectToArwa">
+                <description>connectToArwa will provide the action id result if the invocation is successful.
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <int64/>
+                </returnType>
+            </action>
+            <attribute name="arwaConfigurationId">
+                <description>Holds the name used when identifying the MO.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aci"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="referenceToProxyServer">
+                <description>Identifies the uri address to be used for the proxy server.
+i.e. "https://proxy.foo.com:8080"</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rtps"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="proxyServerUser">
+                <description>Username  for the optional  proxy server used  to connect to  Arwa.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="psu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="proxyServerPw">
+                <description>Password for the optional proxy server used to connect to Arwa.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="psp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="SgsnMmeLM_ArwaConfiguration_proxyServerPw">
+                        <mimName>SgsnMmeLM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="proxyServerType">
+                <description>Proxy server type to be used, can be MANUAL or AUTOMATIC.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pst"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="LmArwaProxyServerType">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="licenseServerLastSuccessfulConnectTime">
+                <description>Last time of successful connection.
+i.e. “Fri, Dec 19, 2014 12:41:39 PM”</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lslsct"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="customerName">
+                <description>Name of the current customer.
+(e.g. Customer1)</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="maxAggregationFileSize">
+                <description>To define the maximum size of aggregation files in Kilobytes. 
+If set to NULL there will be no files created (Turned off).</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mafs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <uint32>
+                        <defaultValue>1024</defaultValue>
+                    </uint32>
+                </dataType>
+            </attribute>
+            <attribute name="maxNumberOfIntermediaryAggregationFiles">
+                <description>Maximum number of the intermediary aggregation files to be used by the report tool.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mnoiaf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint32>
+                        <defaultValue>100</defaultValue>
+                    </uint32>
+                </dataType>
+            </attribute>
+            <attribute name="arwaLicenseServerConnectionType">
+                <description>Type of connectivity for the Proxy server, can be PERMANENT or INTERMITTENT.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="alsct"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="LmArwaServerConnectionType">
+                        <mimName>SgsnMmeLM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="reportProgress">
+                <description>Reports if the Arwa connection was successful or not.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <structRef name="AsyncActionProgress">
+                        <mimName>SgsnMmeLM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="licenseServerPlannedConnectEvent">
+                <description>Next Schedule for a  planned connection to the Arwa server. 
+NULL if it is PERMANENT connection </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lspce"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <string/>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+        </class>
+        <relationship name="Lm_to_CapacityKey">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="CapacityKey">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_FeatureKey">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="FeatureKey">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_EmergencyUnlock">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="EmergencyUnlock">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_IntegrationUnlock">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="IntegrationUnlock">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_MaintenanceUnlock">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="MaintenanceUnlock">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_SystemTriggeredUnlock">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="SystemTriggeredUnlock">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_AutonomousMode">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="AutonomousMode">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_KeyFileManagement">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="KeyFileManagement">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="KeyFileManagement_to_KeyFileInformation">
+            <containment>
+                <parent>
+                    <hasClass name="KeyFileManagement">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="KeyFileInformation">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_CapacityState">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="CapacityState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="FeatureKey_to_FeatureState">
+            <biDirectionalAssociation>
+                <associationEnd name="featureKey">
+                    <hasClass name="FeatureKey">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </associationEnd>
+                <associationEnd name="state">
+                    <hasClass name="FeatureState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </associationEnd>
+            </biDirectionalAssociation>
+        </relationship>
+        <relationship name="CapacityKey_to_CapacityState">
+            <biDirectionalAssociation>
+                <associationEnd name="capacityKey">
+                    <hasClass name="CapacityKey">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </associationEnd>
+                <associationEnd name="state">
+                    <hasClass name="CapacityState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </associationEnd>
+            </biDirectionalAssociation>
+        </relationship>
+        <relationship name="Lm_to_FeatureState">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="FeatureState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="CapacityState_to_WarningThreshold">
+            <containment>
+                <parent>
+                    <hasClass name="CapacityState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="WarningThreshold">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="CapacityState_to_GracePeriod">
+            <containment>
+                <parent>
+                    <hasClass name="CapacityState">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="GracePeriod">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_NeLSConfiguration">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="NeLSConfiguration">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="Lm_to_ArwaConfiguration">
+            <containment>
+                <parent>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="ArwaConfiguration">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+    </mim>
+    <interMim>
+        <relationship name="SystemFunctions_to_Lm">
+            <containment>
+                <parent>
+                    <hasClass name="SystemFunctions">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="Lm">
+                        <mimName>SgsnMmeLM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </interMim>
+</models>

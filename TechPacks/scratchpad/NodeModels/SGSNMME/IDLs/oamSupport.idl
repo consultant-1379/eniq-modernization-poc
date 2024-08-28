@@ -1,0 +1,129 @@
+// ==================================================================
+// 
+// NAME
+//   Interface Specification
+//   Common support definitions in WPP
+//
+// MODULE
+//   oamSupport
+//
+// FILE
+//   oamSupport.idl
+// 
+// DOCUMENT NO.            
+//   101/155 19-CNX 901 111
+//
+// REVISION
+//   C
+//
+// COPYRIGHT
+//   COPYRIGHT Ericsson Eurolab Deutschland GmbH, Germany 1998.
+//   All rights reserved.
+//
+//   The Copyright to the computer program(s) herein is the property of
+//   Ericsson Eurolab Deutschland GmbH, Germany.
+//   The program(s) may be used and/or copied only with the written
+//   permission from Ericsson Eurolab Deutschland GmbH or in accordance with
+//   the terms and conditions stipulated in the agreement/contract under
+//   which the program(s) have been supplied.
+// 
+// DESCRIPTION 
+//   Common support definitions for O&M in WPP
+//
+// NOTE: Whenever you change a type definition in this file, remember
+// to also update the belonging default in oamSupportDef.hrl.
+//
+// VISIBILITY
+//   External.
+//
+// AUTHOR
+//   Stefan Behrens eedbeh@eed.ericsson.se
+//   Responsibility now in ERV Vanersborg, contact ervkatb@erv
+//
+// REVISION HISTORY
+//   B     2000-03-28	eedsus	Approved version for WPP 2.0
+//   C     2000-11-28   ervbolm Removed 2.0 from name.
+// ==================================================================
+
+#ifndef _OAMSUPPORT_IDL
+#define _OAMSUPPORT_IDL
+
+//#include "pragma.idl"
+
+// Common support definiton for O&M
+module oamSupport
+{
+   // Administrative Data Record
+   // Holds software version,
+   // caller user identification, etc.
+   struct AdmData
+   {
+      // The software version of the caller of a function.
+      // The interface implementation must check that the
+      // version of client and server are compatible.
+      // Servers are free to define/document own schemes
+      // for backward compatibility.
+      // Valid version numbers are 1..65535.
+      // Servers must accept -1 as wildcard that always matches.
+      // 0 and all other integers outside the valid range are
+      // reserved for future use.
+      long callerSwVersion;
+
+      // The user ID of the operator using the client software.
+      string callerUserId;
+      // A key which idetifies a previous successful authentication
+      // of the user.	
+      string authenticationKey;
+
+     // software version of the caller of SM.
+    long smSwVersion;
+   };
+
+   // Time stamps are to be used in order to assist concurrency control
+   // The interface implementation must check that the timstamp of the
+   // data that is to be overwritten is not more recent than the one
+   // kept by the entity issuing the change
+   // Servers must accept 0, 0 that enables forced update 
+   // When long long types are supported we can make the switch
+   // This strcucture should be safe at least until 2100.
+
+   struct TimeStamp
+   {
+	unsigned long sec;	/* seconds since Jan. 1, 1970 */
+	unsigned long usec;	/* and microseconds */
+   };
+
+
+   // Simple list of strings;
+   // this is to avoid multiple definitions
+   // that generate unnecessary code
+   typedef sequence<string> StringList;
+
+   // List of list of strings;
+   // this is to avoid multiple definitions
+   // that generate unnecessary code
+   typedef sequence<StringList> StringListList;
+
+   // List of list of list of strings;
+   // this is to avoid multiple definitions
+   // that generate unnecessary code
+   typedef sequence<StringListList> StringListListList;
+
+   // List of list of list of list of strings;
+   // this is to avoid multiple definitions
+   // that generate unnecessary code
+   typedef sequence<StringListListList> StringListListListList;
+
+   // Simple list of short;
+   // this is to avoid multiple definitions
+   // that generate unnecessary code
+   typedef sequence<short> ShortList;
+
+   // Simple list of longs;
+   // this is to avoid multiple definitions
+   // that generate unnecessary code
+   typedef sequence<long> LongList;
+};
+
+#endif
+

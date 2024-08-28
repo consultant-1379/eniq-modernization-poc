@@ -1,0 +1,362 @@
+// ==================================================================
+//
+// NAME
+//   dpeDefs - common definitions for DPE API
+//
+// INTERFACES       REGISTERED NAME
+// -                -
+//
+// FILE
+//   dpeDefs.idl
+//
+// Copyright Ericsson AB 1998-2014
+//   The copyright to the computer program(s) herein is the
+//   property of ERICSSON AB, Sweden. The program(s) may be used
+//   and/or copied only with the written permission from ERICSSON AB
+//   or in accordance with the terms and conditions stipulated
+//   in the agreement/contract under which the program(s) have
+//   been supplied.
+//
+// DESCRIPTION
+//   See documentation comments below.
+//
+// REVISION HISTORY
+//                    Date    Author   Item changed
+//   GSN R6           040906  ervpeas  dpeDefs2::AdminState
+//                      Extention of dpeDefs::AdminState.
+//   GSN R8           070215  qguneko  dpeDefs::ForceOperation
+//                      Addition of new enumeration type.
+//   GSN R8           070716  qjanste  dpeDefs::ListOfStrings
+//                      Addition of new string array type.
+//   SGSN-MME 2012A   120217  qhhkjjn  dpeDefs::CPULoad
+//                      Addition of optional string for instance number.
+//
+//   SGSN-MME 2014A   130115  ervpabj  dpeDefs::PowerStateOperation
+//                      created.
+//
+//   SGSN-MME 2014A   130503  ervpabj  dpeDefs::PowerState
+//                      created.
+//   SGSN-MME 2015A   141204  ervpabj dpeDefs::RemoveOperation
+//
+// ==================================================================
+
+/**
+ ** @file
+ **
+ ** Common definitions for the DPE API.
+ **
+ **/
+
+#ifndef dpeDefs_idl
+#define dpeDefs_idl
+
+/**
+ ** Extended common datatypes and definitions used in DPE API.
+ **/
+
+module dpeDefs2 {
+  enum AdminState {
+    Unblocked,  /**< The piece of equipment is available for use.*/
+    Blocking,   /**< Deprecated, never used. */
+    /** The piece of equipment is blocked and is thus not available
+     ** for use until it has been deblocked. */
+    Blocked,
+    Permblocked,/**< Deprecated, never used. */
+    /** The piece of equipment belongs to another node size and is
+     ** thus not available for use. */
+    Foreign
+
+  };
+};
+
+
+/**
+ ** Common datatypes and definitions used in DPE API.
+ **/
+
+module dpeDefs {
+
+  // Equipment ID
+  // start == 0 and depth == 0 denotes the whole NE
+  struct EquipmentId {
+    long start;           // start level, 0-3
+    long depth;           // number of levels in id
+    long elem[4];
+  };
+
+  typedef  EquipmentId  PMName;
+
+  enum AdminState {
+    Unblocked,  /**< The piece of equipment is available for use.*/
+    Blocking,   /**< Deprecated, never used. */
+    Blocked,    /**< The piece of equipment is not available for use.*/
+    Permblocked /**< Deprecated, never used. */
+  };
+
+  enum OperState {
+    Up,   /**< The piece of equipment is up. */
+    Down, /**< The piece of equipment is not up. */
+    Restarting /**< Deprecated, never used. */
+  };
+
+  enum EquipmentClass {
+    PM, FPM, IO, CB
+  };
+
+  enum EqListType {
+    /** All installed, not foreign, equipments (PIUs and PMs). */
+    EqListAll,
+    /** All installed, not foreign, equipments (PIUs). */
+    EqListPIU,
+    /** All blocked equipments (PIUs). */
+    EqListBlocked,
+    /** Not implemented yet. A placeholder for future development. */
+    EqListDeblocked,
+    /** All foreign equipments (PIUs). */
+    EqListForeign,
+    /** All installed, not blocked and not foreign, equipments (PIUs)
+     ** with status Up. */
+    EqListUp,
+    /** All installed, not foreign, equipments (PIUs) with status Down. */
+    EqListDown,
+    /** All in powerstate poweron - all known to shelf managers */
+    EqListPoweron,
+    /** All in powerstate poweroff - all known to shelf managers */
+    EqListPoweroff
+  };
+
+  enum RestartReason {
+    Maint, Recover
+  };
+
+  enum RemoveOperation {
+    /** The operation will remove an PIU in stored data. */
+    Remove,
+    NoRemove
+  };
+
+  enum ForceOperation {
+    /** The operation will force. */
+    Forced,
+    /** The operation may be vetoed due to resource shortage or
+        ongoing error recovery interactions. */
+    Vetoable
+  };
+
+  enum PowerStateOperation {
+    /** The operation will trigger poweroff. */
+    BlockPoweroff,
+    /** The operation will trigger poweron */
+    BlockNoPoweroff
+  };
+
+  enum PowerState {
+    Poweroff,
+    Poweron,
+    NotInserted
+  };
+
+  enum RestartType {
+    Cold, Normal
+  };
+
+  struct EquipmentInfo {
+    EquipmentClass eqClass;
+    string      type;
+    AdminState  admin;
+    OperState   oper;
+    string      Revision;
+    string      extra;
+  };
+
+   // This struct extends the EquipmentInfo struct, see above.
+   struct EquipmentInfo_2 {
+    EquipmentClass eqClass;
+    string      type;
+    AdminState  admin;
+    OperState   oper;
+    string      Revision;
+    string      extra;
+    string      BootROM;
+    string      MemorySize;
+    string      Frequency;
+    string      ProdNo;
+    string      ProdName;
+    string      ManWeek;
+    string      SerialNo;
+  };
+
+  struct EquipmentInfo_3 {
+    EquipmentClass eqClass;
+    string      type;
+    dpeDefs2::AdminState
+    admin;
+    OperState   oper;
+    string      Revision;
+    string      extra;
+    string      BootROM;
+    string      MemorySize;
+    string      Frequency;
+    string      ProdNo;
+    string      ProdName;
+    string      ManWeek;
+    string      SerialNo;
+  };
+
+  struct EquipmentInfo_4 {
+    EquipmentClass eqClass;
+    string      type;
+    dpeDefs2::AdminState
+    admin;
+    OperState   oper;
+    PowerState  power;
+    string      Revision;
+    string      extra;
+    string      BootROM;
+    string      MemorySize;
+    string      Frequency;
+    string      ProdNo;
+    string      ProdName;
+    string      ManWeek;
+    string      SerialNo;
+  };
+
+  struct EquipmentInstance {
+   EquipmentId    eqId;
+   EquipmentClass eqClass;
+  };
+
+  typedef sequence<EquipmentInstance> EquipmentInstanceList;
+  typedef sequence<EquipmentId> EquipmentList;
+
+  typedef string<64> CapsuleName;
+
+  struct FullCapsuleName {
+    PMName      pmName;
+    CapsuleName capsuleName;
+  };
+
+  typedef string<32> ApplicationName;
+
+  typedef string<32> BlockIdentity;
+
+  typedef string<8> RevisionName;
+
+  struct BlockName {
+    BlockIdentity blockId;
+    RevisionName  revName;
+  };
+
+  struct FullBlockName {
+    ApplicationName applName;
+    BlockName       blockName;
+  };
+
+  struct ApplicationInstance {
+    ApplicationName       applName;
+    unsigned long         applicationInstanceId;
+  };
+
+  typedef sequence<ApplicationInstance> ApplicationInstanceList;
+
+  typedef sequence<ApplicationName> ApplicationNameList;
+
+
+  struct BlockTemplateName {
+    FullCapsuleName fullCapsuleName;
+    FullBlockName   fullBlockName;
+  };
+
+  struct BlockInstanceName {
+    unsigned long         applicationInstanceId;
+    BlockTemplateName     blockTempName;
+    unsigned long         blockInstanceId;
+  };
+
+  struct ApplicationInstanceInfo {
+    RevisionName         revision;
+    boolean              persistent;
+    BlockInstanceName    rootBlockInstance;
+    unsigned short       numberOfBlockInstances;
+    boolean              pendingStop;
+  };
+
+
+  enum BlockInstanceState {
+    Mapped,
+    CreationRequested,      Ready,
+    DeletionRequested,
+    StartRequested,         Running,
+    StopRequested,
+    KillRequested,
+    SuspensionRequested,    Suspended,
+    ResumptionRequested,
+    PMDied
+  };
+
+  struct BlockInstanceInfo {
+    BlockInstanceName    blockInstName;
+    BlockInstanceState   blockInstState;
+  };
+
+  typedef sequence<BlockInstanceInfo> SetOfBlockInstances;
+  typedef sequence<BlockName>         SetOfBlocks;
+
+  typedef string<32> CapsuleType;
+
+  typedef string<512> LoadUnitName;
+
+  typedef sequence<char>        CreateParameterSeq;
+
+  struct SoftwareConfigurationName {
+    string          releaseName;
+    string          checkpointName;
+  };
+
+  struct SoftwareConfiguration {
+    string              releaseName;
+    string              checkpointName;
+    ApplicationNameList applications;
+  };
+
+  typedef sequence<SoftwareConfiguration> SoftwareConfigurationList;
+
+  typedef sequence<string> ListOfStrings;
+
+  struct DeploymentInfo {
+    string          hardwareType;
+    string          nodeType;
+    string          sauValue;
+    string          tmoValue;
+    string          ss7Type;
+  };
+
+  struct EquipmentRole {
+    string        role;
+    EquipmentList pius;
+  };
+
+  typedef sequence<EquipmentRole> EquipmentRoleList;
+
+  struct CPULoad {
+    dpeDefs::EquipmentId piu;
+
+    //Ususally "", but "_n" where n is an instance number where applicable.
+    string               optionalInstanceNumber;
+    unsigned short       load;
+  };
+
+  typedef sequence<CPULoad> CPULoadList;
+
+  struct CPULoadForRole {
+    string      role;
+    CPULoadList loads;
+  };
+
+  typedef sequence<CPULoadForRole> CPULoadForRoleList;
+  
+  const short dpeDefsDummyVar = 1;
+
+};
+
+#endif

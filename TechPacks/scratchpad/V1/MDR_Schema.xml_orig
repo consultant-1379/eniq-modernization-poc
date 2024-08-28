@@ -1,0 +1,356 @@
+<EntityDef name="MDR_Schema">
+	<Components section="Tables">
+	
+		<EntityDef name="TECHPACK_VERSIONS">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="TECHPACK_RELEASE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="TECHPACK_TYPE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="VENDOR">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="TECHNOLOGY">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="PRODUCT_NUMBER">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="FEATURE_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DESCRIPTION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>255</Column_Size>
+				</EntityDef>
+				<EntityDef name="LICENSE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DEPENDENCY">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="SUPPORTED_NODE_VERSIONS">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="NODE_VERSION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="MODEL_VERSION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="MODEL_REVISION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DESCRIPTION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>255</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="NODE_MO_HIERARCHY">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="NODE_MODEL_VERSION_ID">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="PARENT_MO_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="CHILD_MO_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="REPORTABLE_ENTITY">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="REPORTABLE_ENTITY_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="REPORTABLE_ENTITY_DESCRIPTION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>255</Column_Size>
+				</EntityDef>
+				<EntityDef name="DERIVED_FROM">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="REPORTABLE_ENTITY_COLUMNS">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="REPORTABLE_ENTITY_ID">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="PERSISTENCE_ENTITY_ID">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="COLUMN_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="COLUMN_TYPE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="COLUMN_DESCRIPTION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>255</Column_Size>
+				</EntityDef>
+				<EntityDef name="PERSISTENCE_ENTITY_COLUMN_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="PERSISTENCE_ENTITY">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="NODE_MODEL_VERSION_ID">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="PERSISTENCE_ENTITY_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DERIVED_FROM">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DERIVE_TYPE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="PERSISTENCE_ENTITY_COLUMNS">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="NODE_MODEL_VERSION_ID">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="PERSISTENCE_ENTITY_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="COLUMN_ORDER">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="COLUMN_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="COLUMN_TYPE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DATA_TYPE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="COUNTER_TYPE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DESCRIPTION">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>2048</Column_Size>
+				</EntityDef>
+				<EntityDef name="PARTITION_BY">
+					<Column_Type>SMALLINT</Column_Type>
+				</EntityDef>
+				<EntityDef name="MO_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="MO_ATTRIBUTE_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="FLOW_CONFIGURATION">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="FLOW_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="ACTION_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="WORKER_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="WORKER_CONFIG">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DEPENDENCY_FLOW_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="DEPENDENCY_ACTION_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="FLOW_SCHEDULING">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="FLOW_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="ACTION_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="WORKER_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="REOCCURING">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="ROP_INTERVAL">
+					<Column_Type>int</Column_Type>
+				</EntityDef>
+				<EntityDef name="ROP_OFFSET">
+					<Column_Type>int</Column_Type>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="FILEBACKLOG">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="FLOW_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="WORKER_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="FILEPATH">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>1024</Column_Size>
+				</EntityDef>
+				<EntityDef name="STATUS">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+		<EntityDef name="DESIGNRULES">
+			<Components section="Columns">
+				<EntityDef name="TECHPACK_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="TARGET_PACKAGE_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="RULE_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="PARENT_RULE_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="EXECUTION_ORDER">
+					<Column_Type>int</Column_Type>
+				</EntityDef>
+				<EntityDef name="MATCH_TYPE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="MATCH_ARGUMENT">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="MATCH_VALUE">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+				<EntityDef name="TARGET_NAME">
+					<Column_Type>varchar</Column_Type>
+					<Column_Size>128</Column_Size>
+				</EntityDef>
+			</Components>
+		</EntityDef>
+		
+	</Components>
+</EntityDef>

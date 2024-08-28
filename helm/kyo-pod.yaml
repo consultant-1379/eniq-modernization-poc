@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kyo-client
+  namespace: kyo
+  labels:
+    app: kyo-client
+spec:
+  containers:
+    - name: client
+      command: ["sh", "-c"]
+      args: ["sleep infinity"]
+      image: armdocker.rnd.ericsson.se/aia_releases/data-engine-sk-2.3.1:1.0.0-20
+      env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: HADOOP_CONF_DIR
+          value: /etc/hadoop/conf/
+      volumeMounts:
+        - mountPath: /data/
+          name: kyo-nfs
+        - mountPath: /etc/hadoop/conf/
+          name: kyo-hdfs-config
+  volumes:
+    - name: kyo-nfs
+      nfs:
+        path: /export/pvc-891865bb-2bc0-11e9-8f95-fa163e9b416a/
+        server: 192.168.239.40
+    - name: kyo-hdfs-config
+      configMap:
+        name: kyo-hdfs-config

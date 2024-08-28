@@ -1,0 +1,1431 @@
+<EntityDef name="SGSN-MME">
+    <Components section="Children">
+        <EntityDef name="models">
+            <Occurrence>Multiple</Occurrence>
+            <ContainsText>True</ContainsText>
+            <Components section="Children">
+                <EntityDef name="dtdVersion">
+                    <Occurrence>Multiple</Occurrence>
+                    <ContainsText>True</ContainsText>
+                </EntityDef>
+                <EntityDef name="momMetaData">
+                    <Occurrence>Multiple</Occurrence>
+                    <ContainsText>True</ContainsText>
+                    <Components section="Children">
+                        <EntityDef name="momTitle">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                        </EntityDef>
+                        <EntityDef name="momSubTitle">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                        </EntityDef>
+                        <EntityDef name="momIdentity">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Components section="Children">
+                                <EntityDef name="docNum">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="docLang">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="docRev">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="docDate">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                        <EntityDef name="createdBy">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Components section="Children">
+                                <EntityDef name="signature">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                    </Components>
+                </EntityDef>
+                <EntityDef name="mim">
+                    <Occurrence>Multiple</Occurrence>
+                    <ContainsText>True</ContainsText>
+                    <Attributes>docNo,namespace,organization,date,revision,namespacePrefix,correction,release,name,author,version,contact</Attributes>
+                    <Components section="Children">
+                        <EntityDef name="description">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                        </EntityDef>
+                        <EntityDef name="class">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>name</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="description">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="domainExtension">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>domain</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="extension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Attributes>value,name</Attributes>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="systemCreated">
+                                    <Occurrence>Multiple</Occurrence>
+                                </EntityDef>
+                                <EntityDef name="root">
+                                    <Occurrence>Multiple</Occurrence>
+                                </EntityDef>
+                                <EntityDef name="attribute">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>name</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="description">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                        <EntityDef name="domainExtension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>domain</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="extension">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Attributes>value,name</Attributes>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="mandatory">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="noNotification">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="restricted">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="key">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="dataType">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="string">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Components section="Children">
+                                                        <EntityDef name="defaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="structRef">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="enumRef">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="defaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="derivedDataTypeRef">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="defaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="sequence">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="structRef">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Attributes>name</Attributes>
+                                                            <Components section="Children">
+                                                                <EntityDef name="mimName">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="minLength">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="string">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                        </EntityDef>
+                                                        <EntityDef name="ordered">
+                                                            <Occurrence>Single</Occurrence>
+                                                        </EntityDef>
+                                                        <EntityDef name="moRef">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Attributes>name</Attributes>
+                                                            <Components section="Children">
+                                                                <EntityDef name="mimName">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="nonUnique">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                        </EntityDef>
+                                                        <EntityDef name="enumRef">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Attributes>name</Attributes>
+                                                            <Components section="Children">
+                                                                <EntityDef name="mimName">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="derivedDataTypeRef">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Attributes>name</Attributes>
+                                                            <Components section="Children">
+                                                                <EntityDef name="mimName">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="seqDefaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="defaultValue">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="maxLength">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="uint16">
+                                                            <Occurrence>Single</Occurrence>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="uint16">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="defaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="moRef">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="uint64">
+                                                    <Occurrence>Single</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="uint32">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Components section="Children">
+                                                        <EntityDef name="defaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="boolean">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Components section="Children">
+                                                        <EntityDef name="defaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="int64">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="int32">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="uint8">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="int16">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Components section="Children">
+                                                        <EntityDef name="defaultValue">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="readOnly">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="isNillable">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="preliminary">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="deprecated">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="statusInformation">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                        <EntityDef name="specification">
+                                            <Occurrence>Single</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                        <EntityDef name="obsolete">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="action">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>name</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="description">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                        <EntityDef name="domainExtension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>domain</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="extension">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Attributes>value,name</Attributes>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="returnType">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="derivedDataTypeRef">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="boolean">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="string">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="uint16">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="int64">
+                                                    <Occurrence>Single</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="void">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="moRef">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="parameter">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>name</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="description">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                                <EntityDef name="domainExtension">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>domain</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="extension">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <Attributes>value,name</Attributes>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="in">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="dataType">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="string">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <Components section="Children">
+                                                                <EntityDef name="defaultValue">
+                                                                    <Occurrence>Single</Occurrence>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="derivedDataTypeRef">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Attributes>name</Attributes>
+                                                            <Components section="Children">
+                                                                <EntityDef name="mimName">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="defaultValue">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="moRef">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Attributes>name</Attributes>
+                                                            <Components section="Children">
+                                                                <EntityDef name="mimName">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                        <EntityDef name="boolean">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="defaultValue">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="isNillable">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="preliminary">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="deprecated">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="obsolete">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="statusInformation">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="preliminary">
+                                    <Occurrence>Multiple</Occurrence>
+                                </EntityDef>
+                                <EntityDef name="obsolete">
+                                    <Occurrence>Multiple</Occurrence>
+                                </EntityDef>
+                                <EntityDef name="statusInformation">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="deprecated">
+                                    <Occurrence>Multiple</Occurrence>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                        <EntityDef name="domainExtension">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>domain</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="extension">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <Attributes>value,name</Attributes>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                        <EntityDef name="implements">
+                            <Occurrence>Multiple</Occurrence>
+                            <Attributes>version,name,release,correction</Attributes>
+                        </EntityDef>
+                        <EntityDef name="struct">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>name</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="description">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="domainExtension">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>domain</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="extension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Attributes>value,name</Attributes>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="structMember">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>name</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="description">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                        <EntityDef name="domainExtension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>domain</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="extension">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Attributes>value,name</Attributes>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="string">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Components section="Children">
+                                                <EntityDef name="defaultValue">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="derivedDataTypeRef">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>name</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="mimName">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="sequence">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="string">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                                <EntityDef name="minLength">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="uint8">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="enumRef">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>name</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="mimName">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="uint16">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Components section="Children">
+                                                <EntityDef name="defaultValue">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="int32">
+                                            <Occurrence>Single</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="boolean">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="defaultValue">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="moRef">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>name</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="mimName">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="int16">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="uint32">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="int8">
+                                            <Occurrence>Single</Occurrence>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="isExclusive">
+                                    <Occurrence>Single</Occurrence>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                        <EntityDef name="enum">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>name</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="description">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="domainExtension">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>domain</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="extension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Attributes>value,name</Attributes>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="enumMember">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>name</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="description">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                        <EntityDef name="value">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                        <EntityDef name="derivedDataType">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>name</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="description">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="domainExtension">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>domain</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="extension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Attributes>value,name</Attributes>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="baseType">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Components section="Children">
+                                        <EntityDef name="int16">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="ranges">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="string">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Components section="Children">
+                                                <EntityDef name="validValues">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                                <EntityDef name="lengthRange">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="stringLength">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="isPassphrase">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="boolean">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="int32">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="ranges">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="unit">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                                <EntityDef name="resolution">
+                                                    <Occurrence>Single</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="uint16">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="ranges">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="unit">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="uint32">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="ranges">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="unit">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="uint8">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="ranges">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="unit">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="int64">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="ranges">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="uint64">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="ranges">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="subrange">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                            <Components section="Children">
+                                                                <EntityDef name="min">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                                <EntityDef name="max">
+                                                                    <Occurrence>Multiple</Occurrence>
+                                                                    <ContainsText>True</ContainsText>
+                                                                </EntityDef>
+                                                            </Components>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="int8">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="range">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="unit">
+                                                    <Occurrence>Single</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="validationRules">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Components section="Children">
+                                        <EntityDef name="rule">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>format,exceptionText,name</Attributes>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                        <EntityDef name="relationship">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>name</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="containment">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Components section="Children">
+                                        <EntityDef name="parent">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="hasClass">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="child">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="hasClass">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="cardinality">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="domainExtension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>domain</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="extension">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Attributes>value,name</Attributes>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="notCreatable">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="notDeleteable">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="noNotification">
+                                            <Occurrence>Single</Occurrence>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="biDirectionalAssociation">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Components section="Children">
+                                        <EntityDef name="associationEnd">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>name</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="hasClass">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="cardinality">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="isReserving">
+                                                    <Occurrence>Single</Occurrence>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="uniDirectionalAssociation">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Components section="Children">
+                                        <EntityDef name="hasClass">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>name</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="mimName">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="associationEnd">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>name</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="hasClass">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="cardinality">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="description">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                </EntityDef>
+                                <EntityDef name="preliminary">
+                                    <Occurrence>Multiple</Occurrence>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                    </Components>
+                </EntityDef>
+                <EntityDef name="interMim">
+                    <Occurrence>Multiple</Occurrence>
+                    <ContainsText>True</ContainsText>
+                    <Components section="Children">
+                        <EntityDef name="relationship">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>name</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="containment">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Components section="Children">
+                                        <EntityDef name="parent">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="hasClass">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="child">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="hasClass">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="mimName">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                                <EntityDef name="cardinality">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Components section="Children">
+                                                        <EntityDef name="min">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                        <EntityDef name="max">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="domainExtension">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Attributes>domain</Attributes>
+                                            <Components section="Children">
+                                                <EntityDef name="extension">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <Attributes>value,name</Attributes>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                        <EntityDef name="notCreatable">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="notDeleteable">
+                                            <Occurrence>Multiple</Occurrence>
+                                        </EntityDef>
+                                        <EntityDef name="noNotification">
+                                            <Occurrence>Single</Occurrence>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                    </Components>
+                </EntityDef>
+                <EntityDef name="mib">
+                    <Occurrence>Multiple</Occurrence>
+                    <ContainsText>True</ContainsText>
+                    <Attributes>correction,release,version,name</Attributes>
+                    <Components section="Children">
+                        <EntityDef name="object">
+                            <Occurrence>Multiple</Occurrence>
+                            <ContainsText>True</ContainsText>
+                            <Attributes>parentDn</Attributes>
+                            <Components section="Children">
+                                <EntityDef name="hasClass">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>name</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="mimName">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                                <EntityDef name="slot">
+                                    <Occurrence>Multiple</Occurrence>
+                                    <ContainsText>True</ContainsText>
+                                    <Attributes>name</Attributes>
+                                    <Components section="Children">
+                                        <EntityDef name="value">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                        </EntityDef>
+                                        <EntityDef name="complexValue">
+                                            <Occurrence>Multiple</Occurrence>
+                                            <ContainsText>True</ContainsText>
+                                            <Components section="Children">
+                                                <EntityDef name="slot">
+                                                    <Occurrence>Multiple</Occurrence>
+                                                    <ContainsText>True</ContainsText>
+                                                    <Attributes>name</Attributes>
+                                                    <Components section="Children">
+                                                        <EntityDef name="value">
+                                                            <Occurrence>Multiple</Occurrence>
+                                                            <ContainsText>True</ContainsText>
+                                                        </EntityDef>
+                                                    </Components>
+                                                </EntityDef>
+                                            </Components>
+                                        </EntityDef>
+                                    </Components>
+                                </EntityDef>
+                            </Components>
+                        </EntityDef>
+                    </Components>
+                </EntityDef>
+            </Components>
+        </EntityDef>
+    </Components>
+</EntityDef>

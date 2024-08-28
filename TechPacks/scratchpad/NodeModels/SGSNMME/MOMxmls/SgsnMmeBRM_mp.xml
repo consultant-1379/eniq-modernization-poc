@@ -1,0 +1,2123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2018 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Oct 29, 2018 9:22:12 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>ECIM BRM</momTitle>
+        <momSubTitle>sub title</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>20/02/2014</docDate>
+        </momIdentity>
+        <createdBy>
+            <signature>EMC/QRT/EB Hossein Kassaei</signature>
+        </createdBy>
+    </momMetaData>
+    <mim author="EMC/QRT/EB Hossein Kassaei" contact="EMC/QRT/EB Hossein Kassaei" correction="5" date="2018-04-26" docNo="" name="SgsnMmeBRM" namespace="urn:com:ericsson:ecim:SgsnMmeBRM" namespacePrefix="sgsnmmebrm" organization="EMC/QRT/EB" release="9" revision="0" version="3">
+        <description>SgsnMmeBRM model for backup and restore.&#13;
+&#13;
+</description>
+        <domainExtension domain="ECIM">
+            <extension name="ecimMomName" value="ECIM_BrM"/>
+            <extension name="ecimMomVersion" value="3"/>
+            <extension name="ecimMomRelease" value="2"/>
+            <extension name="ecimMomCorrection" value="0"/>
+        </domainExtension>
+        <implements correction="0" name="ECIM_BrM" release="2" version="3"/>
+        <struct name="ProductData">
+            <description>This represents an Ericsson software product.&#13;
+The product name, product number and product revision represent product information stored in PRIM realization part.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="productName">
+                <description>The name of the product.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pnam"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productNumber">
+                <description>The product number of the product.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pnum"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productRevision">
+                <description>The revision state of the product.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="prev"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="productionDate">
+                <description>The production date of the product.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pdat"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeBRM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="description">
+                <description>Free text description of the product. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="des"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="type">
+                <description>Free text product type. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="type"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <struct name="EcimPassword">
+            <description>This struct stores the password.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="cleartext">
+                <description>Indicates if the password is entered in cleartext or not. </description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="ct"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="EcimEmpty">
+                    <mimName>SgsnMmeBRM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="password">
+                <description>Holds the password or passphrase text.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pwd"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <struct name="AsyncActionProgress">
+            <description>This records the progress of an asyncronous action.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="actionName">
+                <description>The name of the invoked asynchronous action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="an"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="additionalInfo">
+                <description>Used for logging significant messages during execution of an action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="adi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <sequence>
+                    <string/>
+                    <minLength>0</minLength>
+                </sequence>
+            </structMember>
+            <structMember name="progressInfo">
+                <description>Textual information describing the actual state of the execution of the action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="progressPercentage">
+                <description>Progress of the action. &#13;
+The range is between 0 and 100.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="pp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint8/>
+            </structMember>
+            <structMember name="result">
+                <description>Result state of completed action.&#13;
+This field has the value NOT_AVAILABLE if the action is not finished.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="res"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionResultType">
+                    <mimName>SgsnMmeBRM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="resultInfo">
+                <description>Textual description of the outcome/result of the action containing useful info for the NMS.&#13;
+It can contain an error message if the action failed.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="resi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="state">
+                <description>Current state of the action.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <enumRef name="ActionStateType">
+                    <mimName>SgsnMmeBRM</mimName>
+                </enumRef>
+            </structMember>
+            <structMember name="actionId">
+                <description>Uniquely identifies the invocation of an action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="ai"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <uint16/>
+            </structMember>
+            <structMember name="timeActionStarted">
+                <description>The date and time when the current action was started.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tas"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeBRM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeActionCompleted">
+                <description>The date and time when the action was completed (successfully or unsuccessfully).</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tac"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeBRM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="timeOfLastStatusUpdate">
+                <description>The date and time when the struct member state was last updated.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="tlsu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmeBRM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+        </struct>
+        <enum name="DayOfWeekOccurrence">
+            <description>The occurrence of a day in the month  for example the first Monday of the month.&#13;
+This attribute is used in combination with DayOfWeek to schedule an event on a certain occurence of that day in the month, for example first Monday or last Friday of the month.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="FIRST">
+                <description>First occurrence.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="SECOND">
+                <description>Second occurrence.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="THIRD">
+                <description>Third Occurrence.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="FOURTH">
+                <description>Fourth occurrence.</description>
+                <value>4</value>
+            </enumMember>
+            <enumMember name="LAST">
+                <description>The last occurrence.</description>
+                <value>5</value>
+            </enumMember>
+            <enumMember name="ALL">
+                <description>All occurrences.</description>
+                <value>0</value>
+            </enumMember>
+        </enum>
+        <enum name="ActionResultType">
+            <description>Lists the different results of an action.&#13;
+</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="SUCCESS">
+                <description>The asynchronous action has ended with success.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="FAILURE">
+                <description>The asynchronous action has ended with failure.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="NOT_AVAILABLE">
+                <description>No result is available yet.</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="BasicAdmState">
+            <description>The basic administrative states for a resource.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="LOCKED">
+                <description> The resource is administratively prohibited from performing services for its users.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="UNLOCKED">
+                <description>The resource is administratively permitted to perform services for its users. &#13;
+This is independent of its inherent operability.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <enum name="BrmAutoExport">
+            <description>Indicates whether or not a scheduled backup is automatically exported at successful creation.</description>
+            <enumMember name="DISABLED">
+                <description>Disabled.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="ENABLED">
+                <description>Enabled.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <enum name="BrmBackupStatus">
+            <description>Indicates the status of a Backup. &#13;
+The status is INCOMPLETE during creation or deletion of a backup. Once a backup is successfully created, its status is COMPLETE. If the integrity of the backup is violated, it is marked as CORRUPTED.</description>
+            <enumMember name="BRM_BACKUP_COMPLETE">
+                <description>The backup is complete and can be safely restored.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="BRM_BACKUP_INCOMPLETE">
+                <description>The backup is incomplete. The reason can be failure during creation or deletion. &#13;
+An incomplete backup can never be restored. The only operation permitted on an incomplete backup is to delete it.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="BRM_BACKUP_CORRUPTED">
+                <description>The backup is corrupted. &#13;
+A corrupted backup is never allowed to be restored. The only operation permitted on a corrupted backup is to delete it.</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="BrmManualBackupAutoDelete">
+            <description>Indicates whether or not the implementation of BRM automatically does the housekeeping of manual backups.</description>
+            <enumMember name="ENABLED">
+                <description>Enabled.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="DISABLED">
+                <description>Disabled.</description>
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="DayOfWeek">
+            <description>Presents the day of the week.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="SUNDAY">
+                <description>Sunday.</description>
+                <value>7</value>
+            </enumMember>
+            <enumMember name="MONDAY">
+                <description>Monday.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="TUESDAY">
+                <description>Tuesday.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="WEDNESDAY">
+                <description>Wednesday.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="THURSDAY">
+                <description>Thursday.</description>
+                <value>4</value>
+            </enumMember>
+            <enumMember name="FRIDAY">
+                <description>Friday.</description>
+                <value>5</value>
+            </enumMember>
+            <enumMember name="SATURDAY">
+                <description>Saturday.</description>
+                <value>6</value>
+            </enumMember>
+            <enumMember name="ALL">
+                <description>All days.</description>
+                <value>0</value>
+            </enumMember>
+        </enum>
+        <enum name="ActionStateType">
+            <description>Lists Action states.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="CANCELLING">
+                <description>Cancellation is in progress.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="RUNNING">
+                <description>The execution of the action is currently executing.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="FINISHED">
+                <description>The action is finished.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="CANCELLED">
+                <description>The action has been cancelled and the cancellation is done.</description>
+                <value>4</value>
+            </enumMember>
+        </enum>
+        <enum name="BrmBackupCreationType">
+            <description>Backup creation type.</description>
+            <enumMember name="MANUAL">
+                <description>Backup created via a manual operation. &#13;
+A backup of this creation type is subject to housekeeping based on "maximum number" defined in BrmBackupHousekeeping MO and "remove-oldest" policy.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="SCHEDULED">
+                <description>Backup created automatically based on a preconfigured schedule. &#13;
+A backup of this creation type is subject to housekeeping based on "maximum number" defined in BrmBackupScheduler MO and "remove-oldest" policy</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="SYSTEM_CREATED">
+                <description>Backup automatically created by the managed element.&#13;
+A backup of this creation type is not subject to any housekeeping policy defined by the management system and can only be removed by the managed element. Such a backup is primarily used for automatic recovery from catastrophic failures, but may also be used as any other backup if the management system chooses to restore the managed element with it.&#13;
+</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="OperState">
+            <description>The operational states of a resource.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="DISABLED">
+                <description> The resource is  totally inoperable.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="ENABLED">
+                <description> The resource is partially or fully operable.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <derivedDataType name="DayOfMonth">
+            <description>Represents a day in  month in digits.&#13;
+The string format is "D" or "DD"(excluding quotes).&#13;
+D or DD = One or Two digit Day (1 through 31)&#13;
+0 denotes All days.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <int16>
+                    <range>
+                        <min>0</min>
+                        <max>31</max>
+                    </range>
+                    <ranges>
+                        <subrange>
+                            <min>0</min>
+                            <max>31</max>
+                        </subrange>
+                    </ranges>
+                </int16>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="EcimPasswordString">
+            <description>Holds the password string.</description>
+            <baseType>
+                <string/>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="EcimEmpty">
+            <description>This type represents a leaf that has no value, it conveys information by its presence or absence.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <boolean/>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="Time">
+            <description>Represents the local time ( ISO 8601) . &#13;
+The following pattern describes the Time format in detail:&#13;
+hh:mm:ss&#13;
+Where:&#13;
+hh      = two digits of hour (00 through 23, AM/PM not allowed)&#13;
+mm      = two digits of minute (00 through 59)&#13;
+ss      = two digits of second (00 through 59, leap second not allowed)&#13;
+</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <validValues>^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="Month">
+            <description>Represents a month in digits.&#13;
+The string format is "M" or "MM" (excluding quotes).&#13;
+M or MM = One or two digit month (1 or 0 1=January, etc.)&#13;
+0 denotes All Months.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <int16>
+                    <range>
+                        <min>0</min>
+                        <max>12</max>
+                    </range>
+                    <ranges>
+                        <subrange>
+                            <min>0</min>
+                            <max>12</max>
+                        </subrange>
+                    </ranges>
+                </int16>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="ActionInvocationResult">
+            <description>Indicates whether an asynchronous operation was successfully invoked. (The actual result of the operation will be communicated by other means.)
+
+A value of zero indicates success. Non-zero error codes are implementation-specific.</description>
+            <baseType>
+                <int32/>
+            </baseType>
+        </derivedDataType>
+        <derivedDataType name="DateTime">
+            <description>DateTime in format YYYY-MM-DDThh:mm:ss.SSSZ .</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="10"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>19</min>
+                        <max>31</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>19</min>
+                            <max>31</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <class name="BrM">
+            <description>ECIM Backup and Restore Management top-level class.&#13;
+&#13;
+ECIM BRM encompasses all the operations associated with the backup and restore of the managed element.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <attribute name="brMId">
+                <description>The value component of the RDN. &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="id"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="exportPackageLabelPrefix">
+                <description>Free text to help better identify a backup export package when residing outside the ME.&#13;
+If specified, BRM prefixes this text to the label that it generates for the backup export package.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="eplp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmBackupManager">
+            <description>Serves as container for Backup instances of a particular backupType and backupDomain.&#13;
+&#13;
+This class also provides the actions for creating new backups, importing backups from other locations, and deleting existing backups of the corresponding type and domain.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="createBackup">
+                <description>Create a new backup of the backupType and backupDomain managed by this BackupManager.&#13;
+This is an asynchronous action - the progress and result are reported in the progressReport attribute.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+                <parameter name="name">
+                    <description>The name of the backup to create.&#13;
+Input name validation is done by the implementation to forbid illegal names. Backup name validation rules are defined by the implementation and include duplicate backup names, names exceeding maximum allowed length, etc.</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="name"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="deleteBackup">
+                <description>Delete a backup specified by its name and the backupType and backupDomain managed by this BackupManager.&#13;
+This is an asynchronous action. The progress and result are reported in the progressReport attribute.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+                <parameter name="name">
+                    <description>The name of the backup to delete.</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="name"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+            </action>
+            <action name="cancelCurrentAction">
+                <description>Cancel an ongoing asynchronous createBackup, deleteBackup, or importBackup operation.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+            </action>
+            <action name="importBackup">
+                <description>Import a backup using the specified resource identifier (uri). &#13;
+This is an asynchronous action where the progress and result are reported in the progressReport attribute. Note that the type and domain of the backup to be imported must match the backup type and domain indicated by the instance of the backup manager on which this action is invoked.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+                <parameter name="uri">
+                    <description>Specifies the location (url) of the backup to import or the resource name (urn) that encapsulates the backup import procedure.&#13;
+&#13;
+</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="uri"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="password">
+                    <description>The password required to access the location specified by the uri.&#13;
+If no password is required, this parameter is ignored.</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="pass"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <derivedDataTypeRef name="EcimPasswordString">
+                            <mimName>SgsnMmeBRM</mimName>
+                        </derivedDataTypeRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <attribute name="brmBackupManagerId">
+                <description>The value component of the RDN. &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="bmi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="backupType">
+                <description> Type of backup, for example System Data or User Data.&#13;
+            </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="bt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="backupDomain">
+                <description>Backup domain, for example System.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="bd"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="progressReport">
+                <description>Represents the progress report and  final result of the ongoing (asynchronous) action, for example createBackup. &#13;
+This MO supports only one action to be executed at a time.&#13;
+            </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <structRef name="AsyncActionProgress">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="adminState">
+                <description>Administrative state of the manager.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="BasicAdmState">
+                        <defaultValue>UNLOCKED</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="managerState">
+                <description>Operational state of the manager.&#13;
+State ENABLED confirms that the manager is available. State DISABLED indicates that the manager is inactive and unavailable.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ms"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="OperState">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmBackup">
+            <description>Represents one backup of the type and domain specified by the BrmBackupManager in which it is contained.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="restore">
+                <description>Restore from this backup. This is an asynchronous action - progress and result are reported in the progressReport attribute.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+            </action>
+            <action name="cancelCurrentAction">
+                <description>Cancel an ongoing asynchronous restore or export operation.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+            </action>
+            <action name="export">
+                <description>Export the backup using the specified resource identifier (uri). &#13;
+This is an asynchronous action. Progress and the result are reported in the progressReport attribute. Note: When backup successfully completed, a copy of the backup is transferred and the original backup remains in the ME.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+                <parameter name="uri">
+                    <description>Specifies the location (url) where the backup is to be exported or the resource name (urn) that encapsulates the backup export procedure.&#13;
+</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="uri"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <string/>
+                    </dataType>
+                </parameter>
+                <parameter name="password">
+                    <description>The password required to access the location specified by the uri.&#13;
+If no password is required, this parameter is ignored.</description>
+                    <domainExtension domain="SgsnMme">
+                        <extension name="cliOperand" value="pass"/>
+                        <extension name="yangName" value="not-yet-supported"/>
+                    </domainExtension>
+                    <in/>
+                    <dataType>
+                        <derivedDataTypeRef name="EcimPasswordString">
+                            <mimName>SgsnMmeBRM</mimName>
+                        </derivedDataTypeRef>
+                    </dataType>
+                </parameter>
+            </action>
+            <attribute name="brmBackupId">
+                <description>The value component of the RDN. &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="bid"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="backupName">
+                <description>Backup name, provided by the operator. </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="bn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="creationTime">
+                <description>Date and time when the backup was created, i.e., start time of backup procedure.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ctime"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="status">
+                <description>Status of the backup.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="BrmBackupStatus">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="progressReport">
+                <description>Represents the progress report and  final result of the ongoing (asynchronous) action in this MO, for example restore. &#13;
+This MO supports only one action to be executed at a time.&#13;
+            </description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <structRef name="AsyncActionProgress">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="creationType">
+                <description>Creation type; whether manually created or automatically via BrmBackupScheduler.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ctype"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="BrmBackupCreationType">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="swVersion">
+                <description>The administrative data portion of active software versions as specified in the software inventory management, when the backup is created.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sv"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <structRef name="ProductData">
+                            <mimName>SgsnMmeBRM</mimName>
+                        </structRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmSingleEvent">
+            <description>A single scheduled backup event.&#13;
+This construct can be used to configure a single, one-shot, scheduled backup event by specifying the desired date and time.&#13;
+</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="brmSingleEventId">
+                <description>The value component of the RDN. &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="eid"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="scheduledTime">
+                <description>Scheduled time.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmPeriodicEvent">
+            <description>Periodic backup event.&#13;
+This construct can be used to configure a periodic scheduled backup event by specifying the number of months, weeks, days, hours, or minutes. For instance, in order to configure a scheduled backup event to occur every 12 hours, the following setup must be done: hours = 12.&#13;
+If more than one attribute is set, the values are added when calculating the next scheduled event. For example, if hours = 6 and minutes = 30, the scheduled backup event occurs every 6 hour and 30 minutes. The start time for calculating scheduled events is assumed to be the current system time by default, unless explicitly set using the startTime attribute. Furthermore, if the configured event is to stop at a specific date, attribute stopTime must be set accordingly. Note that the default value of stopTime is the end of a century. Daylight saving adjustments in Spring and Fall are addressed in such a way that the affected scheduled backup events are triggered exactly once only</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="brmPeriodicEventId">
+                <description>The value component of the RDN. &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="eid"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="months">
+                <description>The number of months.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mon"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint16>
+                        <defaultValue>0</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="weeks">
+                <description>The number of weeks.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="w"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint16>
+                        <defaultValue>0</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="days">
+                <description>The number of days.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="d"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint16>
+                        <defaultValue>0</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="hours">
+                <description>The number of hours.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="h"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <uint16/>
+                </dataType>
+            </attribute>
+            <attribute name="minutes">
+                <description>The number of minutes.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="m"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint16>
+                        <defaultValue>0</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="startTime">
+                <description>Start time. It is an optional attribute. If not specified, the implementation uses the current system time as the default value.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="start"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="stopTime">
+                <description>Stop time. It is an optional attribute. The default value is the end of the century.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="stop"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <defaultValue>2099-12-31T23:59:59</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmBackupHousekeeping">
+            <description>Provides optional support for automated housekeeping of manually created backups. &#13;
+&#13;
+If autoDelete is set to ENABLED before creating a new manual backup, BRM first checks the number of manual backups, and if the limit specified by the value of maxStoredManualBackups is reached, BRM removes the oldest manual backup before creating a new one.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="brmBackupHousekeepingId">
+                <description>The value component of the RDN. &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="bhi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="maxStoredManualBackups">
+                <description>Maximum number of manual backups, per backup type, to store in the ME. &#13;
+When this limit is reached, if autoDelete=ENABLED, BRM removes the oldest manual backup before creating a new one. Otherwise an error is returned when createBackup() is invoked and the NMS must perform the required housekeeping activity before attempting to create a new backup.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="msmb"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <uint16>
+                        <defaultValue>5</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="autoDelete">
+                <description>Determines whether automated housekeeping of manual backups is enabled.&#13;
+If ENABLED and the number of backups already stored on the ME is equal to the value of maxStoredManualBackups, the oldest backup is removed before creating a new one. If set to DISABLED, no backup is removed. Instead, when action createBackup() is invoked, it returns a failure parameter.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ad"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="BrmManualBackupAutoDelete">
+                        <defaultValue>ENABLED</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmBackupScheduler">
+            <description>Provides optional support for scheduling backup creation.&#13;
+Each instance of BrmBackupScheduler MOC serves as the backup scheduler for the backup type indicated by its parent instance of BrmBackupManager. The scheduled backup events can be instances of BrmSingleEvent MOC, BrmCalnedarBasedPeriodicEvent MOC, or BrmPeriodicEvent MOC contained in the instance of BrmBackupScheduler.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="brmBackupSchedulerId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="bsi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="maxStoredScheduledBackups">
+                <description>The maximum number of scheduled backups, per backup type, to store in the ME.&#13;
+When this limit is reached, the oldest scheduled backup is deleted by BRM before creating a new one.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mssb"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <uint16>
+                        <defaultValue>5</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="scheduledBackupName">
+                <description>The configurable portion of the scheduled backup name.&#13;
+The scheduled backups are named &lt;scheduledBackupName&gt;-&lt;creation date and time&gt;, where creation date and time is of type DateTime defined in the common library.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sbn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string>
+                        <defaultValue>BACKUP</defaultValue>
+                    </string>
+                </dataType>
+            </attribute>
+            <attribute name="progressReport">
+                <description>Reports the progress and final result of the ongoing (asynchronous) scheduled backup operation.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <structRef name="AsyncActionProgress">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="mostRecentlyCreatedAutoBackup">
+                <description>The name of the scheduled backup created most recently by the backup scheduler.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mrcab"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="autoExport">
+                <description>Determines whether a scheduled backup is to be automatically exported at successful creation.&#13;
+If set to ENABLED, the scheduled backup specified by the attribute mostRecentlyCreatedAutoBackup is exported to the location specified by attribute autoExportUri after it is successfully created. Note that the automatic export is only triggered if creation of the scheduled backup was successful. Otherwise, no export operation is triggered, even if this attribute is set to ENABLED. Also, note that setting this attribute to ENABLED has no impact on the scheduled backups that were already created and stored prior to the new configuration.&#13;
+&#13;
+</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ae"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="BrmAutoExport">
+                        <defaultValue>DISABLED</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="autoExportUri">
+                <description>Uri used by the backup scheduler when automatically exporting a scheduled backup.&#13;
+If attribute autoExport is set to ENABLED, this uri specifies the location to which the scheduled backup is automatically exported.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aeu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="autoExportPassword">
+                <description>Password used by the backup scheduler when automatically exporting a scheduled backup.&#13;
+If attribute autoExport is set to ENABLED, this password is used for authentication when automatically exporting the scheduled backup.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="aep"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <structRef name="EcimPassword">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="adminState">
+                <description>Administrative state of the scheduler.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="as"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="BasicAdmState">
+                        <defaultValue>UNLOCKED</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="nextScheduledTime">
+                <description>The date and time when the next scheduled event is triggered.&#13;
+This is the earliest scheduled event from the set of configured events, i.e. single, periodic, and calendar-based periodic events.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="nst"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="schedulerState">
+                <description>Operational state of the scheduler.&#13;
+State ENABLED confirms that the scheduler is successfully configured and that the next event is calculated. State DISABLED indicates that no more scheduled events are triggered by the scheduler.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ss"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="OperState">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmCalendarBasedPeriodicEvent">
+            <description>Periodic backup event using calendar-based interval.&#13;
+This construct can be used to configure a periodic scheduled backup event by specifying the desired interval using the calendar. For instance, in order to configure a scheduled backup event to occur every night at 2:00 am, the following setup must be done: time = 02:00:00.&#13;
+The start time for calculating scheduled events is by default the current system time, unless explicitly set using the startTime attribute. Furthermore, if the configured event is to stop at a specific date, stopTime attribute must be set accordingly. Note that the default value of stopTime is the end of the century. A scheduled backup event of this type is triggered only if ALL the conditions with regard to attribute values are satisfied. For example, if dayOfWeek is set to Monday and dayOfMonth is set to 1, the event is triggered only if the first day of month is Monday.&#13;
+Daylight saving adjustments in Spring and Fall are addressed in such a way that the affected scheduled backup events are triggered exactly once.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="brmCalendarBasedPeriodicEventId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="eid"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="month">
+                <description>Month.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mon"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="Month">
+                        <defaultValue>0</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="dayOfWeek">
+                <description>Day of week.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dow"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="DayOfWeek">
+                        <defaultValue>ALL</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="dayOfMonth">
+                <description>Day of month. &#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dom"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="DayOfMonth">
+                        <defaultValue>0</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="time">
+                <description>This is the time when the scheduled event must occur.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="time"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <derivedDataTypeRef name="Time">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="dayOfWeekOccurrence">
+                <description>The occurrence of the day of week specified by dayOfWeek attribute in the month.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dowo"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <enumRef name="DayOfWeekOccurrence">
+                        <defaultValue>ALL</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="startTime">
+                <description>Start time. It is an optional attribute. If not specified, the implementation uses the current system time as the default value.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="start"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="stopTime">
+                <description>Stop time. It is an optional attribute. The default value is the end of the century.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="stop"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="DateTime">
+                        <defaultValue>2099-12-31T23:59:59</defaultValue>
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmRollbackAtRestore">
+            <description>Provides optional support for confirmation of a restore action or automatic rollback after an unconfirmed restore operation was executed.&#13;
+The existence of an instance of this class indicates that this feature is supported by the implementation.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="confirmRestore">
+                <description>Invoking this action indicates acceptance of the previously executed restore operation.&#13;
+The restore supervision timer, counting down from the initial value indicated by the timeAllowedBeforeRollback attribute, is stopped when this action is invoked. If this action is not invoked before the supervision timer expires, the system is restored to the state it was in before the last restore operation was invoked. This is a synchronous action.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="false"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <derivedDataTypeRef name="ActionInvocationResult">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </derivedDataTypeRef>
+                </returnType>
+            </action>
+            <attribute name="brmRollbackAtRestoreId">
+                <description>The value component of the RDN.</description>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="timeAllowedBeforeRollback">
+                <description>Number of seconds to wait for action confirmRestore to invoke before performing the rollback to the state before restore.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <uint16>
+                        <defaultValue>3600</defaultValue>
+                    </uint16>
+                </dataType>
+            </attribute>
+            <attribute name="timeRemainingBeforeRollback">
+                <description>The remaining number of seconds before performing the rollback to the state before restore.&#13;
+The countdown stops after confirmRestore action is invoked on the BrmBackup MO, representing the restored backup. If action confirmRestore is not invoked before the expiration of the rollback timer, an automatic rollback is triggered. Countdown starts at restore, and stops when confirmRestore() is invoked.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <uint16/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="BrmBackupLabelStore">
+            <description>Provides optional support for labeling of certain backups.&#13;
+This class contains attributes that help distinguish certain backups such as the last restored backup, primary restore candidate, and so on.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="brmBackupLabelStoreId">
+                <description>The value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="blsi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="lastRestoredBackup">
+                <description>The name of the backup that was last used to restore the ME.&#13;
+This does not imply that the currently running version of the system is the same as this backup, but instead shows which one of the backups was last used to restore the ME. In a system that has never been restored using a backup, this attribute is empty.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lrb"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="lastCreatedBackup">
+                <description>The name of the last backup created.&#13;
+This backup can be MANUAL or SCHEDULED. Note that this attribute is not updated in the case of a failed attempt to create a backup, which would result in an INCOMPLETE backup.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lcb"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="lastImportedBackup">
+                <description>The name of the last backup imported to the ME.&#13;
+Note that this attribute is not updated in the case of a failed attempt to import a backup.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lib"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="lastExportedBackup">
+                <description>The name of the last backup exported from the ME.&#13;
+Note that this attribute is not updated in the case of a failed attempt to export a backup.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="leb"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="restoreEscalationList">
+                <description>Specifies a list of backups by name, in the order that is to be used to restore the ME when needed.&#13;
+Specifically, the first element of this ordered list identifies the “primary restore candidate”. If the attempt to restore the ME with a given backup fails, the next backup in the list must be tried.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rel"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <string/>
+                        <minLength>0</minLength>
+                        <ordered/>
+                    </sequence>
+                </dataType>
+            </attribute>
+        </class>
+        <relationship name="BrM_to_BrmBackupManager">
+            <containment>
+                <parent>
+                    <hasClass name="BrM">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmBackupManager">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="BrmBackupManager_to_BrmBackup">
+            <containment>
+                <parent>
+                    <hasClass name="BrmBackupManager">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmBackup">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="BrmBackupManager_to_BrmBackupHousekeeping">
+            <containment>
+                <parent>
+                    <hasClass name="BrmBackupManager">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmBackupHousekeeping">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="BrmBackupScheduler_to_BrmSingleEvent">
+            <containment>
+                <parent>
+                    <hasClass name="BrmBackupScheduler">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmSingleEvent">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="BrmBackupScheduler_to_BrmPeriodicEvent">
+            <containment>
+                <parent>
+                    <hasClass name="BrmBackupScheduler">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmPeriodicEvent">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="BrmBackupManager_to_BrmBackupScheduler">
+            <containment>
+                <parent>
+                    <hasClass name="BrmBackupManager">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmBackupScheduler">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="BrmBackupScheduler_to_BrmCalendarBasedPeriodicEvent">
+            <containment>
+                <parent>
+                    <hasClass name="BrmBackupScheduler">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmCalendarBasedPeriodicEvent">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="BrM_to_BrmRollbackAtRestore">
+            <containment>
+                <parent>
+                    <hasClass name="BrM">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmRollbackAtRestore">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="BrmBackupManager_to_BrmBackupLabelStore">
+            <containment>
+                <parent>
+                    <hasClass name="BrmBackupManager">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrmBackupLabelStore">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </mim>
+    <interMim>
+        <relationship name="SystemFunctions_to_BrM">
+            <containment>
+                <parent>
+                    <hasClass name="SystemFunctions">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="BrM">
+                        <mimName>SgsnMmeBRM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </interMim>
+</models>

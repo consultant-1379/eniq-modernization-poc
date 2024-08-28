@@ -1,0 +1,628 @@
+// ==================================================================
+//
+// NAME
+//   exMI - API for Application Management Functions and Execution
+//	  Control Functions towards the Management interface
+//
+// INTERFACES       REGISTERED NAME
+//   exMI::SLO      "oam/cps/execution"
+//
+// FILE
+//   exMI.idl
+//
+// COPYRIGHT ERICSSON AB 1998-2014
+//   The copyright to the computer program(s) herein is the
+//   property of ERICSSON AB, Sweden. The program(s) may be used
+//   and/or copied only with the written permission from ERICSSON AB
+//   or in accordance with the terms and conditions stipulated
+//   in the agreement/contract under which the program(s) have
+//   been supplied.
+//
+// DESCRIPTION
+//   See documentation comments below.
+//
+// REVISION HISTORY
+//            Date    Author   Item changed
+//   GSN R6   040906  ervpeas  Comments
+//              Doxygen comments added
+//
+// ==================================================================
+
+/**
+ ** @file
+ **
+ ** API for Application Management Functions and Execution Control
+ ** Functions towards the Management interface.
+ **/
+
+#ifndef ex_MI_Idl
+#define ex_MI_Idl
+
+// Include general OMS and DPE types and definitions.
+#include "omsDefs.idl"
+#include "dpeDefs.idl"
+
+#include "oamSupport.idl"
+
+/**
+ ** Namespace for Execution Management Functions towards the Management
+ ** interface.
+ ** <p>
+ ** This API provides the access to the execution management functions of
+ ** GPRS Core 2.0 towards the IIOP interface.
+ ** Most functions in this Module use API towards DPE (NCL) to access the
+ ** execution manangement resources
+ ** <p>
+ ** This interface can be used by the management clients to retrieve
+ ** information about the DPE application resources and it can be
+ ** used by the management clients to affect the DPE application resources.
+ **/
+
+
+module exMI {
+
+  /**
+   ** API for Execution Management Functions towards the Management
+   ** interface.
+   ** <p>
+   ** The <code>exMI::SLO</code> interface is registered with the name
+   ** <b><code>oam/cps/execution</code></b> on the node.
+   **
+   **/
+
+  interface SLO {
+
+    const long IF_VERSION = 1;
+
+    // =================================//
+    // Information Retrieval Functions  //
+    // =================================//
+
+    //******************************************************************
+    /**
+     ** Returns a list of all applications. If there exists several
+     ** revisions of a specific application, this application is only
+     ** present once in the list.
+     **
+     ** @param data     OAM session context data
+     ** @param aList    list of all application instances
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: exma_slo_passive: retrieve data
+    void getApplications(in oamSupport::AdmData data,
+                         out dpeDefs::ApplicationNameList aList)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     **	Returns a list of all application instances for a specific
+     ** application. The list contains for each application instance,
+     ** the application instance name (dpeDefs::ApplicationInstance)
+     **
+     ** @param data          OAM session context data
+     ** @param application   the name of the application
+     ** @param aiList        list of all application instances
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: exma_slo_passive: retrieve data
+    void getApplicationInstances(in oamSupport::AdmData data,
+                                 in dpeDefs::ApplicationName application,
+                                 out dpeDefs::ApplicationInstanceList aiList)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     **	Returns information about the specified application instance.
+     **
+     ** @param data       OAM session context data
+     ** @param instance   the application instance under inspection
+     ** @param info       info about the specified application instance
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: exma_slo_passive: retrieve data
+    void getApplicationInstanceInfo(in oamSupport::AdmData data,
+                                    in dpeDefs::ApplicationInstance instance,
+                                    out dpeDefs::ApplicationInstanceInfo info)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns all instances of a specific block within a
+     ** specific application instance.
+     **
+     ** @param data            OAM session context data
+     ** @param block           the block under inspection
+     ** @param applInstance    the application instance under inspection
+     ** @param blockInstances  the block instances retrieved
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: exma_slo_passive: retrieve data
+    void getInstancesOfBlock(in oamSupport::AdmData data,
+                             in dpeDefs::BlockName block,
+                             in dpeDefs::ApplicationInstance applInstance,
+                             out dpeDefs::SetOfBlockInstances blockInstances)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     ** Returns the set of all descendant blocks of a specific block
+     ** within a specific application instance
+     **
+     ** @param data            OAM session context data
+     ** @param block           the block under inspection
+     ** @param applInstance    the application instance under inspection
+     ** @param blocks          the blocks retrieved
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     **
+     ** @pre
+     **
+     ** @post
+     **   state unchanged.
+     **/
+    // #SM_ASD: exma_slo_passive: retrieve data
+    void getDescendantsOfBlock(in oamSupport::AdmData data,
+                               in dpeDefs::BlockName block,
+                               in dpeDefs::ApplicationInstance applInstance,
+                               out dpeDefs::SetOfBlocks blocks)
+      raises(omsDefs::OperationFailed);
+
+
+
+    // =================================//
+    // Control Functions                //
+    // =================================//
+
+    //******************************************************************
+    /**
+     **	Calls the NDM operation "startApplication"
+     **
+     ** @param data            OAM session context data
+     ** @param applName        the name of the application
+     ** @param applInstance    the created application instance
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_StoppingAllApplications"</code>,
+     **               The node is not stable: a request to stop all applications
+     **               is being carried out.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_StoppingAllForUpgrade"</code>,
+     **               The node is not stable: all the applications are being
+     **               stopped as a part of software upgrade.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_FailedToObtainSC"</code>,
+     **               An internal error in NCL.
+     **               Shouldn't happen, indicates some serious error in the NCL
+     **               software. The specific manifestation will be described by
+     **               an event.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationAlreadyStarted"</code>,
+     **               The application has already been started. (DPE currently
+     **               supports only one instance of each application.)
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_UnableToCreateApplication"</code>,
+     **               The attempt to create the application failed.
+     **               May be caused by a great number of reasons: the
+     **               accompanying event will contain more information.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationNotFoundInSC"</code>,
+     **               The software configuration does not contain files with
+     **               this application.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_InternalError"</code>,
+     **               An internal error in NCL.
+     **               Shouldn't happen, indicates some serious error in the NCL
+     **               software. The specific manifestation will be described by
+     **               an event.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_OutOfResources"</code>,
+     **               NCL cannot allocate memory etc.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_CapsuleNotLoadable"</code>,
+     **               Creation of block instance would require adding a new
+     **               load unit to a capsule whose type does not allow that.
+     **               Should never happen unless an application tries to
+     **               outsmart the system.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_BlockInstanceUnknown"</code>,
+     **               An attempt to create a block instance whose name has not
+     **               been created by FDM.
+     **               Should never happen unless an application tries to
+     **               outsmart the system.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_BlockInstanceInWrongState"</code>,
+     **               An attempt to create a block instance whose state is not
+     **               "Mapped". Should never happen unless an application
+     **               tries to outsmart the system.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_NoLoadUnit"</code>,
+     **               An attempt to create a block instance in a capsule whose
+     **               type is such that there is no appropriate unit that
+     **               contains the block in question.
+     **               May be caused by an incomplete BLU (block to load unit
+     **               map) file.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_CannotCreateCapsule"</code>,
+     **               The capsule that is supposed to contain the block instance
+     **               cannot be created.
+     **               May be caused by a number of things: a failure in CPMA,
+     **               inability to access a file, lack of resources on the PM in
+     **               question etc.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_CannotGetLoadUnit"</code>,
+     **               The unit that contains the block template cannot be
+     **               loaded. May be caused by a number of things.
+     **
+     ** @pre
+     **
+     ** @post
+     **   An instance of the application is created and started.
+     **/
+    // #SM_ASD: exma_slo_active: change on node
+    void startApplication(in oamSupport::AdmData data,
+                          in dpeDefs::ApplicationName applName,
+                          out dpeDefs::ApplicationInstance applInstance)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     **	Calls the NDM operation "stopApplication"
+     **
+     ** @param data            OAM session context data
+     ** @param applInstance    the name of the application instance to stop
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_StoppingAllApplications"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_StoppingAllForUpgrade"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_FailedToObtainSC"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationNotStarted"</code>,
+     **               According to NCL tables the application is not running.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationAlreadyStopping"</code>,
+     **               The application is in the process of undergoing some
+     **               other state transition.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationNotFoundInSC"</code>,
+     **               The software configuration does not contain files with
+     **               this application.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_PackingError"</code>,
+     **               NCL was unable to pack a message.
+     **               Probably due to lack of memory.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_BlockInstanceUnknown"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_BlockInstanceInWrongState"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     **
+     ** @pre
+     **
+     ** @post
+     **   The application instance is stopped and deleted.
+     **/
+    // #SM_ASD: exma_slo_active: change on node
+    void stopApplication(in oamSupport::AdmData data,
+                         in dpeDefs::ApplicationInstance applInstance)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     **	Calls the NDM operation "killApplication"
+     **
+     ** @param data            OAM session context data
+     ** @param applInstance    the name of the application instance to kill
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationNotStarted"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationAlreadyBeingKilled"</code>,
+     **               The application is already in the process of being killed.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_FailedToObtainSC"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+      ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationNotFoundInSC"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_BlockInstanceUnknown"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     **
+     **
+     ** @pre
+     **
+     ** @post
+     **   The application instance is killed.
+     **/
+    // #SM_ASD: exma_slo_active: change on node
+    void killApplication(in oamSupport::AdmData data,
+                         in dpeDefs::ApplicationInstance applInstance)
+      raises(omsDefs::OperationFailed);
+
+
+
+    //******************************************************************
+    /**
+     **	Calls the NDM operation "restartApplication"
+     **
+     ** @param data           OAM session context data
+     ** @param oldInstance    the name of the application instance to stop
+     ** @param newInstance    the id of the new application instance
+     **
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eadmin"</code>,
+     **               Could not contact sequrity management.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "eqma_slo_eversion"</code>,
+     **               interface versions does not match
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+     **               Timeout during a function call to DPE
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_StoppingAllApplications"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_StoppingAllForUpgrade"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_FailedToObtainSC"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationNotStarted"</code>,
+     **               According to NCL tables the application is not running.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationAlreadyStopping"</code>,
+     **               The application is in the process of undergoing some
+     **               other state transition.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationNotFoundInSC"</code>,
+     **               The software configuration does not contain files with
+     **               this application.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_PackingError"</code>,
+     **               NCL was unable to pack a message.
+     **               Probably due to lack of memory.
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_BlockInstanceUnknown"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_BlockInstanceInWrongState"</code>,
+     **               See <code>exMI::SLO::startApplication</code>
+     ** @exception
+     **   omsDefs::OperationFailed:
+     **   <code>errorCode = "exma_slo_dpe_err_ApplicationAlreadyBeingKilled"</code>,
+     **               The application is already in the process of being killed.
+     **
+     ** @pre
+     **
+     ** @post
+     **   The old application instance is stopped and deleted, and a
+     **       new application instance is created and started
+     **/
+    // #SM_ASD: exma_slo_active: change on node
+    void restartApplication(in oamSupport::AdmData data,
+                            in  dpeDefs::ApplicationInstance oldInstance,
+                            out dpeDefs::ApplicationInstance newInstance)
+      raises(omsDefs::OperationFailed);
+
+    //******************************************************************
+    /**
+     **	Reatarts DPE with controlled stop of applications
+     **
+     ** @param data           OAM session context data
+     **
+     **/
+    // #SM_ASD: exma_slo_active: change on node
+    void restartDPE(in oamSupport::AdmData data)
+      raises(omsDefs::OperationFailed);
+
+     //******************************************************************
+     /**
+      ** Perform preUpgradeConfigurationCheck
+      **
+      ** @param data OAM session context data.
+      **
+      ** @exception
+      **   omsDefs::OperationFailed:
+      **   <code>errorCode = "exma_slo_eadmin"</code>,
+      **               Could not contact sequrity management.
+      ** @exception
+      **   omsDefs::OperationFailed:
+      **   <code>errorCode = "exma_slo_eversion"</code>,
+      **               interface versions does not match
+      ** @exception
+      **   omsDefs::OperationFailed:
+      **   <code>errorCode = "exma_slo_dpe_timeout"</code>,
+      **               Timeout during a function call to DPE
+      **
+      ** @pre
+      **
+      ** @post
+      **   state unchanged.
+      **/
+     // #SM_ASD: exma_slo_passive: retrieve data
+     void showNclMemoryStatistics(in oamSupport::AdmData data,
+                                  out string info)
+       raises(omsDefs::OperationFailed);
+  };
+};
+#endif

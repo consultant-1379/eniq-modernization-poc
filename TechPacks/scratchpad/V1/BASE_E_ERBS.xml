@@ -1,0 +1,136 @@
+<EntityDef name="BASE_E_ERBS">
+	<TECHPACK_RELEASE>R1A01</TECHPACK_RELEASE>
+	<PRODUCT_NUMBER>CXP111111</PRODUCT_NUMBER>
+	<FEATURE_NAME>LTE</FEATURE_NAME>
+	<DESCRIPTION>Base support for ERBS G1 node</DESCRIPTION>
+	<LICENSE>CXP111111</LICENSE>
+	<TECHPACK_TYPE>BASE</TECHPACK_TYPE>
+	<VENDOR>E</VENDOR>
+	<TECHNOLOGY>ERBS</TECHNOLOGY>
+	<DEPENDENCY></DEPENDENCY>
+
+	<Components section="PERSISTENCE_ENTITIES">
+	
+		<EntityDef name="BASE_E_ERBS_COMMON">
+			<NODE_MODEL_VERSION_ID>R1A01</NODE_MODEL_VERSION_ID>
+			
+			<Components section="PERSISTENCE_ENTITIES_COLUMNS">
+				<EntityDef name="moid">
+					<COLUMN_ORDER>0</COLUMN_ORDER>
+					<COLUMN_TYPE>key</COLUMN_TYPE>
+					<DATA_TYPE>BINARY</DATA_TYPE>
+					<COUNTER_TYPE>TEXT</COUNTER_TYPE>
+					<DESCRIPTION>MOID</DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="node">
+					<COLUMN_ORDER>1</COLUMN_ORDER>
+					<COLUMN_TYPE>key</COLUMN_TYPE>
+					<DATA_TYPE>BINARY</DATA_TYPE>
+					<COUNTER_TYPE>TEXT</COUNTER_TYPE>
+					<DESCRIPTION>NODE NAME</DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="nedn">
+					<COLUMN_ORDER>2</COLUMN_ORDER>
+					<COLUMN_TYPE>key</COLUMN_TYPE>
+					<DATA_TYPE>BINARY</DATA_TYPE>
+					<COUNTER_TYPE>TEXT</COUNTER_TYPE>
+					<DESCRIPTION>NEDN</DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="granularity">
+					<COLUMN_ORDER>3</COLUMN_ORDER>
+					<COLUMN_TYPE>key</COLUMN_TYPE>
+					<DATA_TYPE>INT64</DATA_TYPE>
+					<COUNTER_TYPE>TEXT</COUNTER_TYPE>
+					<DESCRIPTION>GRANULARITY</DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="ropendtime">
+					<COLUMN_ORDER>4</COLUMN_ORDER>
+					<COLUMN_TYPE>key</COLUMN_TYPE>
+					<DATA_TYPE>BINARY</DATA_TYPE>
+					<COUNTER_TYPE>TEXT</COUNTER_TYPE>
+					<DESCRIPTION>ROP ENDTIME</DESCRIPTION>
+					<PARTITION_BY>0</PARTITION_BY>
+				</EntityDef>
+				
+				<EntityDef name="date_id">
+					<COLUMN_ORDER>5</COLUMN_ORDER>
+					<COLUMN_TYPE>key</COLUMN_TYPE>
+					<DATA_TYPE>BINARY</DATA_TYPE>
+					<COUNTER_TYPE>TEXT</COUNTER_TYPE>
+					<DESCRIPTION>DATE_ID</DESCRIPTION>
+					<PARTITION_BY>1</PARTITION_BY>
+				</EntityDef>
+			</Components>
+				
+		</EntityDef>
+	</Components>
+
+	<Components section="Flows">
+		<EntityDef name="PM_E_ERBS">
+		
+			<Components section="Actions">
+				<EntityDef name="FileCollection">
+					<WORKER_NAME>com.ericsson.kyo.workers.FileCollectionWorker</WORKER_NAME>
+					<REOCCURING>True</REOCCURING>
+					<ROP_INTERVAL>1</ROP_INTERVAL>
+					<ROP_OFFSET>0</ROP_OFFSET>
+					<CONFIG_inputDirectory>C:/Users/ebrifol/Dev/KYO/scratchpad/DataSource/IngressDir</CONFIG_inputDirectory>
+				</EntityDef>
+
+				<EntityDef name="FileParsing">
+					<WORKER_NAME>com.ericsson.kyo.workers.PMFileParser</WORKER_NAME>
+					<DEPENDENCY_FLOW_NAME>PM_E_ERBS</DEPENDENCY_FLOW_NAME>
+					<DEPENDENCY_ACTION_NAME>FileCollection</DEPENDENCY_ACTION_NAME>
+					<CONFIG_rowTag>md</CONFIG_rowTag>
+					<CONFIG_OutputPath>C:/Users/ebrifol/Dev/KYO/scratchpad/Output/PM/E/ERBS</CONFIG_OutputPath>
+				</EntityDef>
+			</Components>
+			
+		</EntityDef>
+	</Components>
+	
+	<Components section="DESIGNRULES">
+		<EntityDef name="PM_E_ERBS">
+		
+			<Components section="Rules">
+				<EntityDef name="RuleForAllMOs">
+					<MATCH_TYPE>ALL</MATCH_TYPE>
+					
+						<Components section="Rules">
+							<EntityDef name="Vector">
+								<MATCH_TYPE>equals</MATCH_TYPE>
+								<MATCH_ARGUMENT>counterType</MATCH_ARGUMENT>
+								<MATCH_VALUE>PDF</MATCH_VALUE>
+								<TARGET>_V</TARGET>
+							</EntityDef>
+						
+							<EntityDef name="Flex">
+								<MATCH_TYPE>startswith</MATCH_TYPE>
+								<MATCH_ARGUMENT>name</MATCH_ARGUMENT>
+								<MATCH_VALUE>pmFlex</MATCH_VALUE>
+								<TARGET>_FLEX</TARGET>
+							</EntityDef>
+							
+							<EntityDef name="Gauge/Peg">
+								<MATCH_TYPE>startswith</MATCH_TYPE>
+								<MATCH_ARGUMENT>name</MATCH_ARGUMENT>
+								<MATCH_VALUE>pm</MATCH_VALUE>
+							</EntityDef>
+
+						</Components>
+				</EntityDef>
+
+			</Components>
+		</EntityDef>
+	
+	</Components>
+	
+</EntityDef>

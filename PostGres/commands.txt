@@ -1,0 +1,33 @@
+#linux
+##stop and remove postgres container
+docker stop KYO_postgres; docker rm KYO_postgres
+
+##create postgres container
+docker run -v <path2sqlfolder>/sql/1-createMDR.sql:/docker-entrypoint-initdb.d/1-createMDR.sql -v <path2sqlfolder>/sql/2-PM_E_ERBS.sql:/docker-entrypoint-initdb.d/2-PM_E_ERBS.sql --name KYO_postgres -e POSTGRES_DB=KYO_postgres -e POSTGRES_PASSWORD=sql123 -e POSTGRES_USER=KYO_dba -d postgres
+
+## connect to postgres
+docker exec -it KYO_postgres psql KYO_postgres KYO_dba
+docker exec -it KYO_postgres bash
+
+
+#windows
+
+##stop and remove postgres container
+	docker stop KYO_postgres; docker rm KYO_postgres
+
+##create postgres container
+	docker run  --name KYO_postgres -p 5432:5432 -e POSTGRES_DB=KYO_postgres -e POSTGRES_PASSWORD=dba123 -e POSTGRES_USER=KYO_dba  -d postgres 
+
+	docker cp <path2sqlfolder>/sql/1-createMDR.sql KYO_postgres:/docker-entrypoint-initdb.d/1-createMDR.sql 
+	docker cp <path2sqlfolder>/sql/2-PM_E_ERBS.sql KYO_postgres:/docker-entrypoint-initdb.d/2-PM_E_ERBS.sql
+
+	#connect to sql 
+		winpty docker exec -it KYO_postgres psql KYO_postgres KYO_dba dba123
+ 
+	#create tables and users
+		KYO_postgres=# \i /docker-entrypoint-initdb.d/1-createMDR.sql
+	#insert tp
+		KYO_postgres=# \i /docker-entrypoint-initdb.d/2-PM_E_ERBS.sql
+
+	#connect to commandline
+	winpty docker exec -it KYO_postgres bash

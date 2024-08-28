@@ -1,0 +1,2296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2019 Ericsson AB. 
+	All rights reserved 
+
+	DX ECIM Tool-chain generated this file on Jun 3, 2019 8:03:31 AM using:
+	* com.ericsson.ecim.m2m 2.14.7.201603221858
+	* com.ericsson.ecim.dsl 2.14.7.201603221858
+	* com.ericsson.ecim.edm 2.14.7.201603221858
+--><!DOCTYPE models SYSTEM "mp.dtd">
+<models>
+    <dtdVersion>G</dtdVersion>
+    <momMetaData>
+        <momTitle>title</momTitle>
+        <momSubTitle>sub title</momSubTitle>
+        <momIdentity>
+            <docNum>0</docNum>
+            <docLang>English</docLang>
+            <docRev>0</docRev>
+            <docDate>date</docDate>
+        </momIdentity>
+    </momMetaData>
+    <mim author="EAB/FBA/TN Johan Landtmansson" contact="EAB/FBA/TN Johan Landtmansson" correction="1" date="2015-04-20" docNo="" name="SgsnMmePM" namespace="urn:com:ericsson:ecim:SgsnMmePM" namespacePrefix="sgsnmmepm" organization="EAB/FBA/T - NDO SGSN-MME" release="16" revision="A" version="1">
+        <description>Performance Management MOM.&#13;
+3GPP defines Performance Management in 3GPP 32.401.
+Introduced in SGSN-MME 14B CP02</description>
+        <domainExtension domain="ECIM">
+            <extension name="ecimMomName" value="ECIM_PM"/>
+            <extension name="ecimMomVersion" value="2"/>
+            <extension name="ecimMomRelease" value="2"/>
+            <extension name="ecimMomCorrection" value="0"/>
+        </domainExtension>
+        <implements correction="0" name="ECIM_PM" release="2" version="2"/>
+        <struct name="MeasurementSpecification">
+            <description>Specifies a reference to either a MeasurementType MO or to a PmGroup MO.&#13;
+Must contain only one member, either groupRef or measurementTypeRef.&#13;
+</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <isExclusive/>
+            <structMember name="groupRef">
+                <description>Reference to a PmGroup which can be associated with a MeasurementReader.&#13;
+The MeasurementReader will therefore handle all the MeasurementTypes contained by the PmGroup.&#13;
+Only valid for PM jobs of type MEASUREMENTJOB.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="gr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <moRef name="PmGroup">
+                    <mimName>SgsnMmePM</mimName>
+                </moRef>
+            </structMember>
+            <structMember name="measurementTypeRef">
+                <description>Reference to a MeasurementType which can be associated with a MeasurementReader.&#13;
+The MeasurementReader will handle this MeasurementType.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="mtr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <moRef name="MeasurementType">
+                    <mimName>SgsnMmePM</mimName>
+                </moRef>
+            </structMember>
+        </struct>
+        <struct name="MeasurementReaderNameValue">
+            <description>This name value is used for real-time monitoring.&#13;
+The real-time monitoring is set up using a PM job of type REALTIMEJOB.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="currentValue">
+                <description>Contains the real-time value of the measurement.&#13;
+This value can be read in conjunction with attribute lastUpdated to determine the value of counters in real time.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="cv"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="lastUpdated">
+                <description>Contains the exact time the currentValue was last set. &#13;
+This attribute is used to determine how recent the value supplied in currentValue is.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="lu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <derivedDataTypeRef name="DateTime">
+                    <mimName>SgsnMmePM</mimName>
+                </derivedDataTypeRef>
+            </structMember>
+            <structMember name="moClassInstance">
+                <description>Specifies the MO class instance that the real-time measurement applies to.&#13;
+This maps to the measObjLdn as defined in 3GPP 32.401.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="mci"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <moRef name="ManagedObject"/>
+            </structMember>
+            <structMember name="suspectFlag">
+                <description>Indicates if the collected measurement result is suspect.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="sf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <boolean>
+                    <defaultValue>false</defaultValue>
+                </boolean>
+            </structMember>
+        </struct>
+        <struct name="ManagedObjectClass">
+            <description>This struct represents a Managed Object Class.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <structMember name="moClassName">
+                <description>Contains the Managed Object Class name.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="moc"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="mimName">
+                <description>Contains the name of the MIM that contains the Managed Object Class.&#13;
+&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="mn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="mimVersion">
+                <description>Contains the version of the MIM that contains the Managed Object Class.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="mv"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+            <structMember name="mimRelease">
+                <description>Contains the release number of the MIM that contains the Managed Object Class.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="cliOperand" value="mr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <string/>
+            </structMember>
+        </struct>
+        <enum name="CollectionMethod">
+            <description>The form in which measurement data for a Measurement Type  is obtained.</description>
+            <enumMember name="CC">
+                <description>The collection method is Cumulative Counter.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="GAUGE">
+                <description>The collection method is Gauge - based on a dynamic variable.&#13;
+This method is used when data being measured can vary up or down during the period of measurement.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="DER">
+                <description>The collection method is Discrete Event Registration (DER).&#13;
+When data related to a particular event are captured, every nth event is registered, where n can be 1 or greater.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="SI">
+                <description>The collection method is Status Inspection.</description>
+                <value>4</value>
+            </enumMember>
+        </enum>
+        <enum name="Aggregation">
+            <description>The aggregation method for a Measurement Type.</description>
+            <enumMember name="SUM">
+                <description>Aggregation method = SUM.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="AVG">
+                <description>Aggregation method = AVG.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="MIN">
+                <description>Aggregation method = MIN.</description>
+                <value>4</value>
+            </enumMember>
+            <enumMember name="MAX">
+                <description>Aggregation method = MAX.</description>
+                <value>5</value>
+            </enumMember>
+            <enumMember name="LAST_UPDATE">
+                <description>Aggregation method = LAST_UPDATE.</description>
+                <value>6</value>
+            </enumMember>
+        </enum>
+        <enum name="JobControl">
+            <description>The level of MS control of the PM job.</description>
+            <enumMember name="FULL">
+                <description>MS has Full control of the PM Job.&#13;
+MS can create, delete, start and stop a job.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="STARTSTOP">
+                <description>MS has Restricted control of the PM Job.&#13;
+MS can stop and start a job, but cannot delete or create it.&#13;
+</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="VIEWONLY">
+                <description>MS can only view the PM job.</description>
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="JobStartStopSupport">
+            <description>Specifies if Performance Management jobs defined in ME can be started and stopped.</description>
+            <enumMember name="NONE">
+                <description>NONE - a job is started when it is created and will run until it is deleted.</description>
+                <value>0</value>
+            </enumMember>
+            <enumMember name="BASIC">
+                <description>BASIC - simple start/stop supported.</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <enum name="SeverityLevel">
+            <description>The possible alarm serverities.
+The values are aligned to the ERICSSON-ALARM-MIB which is compliant with the IETF understanding of the ITU X.733.&#13;
+SnmpItuAlarmPercSeverity:&#13;
+DESCRIPTION "The perceived severity of the alarm as specified in [X.733] and [X.736].&#13;
+SYNTAX INTEGER {cleared (1), critical (3), major (4), minor (5), warning (6)}&#13;
+Note: ERICSSON-ALARM-MIB does not support severity indeterminate (2)</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="14"/>
+                <extension name="originatingMimName" value="SgsnMmeFM"/>
+                <extension name="originatingMimVersion" value="5"/>
+            </domainExtension>
+            <enumMember name="CRITICAL">
+                <description>Aligned with ERICSSON-ALARM-MIB numbering.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="MAJOR">
+                <description>Aligned with ERICSSON-ALARM-MIB numbering.</description>
+                <value>4</value>
+            </enumMember>
+            <enumMember name="MINOR">
+                <description>Aligned with ERICSSON-ALARM-MIB numbering.</description>
+                <value>5</value>
+            </enumMember>
+            <enumMember name="WARNING">
+                <description>Aligned with ERICSSON-ALARM-MIB numbering.</description>
+                <value>6</value>
+            </enumMember>
+        </enum>
+        <enum name="JobType">
+            <description>PM job types.</description>
+            <enumMember name="MEASUREMENTJOB">
+                <description>Measurement Job.&#13;
+This job monitors a number of Measurement Types and the resulting data will be presented in an XML file. This file will then be available for collection.&#13;
+</description>
+                <value>1</value>
+            </enumMember>
+        </enum>
+        <enum name="CompressionTypes">
+            <description>The common File Compression Type(s) supported.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <enumMember name="GZIP">
+                <description>The GNU zip file compression type.</description>
+                <value>0</value>
+            </enumMember>
+        </enum>
+        <enum name="TimePeriod">
+            <description>The different time periods associated with Performance Monitoring.</description>
+            <enumMember name="ONE_MIN">
+                <description>This represents a one-minute time period.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="FIVE_MIN">
+                <description>This represents a five-minute time period.</description>
+                <value>4</value>
+            </enumMember>
+            <enumMember name="FIFTEEN_MIN">
+                <description>This represents a 15-minute time period.</description>
+                <value>5</value>
+            </enumMember>
+            <enumMember name="THIRTY_MIN">
+                <description>This represents a 30-minute time period.</description>
+                <value>6</value>
+            </enumMember>
+            <enumMember name="ONE_HOUR">
+                <description>This represents a one-hour time period.</description>
+                <value>7</value>
+            </enumMember>
+            <enumMember name="TWELVE_HOUR">
+                <description>This represents a 12-hour (720-minute)  time period.</description>
+                <value>8</value>
+            </enumMember>
+            <enumMember name="ONE_DAY">
+                <description>This represents a 24-hour (1440-minute)  time period.</description>
+                <value>9</value>
+            </enumMember>
+        </enum>
+        <enum name="JobPriority">
+            <description>Job Priority.</description>
+            <enumMember name="LOW">
+                <description>Priority = Low.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="MEDIUM">
+                <description>Priority = Medium.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="HIGH">
+                <description>Priority = High.</description>
+                <value>3</value>
+            </enumMember>
+        </enum>
+        <enum name="MeasurementStatus">
+            <description>The Measurement status of a Measurement Type.</description>
+            <enumMember name="USED">
+                <description>Measurement status = Used. </description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="DEPRECATED">
+                <description>Measurement status = Deprecated.</description>
+                <value>2</value>
+            </enumMember>
+            <enumMember name="OBSOLETE">
+                <description>Measurement status = Obsolete.</description>
+                <value>3</value>
+            </enumMember>
+            <enumMember name="PRELIMINARY">
+                <description>MeasurementStatus = Preliminary.</description>
+                <value>4</value>
+            </enumMember>
+        </enum>
+        <enum name="JobState">
+            <description>PM job states.</description>
+            <enumMember name="ACTIVE">
+                <description>Job State = Active.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="STOPPED">
+                <description>Job State = Stopped.</description>
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <enum name="ThresholdDirection">
+            <description>The threshold direction of a Measurement Type value which raises the Performance Alarm severity.</description>
+            <enumMember name="INCREASING">
+                <description>Threshold direction = Increasing.</description>
+                <value>1</value>
+            </enumMember>
+            <enumMember name="DECREASING">
+                <description>Threshold Direction = Decreasing.</description>
+                <value>2</value>
+            </enumMember>
+        </enum>
+        <derivedDataType name="Hardware">
+            <description>.</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="4"/>
+                <extension name="originatingMimName" value="NodeParameters"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <domainExtension domain="SgsnMme">
+                <extension name="isEnumString" value="true"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>3</min>
+                        <max>9</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>3</min>
+                            <max>9</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>mkvi|mkvi+|mkviii|mkx|virtual|container</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[mkvi|mkvi+|mkviii|mkx|virtual|container]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="DateTime">
+            <description>DateTime in format YYYY-MM-DDThh:mm:ss.SSSZ .</description>
+            <domainExtension domain="ECIM">
+                <extension name="originatingMimRelease" value="12"/>
+                <extension name="originatingMimName" value="ECIM_CommonLibrary"/>
+                <extension name="originatingMimVersion" value="1"/>
+            </domainExtension>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>19</min>
+                        <max>31</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>19</min>
+                            <max>31</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[1|2][0-9]|3[0-1])T(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])([\.][0-9]+){0,1}(([\+|\-](0[0-9]|1[0-9]|2[0-4])(:[0-5][0-9])?)|(Z)?)$]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="LogFormat">
+            <description>Range:ECIM,OLD,DTD,JSON_ONAP</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>3</min>
+                        <max>9</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>3</min>
+                            <max>9</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>ECIM|OLD|DTD|JSON_ONAP</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[ECIM|OLD|DTD|JSON_ONAP]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <derivedDataType name="DeltaValue">
+            <description>Range:ON,OFF</description>
+            <baseType>
+                <string>
+                    <lengthRange>
+                        <min>2</min>
+                        <max>3</max>
+                    </lengthRange>
+                    <stringLength>
+                        <subrange>
+                            <min>2</min>
+                            <max>3</max>
+                        </subrange>
+                    </stringLength>
+                    <validValues>OFF|ON</validValues>
+                </string>
+            </baseType>
+            <validationRules>
+                <rule exceptionText="" format="posix_ere" name="Pattern Constraint"><![CDATA[OFF|ON]]></rule>
+            </validationRules>
+        </derivedDataType>
+        <class name="Pm">
+            <description>The top class of the Performance Management model.&#13;
+It is used to manage the Performance Management jobs and PM measurements.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <root/>
+            <attribute name="pmId">
+                <description>Value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pmid"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="PmMeasurementCapabilities">
+            <description>Contains the measurement capabilities of the ME.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="pmMeasurementCapabilitiesId">
+                <description>Value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pmci"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="maxNoOfJobs">
+                <description>Specifies the maximum number of jobs that can be defined.&#13;
+A value of 0 means there is no limit to the number of jobs.&#13;
+If the specified limit is exceeded, when a performance monitoring is created or started, the create job or start job operation is rejected.&#13;
+This is an upper system limit, and support for it cannot be guaranteed in high-load conditions.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mnoj"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <uint16/>
+                </dataType>
+            </attribute>
+            <attribute name="jobStartStopSupport">
+                <description>Specifies whether or not Performance Management jobs defined in the ME can be started and stopped. &#13;
+Possible values: &#13;
+NONE: a job is started when it is created and runs until it is deleted. &#13;
+BASIC: simple start/stop supported</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="jsss"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="JobStartStopSupport">
+                        <defaultValue>BASIC</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="finalROP">
+                <description>Indicates if measurement file for the last ROP is expected. &#13;
+When a measurement job is stopped, this attribute specifies whether a result file for the last ROP is expected (true), or not expected (false).</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="frop"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+            </attribute>
+            <attribute name="jobPrioritizationSupport">
+                <description>Defines whether or not measurement jobs can be stopped by the system.&#13;
+Based on the priority of the Measurement jobs, they can either be stopped (true) or not (false) by the system. Attribute jobPriority in the job sets the priority per job.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="jps"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>false</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="maxNoOfMeasurements">
+                <description>The maximum number of counter instances, i.e. active counters, that can be reported in one ROP.&#13;
+This is used by an MS to determine the max PM data file size. An alarm is issued if the total number of simultaneously active counters becomes higher than the value defined in this attribute. This is an upper-system limit, and support for it cannot be guaranteed in high-load conditions.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mnom"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <uint32/>
+                </dataType>
+            </attribute>
+            <attribute name="maxNoOfPmFiles">
+                <description>Specifies the maximum number of Result Output Period (ROP) files that are maintained in the ME.&#13;
+If a new file is created and the limit is exceeded, the oldest file is deleted. This is an upper-system limit, and support for it cannot be guaranteed in high-load conditions.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mnop"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <uint16/>
+                </dataType>
+            </attribute>
+            <attribute name="alignedReportingPeriod">
+                <description>Defines whether or not the Managed Element aligns its reporting periods to the hour.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="arp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="measurementJobSupport">
+                <description>Indicates if Managed Element supports Measurement Job Types.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mjs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="realTimeJobSupport">
+                <description>Indicates if the Managed Element supports Realtime Jobs.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rtjs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="thresholdJobSupport">
+                <description>Indicates if the Managed Element supports Threshold Jobs.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tjs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="fileLocation">
+                <description>Contains the path to the virtual file system on the node from which to fetch the measurement files.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fl"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="fileRPSupported">
+                <description>Specifies if ME supports a file Reporting Period different to Granularity Period where RP &gt; GP.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="frps"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>false</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="supportedRopPeriods">
+                <description>Indicates the Result Output Period (ROP) or ROPs supported by the ME.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="srp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <enumRef name="TimePeriod">
+                            <mimName>SgsnMmePM</mimName>
+                        </enumRef>
+                        <minLength>0</minLength>
+                        <maxLength>9</maxLength>
+                        <nonUnique/>
+                        <seqDefaultValue>
+                            <defaultValue>ONE_MIN</defaultValue>
+                            <defaultValue>FIVE_MIN</defaultValue>
+                            <defaultValue>FIFTEEN_MIN</defaultValue>
+                            <defaultValue>THIRTY_MIN</defaultValue>
+                            <defaultValue>ONE_HOUR</defaultValue>
+                            <defaultValue>TWELVE_HOUR</defaultValue>
+                            <defaultValue>ONE_DAY</defaultValue>
+                        </seqDefaultValue>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="supportedMeasJobGps">
+                <description>Indicates which granularity periods are supported by the ME for Measurement jobs.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="smj"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <enumRef name="TimePeriod">
+                            <mimName>SgsnMmePM</mimName>
+                        </enumRef>
+                        <minLength>0</minLength>
+                        <maxLength>9</maxLength>
+                        <nonUnique/>
+                        <seqDefaultValue>
+                            <defaultValue>ONE_MIN</defaultValue>
+                            <defaultValue>FIVE_MIN</defaultValue>
+                            <defaultValue>FIFTEEN_MIN</defaultValue>
+                            <defaultValue>THIRTY_MIN</defaultValue>
+                            <defaultValue>ONE_HOUR</defaultValue>
+                            <defaultValue>TWELVE_HOUR</defaultValue>
+                            <defaultValue>ONE_DAY</defaultValue>
+                        </seqDefaultValue>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="supportedRtJobGps">
+                <description>Indicates which granularity periods are supported by the ME for Realtime jobs.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="srj"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <enumRef name="TimePeriod">
+                            <mimName>SgsnMmePM</mimName>
+                        </enumRef>
+                        <minLength>0</minLength>
+                        <maxLength>9</maxLength>
+                        <nonUnique/>
+                        <seqDefaultValue>
+                            <defaultValue>ONE_MIN</defaultValue>
+                        </seqDefaultValue>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="supportedThreshJobGps">
+                <description>Indicates which granularity periods are supported by the ME for Threshold jobs.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="stj"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <enumRef name="TimePeriod">
+                            <mimName>SgsnMmePM</mimName>
+                        </enumRef>
+                        <minLength>0</minLength>
+                        <maxLength>9</maxLength>
+                        <nonUnique/>
+                        <seqDefaultValue>
+                            <defaultValue>FIFTEEN_MIN</defaultValue>
+                        </seqDefaultValue>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="supportedCompressionTypes">
+                <description>Indicates which compression types are supported by the ME for report files.&#13;
+If this attribute is not present, the ME does not support compression of report files.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sct"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <enumRef name="CompressionTypes">
+                            <mimName>SgsnMmePM</mimName>
+                        </enumRef>
+                        <minLength>0</minLength>
+                        <maxLength>2</maxLength>
+                        <nonUnique/>
+                        <seqDefaultValue>
+                            <defaultValue>GZIP</defaultValue>
+                        </seqDefaultValue>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="jobGroupingSupport">
+                <description>Indicates if Managed Element supports grouping of selected measurement job results in a report file.&#13;
+If set to true, the ME groups selected measurement job results into one file based on the PmJob attribute jobGroup. &#13;
+If set to false, the default behaviour is to generate one PM report file per granularity period.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="jgs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>false</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="producesUtcRopFiles">
+                <description>Indicates if the PM report files are produced using UTC format.&#13;
+If the timestamp is expressed in UTC time with no offset, then the value shall be true.&#13;
+If the timestamp is expressed in local time with UTC offset, then the value shall be false.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="utc"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>true</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="PmGroup">
+            <description>A grouping of the measurements into logical grouping. &#13;
+PmGroup is unique in the ME.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <attribute name="pmGroupId">
+                <description>Value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pgi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="category">
+                <description>Deprecated, Comma-separated sequence of key words.&#13;
+Used for categorization and searching for data among reports. e.g. KPI, Feature xx, etc.&#13;
+Deprecated in ECIM PM 2.2.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cat"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+                <deprecated/>
+                <statusInformation>There is no practical use for this attribute in the model. It will not be visible in PM report files.</statusInformation>
+            </attribute>
+            <attribute name="consistentData">
+                <description>Deprecated, Defines whether or not this group of data is guaranteed to be consistent.&#13;
+Counter Data Consistency&#13;
+In some MEs there are both detailed counters, e.g. #failedConnections and #succeededConnections, as well as more high-level summary counters. e.g. #totalConnections. &#13;
+A counter group is guaranteed to be consistent if it does not contain a summary counter whose value can be calculated based on other counters in that group, or if it does so but this calculation will always show the same value as the summary counter. &#13;
+Deprecated in ECIM PM 2.2.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cd"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+                <deprecated/>
+                <statusInformation>There is no practical need for this attribute in the model.</statusInformation>
+            </attribute>
+            <attribute name="generation">
+                <description>Determines if group concerns GSM, UMTS, EPS, combined (GSM+UMTS+EPS) or IMS measurements.&#13;
+Values are defined in 3GPP standard 32:404.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="gen"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="switchingTechnology">
+                <description>The Switching domain or domains to which this measurement is applicable.&#13;
+Values are defined in 3GPP standard 32.404.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="st"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="validity">
+                <description>States if the group is valid.&#13;
+A group might not be valid if, for example, the feature that this group is used for is not available to the customer.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="va"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+            </attribute>
+            <attribute name="moClass">
+                <description>The Managed Object Class that uses the Measurement Types in this PmGroup.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="moc"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <structRef name="ManagedObjectClass">
+                        <mimName>SgsnMmePM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="description">
+                <description>Description of the PmGroup.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="des"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="pmGroupVersion">
+                <description>PM Group version identifier.&#13;
+Unique version identifier associated with a change to the contents of the PM Group, where new MeasurementTypes have been added.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pgv"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="moInstances">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="true"/>
+                    <extension name="cliOperand" value="moi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="pmIndexFormat">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pif"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="MeasurementType">
+            <description>Defines a Measurement Type on the Managed Element to be monitored and collected.&#13;
+MeasurementType is unique within the PM Group.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <systemCreated/>
+            <action name="report">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="true"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <string/>
+                </returnType>
+                <preliminary/>
+            </action>
+            <attribute name="measurementTypeId">
+                <description>Value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mti"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="measurementName">
+                <description>The full name of the measurement type.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mn"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="size">
+                <description>Contains the size of the measurement in number of octets.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="si"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <uint16/>
+                </dataType>
+            </attribute>
+            <attribute name="collectionMethod">
+                <description>Contains the form in which this measurement data is obtained.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cm"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="CollectionMethod">
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="description">
+                <description>A comprehensible explanation of this measurement.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="des"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="condition">
+                <description>Details the condition which causes the measurement result data to be updated.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="con"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="aggregation">
+                <description>Describes how the PM service aggregates the measurement values for measurement instances.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ag"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="Aggregation">
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="measurementStatus">
+                <description>Contains the status of the measurement.&#13;
+If this is set to PRELIMINARY, the measurement is available and stepped in this version of the Managed Element, but is not yet approved.&#13;
+If it is set to USED, the measurement is approved, available and stepped in this version of the Managed Element.&#13;
+If it is set to OBSOLETE, the measurement is not available and not stepped in this version of the Managed Element.&#13;
+If it is set to DEPRECATED, the measurement is available but is not stepped in this version of the Managed Element.&#13;
+</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ms"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="MeasurementStatus">
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="measurementResult">
+                <description>Contains a description of expected result value or values.&#13;
+For example, result will be a single integer value. See 3GPP 32.404.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="multiplicity">
+                <description>Where a counter is an array of values, this attribute represents the size of the array.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mu"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <int16/>
+                </dataType>
+            </attribute>
+            <attribute name="initialValue">
+                <description>The initial value to which a counter must be set at the beginning of a new granularity period.&#13;
+This attribute is only valid if resetAtGranPeriod = true.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="iv"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <int32/>
+                </dataType>
+            </attribute>
+            <attribute name="resetAtGranPeriod">
+                <description>Specifies whether the value is initialized at the beginning of each granularity period.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rgp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean/>
+                </dataType>
+            </attribute>
+            <attribute name="derSampleRate">
+                <description>Specifies the sample rate for DER counters.&#13;
+Defined as according to 3GPP 32.401.&#13;
+Data related to a particular event is captured. Every nth event is registered, where n can be 1 or greater.&#13;
+This attribute defines n.&#13;
+This attribute is not valid for non-DER Measurement Types.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dsr"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <int16/>
+                </dataType>
+            </attribute>
+            <attribute name="fmAlarmType">
+                <description>FmAlarmType associated to Threshold.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="fat"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <moRef name="FmAlarmType">
+                        <mimName>SgsnMmeFM</mimName>
+                    </moRef>
+                </dataType>
+            </attribute>
+            <attribute name="thresholdDirection">
+                <description>The threshold direction of a Measurement Type value which raises the Performance Alarm severity.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="td"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="ThresholdDirection">
+                        <defaultValue>INCREASING</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="owner">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="true"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="o"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="supervisionOnByDefault">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="son"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="supervisionType">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sty"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="supervisionDefaultInterval">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="sdi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="alarmRaiseDefaultLevel">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ard"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="alarmClearDefaultLevel">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="acd"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="index">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="in"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="supervisionEquation">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="se"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="isCompressed">
+                <description>Indicates if the MeasurementType result is in compressed format.&#13;
+For MeasurementTypes with multiplicity greater than 1, the result can be compressed by only reporting the non-zero values.&#13;
+A detailed explanation of the format of the measurement result is given in the measurementResult attribute.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="is"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <boolean>
+                        <defaultValue>false</defaultValue>
+                    </boolean>
+                </dataType>
+            </attribute>
+            <attribute name="validForHardware">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="vfh"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <derivedDataTypeRef name="Hardware">
+                            <mimName>SgsnMmePM</mimName>
+                        </derivedDataTypeRef>
+                        <minLength>1</minLength>
+                        <nonUnique/>
+                        <seqDefaultValue>
+                            <defaultValue>mkviii</defaultValue>
+                            <defaultValue>mkx</defaultValue>
+                            <defaultValue>virtual</defaultValue>
+                            <defaultValue>container</defaultValue>
+                        </seqDefaultValue>
+                    </sequence>
+                </dataType>
+                <preliminary/>
+            </attribute>
+        </class>
+        <class name="PmThresholdMonitoring">
+            <description>Contains configuration of each threshold for Threshold jobs.&#13;
+To be able to monitor the overall health of the network, thresholds are used for generating Performance Alarms.&#13;
+Performance alarms cannot be cleared manually. Performance alarms must be cleared when the threshold is (a) crossed, or (b) reached, in the opposite direction to the one that triggers the alarm.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="pmThresholdMonitoringId">
+                <description>Value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ptmi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="thresholdHigh">
+                <description>Defines the high-threshold level for this alarm severity.&#13;
+For each pair of high-threshold and low-threshold levels, one of them must generate an alarm notification - or increase the severity of an existing alarm. The other one must generate an alarm clear notification, or decrease the severity of an existing alarm. &#13;
+If the direction of the threshold is increasing, a new alarm (or severity increase of an existing alarm) is not generated before the measurement value has (a) crossed or (b) reached the high-level threshold value. &#13;
+Furthermore, an existing alarm is not cleared (or its severity decreased) before the measurement value has reached or crossed the low-level threshold value. &#13;
+For decreasing thresholds, the opposite is applied. The hysteresis mechanism can be used for both Gauges and Cumulative Counters thresholds.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="th"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <int64/>
+                </dataType>
+            </attribute>
+            <attribute name="thresholdLow">
+                <description>Defines the low-threshold level for this alarm severity.&#13;
+For each pair of high-threshold and low-threshold levels, one of them must generate an alarm notification, or increase the severity of an existing alarm. The other one must generate an alarm clear notification, or decrease the severity of an existing alarm. &#13;
+If the direction of the threshold is increasing, a new alarm (or severity increase of an existing alarm) is not generated before the measurement value has (a) crossed or (b) reached the high-level threshold value. &#13;
+Furthermore, an existing alarm is not cleared (or its severity decreased) before the measurement value has reached or crossed the low-level threshold value. &#13;
+For decreasing thresholds, the opposite is applied. The hysteresis mechanism can be used for both Gauges and Cumulative Counters thresholds.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="tl"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <int64/>
+                </dataType>
+            </attribute>
+            <attribute name="thresholdSeverity">
+                <description>Threshold severity.&#13;
+One of the following Severity Levels must be assigned per threshold, in order to raise a threshold alarm of this severity, or change an existing alarm to this severity, if that threshold is reached or crossed:&#13;
+CRITICAL&#13;
+MAJOR&#13;
+MINOR&#13;
+WARNING&#13;
+&#13;
+Severity level CLEARED is not a valid severity level and cannot be assigned to this attribute.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ts"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="SeverityLevel">
+                        <defaultValue>MINOR</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="PmJob">
+            <description>Describes a user-defined PM job on the Managed Element.&#13;
+A PM Job defines the attributes required per job and also defines the measurements to be included in the job. An instance of the MeasurementReader class is created for every PmGroup or MeasurementType instance being measured.</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <action name="report">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isAbortable" value="false"/>
+                    <extension name="isShowable" value="true"/>
+                    <extension name="isStandalone" value="false"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <returnType>
+                    <string/>
+                </returnType>
+                <preliminary/>
+            </action>
+            <attribute name="pmJobId">
+                <description>Value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="pji"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="requestedJobState">
+                <description>Contains the requested state of the PM job.&#13;
+It represents the state that the job has been ordered to reach.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rjs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="JobState">
+                        <defaultValue>ACTIVE</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="reportingPeriod">
+                <description>Contains the reporting period of the result file.&#13;
+This is directly related to the granularity period as the granularity period can not be longer than the reporting period.&#13;
+Possible Values (s=second,m=minute, h=hour): 10s,30s,1m, 5m, 15m, 30m, 1h, 12h, 24h.&#13;
+Default Value: 15m.&#13;
+Report files are only generated for jobs of jobType MEASUREMENTJOB.&#13;
+The value of reportingPeriod must be equal to the value of granularityPeriod if fileRPSupported in PmMeasurementCapabilities is false, or may be equal to a multiple of the value of granularityperiod if fileRPSupported is set to true.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="rp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="TimePeriod">
+                        <defaultValue>FIFTEEN_MIN</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="jobType">
+                <description>Contains the type of PM job.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="jt"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="JobType">
+                        <defaultValue>MEASUREMENTJOB</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="jobPriority">
+                <description>Contains the priority of the job.&#13;
+Each job must have a priority if jobPrioritizationSupport in the PmMeasurementCapabilities is set to true.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="jp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="JobPriority">
+                        <defaultValue>MEDIUM</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="granularityPeriod">
+                <description>Contains the granularity period of the job.&#13;
+The granularity period is the time between the initiation of two successive gatherings of measurement data. This is directly related to the ReportingPeriod as the granularity period can not be longer than the reporting period.&#13;
+Possible Values (s=second,m=minute, h=hour): 10s,30s,1m, 5m, 15m, 30m, 1h, 12h, 24h.&#13;
+Default Value: 15m.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="gp"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="TimePeriod">
+                        <defaultValue>FIFTEEN_MIN</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="currentJobState">
+                <description>Describes the current state of the PM job.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="cjs"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <dataType>
+                    <enumRef name="JobState">
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="jobControl">
+                <description>Describes the level of MS control of the PM job.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="jc"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="JobControl">
+                        <defaultValue>FULL</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="compressionType">
+                <description>Indicates file compression type to be applied to the report file.&#13;
+If no value is supplied, then no compression is to be applied to the report file for this job.&#13;
+Only valid for PM jobs of type MEASUREMENTJOB.&#13;
+Must have the same value for all PM jobs with the same jobGroup tag assigned.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ct"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <enumRef name="CompressionTypes">
+                        <mimName>SgsnMmePM</mimName>
+                    </enumRef>
+                </dataType>
+            </attribute>
+            <attribute name="jobGroup">
+                <description>Tag for grouping PM measurement job results.&#13;
+Represents a grouping of separate PM Jobs for which the measurement results must be collected together in a single report file for that group only.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="jg"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <isNillable/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="deltaValue">
+                <description>.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="dv"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="DeltaValue">
+                        <defaultValue>ON</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+            <attribute name="numberOfInstances">
+                <description>.</description>
+                <domainExtension domain="ECIM">
+                    <extension name="isNillable" value="true"/>
+                </domainExtension>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="true"/>
+                    <extension name="cliOperand" value="noi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <isNillable/>
+                <dataType>
+                    <uint32/>
+                </dataType>
+                <preliminary/>
+            </attribute>
+            <attribute name="logFormat">
+                <description>log file format.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="lf"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <derivedDataTypeRef name="LogFormat">
+                        <defaultValue>ECIM</defaultValue>
+                        <mimName>SgsnMmePM</mimName>
+                    </derivedDataTypeRef>
+                </dataType>
+            </attribute>
+        </class>
+        <class name="MeasurementReader">
+            <description>Represents the capability to read the value of the MeasurementType or group of MeasurementTypes.&#13;
+There can be many Measurement Reader instances for each job (one for each MeasurementType or PmGroup).</description>
+            <domainExtension domain="SgsnMme">
+                <extension name="accessType" value="INHERIT"/>
+                <extension name="smTag" value="INHERIT"/>
+                <extension name="isVolatile" value="false"/>
+                <extension name="isInternal" value="false"/>
+                <extension name="isAssociation" value="false"/>
+                <extension name="yangName" value="not-yet-supported"/>
+            </domainExtension>
+            <attribute name="measurementReaderId">
+                <description>Value component of the RDN.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mri"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <noNotification/>
+                <restricted/>
+                <key/>
+                <dataType>
+                    <string/>
+                </dataType>
+            </attribute>
+            <attribute name="measurementReaderNameValue">
+                <description>Contains the real-time measurement data.&#13;
+Only used by a PM job of type REALTIMEJOB.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="mrnv"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <noNotification/>
+                <readOnly/>
+                <dataType>
+                    <sequence>
+                        <structRef name="MeasurementReaderNameValue">
+                            <mimName>SgsnMmePM</mimName>
+                        </structRef>
+                        <minLength>0</minLength>
+                    </sequence>
+                </dataType>
+            </attribute>
+            <attribute name="measurementSpecification">
+                <description>This struct allows reference to either MeasurementType or PmGroup of MeasurementTypes to be defined.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="ms"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <mandatory/>
+                <dataType>
+                    <structRef name="MeasurementSpecification">
+                        <mimName>SgsnMmePM</mimName>
+                    </structRef>
+                </dataType>
+            </attribute>
+            <attribute name="moInstances">
+                <description>Target MO instance or instances.&#13;
+It is possible to select one or more MO instances as the specific target of the job.&#13;
+If this attribute is not present the job will be applied to all MO instances relevant to the selected PmGroup or MeasurementType.</description>
+                <domainExtension domain="SgsnMme">
+                    <extension name="isInternal" value="false"/>
+                    <extension name="isSystemCreated" value="false"/>
+                    <extension name="isVolatile" value="false"/>
+                    <extension name="cliOperand" value="moi"/>
+                    <extension name="yangName" value="not-yet-supported"/>
+                </domainExtension>
+                <dataType>
+                    <sequence>
+                        <string/>
+                        <minLength>0</minLength>
+                        <nonUnique/>
+                    </sequence>
+                </dataType>
+            </attribute>
+        </class>
+        <relationship name="Pm_to_PmMeasurementCapabilities">
+            <containment>
+                <parent>
+                    <hasClass name="Pm">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="PmMeasurementCapabilities">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="Pm_to_PmGroup">
+            <containment>
+                <parent>
+                    <hasClass name="Pm">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="PmGroup">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="PmGroup_to_MeasurementType">
+            <containment>
+                <parent>
+                    <hasClass name="PmGroup">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="MeasurementType">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+        <relationship name="MeasurementReader_to_PmThresholdMonitoring">
+            <containment>
+                <parent>
+                    <hasClass name="MeasurementReader">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="PmThresholdMonitoring">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                        <max>4</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="PmJob_to_MeasurementReader">
+            <containment>
+                <parent>
+                    <hasClass name="PmJob">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="MeasurementReader">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+        <relationship name="Pm_to_PmJob">
+            <containment>
+                <parent>
+                    <hasClass name="Pm">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="PmJob">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>0</min>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="true"/>
+                    <extension name="canDelete" value="true"/>
+                </domainExtension>
+            </containment>
+        </relationship>
+    </mim>
+    <interMim>
+        <relationship name="SystemFunctions_to_Pm">
+            <containment>
+                <parent>
+                    <hasClass name="SystemFunctions">
+                        <mimName>SgsnMmeTop</mimName>
+                    </hasClass>
+                </parent>
+                <child>
+                    <hasClass name="Pm">
+                        <mimName>SgsnMmePM</mimName>
+                    </hasClass>
+                    <cardinality>
+                        <min>1</min>
+                        <max>1</max>
+                    </cardinality>
+                </child>
+                <domainExtension domain="ECIM">
+                    <extension name="canCreate" value="false"/>
+                    <extension name="canDelete" value="false"/>
+                </domainExtension>
+                <notCreatable/>
+                <notDeleteable/>
+            </containment>
+        </relationship>
+    </interMim>
+</models>

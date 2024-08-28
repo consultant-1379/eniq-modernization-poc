@@ -1,0 +1,912 @@
+// ==================================================================
+// 
+// NAME
+//   ServiceObjectBase
+//
+// MODULE
+//   pxmGenericConfiguration
+//
+// FILE
+//   pxmGenericConfiguration.idl
+// 
+// DOCUMENT NO.            
+//   3/155 19-CNX 901 125 Uen
+//
+// REVISION
+//   B
+//
+// COPYRIGHT
+//   COPYRIGHT Ericsson Eurolab Deutschland GmbH, Germany 1998.
+//   All rights reserved.
+//
+//   The Copyright to the computer program(s) herein is the property of
+//   Ericsson Eurolab Deutschland GmbH, Germany.
+//   The program(s) may be used and/or copied only with the written
+//   permission from Ericsson Eurolab Deutschland GmbH or in accordance with
+//   the terms and conditions stipulated in the agreement/contract under
+//   which the program(s) have been supplied.
+// 
+// DESCRIPTION 
+//   An API defining the functions called by the generic applet, running
+//   on the PXM, to read or manipulate the different MOs on the NE side.
+//
+//   This interface must be inherited by all SOs that are using the
+//   Generic GUI support. The SO designer must implement the methods
+//   defined here.
+//
+// NOTE 
+//   This is a preliminary version of the interface.   
+//
+// VISIBILITY
+//   External.
+//
+// INTERFACE HIERARCHY/USAGE RELATIONS
+//   Abstract base.
+//
+// AUTHOR
+//   Juho.Eskelinen@eed.ericsson.se
+//   Martin.Baum@eed.ericsson.se
+//
+// APPROVED
+//   (Reter.Rasmussen@eed.ericsson.se)
+// 
+// CHECKED
+//   
+//
+// REVISION HISTORY
+//   A       1998-08-13  First final revision
+//   B       2000-03-03  CR38: field allowListMoIds added
+//
+// ==================================================================
+
+#ifndef pxmGenericConfiguration_idl
+#define pxmGenericConfiguration_idl
+
+#include "omsDefs.idl"
+#include "oamSupport.idl"
+
+// ==================================================================
+
+module pxmGenericConfiguration {
+
+
+   // general description of the form
+   struct FormGeneralDescription {
+
+      // the fully qualified name of the resource bundle containing key-value
+      // (display string) pairs specific for this form
+      // (without the ".properties" ending)
+      string resourceBundle;
+
+      // the fully qualified name of the LDL (without the ".properties" ending)
+      string ldl;
+
+      // the key defining the title text of the page
+      string titleTextKey;
+
+      // whether selection of MOs is allowed, value of "false" only
+      // applicable when the SO supports just one MO
+      boolean allowSelectMo;
+
+      // the key defining the text for the MO type that applies 
+      // to all types supported by the SO ("base class name"). 
+      // Used in menus and popups to denote the MO.
+      string commonShortMoTypeTextKey;
+
+      // the key defining the text for the MO selection panel,
+      // only applicable when allowSelect == true
+      string commonLongMoTypeTextKey;
+
+      // the key defining the text for the MO selection popup,
+      // only applicable when allowSelect == true
+      string commonShortMoTypeTextPluralKey;
+
+      // whether to create MOs by asking the user the MO ID ("true") or
+      // by letting the SO choose it ("false"),
+      // only applicable when for at least one MO type allowCreate == true.
+      boolean createByAskingMoId;
+
+      // whether generating an HTML page containing a list of MOs is allowed
+      boolean allowListMos;
+
+      // whether to allow listing of all MO IDs
+      // (shown in the MO selection popup)
+      boolean allowListMoIds;
+
+      // the key (logical link) defining the URL of the associated help page
+      string helpPageKey;
+   };
+
+
+    // description of an MO type
+   struct MoTypeDescription {
+
+      // the key defining the visible name for the MO type
+      string textKey;
+
+      // the ID of the type that is referred to in interface methods
+      string typeId;
+
+      // whether applying changes to MOs of this type is allowed
+      boolean allowSaveMo;
+
+      // whether creation and copying of MOs of this type is allowed
+      boolean allowCreateMo;
+
+      // whether renaming of MOs of this type is allowed
+      boolean allowRenameMo;
+
+      // whether deletion of MOs of this type is allowed
+      boolean allowDeleteMo;
+
+      // whether generating an HTML page containing a detailed list of
+      // attributes and their values of the selected MO is allowed
+      boolean allowListMoDetails;
+
+      // descriptions of the attributes
+      oamSupport::StringListListList attributeDescriptions;
+   };
+
+   typedef sequence<MoTypeDescription> MoTypeDescriptionList;
+
+      
+   // description of an SO specific action that the user can 
+   // initiate from the generic applet (from a menu)
+   struct ActionDescription {
+
+      // the key defining the visible name for the action
+      string textKey;
+
+      // the internal ID of the action, 
+      // please see method ServiceObjectBase::performAction
+      string actionId;
+
+      // the action is allowed when an MO of one of the types listed
+      // here is selected, an empty list means that the action is
+      // not allowed when any MO is selected.
+      // allowForMoTypes==[] cannot be combined with
+      // allowWhenMoNotSelected==false
+      oamSupport::StringList allowForMoTypes;
+
+      // whether the action is allowed when an MO is NOT selected,
+      // allowForMoTypes==[] cannot be combined with
+      // allowWhenMoNotSelected==false
+      boolean allowWhenMoNotSelected;
+
+      // the key defining the text shown to the user when asking
+      // for a confirmation to perform the operation
+      string confirmationTextKey;
+   };
+
+   typedef sequence<ActionDescription> ActionDescriptionList;
+
+   typedef sequence<ActionDescriptionList> ActionDescriptionListList;
+
+
+   interface ServiceObjectBase {
+
+      // the version of this interface, only to be changed when
+      // the signatures or semantics of this interface change
+      const long IF_VERSION = 2;
+
+     // NOTE:
+     // The logic for choosing the MO create procedure is as follows
+     // (see also pxmGenericConfiguration::FormGeneralDescription):
+     //
+     //   number of MO types           1              >1  
+     //   -------------------------------------------------------------------
+     //   "createByAskingMoId==false"  Not supported  Ask MO type, 
+     //                                               SO generates ID 
+     //   "createByAskingMoId==true"   Ask MO ID      Ask MO type and ID
+     //  
+     //   Please note that when "create" is allowed only for one MO type
+     //   and there exists several types, the user is still prompted for the
+     //   type because this will make him more aware of the type of MO he is
+     //   creating.
+
+      void getFormDescription(in oamSupport::AdmData data, 
+                              out FormGeneralDescription generalDescription,
+                              out MoTypeDescriptionList moTypeDescriptions,
+                              out ActionDescriptionListList actionDescriptions) 
+           raises(omsDefs::OperationFailed);      
+
+      // Purpose
+      //   Return a description of the GUI form associated with the SO.
+      //   For a description of the precise parameter format please
+      //   see the User Guide for Generic GUI Support (3/1553-CNX 901 125 Uen).
+      //   Called by the generic applet at the applet initialisation. 
+      //   
+      // Parameters
+      //   data                 : OAM session context data.
+      //   generalDescription   : Parameters common for the whole GUI form.
+      //   moTypeDescriptions   : Description of all the MO types and their 
+      //                          attributes that are to be displayed
+      //                          in the GUI form. 
+      //   actionDescriptions   : Descriptions of the SO specific
+      //                          action commands, as a list of lists of
+      //                          related actions. 
+      //                          For example [[Block, Unblock], [Foo], [Bar]],
+      //                          where Block, Unblock, etc. represent
+      //                          ActionDescription structs.
+      //                          The actions are put into a menu located at
+      //                          the menubar.
+      //                          Please see also method performAction.
+      //
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //
+      // Preconditions
+      //   -
+      //
+      // Postconditions
+      //   -
+      // 
+
+
+      void getMoIds(in oamSupport::AdmData data,
+                    in oamSupport::StringList filter,
+                    out oamSupport::StringList moTypeList,
+                    out oamSupport::StringList moIdList)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Return a list of IDs of MOs managed by the SO.
+      //   If no MOs are available, return an empty list.
+      //   Called by the generic applet when the "select" button is pressed,
+      //   and after the user has deleted MO(s) in the MO selection popup.
+      //   
+      // Parameters
+      //   data                 : OAM session context data.
+      //   filter               : A filter for selecting the returned MO IDs.
+      //                          For the syntax, please see method 
+      //                          requestUrl.
+      //   moTypeList           : List of types of the MOs.
+      //   moIdList             : List of IDs of the MOs.
+      //
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      // Preconditions
+      //   -
+      //
+      // Postconditions
+      //   -
+      // 
+
+
+      void getAttributeValues(in oamSupport::AdmData data,
+                              in string moId,
+                              out string moType,
+                              out oamSupport::StringListListList attributeValues,
+                              out oamSupport::TimeStamp timeStamp)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Return the values of the attributes of the selected MO
+      //   (moId), together with its type and a timestamp indicating the time 
+      //   the attribute values were changed last time.
+      //   Called by the generic applet:
+      //     1. whenever an MO is selected,
+      //     2. when creating an MO after the user has entered an MO ID
+      //        to check whether the MO ID is valid and whether the MO
+      //        already exists.
+      //   
+      // Parameters
+      //   data                 : OAM session context data.
+      //   moId                 : ID of the selected MO.
+      //   moType               : Type of the MO, must correspond to 
+      //                          one of the values specified in moTypeNames
+      //                          in method getFormDescription.
+      //   attributeValues      : Values of the attributes. Each value 
+      //                          is a list of list of strings.
+      //   timeStamp            : Time when the MO was modified.
+      //
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_invalidMoId" if moId does not represent a valid
+      //        MO ID (e.g too long name or illegal characters). Please see the
+      //        explanation in method setAttributeValues. This check shall be
+      //        performed before the check for the existence of the MO.
+      //      errorCode="oam_moNotFound"
+      //        if the specified MO does not exist.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   The MO must exist. 
+      //
+      // Postconditions
+      //   -
+      // 
+
+
+      void setAttributeValues(in oamSupport::AdmData data,
+                              in string moId,
+                              inout oamSupport::StringListListList attributeValues,
+                              inout oamSupport::TimeStamp timeStamp)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Set values of all attributes of the selected MO.
+      //   Called by the generic applet when the "apply" button is pressed.
+      //  
+      // Parameters
+      //   data                 : OAM session context data.
+      //   moId                 : ID of the MO to be updated.
+      //   attributeValues      : IN: new attribute values for the MO. 
+      //                          Each value is a list of list of strings.
+      //                          If an optional attribute is not set,
+      //                          the value is set to an empty list.
+      //                          OUT: the new attribute values,
+      //                          the same as the IN-values if the SO does not 
+      //                          further process those (for example, the SO
+      //                          could modify the values of read only
+      //                          attributes based on the values of the other
+      //                          attributes).
+      //   timeStamp            : IN: the last time the MO was updated at the 
+      //                          time when getAttributeValues was called.
+      //                          OUT: the new modification time.
+      //
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_timeStampTooOld"
+      //        if the time stamp is too old, meaning that the MO has been
+      //        modified by someone else after the attribute values
+      //        were loaded to the Generic Applet.
+      //      errorCode="oam_moNotFound"
+      //        if the specified MO does not exist.
+      //      errorCode="oam_invalidValue"
+      //        Server side syntax check has failed. The first element
+      //        of the field "extra" shall contain a key to a display string
+      //        found in the specific resource bundle that contains
+      //        an appropriate localised error message in a format
+      //        understood by java.text.MassageFormat. The following elements
+      //        shall contain the parameters, if any, to be inserted into
+      //        that display string.
+      //        Example: let us assume that the SO throws an exception having
+      //          the following parameters:
+      //            errorCode="oam_invalidValue", extra=["invalidRAC", "RAc"]
+      //          The specific resource bundle contains the following
+      //          key=value pair:
+      //            invalidRAC=The RAC \"{0}\" does not exist.
+      //          The user is then presented with an error popup stating:
+      //            The RAC "RAc" does not exist.
+      //      errorCode="oam_invalidMoId" if moId does not represent a valid
+      //        MO ID (e.g too long name or illegal characters). The error
+      //        message and parameters, if any, are placed in the field "extra"
+      //        the same way as for "oam_invalidValue" above.
+      //      errorCode="oam_otherError"
+      //        Other error, defined by the SO designer. The error message
+      //        and parameters, if any, are placed in the field "extra"
+      //        the same way as for "oam_invalidValue" above.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //  
+      // Preconditions
+      //   The MO must exist.
+      //   timeStamp must not be older than the internal time stamp associated
+      //   with the MO (or SO, if only one time stamp is used in the whole SO).
+      //
+      // Postconditions
+      //   The MO is updated with the new attribute values.
+      //   The internal time stamp related to the MO is set 
+      //   to the current time.
+      //
+
+
+      void getPossibleValues(in oamSupport::AdmData data,
+                             in string attributeId,
+                             in string moId,
+                             in oamSupport::StringListListList contextAttributeValues,
+                             out oamSupport::StringListListList values)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Return a list of possible values for the attribute indicated
+      //   in "attributeId". The values returned may depend on the values
+      //   of the attributes given in "contextAttributeValues" (the attributes
+      //   whose values are put into "contextAttributeValues" are specified
+      //   in the attribute description). Also, the given "moId" can influence
+      //   the values returned.
+      //   Called by the generic applet when the "select..." button
+      //   of an attribute is pressed.
+      //   
+      // Parameters
+      //   data                 : OAM session context data.
+      //   attributeId          : ID of the attribute.
+      //   moId                 : MO ID found on the MO selection panel.
+      //   contextAttributeValues :
+      //                          Values of the attributes defined in
+      //                          the attribute definition of this attribute
+      //                          that are passed to the service object as
+      //                          input for deciding the possible values
+      //                          to be returned in parameter "values".
+      //   values               : A list of values for the attribute
+      //                          NOTE: in order to have a consistent
+      //                          representation of attribute values
+      //                          thorough the interface, each value
+      //                          is represented by a list of list of strings
+      //                          here as well, although only the first
+      //                          element of each list of lists is used
+      //                          at the moment in this method.
+      //
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   attributeId must denote a valid attribute.
+      //
+      // Postconditions
+      //   -
+      // 
+
+
+      void createMo(in oamSupport::AdmData data,
+                    in string moType,
+                    inout string moId,
+                    inout oamSupport::StringListListList attributeValues,
+                    out oamSupport::TimeStamp timeStamp)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Creates an MO by also giving initial values.
+      //   Called by the generic applet when the MO create procedure 
+      //   (initiated by pressing the "new..." button) is completed by
+      //   pressing the "apply" button.
+      //
+      // Parameters
+      //   data                 : OAM session context data.
+      //   moType               : Type of the MO, must correspond to 
+      //                          one of the values specified in moTypeNames
+      //                          in method getFormDescription.
+      //   moId                 : IN: if field createByAskingMoId (in form
+      //                          general description) == true, ID for the
+      //                          MO to be created, otherwise an empty string.
+      //                          OUT: the ID of the created MO.
+      //   attributeValues      : IN: attribute values for the MO. 
+      //                          Each value is a list of list of strings.
+      //                          If an optional attribute is not set,
+      //                          the value is set to an empty list.
+      //                          OUT: the new attribute values,
+      //                          the same as the IN-values if the SO does not 
+      //                          further process those (for example, the SO
+      //                          could modify the values of read only
+      //                          attributes based on the values of the other
+      //                          attributes).
+      //   timeStamp            : Time when the MO was created.
+      //
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_moFound"
+      //        if the specified MO already exists.
+      //      errorCode="oam_invalidValue"
+      //        Server side syntax check has failed. Please see the
+      //        explanation in method setAttributeValues.
+      //      errorCode="oam_invalidMoId" if moId does not represent a valid
+      //        MO ID (e.g too long name or illegal characters). Please see the
+      //        explanation in method setAttributeValues.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   The MO must not exist.
+      //
+      // Postconditions
+      //   The MO is created with the ID and values.
+      //   The internal time stamp associated with the MO
+      //   is set to the current time.
+      // 
+
+
+      void deleteMo(in oamSupport::AdmData data,
+                    in string moId)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Delete the MO with the ID moID.
+      //   Called by the generic applet when the "delete"
+      //   button is pressed.
+      //
+      // Parameters
+      //   data                 : OAM session context data.
+      //   moId                 : ID of MO to delete.
+      //   
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_moNotFound"
+      //        if the specified MO does not exists.
+      //      errorCode="oam_invalidMoId" if moId does not represent a valid
+      //        MO ID (e.g too long name or illegal characters). Please see the
+      //        explanation in method setAttributeValues.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   The MO must exist.
+      //
+      // Postconditions
+      //   The MO is removed.
+      // 
+
+
+      void renameMo(in oamSupport::AdmData data,
+                    in string oldMoId,
+                    in string newMoId,
+                    inout oamSupport::TimeStamp timeStamp,
+                    out oamSupport::StringListListList attributeValues)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Rename the MO. Only applicable when the user can decide the MO ID.
+      //   Called by the generic applet when the "rename" menu entry is
+      //   selected.
+      //
+      // Parameters
+      //   NOTE: the order of timeStamp and attributeValues is different
+      //         than in other methods.
+      //   data                 : OAM session context data.
+      //   oldMoId              : ID of the MO to be renamed.
+      //   newMoId              : The new ID for the MO.
+      //   timeStamp            : IN: the last time the MO was updated at the 
+      //                          time when getAttributeValues was called.
+      //                          OUT: the time the MO was renamed.
+      //   attributeValues      : Attribute values for the MO (possibly changed
+      //                          while renaming the MO).
+      //
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_timeStampTooOld"
+      //        if the time stamp is too old, meaning that the MO has been
+      //        modified by someone else after the attribute values
+      //        were loaded to the Generic Applet.
+      //      errorCode="oam_moNotFound"
+      //        if the specified MO ("oldMoId") does not exist.
+      //      errorCode="oam_moFound"
+      //        if an MO having the specified ID ("newMoId") already exists.
+      //      errorCode="oam_invalidMoId" if moId does not represent a valid
+      //        MO ID (e.g too long name or illegal characters). Please see the
+      //        explanation in method setAttributeValues.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   The MO specified in "oldMoId" shall and
+      //   the MO specified in "newMoId" shall not exist.
+      //   timeStamp must not be older than the internal time stamp associated
+      //   with the MO (or SO, if only one time stamp is used in the whole SO).
+      //
+      // Postconditions
+      //   The MO is renamed.
+      //   MO attribute values may have changed.
+      //   The internal time stamp associated with the MO
+      //   is set to the current time.
+      // 
+
+
+      void performAction(in oamSupport::AdmData data,
+                         in string actionId,
+                         in string moId,
+                         inout oamSupport::StringListListList attributeValues,
+                         inout oamSupport::TimeStamp timeStamp)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Perform the action specified by actionId on the SO.
+      //   Called by the generic applet when a user defined
+      //   menu item is selected.
+      //   The actions are defined in parameter actionDescriptions in method
+      //   getFormDescription.
+      //
+      // Parameters
+      //   data                 : OAM session context data.
+      //   actionId             : The id of the button that was pressed.
+      //   moId                 : ID of the selected MO. An empty string
+      //                          if no MO is selected.
+      //   attributeValues      : IN: new attribute values for the MO. 
+      //                          Each value is a list of list of strings.
+      //                          If an optional attribute is not set,
+      //                          the value is set to an empty list.
+      //                          OUT: the new attribute values,
+      //                          the same as the IN-values if the SO does not 
+      //                          further process those (for example, the SO
+      //                          could modify the values of read only
+      //                          attributes based on the values of the other
+      //                          attributes).
+      //   timeStamp            : IN: the last time the MO was updated at the 
+      //                          time when getAttributeValues was called.
+      //                          OUT: the time the MO was renamed.
+      //   
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_timeStampTooOld"
+      //        if the time stamp is too old, meaning that the MO has been
+      //        modified by someone else after the attribute values
+      //        were loaded to the Generic Applet.
+      //      errorCode="oam_moNotFound"
+      //        if the specified MO does not exists.
+      //      errorCode="oam_invalidValue"
+      //        Server side syntax check has failed. Please see the
+      //        explanation in method setAttributeValues.
+      //      errorCode="oam_invalidMoId" if moId does not represent a valid
+      //        MO ID (e.g too long name or illegal characters). Please see the
+      //        explanation in method setAttributeValues.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   The MO must exist.
+      //   timeStamp must not be older than the internal time stamp associated
+      //   with the MO (or SO, if only one time stamp is used in the whole SO).
+      //
+      // Postconditions
+      //   The specified action has been performed.
+      //   MO attribute values may have changed.
+      //   The internal time stamp associated with the MO
+      //   is set to the current time.
+      // 
+
+
+      // NOTE: This function has become obsolete, and will be phased out in the 
+      //       near future via CR. Please use the functions requestUrl, getMoList  
+      //       and getMoDetails instead.
+      //
+      void requestMoList(in oamSupport::AdmData data,
+                         in oamSupport::StringList filter,
+                         out string moListLocation)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Request the SO to generate a temporary HTML page containing
+      //   a (filtered) list of MOs and their detailed attributes. 
+      //   It is not defined when the SO shall generate the page
+      //   (either when requestMoList is called or when the returned URL
+      //   is accessed for the first time). The page will be removed by
+      //   the NE either after it was read for the first time 
+      //   or after a timeout.
+      //   Called by the generic applet when either the "list"
+      //   or "details" menu entry is selected. In the latter case
+      //   parameter filter will contain the following:
+      //   ["mo_id", "=", <id of selected mo>].
+      //   NOTE: defining filters other than what is stated above 
+      //         is currently NOT supported.
+      //
+      // Parameters
+      //   data                 : OAM session context data.
+      //   filter               : The filter specifying the MOs to list.
+      //                          An empty filter ([[]]) will list all MOs.
+      //                          The filter syntax is FFS, possibly:
+      //                          ["mo_id", "=", "foo", "OR", 
+      //                           "xyz", "=", "100"]
+      //   moListLocation       : A URL pointing to the location of the 
+      //                          generated MO list.
+      //   
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      (errorCode="oam_invalidFilter" if the filter has syntax errors)
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   -
+      //
+      // Postconditions
+      //   A temporary HTML page containing requested information has been
+      //   logically created.
+      // 
+
+
+      void requestUrl(in oamSupport::AdmData data,
+                      in short requestType,
+                      in string moId,
+                      in oamSupport::StringList filter,
+                      out string url)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Requests the SO to generate a URL pointing to a temporary
+      //   HTML page containing either a (filtered) list of MOs or the
+      //   details of one specific MO, depending on the requestType.
+      //
+      //   Connecting to the url returned by the SO will result in a
+      //   call to the Erlang Scripting Interface (ESI), which will make
+      //   either a direct or a Corba call (decided by the SO) to the 
+      //   function getMoDetails (requestType=1) or getMoList 
+      //   (requestType=0). 
+      //
+      //   Called by the generic applet when either the "list"
+      //   or "details" menu entry is selected. In the latter case
+      //   parameter moId will contain the MO ID. The filtering of
+      //   MOs in the first case is not yet supported, and remains 
+      //   FFS.
+      //
+      // Parameters
+      //   data                 : OAM session context data.
+      //   requestType          : The type of requested data. Currently,
+      //                          the following types are supported:
+      //                            0  -> a (filtered) list of MOs
+      //                            1  -> detailed info of one MO
+      //                          Both types are supposed to retrieve a
+      //                          plain ascii format.
+      //   moId                 : Optional parameter containing the MO ID, 
+      //                          to be used in case requestType has the 
+      //                          value 1 (MO details).
+      //   filter               : Optional parameter containing a filter
+      //                          specifying the MOs to list, to be used 
+      //                          in case requestType has the value 0
+      //                          (MO list).
+      //                          An empty filter ([[]]) will list all MOs.
+      //                          The filter syntax is FFS, possibly:
+      //                          ["mo_id", "=", "foo", "OR", 
+      //                           "xyz", "=", "100"]
+      //   url                  : A URL pointing to the location of the 
+      //                          generated MO data.
+      //   
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      (errorCode="oam_invalidFilter" if the filter has syntax errors)
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   -
+      //
+      // Postconditions
+      //   The SO will grant a request to the returned URL.
+      // 
+
+
+      void getMoDetails(in oamSupport::AdmData data,
+                        in string moId,
+                        in short printFormat,   
+                        in string outputTailer, 
+                        out string moData)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Generates detailed attributes of one specific MO, identified
+      //   by the MO ID. Called either directly by the CLI, or from the
+      //   Erlang Scripting Interface (ESI) after menu-entry "details"
+      //   was chosen in the applet.
+      //
+      // Parameters
+      //   data                 : OAM session context data.
+      //   moId                 : ID of the selected MO.
+      //   printFormat          : Optional parameter for future use. Needed
+      //                          when more formats then plain ascii have to
+      //                          be supported.
+      //   outputTailer         : Optional parameter, to be used when an
+      //                          (html) tailer should be concatenated to the
+      //                          generated ascii data.
+      //   moData               : Detailed data of the MO in ascii format.
+      //   
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   -
+      //
+      // Postconditions
+      //   -
+      // 
+
+
+      void getMoList(in oamSupport::AdmData data,
+                     in oamSupport::StringList filter,
+                     in short printFormat,          
+                     in string outputTailer,    
+                     out string moDataList)
+           raises(omsDefs::OperationFailed);
+
+      // Purpose
+      //   Generates a (filtered) list of MOs and their attributes. 
+      //   Called either directly by the CLI, or from the Erlang 
+      //   Scripting Interface (ESI) after menu-entry "details" was 
+      //   chosen in the applet.
+      //
+      // Parameters
+      //   data                 : OAM session context data.
+      //   filter               : Filter specifying which MOs to list, at
+      //                          the moment this filter is only used by
+      //                          the CLI to pass a value which is used to
+      //                          filter the list on a specific attribute.
+      //                          An empty filter ([[]]) will list all MOs.
+      //                          The syntax of a more enhanced filter is 
+      //                          FFS, e.g.: ["mo_id", "=", "foo", "OR",
+      //                                      "xyz",   "=", "100"]
+      //   printFormat          : Optional parameter for future use. Needed
+      //                          when more formats then plain ascii have to
+      //                          be supported.
+      //   outputTailer         : Optional parameter, to be used when an
+      //                          (html) tailer should be concatenated to the
+      //                          generated ascii data.
+      //   moDataList           : List of MOs and their data in ascii format.
+      //   
+      // Exceptions
+      //    omsDefs::OperationFailed: 
+      //      errorCode="oam_versionMismatch" if interface version does not 
+      //        match, extra[0]=own version, extra[1]=other version.
+      //      errorCode="oam_otherError"
+      //        other error. Please see the
+      //        explanation in method setAttributeValues.
+      //
+      //   Please see also the common definitions for OMS API: omsDefs.idl
+      //   (DOCUMENT NO.100/155 19-CNX 901 111).
+      //
+      // Preconditions
+      //   -
+      //
+      // Postconditions
+      //   -
+      // 
+   };
+};
+
+#endif

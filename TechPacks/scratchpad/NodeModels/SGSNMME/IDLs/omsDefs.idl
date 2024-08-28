@@ -1,0 +1,155 @@
+// ==================================================================
+// 
+// NAME
+//   Interface Specification
+//   OMS Definitions in WPP
+//
+// MODULE
+//   omsDefs
+//
+// FILE
+//   omsDefs.idl
+// 
+// DOCUMENT NO.            
+//   100/155 19-CNX 901 111 Uen
+//
+// REVISION
+//   C
+//
+// COPYRIGHT
+//   COPYRIGHT Ericsson Eurolab Deutschland GmbH, Germany 1998.
+//   All rights reserved.
+//
+//   The Copyright to the computer program(s) herein is the property of
+//   Ericsson Eurolab Deutschland GmbH, Germany.
+//   The program(s) may be used and/or copied only with the written
+//   permission from Ericsson Eurolab Deutschland GmbH or in accordance with
+//   the terms and conditions stipulated in the agreement/contract under
+//   which the program(s) have been supplied.
+// 
+// DESCRIPTION 
+//   Common datatypes and definitions used in OMS/WPP API.
+//
+// VISIBILITY
+//   External.
+//
+// AUTHOR
+//   Juho.Eskelinen@eed.ericsson.se
+//   eedgus@eed.ericsson.se
+//   Responsibility now in ERV Vanersborg, contact ervkatb@erv
+//
+// REVISION HISTORY
+//   B     2000-03-28	eedsus	Approved version for WPP 2.0
+//   C     2000-11-28   ervbolm Removed 2.0 from name.
+//   ?     2002-01-23   qrvgijn Pragma removed
+// ==================================================================
+
+#ifndef omsDefs_idl
+#define omsDefs_idl
+
+#include "oamSupport.idl"
+
+//#include "pragma.idl"
+
+module omsDefs {
+
+  struct Time {
+    long year;   // four digits!
+    short month; // 1-12, NOT 0-11 !!
+    short day;   // 1-31
+    short hour;  // 0-23
+    short min;   // 0-59
+    short sec;   // 0-59
+  };
+
+
+// Error Handling
+// --------------
+// 
+// There are two data types for error handling: Result and OperationFailed.
+// They can be used interchangebly and have the same data members.
+// Result is used if you prefer to handle errors via return values;
+// OperationFailed if you prefer exceptions.
+// The common data members for both are {errorCode, extra} and {debugInfo}.
+// These parameters belong together as written here. They serve two different types
+// of error cases:
+// 
+// 1. {errorCode, extra} is used for "user errors", i.e. errors that can be expected
+// in the code and are handled gracefully. The goal is to provide the user with a
+// localized (i.e. local language translated) error message. This localized error message
+// is owned by the client side. The node side only provides the errorCode that
+// enables the client to find the right message, and (specific for each errorCode)
+// a number of extra strings that are filled into the localized message.
+// Error codes must be unique and therefore must be prefixed with subsystem name,
+// followed by block name 
+// 
+// Example:
+//    errorCode="oms_bas_log_file_not_found",
+//    extra=["/opt/local/bin/cc"],
+// The client knows a localized display string for "oms_bas_log_file_not_found":
+// "Dear user, the file {1} does not exist!", and fills in the file name.
+// 
+// 2. debugInfo is used for software errors. The goal is to print out information
+// that can be used to track down the fault when included into a trouble report.
+// This string is not owned by the client side but can be generated wherever the
+// fault is detected. Further, this string *must*not* be localized but must always
+// be in English (or do you want to receive TRs in Chinese ??!)
+// 
+// {errorCode, extra} and {debugInfo} can be use present alone or at the same time.
+// In the latter case it is up to the client to decide how to handle the situation.
+//
+
+  // method return value
+  struct Result {
+    boolean error;           // result code, value:
+                             //  false == no error, 
+                             //  true == error occured.
+                             // If error is true, either {erroCode, extra} or
+                             // debugInfo or both must be present.
+
+    string errorCode;        // Unique name of the error. This parameter
+                             // can be anything as long as it is a unique
+                             // identifier. The rule is to use:
+                             // "subsystem_module_id"
+                             // example: oms_cm_create_failure
+                             // or:      oms_cm_create_1
+
+    oamSupport::StringList extra;  // Extra information specific for 'errorCode'. 
+                             // These will be filled into the display string
+                             // in the corresponding Error Definition Files. 
+                             // This parameter must be language independent. 
+                             // It can contain the names of a 
+                             // resources (e.g a filename)
+                             // Note: The order is important and must be 
+                             // as defined in the Error Definition Files.
+
+    string debugInfo;        // debugInfo can be any english
+                             // text with debug information.
+  };
+
+  exception OperationFailed
+  {
+     // Since this exception always represents an error,
+     // either {erroCode, extra} or debugInfo or both must be present.
+
+    string errorCode;        // Unique name of the error. The rule is to use:
+                             // "subsystem_module_id"
+                             // example: oms_cm_create_failure
+                             // or:      oms_cm_create_1
+
+    oamSupport::StringList extra;  // Extra information specific for 'errorCode'. 
+                             // These will be filled into the display string
+                             // in the corresponding Error Definition Files. 
+                             // This parameter must be language independent. 
+                             // It can contain the names of a 
+                             // resources (e.g a filename)
+                             // Note: The order is important and must be 
+                             // as defined in the Error Definition Files.
+
+    string debugInfo;        // debugInfo can be any english
+                             // text with debug information.
+  }; 
+};
+
+#endif
+
